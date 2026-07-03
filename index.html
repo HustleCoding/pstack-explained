@@ -6,225 +6,177 @@
 <title>pstack · a guided tour</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f4eee1; --bg2:#ece4d2; --paper:#fffdf7; --paper2:#f6efde;
-    --ink:#221c12; --ink-soft:#4b4334; --dim:#6c6453; --faint:#9a917e;
-    --rule:#e4dcc8; --rule2:#d2c8ae;
-    --accent:#b45309; --accent-2:#d97706; --accent-soft:#fbe8cf; --accent-line:#e9b373;
+    --bg:#ffffff; --ink:#1a1a1a; --soft:#3d3d3d; --dim:#6b6b6b; --faint:#9b9b9b;
+    --rule:#ededed; --rule2:#e0e0e0;
+    --accent:#b45309; --accent-soft:#fdf4ea; --accent-line:#e8c39a;
     --core:#b45309; --arch:#1f6f8b; --verif:#4d7c2f; --deleg:#b13a5a; --meta:#7c4d9e;
-    --maxw:1080px; --navh:56px;
-    --ff-display:"Fraunces",Georgia,serif;
-    --ff-body:"Hanken Grotesk",system-ui,sans-serif;
+    --maxw:880px; --navh:54px;
+    --ff:"Hanken Grotesk",system-ui,-apple-system,sans-serif;
     --ff-mono:"IBM Plex Mono",ui-monospace,monospace;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
   body{
     margin:0; background:var(--bg); color:var(--ink);
-    font-family:var(--ff-body); font-size:17px; line-height:1.65;
+    font-family:var(--ff); font-size:17px; line-height:1.65;
     -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   }
-  body::before{
-    content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.5;
-    background:radial-gradient(130% 90% at 50% 0%,#fbf6ea 0%,transparent 55%);
-  }
-  body::after{
-    content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.03;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(18px,5vw,40px); position:relative; z-index:1}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,40px); position:relative}
+  code{font-family:var(--ff-mono); font-size:.92em; color:var(--accent)}
 
   /* masthead */
-  header.mast{padding:clamp(40px,8vw,72px) 0 clamp(28px,5vw,44px)}
-  .mark{display:flex; align-items:flex-end; gap:clamp(14px,3vw,24px); flex-wrap:wrap}
-  .glyph{width:clamp(34px,7vw,48px); height:clamp(34px,7vw,48px); position:relative; flex:none; margin-bottom:8px}
-  .glyph i{position:absolute; left:0; height:18%; background:var(--accent); border-radius:2px}
-  .glyph i:nth-child(1){bottom:0; width:82%; opacity:.45}
-  .glyph i:nth-child(2){bottom:41%; width:62%; opacity:.7}
-  .glyph i:nth-child(3){bottom:82%; width:42%}
-  h1.wordmark{
-    font-family:var(--ff-display); font-style:italic; font-weight:900;
-    font-size:clamp(54px,13vw,104px); line-height:.86; letter-spacing:-.03em;
-    margin:0; color:var(--ink);
-  }
+  header.mast{padding:clamp(56px,9vw,96px) 0 clamp(36px,5vw,52px)}
+  .mark{display:flex; align-items:center; gap:13px; margin-bottom:22px}
+  .glyph{width:26px; height:26px; position:relative; flex:none}
+  .glyph i{position:absolute; left:0; height:20%; background:var(--accent); border-radius:1px}
+  .glyph i:nth-child(1){bottom:0; width:100%; opacity:.4}
+  .glyph i:nth-child(2){bottom:40%; width:68%; opacity:.65}
+  .glyph i:nth-child(3){bottom:80%; width:40%}
+  h1.wordmark{font-family:var(--ff); font-weight:700; font-size:clamp(36px,6vw,50px); letter-spacing:-.025em; margin:0; line-height:1}
   h1.wordmark span{color:var(--accent)}
-  .mast-side{margin-left:auto; align-self:center}
-  .pillrow{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
-  .pill{
-    background:var(--paper); border:1px solid var(--rule2); border-radius:999px;
-    padding:7px 14px; font-size:13px; color:var(--ink-soft); white-space:nowrap;
-  }
-  .pill b{font-family:var(--ff-display); font-weight:700; color:var(--accent); font-size:15px; margin-right:3px}
-  .tagline{
-    font-family:var(--ff-display); font-weight:500; font-size:clamp(18px,2.4vw,23px);
-    line-height:1.4; color:var(--ink-soft); max-width:54ch; margin:clamp(20px,3vw,30px) 0 0;
-  }
-  .tagline em{font-style:italic; color:var(--accent)}
-
-  /* intro card */
-  .intro{
-    margin-top:clamp(24px,4vw,36px); background:var(--paper); border:1px solid var(--rule2);
-    border-radius:14px; padding:clamp(20px,3.5vw,30px); display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:clamp(16px,3vw,28px);
-  }
-  .intro .blk h3{font-family:var(--ff-display); font-weight:700; font-size:18px; margin:0 0 6px; color:var(--ink)}
-  .intro .blk .n{color:var(--accent); font-family:var(--ff-mono); font-size:12px; letter-spacing:.08em}
-  .intro .blk p{margin:6px 0 0; color:var(--dim); font-size:14.5px; line-height:1.55}
+  .count{font-family:var(--ff-mono); font-size:13px; color:var(--faint); margin:0 0 26px; letter-spacing:.02em}
+  .tagline{font-size:clamp(19px,2.6vw,23px); line-height:1.45; color:var(--soft); max-width:52ch; margin:0 0 18px; font-weight:500; letter-spacing:-.005em}
+  .tagline em{font-style:normal; color:var(--ink); border-bottom:2px solid var(--accent-line)}
+  .intro-lead{color:var(--dim); font-size:16px; line-height:1.6; max-width:62ch; margin:0}
 
   /* nav */
-  nav.bar{position:sticky; top:0; z-index:20; background:rgba(244,238,225,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule)}
-  nav.bar .wrap{display:flex; gap:4px; padding-top:8px; padding-bottom:8px; overflow-x:auto; scrollbar-width:none}
+  nav.bar{position:sticky; top:0; z-index:20; background:rgba(255,255,255,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule)}
+  nav.bar .wrap{display:flex; gap:2px; padding-top:7px; padding-bottom:7px; overflow-x:auto; scrollbar-width:none}
   nav.bar .wrap::-webkit-scrollbar{display:none}
-  nav.bar a{
-    color:var(--ink-soft); text-decoration:none; font-size:14px; font-weight:500;
-    white-space:nowrap; padding:8px 14px; border-radius:999px; transition:background .15s,color .15s;
-  }
+  nav.bar a{color:var(--dim); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; padding:8px 13px; border-radius:8px; transition:background .15s,color .15s}
   nav.bar a:hover,nav.bar a:focus-visible{background:var(--accent-soft); color:var(--accent); outline:none}
 
-  section{padding:clamp(44px,7vw,72px) 0; border-bottom:1px solid var(--rule); scroll-margin-top:var(--navh)}
-  .sh{margin-bottom:clamp(20px,3vw,30px); max-width:70ch}
-  .sh .num{color:var(--accent); font-family:var(--ff-mono); font-size:13px; letter-spacing:.06em}
-  .sh h2{font-family:var(--ff-display); font-weight:700; font-size:clamp(27px,5vw,42px); margin:6px 0 10px; letter-spacing:-.01em; line-height:1.05}
-  .sh .lead{color:var(--dim); font-size:clamp(15px,2vw,17px); line-height:1.55; margin:0}
+  section{padding:clamp(52px,8vw,84px) 0; border-bottom:1px solid var(--rule); scroll-margin-top:var(--navh)}
+  .sh{margin-bottom:clamp(26px,4vw,38px); max-width:64ch}
+  .sh .num{color:var(--accent); font-family:var(--ff-mono); font-size:12px; letter-spacing:.04em}
+  .sh h2{font-weight:600; font-size:clamp(24px,3.6vw,31px); margin:7px 0 12px; letter-spacing:-.018em; line-height:1.15}
+  .sh .lead{color:var(--dim); font-size:16px; line-height:1.6; margin:0; max-width:60ch}
 
   /* routing */
-  .flow{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:0 0 22px; font-size:14px; color:var(--dim)}
-  .flow .node{border:1px solid var(--rule2); padding:7px 13px; border-radius:8px; background:var(--paper); font-weight:500; color:var(--ink-soft)}
-  .flow .node.hot{border-color:var(--accent-line); color:var(--accent); background:var(--accent-soft)}
-  .flow .arr{color:var(--faint); font-size:16px; line-height:1}
-  fieldset.chooser{border:none; padding:0; margin:0; max-width:760px}
-  .chooser label{display:block; font-weight:600; font-size:15px; margin-bottom:8px; color:var(--ink)}
+  .flow{margin:0 0 28px; font-size:15px; color:var(--dim); line-height:1.9}
+  .flow .cmd-tok{font-family:var(--ff-mono); color:var(--accent); font-size:14px}
+  .flow .arr{color:var(--faint); margin:0 2px}
+  fieldset.chooser{border:none; padding:0; margin:0; max-width:680px}
+  .chooser label{display:block; font-weight:500; font-size:15px; margin-bottom:9px; color:var(--ink)}
   .chooser label .hint{color:var(--faint); font-weight:400; font-size:13.5px}
   #task{
-    width:100%; background:var(--paper); border:1.5px solid var(--rule2); color:var(--ink);
-    font-family:var(--ff-body); font-size:17px; padding:15px 18px; border-radius:12px; outline:none;
+    width:100%; background:var(--bg); border:1px solid var(--rule2); color:var(--ink);
+    font-family:var(--ff); font-size:16px; padding:14px 16px; border-radius:10px; outline:none;
     transition:border-color .15s, box-shadow .15s;
   }
-  #task:focus{border-color:var(--accent); box-shadow:0 0 0 4px var(--accent-soft)}
+  #task:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
   #task::placeholder{color:var(--faint)}
-  .examples{margin:16px 0 0}
-  .examples .elbl{font-size:13px; color:var(--faint); margin-bottom:9px}
+  .examples{margin:18px 0 0}
+  .examples .elbl{font-size:13px; color:var(--faint); margin-bottom:10px}
   .exchips{display:flex; gap:8px; flex-wrap:wrap}
   .exchip{
-    background:var(--paper); border:1px solid var(--rule2); color:var(--ink-soft);
-    font-family:var(--ff-body); font-size:14px; padding:8px 13px; border-radius:999px;
+    background:var(--bg); border:1px solid var(--rule2); color:var(--soft);
+    font-family:var(--ff); font-size:14px; padding:7px 13px; border-radius:999px;
     cursor:pointer; transition:border-color .15s,background .15s,color .15s;
   }
   .exchip:hover,.exchip:focus-visible{border-color:var(--accent-line); background:var(--accent-soft); color:var(--accent); outline:none}
-  .verdict{margin:20px 0 0; min-height:30px; font-size:15.5px; color:var(--ink-soft); line-height:1.5}
-  .verdict .pick{font-family:var(--ff-display); font-weight:700; color:var(--accent); font-size:17px}
+  .verdict{margin:22px 0 0; min-height:26px; font-size:15.5px; color:var(--soft); line-height:1.55}
+  .verdict .pick{font-weight:600; color:var(--accent)}
   .verdict .kw{font-family:var(--ff-mono); font-size:12px; color:var(--accent); background:var(--accent-soft); padding:2px 7px; border-radius:5px; margin:0 2px; white-space:nowrap}
   .verdict .why{color:var(--faint); font-size:13.5px}
   .verdict .none{color:var(--faint)}
 
   /* grids */
-  .grid{display:grid; gap:14px}
-  .pb.grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+  .grid{display:grid; gap:12px}
+  .pb.grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
   .card{
-    text-align:left; background:var(--paper); border:1px solid var(--rule); color:var(--ink);
-    padding:18px; border-radius:12px; cursor:pointer; font-family:var(--ff-body); font-size:15px;
-    position:relative; transition:border-color .18s, transform .18s, box-shadow .18s; overflow:hidden;
+    text-align:left; background:var(--bg); border:1px solid var(--rule); color:var(--ink);
+    padding:17px 18px; border-radius:12px; cursor:pointer; font-family:var(--ff); font-size:15px;
+    position:relative; transition:border-color .18s, background .18s, transform .18s; overflow:hidden;
     animation:rise .5s both;
   }
-  .card:hover{border-color:var(--rule2); box-shadow:0 4px 16px -8px rgba(34,28,18,.18); transform:translateY(-1px)}
+  .card:hover{border-color:var(--rule2); background:#fafafa; transform:translateY(-1px)}
   .card:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
-  .card .idx{position:absolute; top:16px; right:16px; font-family:var(--ff-mono); font-size:11px; color:var(--faint)}
-  .card .nm{font-family:var(--ff-display); font-weight:700; font-size:19px; line-height:1.2; padding-right:36px}
-  .card .tr{color:var(--dim); font-size:14px; margin-top:9px; line-height:1.5}
-  .card.recommended{border-color:var(--accent); border-width:1.5px; background:linear-gradient(var(--accent-soft),var(--paper) 70%)}
+  .card .idx{display:none}
+  .card .nm{font-weight:600; font-size:16.5px; line-height:1.25}
+  .card .tr{color:var(--dim); font-size:14px; margin-top:8px; line-height:1.5}
+  .card.recommended{border:1.5px solid var(--accent); background:var(--accent-soft)}
   .card.recommended .nm{color:var(--accent)}
   .card.recommended::after{
     content:"match"; position:absolute; top:0; right:0; background:var(--accent); color:#fff;
-    font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:4px 9px; font-weight:700;
+    font-size:10px; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; font-weight:600;
     font-family:var(--ff-mono); border-bottom-left-radius:10px;
   }
   .card.meta-card{border-style:dashed; grid-column:1/-1; background:transparent}
   .card.meta-card .nm{color:var(--dim)}
 
-  /* skills */
-  .sk.grid{grid-template-columns:repeat(auto-fill,minmax(232px,1fr))}
+  .sk.grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
   .chip{
-    text-align:left; background:var(--paper); border:1px solid var(--rule); color:var(--ink);
-    padding:15px; border-radius:12px; cursor:pointer; font-family:var(--ff-body);
+    text-align:left; background:var(--bg); border:1px solid var(--rule); color:var(--ink);
+    padding:14px 15px; border-radius:12px; cursor:pointer; font-family:var(--ff);
     transition:border-color .18s,background .18s,transform .18s; animation:rise .5s both;
   }
-  .chip:hover{border-color:var(--accent-line); background:var(--paper2); transform:translateY(-1px)}
+  .chip:hover{border-color:var(--rule2); background:#fafafa; transform:translateY(-1px)}
   .chip:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
-  .chip .cmd{color:var(--accent); font-family:var(--ff-mono); font-weight:600; font-size:15px}
+  .chip .cmd{color:var(--accent); font-family:var(--ff-mono); font-weight:500; font-size:14px}
   .chip .when{color:var(--dim); font-size:13.5px; margin-top:7px; line-height:1.5}
 
   /* principles */
-  .band{margin-bottom:clamp(22px,3vw,32px); animation:rise .5s both}
+  .band{margin-bottom:clamp(34px,5vw,52px); animation:rise .5s both}
   .band:last-child{margin-bottom:0}
-  .band-head{display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap}
-  .band-head .tick{width:14px; height:14px; border-radius:4px; flex:none}
-  .band-head h3{font-family:var(--ff-display); font-weight:700; font-size:clamp(19px,3vw,23px); margin:0}
+  .band-head{display:flex; align-items:center; gap:10px; margin-bottom:8px}
+  .band-head .tick{width:9px; height:9px; border-radius:2px; flex:none}
+  .band-head h3{font-weight:600; font-size:18px; margin:0; letter-spacing:-.01em}
   .band-head .ct{color:var(--faint); font-family:var(--ff-mono); font-size:12px}
-  .band-head .ln{flex:1 1 60px; height:1px; background:var(--rule2); min-width:20px}
-  .band-desc{color:var(--dim); font-size:14.5px; margin:0 0 14px; max-width:68ch}
-  .bricks{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px}
+  .band-head .ln{flex:1; height:1px; background:var(--rule)}
+  .band-desc{color:var(--dim); font-size:14.5px; margin:0 0 16px; max-width:60ch}
+  .bricks{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px}
   .brick{
-    text-align:left; background:var(--paper); border:1px solid var(--rule); border-left:4px solid var(--c);
-    color:var(--ink); padding:15px 16px; border-radius:4px 12px 12px 4px; cursor:pointer; font-family:var(--ff-body);
-    transition:background .18s,transform .18s,box-shadow .18s; animation:rise .5s both;
+    text-align:left; background:var(--bg); border:1px solid var(--rule); border-left:3px solid var(--c);
+    color:var(--ink); padding:13px 15px; border-radius:3px 12px 12px 3px; cursor:pointer; font-family:var(--ff);
+    transition:background .18s,transform .18s; animation:rise .5s both;
   }
-  .brick:hover{background:var(--paper2); transform:translateY(-1px); box-shadow:0 4px 14px -8px rgba(34,28,18,.16)}
+  .brick:hover{background:#fafafa; transform:translateY(-1px)}
   .brick:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
-  .brick .pn{font-family:var(--ff-display); font-weight:700; font-size:16.5px; line-height:1.25}
-  .brick .pa{color:var(--faint); font-size:13px; margin-top:7px; line-height:1.45}
+  .brick .pn{font-weight:600; font-size:15px; line-height:1.25}
+  .brick .pa{color:var(--faint); font-size:12.5px; margin-top:6px; line-height:1.45}
 
-  /* models as cards */
-  .mgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px}
+  /* models */
+  .mgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:10px}
   .mcard{
-    background:var(--paper); border:1px solid var(--rule); border-radius:12px; padding:16px 17px;
-    display:flex; flex-direction:column; gap:8px; animation:rise .5s both;
+    background:var(--bg); border:1px solid var(--rule); border-radius:12px; padding:15px 16px;
+    display:flex; flex-direction:column; gap:7px; animation:rise .5s both;
   }
-  .mrole{font-family:var(--ff-display); font-weight:700; font-size:16px; line-height:1.25; color:var(--ink)}
-  .kind{align-self:flex-start; font-size:11px; letter-spacing:.04em; padding:3px 9px; border-radius:999px; border:1px solid var(--rule2); color:var(--dim); font-family:var(--ff-mono)}
-  .kind.panel{color:var(--arch); border-color:rgba(31,111,139,.4); background:rgba(31,111,139,.07)}
-  .mowns{color:var(--dim); font-size:14px; line-height:1.5}
-  .models-note{color:var(--faint); font-size:13.5px; margin-top:18px; max-width:62ch; line-height:1.55}
+  .mrole{font-weight:600; font-size:15px; line-height:1.3; color:var(--ink)}
+  .kind{align-self:flex-start; font-size:11px; padding:3px 8px; border-radius:999px; border:1px solid var(--rule2); color:var(--dim); font-family:var(--ff-mono)}
+  .kind.panel{color:var(--arch); border-color:rgba(31,111,139,.35); background:rgba(31,111,139,.06)}
+  .mowns{color:var(--dim); font-size:13.5px; line-height:1.5}
+  .models-note{color:var(--faint); font-size:13.5px; margin-top:20px; max-width:60ch; line-height:1.6}
 
   /* modal */
-  .overlay{position:fixed; inset:0; background:rgba(40,32,18,.5); backdrop-filter:blur(5px); display:none; align-items:center; justify-content:center; z-index:60; padding:clamp(14px,4vw,24px)}
+  .overlay{position:fixed; inset:0; background:rgba(20,20,20,.45); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; z-index:60; padding:clamp(16px,4vw,24px)}
   .overlay.open{display:flex; animation:fade .2s}
-  .dialog{background:var(--paper); border:1px solid var(--rule2); border-radius:16px; max-width:580px; width:100%; padding:clamp(22px,4vw,34px); position:relative; animation:rise .26s both; max-height:86vh; overflow:auto; box-shadow:0 20px 60px -20px rgba(34,28,18,.4)}
-  .dialog .cat{font-family:var(--ff-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
-  .dialog h3{font-family:var(--ff-display); font-weight:700; font-size:clamp(24px,4vw,30px); margin:8px 0 20px; line-height:1.1; letter-spacing:-.01em}
-  .dialog .field{margin:16px 0}
-  .dialog .field .k{color:var(--faint); font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; font-family:var(--ff-mono)}
-  .dialog .field .v{color:var(--ink); font-size:16px; line-height:1.6}
-  .dialog .close{position:absolute; top:14px; right:14px; background:var(--bg); border:1px solid var(--rule2); color:var(--ink-soft); width:36px; height:36px; border-radius:10px; cursor:pointer; font-family:var(--ff-body); font-size:20px; line-height:1; display:flex; align-items:center; justify-content:center}
+  .dialog{background:var(--bg); border:1px solid var(--rule2); border-radius:14px; max-width:540px; width:100%; padding:clamp(24px,4vw,32px); position:relative; animation:rise .26s both; max-height:86vh; overflow:auto; box-shadow:0 16px 48px -16px rgba(0,0,0,.22)}
+  .dialog .cat{font-family:var(--ff-mono); font-size:12px; letter-spacing:.04em; text-transform:uppercase; color:var(--accent)}
+  .dialog h3{font-weight:600; font-size:clamp(22px,3.5vw,27px); margin:8px 0 18px; line-height:1.15; letter-spacing:-.015em}
+  .dialog .field{margin:15px 0}
+  .dialog .field .k{color:var(--faint); font-size:11px; letter-spacing:.06em; text-transform:uppercase; margin-bottom:5px; font-family:var(--ff-mono)}
+  .dialog .field .v{color:var(--ink); font-size:15.5px; line-height:1.6}
+  .dialog .close{position:absolute; top:13px; right:13px; background:var(--bg); border:1px solid var(--rule2); color:var(--dim); width:34px; height:34px; border-radius:9px; cursor:pointer; font-family:var(--ff); font-size:18px; line-height:1; display:flex; align-items:center; justify-content:center}
   .dialog .close:hover{color:var(--accent); border-color:var(--accent-line)}
 
-  footer{padding:clamp(36px,6vw,52px) 0 calc(40px + env(safe-area-inset-bottom)); color:var(--faint); font-size:14px; line-height:1.7}
-  footer .a{color:var(--dim)}
+  footer{padding:clamp(40px,6vw,60px) 0 calc(40px + env(safe-area-inset-bottom)); color:var(--faint); font-size:14px; line-height:1.7}
+  footer p{margin:0 0 8px; max-width:62ch}
   footer a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-line)}
   footer a:hover{border-bottom-color:var(--accent)}
-  .foot-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:clamp(20px,4vw,40px); max-width:80ch}
-  .foot-col h4{font-family:var(--ff-display); font-weight:700; font-size:16px; margin:0 0 8px; color:var(--ink)}
-  .foot-col p{margin:0; color:var(--dim); font-size:14px; line-height:1.6}
-  .foot-col code{font-family:var(--ff-mono); color:var(--accent); font-size:13px}
 
-  @keyframes rise{from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:none}}
+  @keyframes rise{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   @keyframes fade{from{opacity:0} to{opacity:1}}
   @media (prefers-reduced-motion:reduce){
     *{animation:none !important; transition:none !important}
     html{scroll-behavior:auto}
   }
-
-  /* mobile */
   @media (max-width:640px){
-    .mast-side{margin-left:0; width:100%; margin-top:6px}
-    .pillrow{justify-content:flex-start}
-    .flow{flex-direction:column; align-items:stretch; gap:6px}
-    .flow .arr{display:none}
-    .flow .node{width:100%; text-align:center}
     .pb.grid,.sk.grid,.bricks,.mgrid{grid-template-columns:1fr}
-    .card{padding:16px}
-    .intro{grid-template-columns:1fr}
+    .flow{line-height:2}
   }
 </style>
 </head>
@@ -235,33 +187,10 @@
     <div class="mark">
       <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
       <h1 class="wordmark">p<span>stack</span></h1>
-      <div class="mast-side">
-        <div class="pillrow">
-          <span class="pill"><b>20</b>principles</span>
-          <span class="pill"><b>17</b>playbooks</span>
-          <span class="pill"><b>16</b>skills</span>
-        </div>
-      </div>
     </div>
+    <p class="count">20 principles · 17 playbooks · 16 skills</p>
     <p class="tagline">Engineering skills that turn a coding agent into a careful crew. You describe a task, and pstack matches it to a <em>playbook</em>.</p>
-
-    <div class="intro">
-      <div class="blk">
-        <div class="n">01 · the idea</div>
-        <h3>One entry point</h3>
-        <p>Type <code style="font-family:var(--ff-mono);color:var(--accent)">/poteto-mode</code> and describe your task. pstack reads it, matches a playbook, and runs the skills as the steps fire.</p>
-      </div>
-      <div class="blk">
-        <div class="n">02 · the foundation</div>
-        <h3>Principles hold the line</h3>
-        <p>Twenty short rules apply across every playbook. They bias the work toward small diffs, real verification, and root-cause fixes.</p>
-      </div>
-      <div class="blk">
-        <div class="n">03 · this page</div>
-        <h3>A guided tour</h3>
-        <p>Try the router below, then browse the playbooks, skills, and principles. Tap any card to read what it does and when it applies.</p>
-      </div>
-    </div>
+    <p class="intro-lead">Type <code>/poteto-mode</code> and describe a task. pstack matches it to a playbook and runs the skills as the steps fire. Twenty principles apply across every playbook, biasing the work toward small diffs and real verification.</p>
   </div>
 </header>
 
@@ -278,19 +207,11 @@
 <section id="routing">
   <div class="wrap">
     <div class="sh">
-      <span class="num">§ 01</span>
+      <span class="num">01</span>
       <h2>See the routing in action</h2>
-      <p class="lead">This is the whole idea behind <code style="font-family:var(--ff-mono);color:var(--accent)">/poteto-mode</code>. Type a task, or tap an example, and watch the matching playbook light up below.</p>
+      <p class="lead">This is the whole idea behind <code>/poteto-mode</code>. Type a task, or tap an example, and watch the matching playbook light up below.</p>
     </div>
-    <div class="flow">
-      <span class="node hot">/poteto-mode</span>
-      <span class="arr">→</span>
-      <span class="node">match a playbook</span>
-      <span class="arr">→</span>
-      <span class="node">skills fire as steps</span>
-      <span class="arr">→</span>
-      <span class="node">clean reply</span>
-    </div>
+    <p class="flow"><span class="cmd-tok">/poteto-mode</span> <span class="arr">→</span> match a playbook <span class="arr">→</span> skills fire as steps <span class="arr">→</span> clean reply</p>
     <fieldset class="chooser">
       <label for="task">Describe a task <span class="hint">(keyword matching, not the real router)</span></label>
       <input id="task" type="text" autocomplete="off" spellcheck="false" placeholder="Describe a task and watch the playbook light up…" aria-label="Describe a task">
@@ -306,9 +227,9 @@
 <section id="playbooks">
   <div class="wrap">
     <div class="sh">
-      <span class="num">§ 02</span>
+      <span class="num">02</span>
       <h2>Playbooks</h2>
-      <p class="lead">A playbook is a step-by-step recipe for one kind of task. There are seventeen. <code style="font-family:var(--ff-mono);color:var(--accent)">/poteto-mode</code> copies the matched one in full before any work starts.</p>
+      <p class="lead">A playbook is a step-by-step recipe for one kind of task. There are seventeen. <code>/poteto-mode</code> copies the matched one in full before any work starts.</p>
     </div>
     <div class="grid pb" id="pbgrid"></div>
   </div>
@@ -317,7 +238,7 @@
 <section id="skills">
   <div class="wrap">
     <div class="sh">
-      <span class="num">§ 03</span>
+      <span class="num">03</span>
       <h2>Skills</h2>
       <p class="lead">Skills are the individual moves. Reach for one directly when you want a specific result instead of the full route.</p>
     </div>
@@ -328,7 +249,7 @@
 <section id="principles">
   <div class="wrap">
     <div class="sh">
-      <span class="num">§ 04</span>
+      <span class="num">04</span>
       <h2>Principles</h2>
       <p class="lead">Twenty rules in five families. Tap any one to see when it applies and what it says.</p>
     </div>
@@ -339,27 +260,19 @@
 <section id="models">
   <div class="wrap">
     <div class="sh">
-      <span class="num">§ 05</span>
+      <span class="num">05</span>
       <h2>Models per role</h2>
       <p class="lead">pstack can use a different model for each role. Some roles run several models in parallel so the reviews come from different angles.</p>
     </div>
     <div class="mgrid" id="mgrid"></div>
-    <p class="models-note">Run <code style="font-family:var(--ff-mono);color:var(--accent)">/setup-pstack</code> to detect your models and write the rule. Skills read it and fall back to their own defaults when a line is missing, so you override only what you want.</p>
+    <p class="models-note">Run <code>/setup-pstack</code> to detect your models and write the rule. Skills read it and fall back to their own defaults when a line is missing, so you override only what you want.</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-col">
-        <h4>About pstack</h4>
-        <p>pstack is <a href="https://x.com/poteto" target="_blank" rel="noopener">poteto's</a> set of engineering skills for coding agents. It ships as a plugin, installed with <code>/add-plugin pstack</code>. This page is an unofficial reading aid that mirrors the skills installed on this machine.</p>
-      </div>
-      <div class="foot-col">
-        <h4>This site</h4>
-        <p>Source for this page: <a href="https://github.com/HustleCoding/pstack-explained" target="_blank" rel="noopener">HustleCoding/pstack-explained</a>. It deploys to GitHub Pages via a GitHub Actions workflow on every push to master.</p>
-      </div>
-    </div>
+    <p>pstack is <a href="https://x.com/poteto" target="_blank" rel="noopener">poteto's</a> set of engineering skills for coding agents, installed with <code>/add-plugin pstack</code>. This page is an unofficial reading aid.</p>
+    <p>Source and deploy: <a href="https://github.com/HustleCoding/pstack-explained" target="_blank" rel="noopener">HustleCoding/pstack-explained</a>, live at this URL via GitHub Actions.</p>
   </div>
 </footer>
 

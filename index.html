@@ -243,18 +243,18 @@
         </div>
       </div>
     </div>
-    <p class="tagline">A set of engineering skills that turn a coding agent into a careful crew. You describe a task, and pstack picks the right <em>playbook</em> for it.</p>
+    <p class="tagline">Engineering skills that turn a coding agent into a careful crew. You describe a task, and pstack matches it to a <em>playbook</em>.</p>
 
     <div class="intro">
       <div class="blk">
         <div class="n">01 · the idea</div>
         <h3>One entry point</h3>
-        <p>Type <code style="font-family:var(--ff-mono);color:var(--accent)">/poteto-mode</code> and describe your task. pstack reads it, matches a playbook, and runs the right skills as the steps fire.</p>
+        <p>Type <code style="font-family:var(--ff-mono);color:var(--accent)">/poteto-mode</code> and describe your task. pstack reads it, matches a playbook, and runs the skills as the steps fire.</p>
       </div>
       <div class="blk">
         <div class="n">02 · the foundation</div>
         <h3>Principles hold the line</h3>
-        <p>Twenty short rules keep the quality high under every playbook. They bias the work toward small diffs, real verification, and root-cause fixes.</p>
+        <p>Twenty short rules apply across every playbook. They bias the work toward small diffs, real verification, and root-cause fixes.</p>
       </div>
       <div class="blk">
         <div class="n">03 · this page</div>
@@ -292,7 +292,7 @@
       <span class="node">clean reply</span>
     </div>
     <fieldset class="chooser">
-      <label for="task">Describe a task <span class="hint">(the router matches keywords, like the real thing)</span></label>
+      <label for="task">Describe a task <span class="hint">(keyword matching, not the real router)</span></label>
       <input id="task" type="text" autocomplete="off" spellcheck="false" placeholder="Describe a task and watch the playbook light up…" aria-label="Describe a task">
     </fieldset>
     <div class="examples">
@@ -330,7 +330,7 @@
     <div class="sh">
       <span class="num">§ 04</span>
       <h2>Principles</h2>
-      <p class="lead">Twenty rules that keep the quality high, grouped into five families. Tap any one to see when it applies and what it says.</p>
+      <p class="lead">Twenty rules in five families. Tap any one to see when it applies and what it says.</p>
     </div>
     <div id="pstack"></div>
   </div>
@@ -387,7 +387,7 @@ const PLAYBOOKS = [
   {id:"trace-forensics", n:"Trace forensics", t:"Diagnose a captured profiling artifact like a cpuprofile, trace, spindump, or heap snapshot handed to you after the fact.",
    detail:"The deliverable is a diagnosis, not a fix. The artifact is already captured; you read it."},
   {id:"feature", n:"Feature", t:"New or changed behavior, built from a named data shape.",
-   detail:"Name the data shape first. Build the lever. Verify it really works against the real artifact, not a proxy."},
+   detail:"Name the data shape first. Build the lever. Verify it works against the real artifact, not a proxy."},
   {id:"refactoring", n:"Refactoring", t:"A behavior-preserving change to structure or shape. Rename, extract, inline, dedupe, or move.",
    detail:"Behavior must stay identical. Bias to deletion and the smallest diff. Remove dead weight before restructuring."},
   {id:"prototype", n:"Prototype", t:"A throwaway sketch to make a design or behavioral decision cheaply, or to settle an empirical fork by observing it instead of asking.",
@@ -434,7 +434,7 @@ const SKILLS = [
 const GROUPS = [
   {key:"core", label:"Core", color:"var(--core)", desc:"How to sequence work and scope it. The bias to delete before you add."},
   {key:"arch", label:"Architecture", color:"var(--arch)", desc:"Boundaries, types, and shared state across concurrent actors."},
-  {key:"verif", label:"Verification", color:"var(--verif)", desc:"Proving the work really works and ordering it so each step can be checked."},
+  {key:"verif", label:"Verification", color:"var(--verif)", desc:"Proving it works against the real artifact, and ordering the work so each step can be checked."},
   {key:"deleg", label:"Delegation", color:"var(--deleg)", desc:"Keeping context lean and staying unblocked on the human."},
   {key:"meta", label:"Meta", color:"var(--meta)", desc:"Turning repeated corrections into structure that enforces itself."}
 ];

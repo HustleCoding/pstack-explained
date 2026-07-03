@@ -18,8 +18,9 @@ Open `index.html` in any browser.
 
 ## Contents
 
-- `index.html` — the whole app (markup, styles, data, and router logic inline).
-- `.github/workflows/deploy.yml` — the GitHub Pages deployment workflow.
+`index.html` is the whole app. Markup, styles, data, and router logic live inline.
+
+`.github/workflows/deploy.yml` is the GitHub Pages deployment workflow.
 
 ## Notes
 

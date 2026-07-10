@@ -168,6 +168,21 @@
   footer a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-line)}
   footer a:hover{border-bottom-color:var(--accent)}
 
+  .changelog-meta{margin:0 0 18px; font-size:14px; color:var(--dim)}
+  .changelog-meta a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-line)}
+  .changelog-meta a:hover{border-bottom-color:var(--accent)}
+  .changelog-meta .ch-time{font-family:var(--ff-mono); color:var(--faint)}
+  .changelog-list{animation:rise .5s both}
+  .changelog-entry{display:flex; gap:18px; align-items:flex-start; padding:15px 0; border-bottom:1px solid var(--rule); animation:rise .5s both}
+  .changelog-entry:last-child{border-bottom:none}
+  .changelog-date{flex:none; width:84px; font-family:var(--ff-mono); font-size:12.5px; color:var(--faint); text-align:right; padding-top:3px}
+  .changelog-body{flex:1}
+  .changelog-title{font-weight:600; font-size:16px; line-height:1.35; color:var(--ink); margin-bottom:5px}
+  .changelog-title a{color:inherit; text-decoration:none; border-bottom:1px solid var(--rule)}
+  .changelog-title a:hover{color:var(--accent); border-bottom-color:var(--accent)}
+  .changelog-meta .ch-sha{font-family:var(--ff-mono); font-size:12px; color:var(--faint)}
+  .changelog-empty{color:var(--faint); font-size:15px; margin:12px 0 0}
+
   @keyframes rise{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   @keyframes fade{from{opacity:0} to{opacity:1}}
   @media (prefers-reduced-motion:reduce){
@@ -201,6 +216,7 @@
     <a href="#skills">Skills</a>
     <a href="#principles">Principles</a>
     <a href="#models">Models</a>
+    <a href="#changelog">Changelog</a>
   </div>
 </nav>
 
@@ -266,6 +282,18 @@
     </div>
     <div class="mgrid" id="mgrid"></div>
     <p class="models-note">Run <code>/setup-pstack</code> to detect your models and write the rule. Skills read it and fall back to their own defaults when a line is missing, so you override only what you want.</p>
+  </div>
+</section>
+
+<section id="changelog">
+  <div class="wrap">
+    <div class="sh">
+      <span class="num">06</span>
+      <h2>Upstream changelog</h2>
+      <p class="lead">Weekly changes to the <code>pstack</code> plugin in <code>cursor/plugins</code>. We poll the repo and surface any commits that touch the pstack directory.</p>
+    </div>
+    <div class="changelog-meta" id="changelog-meta"></div>
+    <div class="changelog-list" id="changelog-list"></div>
   </div>
 </section>
 
@@ -616,11 +644,73 @@ function rotateExample(){
   exIdx = (exIdx + 1) % EXAMPLES.length;
 }
 
+function renderChangelog(){
+  const root = $("#changelog-list");
+  const meta = $("#changelog-meta");
+  const clear = () => { root.innerHTML = ""; if(meta) meta.innerHTML = ""; };
+  fetch("./changelog.json")
+    .then(r => { if(!r.ok) throw new Error("not found"); return r.json(); })
+    .then(data => {
+      const entries = data.entries || [];
+      clear();
+      if(meta && data.sourceUrl){
+        meta.appendChild(document.createTextNode("Tracking "));
+        const src = el("a"); src.href = data.sourceUrl; src.target = "_blank"; src.rel = "noopener"; src.textContent = "cursor/plugins/pstack";
+        meta.appendChild(src);
+        if(data.lastUpdatedAt){
+          meta.appendChild(document.createTextNode(" · synced "));
+          const t = el("span", "ch-time"); t.textContent = new Date(data.lastUpdatedAt).toLocaleDateString();
+          meta.appendChild(t);
+        }
+      }
+      if(!entries.length){
+        root.appendChild(((e) => { e.textContent = "No changelog entries yet."; return e; })(el("p", "changelog-empty")));
+        return;
+      }
+      entries.forEach((e, i) => {
+        const date = new Date(e.date);
+        const dateStr = date.toLocaleDateString(undefined, { year:"numeric", month:"short", day:"numeric" });
+        const item = el("div", "changelog-entry");
+        item.style.animationDelay = (i * 30) + "ms";
+        const d = el("div", "changelog-date"); d.textContent = dateStr;
+        const body = el("div", "changelog-body");
+        const title = el("div", "changelog-title");
+        const a = el("a"); a.href = e.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = e.title;
+        title.appendChild(a);
+        const m = el("div", "changelog-meta");
+        const sha = el("span", "ch-sha"); sha.textContent = (e.sha || "").slice(0, 7);
+        m.appendChild(sha);
+        if(e.author){
+          m.appendChild(document.createTextNode(" · "));
+          if(e.authorUrl){
+            const au = el("a"); au.href = e.authorUrl; au.target = "_blank"; au.rel = "noopener"; au.textContent = e.author;
+            m.appendChild(au);
+          } else {
+            m.appendChild(document.createTextNode(e.author));
+          }
+        }
+        body.append(title, m);
+        item.append(d, body);
+        root.appendChild(item);
+      });
+    })
+    .catch(err => {
+      clear();
+      if(meta){
+        const p = el("p", "changelog-empty"); p.textContent = "Weekly sync will populate the changelog.";
+        meta.appendChild(p);
+      }
+      const p = el("p", "changelog-empty"); p.textContent = "No changelog yet. Check back after the next weekly sync.";
+      root.appendChild(p);
+    });
+}
+
 function init(){
   renderPlaybooks();
   renderSkills();
   renderPrinciples();
   renderModels();
+  renderChangelog();
   renderExamples();
 
   const input = $("#task");

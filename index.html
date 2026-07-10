@@ -647,18 +647,26 @@ function rotateExample(){
 function renderChangelog(){
   const root = $("#changelog-list");
   const meta = $("#changelog-meta");
+  const clear = () => { root.innerHTML = ""; if(meta) meta.innerHTML = ""; };
   fetch("./changelog.json")
     .then(r => { if(!r.ok) throw new Error("not found"); return r.json(); })
     .then(data => {
       const entries = data.entries || [];
+      clear();
       if(meta && data.sourceUrl){
-        meta.innerHTML = 'Tracking <a href="' + data.sourceUrl + '" target="_blank" rel="noopener">cursor/plugins/pstack</a>' + (data.lastUpdatedAt ? ' · synced <span class="ch-time">' + new Date(data.lastUpdatedAt).toLocaleDateString() + '</span>' : '');
+        meta.appendChild(document.createTextNode("Tracking "));
+        const src = el("a"); src.href = data.sourceUrl; src.target = "_blank"; src.rel = "noopener"; src.textContent = "cursor/plugins/pstack";
+        meta.appendChild(src);
+        if(data.lastUpdatedAt){
+          meta.appendChild(document.createTextNode(" · synced "));
+          const t = el("span", "ch-time"); t.textContent = new Date(data.lastUpdatedAt).toLocaleDateString();
+          meta.appendChild(t);
+        }
       }
       if(!entries.length){
-        root.innerHTML = '<p class="changelog-empty">No changelog entries yet.</p>';
+        root.appendChild(((e) => { e.textContent = "No changelog entries yet."; return e; })(el("p", "changelog-empty")));
         return;
       }
-      root.innerHTML = "";
       entries.forEach((e, i) => {
         const date = new Date(e.date);
         const dateStr = date.toLocaleDateString(undefined, { year:"numeric", month:"short", day:"numeric" });
@@ -670,15 +678,30 @@ function renderChangelog(){
         const a = el("a"); a.href = e.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = e.title;
         title.appendChild(a);
         const m = el("div", "changelog-meta");
-        m.innerHTML = '<span class="ch-sha">' + e.sha.slice(0,7) + '</span>' + (e.author ? ' · ' + (e.authorUrl ? '<a href="' + e.authorUrl + '" target="_blank" rel="noopener">' + e.author + '</a>' : e.author) : '');
+        const sha = el("span", "ch-sha"); sha.textContent = (e.sha || "").slice(0, 7);
+        m.appendChild(sha);
+        if(e.author){
+          m.appendChild(document.createTextNode(" · "));
+          if(e.authorUrl){
+            const au = el("a"); au.href = e.authorUrl; au.target = "_blank"; au.rel = "noopener"; au.textContent = e.author;
+            m.appendChild(au);
+          } else {
+            m.appendChild(document.createTextNode(e.author));
+          }
+        }
         body.append(title, m);
         item.append(d, body);
         root.appendChild(item);
       });
     })
     .catch(err => {
-      if(meta) meta.innerHTML = '<p class="changelog-empty">Weekly sync will populate the changelog.</p>';
-      root.innerHTML = '<p class="changelog-empty">No changelog yet. Check back after the next weekly sync.</p>';
+      clear();
+      if(meta){
+        const p = el("p", "changelog-empty"); p.textContent = "Weekly sync will populate the changelog.";
+        meta.appendChild(p);
+      }
+      const p = el("p", "changelog-empty"); p.textContent = "No changelog yet. Check back after the next weekly sync.";
+      root.appendChild(p);
     });
 }
 

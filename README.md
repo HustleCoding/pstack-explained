@@ -28,6 +28,8 @@ Open `index.html` or `changelog.html` in any browser, or run `python3 -m http.se
 
 `.github/workflows/sync-pstack.yml` runs weekly and fetches any new commits from `cursor/plugins/pstack`. If it finds changes, it commits an updated `changelog.json` and redeploys the site.
 
+`og.png` and the `favicon.*` / `apple-touch-icon.png` files are the social preview and icon assets.
+
 ## Changelog sync
 
 The workflow in `.github/workflows/sync-pstack.yml` runs every Monday at 09:00 UTC. It polls the `pstack` directory in `cursor/plugins`, appends new commits to `changelog.json`, and deploys the updated site (including `changelog.html`). Run it manually from the Actions tab at any time.

@@ -89,7 +89,6 @@ def parse_entry(commit_item):
         "sha": sha,
         "date": commit_author.get("date", ""),
         "title": title,
-        "message": raw_message,
         "author": author,
         "authorUrl": author_url,
         "url": commit_item.get("html_url") or f"https://github.com/{UPSTREAM_OWNER}/{UPSTREAM_REPO}/commit/{sha}",

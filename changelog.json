@@ -1,14 +1,13 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-07-10T14:52:55+00:00",
+  "lastUpdatedAt": "2026-07-10T15:04:06+00:00",
   "lastCommitSha": "0dda29e839d15464a137af9935665a5a47ee09b8",
   "entries": [
     {
       "sha": "0dda29e839d15464a137af9935665a5a47ee09b8",
       "date": "2026-07-09T01:49:43Z",
       "title": "pstack: make poteto-mode a sticky mode with a conditional reminder (#144)",
-      "message": "pstack: make poteto-mode a sticky mode with a conditional reminder (#144)\n\n* pstack: make poteto-mode a sticky mode with a conditional reminder\n\n* pstack: reference the mode as /poteto-mode in the sticky reminder",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/0dda29e839d15464a137af9935665a5a47ee09b8"
@@ -17,7 +16,6 @@
       "sha": "9b80b5349872b2a3404be58bd9236cc9b83833bb",
       "date": "2026-07-08T21:39:53Z",
       "title": "pstack: route hardest tasks to claude-fable-5-thinking-max (#143)",
-      "message": "pstack: route hardest tasks to claude-fable-5-thinking-max (#143)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/9b80b5349872b2a3404be58bd9236cc9b83833bb"
@@ -26,7 +24,6 @@
       "sha": "dc2fae6625a268361243ca044eb5af141c124704",
       "date": "2026-07-08T21:31:43Z",
       "title": "pstack: route composer slots to grok-4.5-fast-xhigh (#142)",
-      "message": "pstack: route composer slots to grok-4.5-fast-xhigh (#142)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/dc2fae6625a268361243ca044eb5af141c124704"
@@ -35,7 +32,6 @@
       "sha": "0452e08a314c03621ec5ac1324f1ad1dd824f1a4",
       "date": "2026-06-24T04:43:34Z",
       "title": "pstack: add Benny issue automation pack (#137)",
-      "message": "pstack: add Benny issue automation pack (#137)\n\n## Summary\n- add a dormant Benny source pack for thread-only issue triage and evidence-backed repro and fix workflows\n- copy the pack into target repositories so live automations read committed files directly without exposing Benny as slash skills\n- keep pstack enabled only for shared workflow dependencies and preserve user-owned configuration outside pack refreshes\n\n## Test plan\n- [x] `node scripts/validate-plugins.mjs`\n- [x] validate the manifest exposes only `./skills/`, direct operational paths, Markdown links, JSON and YAML examples, frontmatter, and unique skill names\n- [x] scan the branch for discovery contradictions, private names, IDs, credentials, endpoints, and local plugin paths\n- [x] run `git diff --check origin/main...HEAD` and review the full branch diff\n\n<!-- CURSOR_SUMMARY -->\n---\n\n> [!NOTE]\n> **Low Risk**\n> Documentation and dormant automation sources only; no runtime code paths in the plugin. Operational risk applies only after users enable automations with Slack, tracker, and repo write access in their own repos.\n> \n> **Overview**\n> **Bumps pstack to 0.10.0** and documents a new **dormant Benny pack** under `automations/benny/` for Slack-driven issue workflows (not added to the plugin slash-skill manifest).\n> \n> The pack defines **two coordinated Cursor automations**: **triage** (classify reports, cause-aware routing, tracker dedupe, single thread reply with `[benny:bug]` / `[benny:performance]` / `[benny:other]`) and **repro/fix** (wait for trusted triage markers, double UI repro via a configured control adapter, verify existing PRs, optional bounded fix with **draft-only** PRs). Operational behavior lives in committed `SKILL.md` files with strict thread-only Slack rules, fail-closed gates, and coordinator-only posting.\n> \n> **Setup** is agent-driven via `FOR_AGENTS.md` and `setup-benny`: merge the pack into the target repo at `.cursor/automations/benny/`, enable **pstack** in `.cursor/settings.json` for shared skills (`how`, `why`, `tdd`, `unslop`, principles), keep user config outside the pack, and wire live automations through `/automate` (or editor updates for existing ones). Templates cover configuration, routing, feature maps, control-adapter contract, and prompt shims.\n> \n> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 1028dd3a69a2dc0dbbdb69348c55785318b96c09. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>\n<!-- /CURSOR_SUMMARY -->",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/0452e08a314c03621ec5ac1324f1ad1dd824f1a4"
@@ -44,7 +40,6 @@
       "sha": "e46364b8be46000b7df0f260550cd712afbb8d36",
       "date": "2026-06-17T17:52:40Z",
       "title": "pstack: add recall and blast-radius skills (#135)",
-      "message": "pstack: add recall and blast-radius skills (#135)\n\ntwo new skills, a version bump, and README rows.\n\n**`/recall`** rebuilds your recent working context on a topic from two records: your own chat history (mined in parallel by subagents) and the shared record the `why` skill searches (source control, issue tracker, chat, error tracking). hands back a tight current-state brief: a capsule, status-tagged threads, recurring problems, and the next move. explicit-invoke; composes `why` and `automate-me`.\n\n**`/blast-radius`** maps what a change could break beyond the diff (consumers, dependency contracts, lifecycle and timing, serialized boundaries), then proves the one fact it's safe because of by running code instead of asserting it. includes a \"how sure are you\" trust ladder; any load-bearing safety claim that doesn't reach \"ran it\" is labeled unproven. explicit-invoke; composes `how`, `why`, `arena`, and `unslop`.\n\nbumped to 0.9.2 and added both to the skills table.\n\n<!-- CURSOR_SUMMARY -->\n---\n\n> [!NOTE]\n> **Low Risk**\n> Documentation and agent workflow definitions only; no application runtime or security-sensitive code paths change.\n> \n> **Overview**\n> Ships **two new explicit-invoke skills** and bumps the plugin to **0.9.2**, with README table rows for when to use each.\n> \n> **`/recall`** adds a playbook for resuming work: scope a time window and topic, mine recent agent transcripts in parallel (with routing away from `session-pickup` / `automate-me`), optionally sweep the same shared evidence sources as **`why`** (rephrased toward current state and recurring failures), verify PRs/branches with `git`/`gh`, and return a fixed brief (capsule, status-tagged threads, problems, next move).\n> \n> **`/blast-radius`** adds a change-risk workflow beyond caller grep: identify the single load-bearing safety fact, hunt cross-boundary breakage (deps, lifecycle, wire formats), rate risks honestly, and **prove** safety via a trust ladder that requires runnable checks—unproven claims stay labeled; wide changes can use **`arena`**.\n> \n> Both skills set `disable-model-invocation: true` and compose existing skills (`why`, `how`, `unslop`, etc.); discovery is unchanged via `skills: \"./skills/\"`.\n> \n> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit d7f9a4db02589a37cfc3dabb231ce9375fa9e32f. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>\n<!-- /CURSOR_SUMMARY -->",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/e46364b8be46000b7df0f260550cd712afbb8d36"
@@ -53,7 +48,6 @@
       "sha": "cfd81b3961ef5fddc90e9f2994fa1c87cd454e61",
       "date": "2026-06-14T00:43:52Z",
       "title": "pstack: bump to 0.9.1, list the hillclimb playbook in the README (#133)",
-      "message": "pstack: bump to 0.9.1, list the hillclimb playbook in the README (#133)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/cfd81b3961ef5fddc90e9f2994fa1c87cd454e61"
@@ -62,7 +56,6 @@
       "sha": "b64f02a456924867d0d293cdb2f94eaecd25b50a",
       "date": "2026-06-14T00:39:39Z",
       "title": "poteto-mode: add the Hillclimb playbook and tighten Autonomous run stop semantics (#132)",
-      "message": "poteto-mode: add the Hillclimb playbook and tighten Autonomous run stop semantics (#132)\n\n* poteto-mode: add the Hillclimb playbook\n\nA generic, metric-agnostic scientific hill-climb loop. Fix a metric and a\nstop predicate, freeze a measurement harness, keep a decision.tsv, and loop\none hypothesis at a time with before/after measurement, a regression gate,\nand one commit per accepted win. The agent supervises and delegates the\nattempts. Registered in the playbook list; perf-issue points here for\nsustained work.\n\n* setup-pstack: add the hillclimb model role\n\nThe Hillclimb playbook reads a configured hillclimb model. Group it with\nbug-fix and perf-issue on the gpt-5.5-high-fast default so /setup-pstack\noffers the choice and the playbook reference is not dangling.\n\n* setup-pstack: split bug-fix, perf-issue, hillclimb into separate model lines\n\n* hillclimb: scope the autonomous-run deferral to the wake mechanism, not its stop rule\n\n* poteto-mode: drop the two-no-progress stop from Autonomous run; keep going past plateaus",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/b64f02a456924867d0d293cdb2f94eaecd25b50a"
@@ -71,7 +64,6 @@
       "sha": "74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12",
       "date": "2026-06-07T03:56:05Z",
       "title": "pstack: sync README with shipped principles and playbooks (#126)",
-      "message": "pstack: sync README with shipped principles and playbooks (#126)\n\nThe README fell behind recent merges. Add sequence-verifiable-units to the\nprinciple index (nineteen to twenty), add the pause-safely playbook to the\ntable (fourteen to fifteen), and broaden the prototype one-liner to match\nits empirical-fork scope.",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12"
@@ -80,7 +72,6 @@
       "sha": "a5cda8b561bb6536e880481734199a568cb647f4",
       "date": "2026-06-07T03:01:18Z",
       "title": "pstack: bump version to 0.9.0 (#125)",
-      "message": "pstack: bump version to 0.9.0 (#125)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/a5cda8b561bb6536e880481734199a568cb647f4"
@@ -89,7 +80,6 @@
       "sha": "91707573f17bde34e376f772ef4dd8f504747cb6",
       "date": "2026-06-06T22:18:49Z",
       "title": "poteto-mode: shape refactoring commits before opening the PR (#124)",
-      "message": "poteto-mode: shape refactoring commits before opening the PR (#124)\n\nThe sequence-verifiable-units continuation landed after \"Run Opening a PR\",\nwhich read as open-then-shape. Fold it into the rebase sentence so commit\nshaping comes before the PR step. Bugbot flagged this after the original\nchange had merged.",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/91707573f17bde34e376f772ef4dd8f504747cb6"
@@ -98,7 +88,6 @@
       "sha": "318e8f74ccc316b5f53e058de03fd1978ba5e041",
       "date": "2026-06-06T22:18:28Z",
       "title": "pstack: self-unblock empirical forks with a sketch instead of asking (#122)",
-      "message": "pstack: self-unblock empirical forks with a sketch instead of asking (#122)\n\n* poteto-mode: extend Prototype playbook to empirical forks\n\nPrototype was UI-only (layout/interaction, the eye is the test). Broaden\nthe trigger and steps 1/5 so a throwaway sketch can settle a behavioral\nor timing fork by observation (which behavior, which timing, which\napproach), not just a visual one. This is the destination the new\nself-unblock trigger routes to.\n\n* poteto-mode: route the AskQuestion reflex to a sketch\n\nBefore asking the human a which-approach / how-should-I / what-should-this-do\nquestion, classify it. If the answer is empirical (observable by running\nsomething), sketch it via the Prototype playbook and let the result decide;\nreserve the ask for a genuine product or preference call. Wires Never Block\non the Human to Prototype, and broadens the Prototype catalog entry to match.\n\n* poteto-mode: finish the Prototype empirical-fork broadening\n\nThree gaps in the partial broadening. Step 3 still assumed a UI build, so\nit now names the script path for a behavioral or timing decision. The Reply\nstill demanded screenshots, so it asks for the matching evidence instead.\nThe AskQuestion trigger had no read-only carve-out, so a cited-answer\nInvestigation no longer routes to a build.",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/318e8f74ccc316b5f53e058de03fd1978ba5e041"
@@ -107,7 +96,6 @@
       "sha": "27daaa309189aabce2dcaa2554cc940d65749a25",
       "date": "2026-06-06T21:48:05Z",
       "title": "pstack: add 'sequence work into verifiable units' principle (#123)",
-      "message": "pstack: add 'sequence work into verifiable units' principle (#123)\n\n* poteto-mode: add \"sequence work into verifiable units\" principle\n\nNew principle leaf plus its index entry in the Verification group. Break\nmulti-step work into small units that each end in a check, verify each\nbefore the next, and stack commits and PRs so the sequence proves itself\nto a reviewer (the failing test first, then the fix).\n\n* poteto-mode: thread sequence-verifiable-units into playbooks\n\nReference the principle where it applies: the iterate-and-verify steps of\nperf-issue and autonomous-run, the commit-staging steps of bug-fix,\nfeature, and refactoring, and the figure-it-out loop.",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/27daaa309189aabce2dcaa2554cc940d65749a25"
@@ -116,7 +104,6 @@
       "sha": "6605d7adc3d4733b87273158c4cc49ae184409ab",
       "date": "2026-06-06T08:25:47Z",
       "title": "pstack: per-role model configuration via /setup-pstack (#121)",
-      "message": "pstack: per-role model configuration via /setup-pstack (#121)\n\n* pstack: per-role model configuration via /setup-pstack, drop codex\n\nMakes pstack's model choices configurable per role instead of hardcoded.\n\n- New /setup-pstack skill detects your available models and writes\n  ~/.cursor/rules/pstack-models.mdc, an always-applied rule with one\n  line per role.\n- poteto-mode gains a Model configuration section (default table and\n  precedence). Skills read the configured model per role and fall back\n  to the inline default when the rule is absent, so nothing breaks\n  with no setup.\n- Review panels (arena, architect, interrogate, how critics) are now\n  config-driven and count-agnostic. One subagent runs per configured\n  model, with no fixed count or A/B/C/D labels.\n- Dropped gpt-5.3-codex-high-fast. bug-fix and perf-issue default to\n  gpt-5.5-high-fast; feature and refactoring stay composer-2.5-fast.\n\nVersion bump to 0.8.0.\n\n* pstack: keep model config out of poteto-mode\n\nDrop the Model configuration section and table from poteto-mode. The\ncanonical defaults live in the setup-pstack rule shape, and each skill\nalready carries its inline default, so poteto-mode only needs a one-line\npointer in its Task defaults. Fixes the plan.md and setup-pstack\nback-references to the removed section.",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/6605d7adc3d4733b87273158c4cc49ae184409ab"
@@ -125,7 +112,6 @@
       "sha": "881e794248cd8d3855807abd7e48f2083809d175",
       "date": "2026-06-06T06:40:11Z",
       "title": "pstack: bump version to 0.7.0 (#117)",
-      "message": "pstack: bump version to 0.7.0 (#117)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/881e794248cd8d3855807abd7e48f2083809d175"
@@ -134,7 +120,6 @@
       "sha": "97d645a601330acf0257e51ce646aa497855c35f",
       "date": "2026-06-06T05:56:21Z",
       "title": "pstack: add skeptical-reviewer trigger and arena routing for multi-shape work (#116)",
-      "message": "pstack: add skeptical-reviewer trigger and arena routing for multi-shape work (#116)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/97d645a601330acf0257e51ce646aa497855c35f"
@@ -143,7 +128,6 @@
       "sha": "2f3a47e6c404daa4bd24e8a0686751be39ed889b",
       "date": "2026-06-06T05:48:31Z",
       "title": "pstack: add pause-safely playbook (clean checkpoint for suspending work) (#115)",
-      "message": "pstack: add pause-safely playbook (clean checkpoint for suspending work) (#115)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/2f3a47e6c404daa4bd24e8a0686751be39ed889b"
@@ -152,7 +136,6 @@
       "sha": "64fe0147d32e0c05d2953501ddf9ff65ebcadc54",
       "date": "2026-06-05T00:23:50Z",
       "title": "pstack: fold enforcement-strength rung into encode-lessons-in-structure (#114)",
-      "message": "pstack: fold enforcement-strength rung into encode-lessons-in-structure (#114)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/64fe0147d32e0c05d2953501ddf9ff65ebcadc54"
@@ -161,7 +144,6 @@
       "sha": "c8402bc8e3673b973719fe3acc2c4837fef34f86",
       "date": "2026-05-30T01:45:40Z",
       "title": "pstack: concision pass on how, interrogate, architect, reflect (#106)",
-      "message": "pstack: concision pass on how, interrogate, architect, reflect (#106)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/c8402bc8e3673b973719fe3acc2c4837fef34f86"
@@ -170,7 +152,6 @@
       "sha": "f7e01457bba4499be1ce302484e4225f9a3c9eca",
       "date": "2026-05-30T01:11:59Z",
       "title": "pstack: concision pass on why and poteto-mode (#105)",
-      "message": "pstack: concision pass on why and poteto-mode (#105)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/f7e01457bba4499be1ce302484e4225f9a3c9eca"
@@ -179,7 +160,6 @@
       "sha": "683cdbda983ea8be4b766ac3fe94b7b88e7f75ad",
       "date": "2026-05-29T19:27:47Z",
       "title": "pstack: bump to 0.6.0 and refresh README (#104)",
-      "message": "pstack: bump to 0.6.0 and refresh README (#104)\n\n* pstack: bump to 0.6.0 and refresh README\n\n* pstack: add skills heading to README",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/683cdbda983ea8be4b766ac3fe94b7b88e7f75ad"
@@ -188,7 +168,6 @@
       "sha": "c532aa167cdbceb3440706ceacea2361e4d395df",
       "date": "2026-05-29T19:06:46Z",
       "title": "pstack: frame reply impact for the consumer and the maintainer (#103)",
-      "message": "pstack: frame reply impact for the consumer and the maintainer (#103)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/c532aa167cdbceb3440706ceacea2361e4d395df"
@@ -197,7 +176,6 @@
       "sha": "ba7781cce69f65bf3edc0e789d28233d9e967f96",
       "date": "2026-05-29T07:47:16Z",
       "title": "pstack: build-the-lever defaults to building the tool for any non-trivial work (#102)",
-      "message": "pstack: build-the-lever defaults to building the tool for any non-trivial work (#102)\n\n* pstack: build-the-lever defaults to building the tool for any non-trivial work\n\n* pstack: plain wording in build-the-lever Balance\n\n* pstack: add gold-plating to unslop abstract-metaphor list",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/ba7781cce69f65bf3edc0e789d28233d9e967f96"
@@ -206,7 +184,6 @@
       "sha": "bb3e1656658b12f0b1f2f1aa868449b678779487",
       "date": "2026-05-29T05:26:53Z",
       "title": "pstack: bump version to 0.5.0 (#101)",
-      "message": "pstack: bump version to 0.5.0 (#101)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/bb3e1656658b12f0b1f2f1aa868449b678779487"
@@ -215,7 +192,6 @@
       "sha": "939812915e8a1c2359b0ea8d93fee7c29c41f60e",
       "date": "2026-05-29T05:18:20Z",
       "title": "pstack: interrogate gains a multi-model code-quality lens (#100)",
-      "message": "pstack: interrogate gains a multi-model code-quality lens (#100)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/939812915e8a1c2359b0ea8d93fee7c29c41f60e"
@@ -224,7 +200,6 @@
       "sha": "ec44aed93cda65227954d46c75be3a2f218144a3",
       "date": "2026-05-29T00:24:30Z",
       "title": "pstack: update Opus 4.7 references to 4.8 (#98)",
-      "message": "pstack: update Opus 4.7 references to 4.8 (#98)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/ec44aed93cda65227954d46c75be3a2f218144a3"
@@ -233,7 +208,6 @@
       "sha": "0fe5b8a0952fd8888f9068f0693099ae74d25902",
       "date": "2026-05-28T23:59:30Z",
       "title": "pstack: architect usage-first design (caller's usage as the spec) (#99)",
-      "message": "pstack: architect usage-first design (caller's usage as the spec) (#99)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/0fe5b8a0952fd8888f9068f0693099ae74d25902"
@@ -242,7 +216,6 @@
       "sha": "9da4009e1278994a5623f23c262f8bde55830598",
       "date": "2026-05-28T05:27:40Z",
       "title": "pstack: bump version to 0.4.0 (#93)",
-      "message": "pstack: bump version to 0.4.0 (#93)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/9da4009e1278994a5623f23c262f8bde55830598"
@@ -251,7 +224,6 @@
       "sha": "65f4dacee2ed677a295de8d295b889bbfe2ad27c",
       "date": "2026-05-28T04:40:03Z",
       "title": "pstack: build-the-lever can be a skill your subagents follow (#91)",
-      "message": "pstack: build-the-lever can be a skill your subagents follow (#91)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/65f4dacee2ed677a295de8d295b889bbfe2ad27c"
@@ -260,7 +232,6 @@
       "sha": "6f2e0c63189ce3b661040153d82a32a2038560ba",
       "date": "2026-05-27T04:37:25Z",
       "title": "pstack: bump version to 0.3.0 (#90)",
-      "message": "pstack: bump version to 0.3.0 (#90)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/6f2e0c63189ce3b661040153d82a32a2038560ba"
@@ -269,7 +240,6 @@
       "sha": "47f3df82728f0df2233ed9d773ba0fba74cd79e3",
       "date": "2026-05-27T03:56:26Z",
       "title": "show-me-your-work: add cross-model review of the trail (#89)",
-      "message": "show-me-your-work: add cross-model review of the trail (#89)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/47f3df82728f0df2233ed9d773ba0fba74cd79e3"
@@ -278,7 +248,6 @@
       "sha": "8d7ca2653dfe8632f02a33c426df28c064ca41be",
       "date": "2026-05-26T21:44:29Z",
       "title": "pstack: bug-fix binary-search hypothesis loop, synthetic repro, /loop (#88)",
-      "message": "pstack: bug-fix binary-search hypothesis loop, synthetic repro, /loop (#88)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/8d7ca2653dfe8632f02a33c426df28c064ca41be"
@@ -287,7 +256,6 @@
       "sha": "21327bee99f30a73758c99f6c6459571bc9f6e98",
       "date": "2026-05-26T07:24:39Z",
       "title": "pstack: bump version to 0.2.0 (#86)",
-      "message": "pstack: bump version to 0.2.0 (#86)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/21327bee99f30a73758c99f6c6459571bc9f6e98"
@@ -296,7 +264,6 @@
       "sha": "7dddd9bcfe5f53136ee4d9a8377da96a4860ef4a",
       "date": "2026-05-26T07:22:43Z",
       "title": "pstack: refresh README playbooks (full list as a table) (#85)",
-      "message": "pstack: refresh README playbooks (full list as a table) (#85)\n\n* pstack: update README playbook list (seven -> current fourteen)\n\n* pstack: render playbook list as a table",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/7dddd9bcfe5f53136ee4d9a8377da96a4860ef4a"
@@ -305,7 +272,6 @@
       "sha": "7b1c32e4c3427c30ad2595630ed74815c52fe4e9",
       "date": "2026-05-26T07:21:23Z",
       "title": "pstack: add build-the-lever principle (#84)",
-      "message": "pstack: add build-the-lever principle (#84)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/7b1c32e4c3427c30ad2595630ed74815c52fe4e9"
@@ -314,7 +280,6 @@
       "sha": "bbc0d75eb2f115124f6fbe9e5c8f27f579779345",
       "date": "2026-05-26T07:01:09Z",
       "title": "pstack: add session-pickup and trace-forensics playbooks (#83)",
-      "message": "pstack: add session-pickup and trace-forensics playbooks (#83)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/bbc0d75eb2f115124f6fbe9e5c8f27f579779345"
@@ -323,7 +288,6 @@
       "sha": "f18ffc1bd6b41a017ab97c53debcf140a8f754fd",
       "date": "2026-05-26T06:00:24Z",
       "title": "pstack: add refactoring playbook (#81)",
-      "message": "pstack: add refactoring playbook (#81)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/f18ffc1bd6b41a017ab97c53debcf140a8f754fd"
@@ -332,7 +296,6 @@
       "sha": "a9e675642ea4297553a4d8c23f5d8a5b004f6626",
       "date": "2026-05-25T21:29:31Z",
       "title": "pstack: add figure-it-out and show-me-your-work to README examples (#80)",
-      "message": "pstack: add figure-it-out and show-me-your-work to README examples (#80)\n\n* pstack: add figure-it-out and show-me-your-work to README examples\n\n* pstack: wrap README examples at 100 cols with aligned hanging indent",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/a9e675642ea4297553a4d8c23f5d8a5b004f6626"
@@ -341,7 +304,6 @@
       "sha": "11ecc12a3ffc037b4ef3b64de2be449668e8afc7",
       "date": "2026-05-25T03:57:58Z",
       "title": "pstack: harden show-me-your-work log.sh (formula-injection + mkdir -p) and shorten skill descriptions (#79)",
-      "message": "pstack: harden show-me-your-work log.sh (formula-injection + mkdir -p) and shorten skill descriptions (#79)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/11ecc12a3ffc037b4ef3b64de2be449668e8afc7"
@@ -350,7 +312,6 @@
       "sha": "35f33923cde39e9c27d68d95517e4e4e83719c7c",
       "date": "2026-05-24T20:36:28Z",
       "title": "pstack: add figure-it-out and show-me-your-work skills (#78)",
-      "message": "pstack: add figure-it-out and show-me-your-work skills (#78)\n\n* pstack: add figure-it-out and show-me-your-work skills\n\n* pstack: plain-spoken decision log template + guidance\n\n* pstack: add end-of-run transcript audit to show-me-your-work\n\n* pstack: figure-it-out adds designed workflow as todos with woven logging\n\n* pstack: prove-it-works gains script-the-check verification practice\n\n* pstack: header-only decision log template + unslop pass on the new skills\n\n* pstack: strengthen figure-it-out routing and show-me-your-work triggers",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/35f33923cde39e9c27d68d95517e4e4e83719c7c"
@@ -359,7 +320,6 @@
       "sha": "b8f2564c2e8da66b331c1dd63c2a2925d6739961",
       "date": "2026-05-24T00:40:00Z",
       "title": "pstack: simplify the feature README example (#77)",
-      "message": "pstack: simplify the feature README example (#77)",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/b8f2564c2e8da66b331c1dd63c2a2925d6739961"
@@ -368,7 +328,6 @@
       "sha": "3dd382f4dbf3753ea5c5fac0935bb5a8a0789021",
       "date": "2026-05-23T23:41:04Z",
       "title": "pstack: add usage examples to README (#76)",
-      "message": "pstack: add usage examples to README (#76)\n\n* pstack: add usage examples to README\n\n* pstack: condense README examples into a one-line bullet list\n\n* pstack: drop trailing gloss from README examples, keep label + prompt\n\n* pstack: wrap README examples in a single code block",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/3dd382f4dbf3753ea5c5fac0935bb5a8a0789021"
@@ -377,7 +336,6 @@
       "sha": "6754d3c09e5ea95de453ac1330f8648a82bbe00a",
       "date": "2026-05-23T21:31:24Z",
       "title": "pstack: add typescript-best-practices to README skills table",
-      "message": "pstack: add typescript-best-practices to README skills table\n\nthe skills table listed every shipped non-principle skill except\ntypescript-best-practices. add a row for it in the README's existing\nvoice. the principles section already enumerates all eighteen principle\nskills, including type-system-discipline, so it needs no change.",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/6754d3c09e5ea95de453ac1330f8648a82bbe00a"
@@ -386,7 +344,6 @@
       "sha": "24bd6eb895d63a6e76fabfea2cb344384d177d79",
       "date": "2026-05-23T01:09:07Z",
       "title": "Add pstack plugin",
-      "message": "Add pstack plugin\n\nlauren tan's working style as a Cursor plugin. Bundles the poteto-mode\nrouting skill plus the workflow skills it routes through (how, why,\narchitect, arena, unslop, interrogate, automate-me, reflect, tdd) and\nthe full seventeen-skill set of first principles. Ships the poteto-agent\nsubagent that runs the same workflow end-to-end.\n\nThe why skill discovers available MCPs at run time and maps each to an\nevidence category (source control, issue tracker, long-form docs,\nreal-time chat, infra observability, error tracking, analytics\nwarehouse). No third-party service integrations required.\n\ncursor-team-kit's control-cli, control-ui, and deslop are referenced as\nsibling-plugin dependencies for surfaces and commit cleanup; the kit\nworks standalone otherwise.\n\nMarketplace entry registered at the root .cursor-plugin/marketplace.json.",
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/24bd6eb895d63a6e76fabfea2cb344384d177d79"

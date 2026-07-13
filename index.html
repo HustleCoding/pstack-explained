@@ -30,6 +30,7 @@
     --rule:#ededed; --rule2:#e0e0e0;
     --accent:#b45309; --accent-soft:#fdf4ea; --accent-line:#e8c39a;
     --core:#b45309; --arch:#1f6f8b; --verif:#4d7c2f; --deleg:#b13a5a; --meta:#7c4d9e;
+    --t-setup:#7c4d9e; --t-sdlc:#b45309; --t-orch:#b13a5a; --t-special:#1f6f8b;
     --maxw:880px; --navh:54px;
     --ff:"Hanken Grotesk",system-ui,-apple-system,sans-serif;
     --ff-mono:"IBM Plex Mono",ui-monospace,monospace;
@@ -71,6 +72,8 @@
   .sh .num{color:var(--accent); font-family:var(--ff-mono); font-size:12px; letter-spacing:.04em}
   .sh h2{font-weight:600; font-size:clamp(24px,3.6vw,31px); margin:7px 0 12px; letter-spacing:-.018em; line-height:1.15}
   .sh .lead{color:var(--dim); font-size:16px; line-height:1.6; margin:0; max-width:60ch}
+  .sh .lead a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-line)}
+  .sh .lead a:hover{border-bottom-color:var(--accent)}
 
   /* routing */
   .flow{margin:0 0 28px; font-size:15px; color:var(--dim); line-height:1.9}
@@ -167,6 +170,8 @@
   .kind.panel{color:var(--arch); border-color:rgba(31,111,139,.35); background:rgba(31,111,139,.06)}
   .mowns{color:var(--dim); font-size:13.5px; line-height:1.5}
   .models-note{color:var(--faint); font-size:13.5px; margin-top:20px; max-width:60ch; line-height:1.6}
+  .tmpl-note a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-line)}
+  .tmpl-note a:hover{border-bottom-color:var(--accent)}
 
   /* modal */
   .overlay{position:fixed; inset:0; background:rgba(20,20,20,.45); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; z-index:60; padding:clamp(16px,4vw,24px)}
@@ -218,6 +223,7 @@
     <a href="#skills">Skills</a>
     <a href="#principles">Principles</a>
     <a href="#models">Models</a>
+    <a href="#templates">Templates</a>
     <a href="changelog.html">Changelog</a>
   </div>
 </nav>
@@ -284,6 +290,19 @@
     </div>
     <div class="mgrid" id="mgrid"></div>
     <p class="models-note">Run <code>/setup-pstack</code> to detect your models and write the rule. Skills read it and fall back to their own defaults when a line is missing, so you override only what you want.</p>
+  </div>
+</section>
+
+<section id="templates">
+  <div class="wrap">
+    <div class="sh">
+      <span class="num">06</span>
+      <h2>Agent Templates</h2>
+      <p class="lead">A companion toolkit by <a href="https://github.com/lionbenjamin/agent-templates" target="_blank" rel="noopener">lionbenjamin</a>: spec-driven agent workflows you install into Antigravity, Cursor, and Claude Code. Same idea as pstack — named workflows a coding agent runs — but organized as a spec-first SDLC, from a written constitution through spec, plan, code, and deploy.</p>
+    </div>
+    <p class="flow"><span class="cmd-tok">/constitute</span> <span class="arr">→</span> <span class="cmd-tok">/specify</span> <span class="arr">→</span> <span class="cmd-tok">/plan</span> <span class="arr">→</span> <span class="cmd-tok">/implement</span> <span class="arr">→</span> <span class="cmd-tok">/deploy</span> <span class="arr">→</span> <span class="cmd-tok">/retro</span></p>
+    <div id="tmplgroups"></div>
+    <p class="models-note tmpl-note">Install every workflow with <code>./install-workflows.sh</code>, which copies them into <code>~/.claude/commands/</code>, <code>~/.cursor/commands/</code>, and the Antigravity dirs. Every step reads a shared technical constitution and a lessons-learned memory file, so the spec, the plan, the code, and the review stay consistent across sessions — spec-driven rigor with an auditable trail instead of one-shot vibe coding. Source and full docs: <a href="https://github.com/lionbenjamin/agent-templates" target="_blank" rel="noopener">lionbenjamin/agent-templates</a>.</p>
   </div>
 </section>
 
@@ -463,6 +482,47 @@ const EXAMPLE_CHIPS = [
   {label:"Migrate callers", text:EXAMPLES[8]}
 ];
 
+const TEMPLATE_GROUPS = [
+  {key:"setup", label:"Project setup", color:"var(--t-setup)", desc:"Lock the tech stack and domain model before any feature work, then stress-test both."},
+  {key:"sdlc", label:"The agentic SDLC", color:"var(--t-sdlc)", desc:"An eleven-step pipeline from a written spec to a deployed change, each step handing off to the next."},
+  {key:"orch", label:"Orchestrators", color:"var(--t-orch)", desc:"Run the whole pipeline for you — with approval gates, without them, or straight from a raw idea."},
+  {key:"special", label:"Specialists", color:"var(--t-special)", desc:"Single-purpose reviewers and fixers you call directly for security, performance, accessibility, docs, and cleanup."}
+];
+
+const TEMPLATES = [
+  {g:"setup", cmd:"/constitute", d:"Define the non-negotiable tech stack and architecture constraints, written to a technical constitution the other agents read."},
+  {g:"setup", cmd:"/review_constitution", d:"Play devil's advocate against the constitution — challenge and stress-test every constraint before you build on it."},
+  {g:"setup", cmd:"/domain_model", d:"Model the domain with DDD bounded contexts so the data shape is settled before any logic is written."},
+  {g:"setup", cmd:"/review_domain", d:"Architectural review of the domain model to catch shape problems early."},
+  {g:"sdlc", cmd:"/specify", d:"Draft a comprehensive product specification from your idea."},
+  {g:"sdlc", cmd:"/clarify", d:"Review the spec for product clarity, completeness, and edge cases, writing a recommendation per gap."},
+  {g:"sdlc", cmd:"/plan", d:"Turn the spec into a TDD-first technical implementation plan."},
+  {g:"sdlc", cmd:"/review_plan", d:"A principal-engineer architectural review of the plan before any code is written."},
+  {g:"sdlc", cmd:"/tasks", d:"Break the plan into actionable tasks, marked [P] to run in parallel or [B] when blocking."},
+  {g:"sdlc", cmd:"/implement", d:"Generate code test-first, following the plan and the technical constitution."},
+  {g:"sdlc", cmd:"/code_review", d:"Security and quality analysis of the newly written code."},
+  {g:"sdlc", cmd:"/quality", d:"Verify correctness and audit the result against the spec."},
+  {g:"sdlc", cmd:"/commit", d:"Stage the changes and write conventional commits."},
+  {g:"sdlc", cmd:"/deploy", d:"Test, build, and deploy the application."},
+  {g:"sdlc", cmd:"/retro", d:"Retrospective that loops lessons learned back into the instructions."},
+  {g:"orch", cmd:"/feature", d:"Orchestrate the full SDLC cycle with manual approval gates between steps."},
+  {g:"orch", cmd:"/autopilot", d:"Run the whole pipeline with no gates, skipping stages that are already complete."},
+  {g:"orch", cmd:"/full_auto", d:"Go from a raw idea to working code in one fully autonomous pass."},
+  {g:"special", cmd:"/analyze", d:"Pre-implementation consistency check across the spec, plan, and tasks."},
+  {g:"special", cmd:"/skeptical_review", d:"A hard skeptic's critical architectural review."},
+  {g:"special", cmd:"/security_agent", d:"Security-focused code analysis against the OWASP Top 10."},
+  {g:"special", cmd:"/fix", d:"Root-cause analysis and a surgical bug fix."},
+  {g:"special", cmd:"/optimize", d:"Performance analysis and improvement."},
+  {g:"special", cmd:"/janitor", d:"Code cleanup and maintenance."},
+  {g:"special", cmd:"/document", d:"Keep READMEs, JSDoc/TSDoc, and inline docs in sync with the code."},
+  {g:"special", cmd:"/a11y_check", d:"WCAG accessibility compliance check."},
+  {g:"special", cmd:"/ux_redesign", d:"A principal designer's user-experience redesign."},
+  {g:"special", cmd:"/design_audit", d:"A comprehensive UX design audit."},
+  {g:"special", cmd:"/wireframe", d:"Markdown wireframes with UX descriptions drawn from the spec."},
+  {g:"special", cmd:"/tech_review", d:"Technical architecture review."},
+  {g:"special", cmd:"/release_gate", d:"Release-readiness validation before shipping."}
+];
+
 const $ = s => document.querySelector(s);
 const el = (tag, cls) => { const e = document.createElement(tag); if(cls) e.className = cls; return e; };
 
@@ -527,6 +587,37 @@ function renderPrinciples(){
   });
 }
 
+function renderTemplates(){
+  const root = $("#tmplgroups");
+  TEMPLATE_GROUPS.forEach((g, gi) => {
+    const band = el("div", "band");
+    band.style.animationDelay = (gi * 60) + "ms";
+    const head = el("div", "band-head");
+    const tick = el("span", "tick"); tick.style.background = g.color;
+    const h3 = el("h3"); h3.textContent = g.label;
+    const ct = el("span", "ct"); ct.textContent = TEMPLATES.filter(t => t.g === g.key).length + " templates";
+    const ln = el("span", "ln");
+    head.append(tick, h3, ct, ln);
+    band.appendChild(head);
+    const desc = el("p", "band-desc"); desc.textContent = g.desc;
+    band.appendChild(desc);
+    const bricks = el("div", "bricks");
+    TEMPLATES.filter(t => t.g === g.key).forEach((t, i) => {
+      const bk = el("button", "brick");
+      bk.type = "button";
+      bk.style.setProperty("--c", g.color);
+      bk.style.animationDelay = (i * 35) + "ms";
+      const pn = el("div", "pn"); pn.textContent = t.cmd;
+      const pa = el("div", "pa"); pa.textContent = t.d;
+      bk.append(pn, pa);
+      bk.addEventListener("click", () => openDialog("template", { ...t, group: g.label }));
+      bricks.appendChild(bk);
+    });
+    band.appendChild(bricks);
+    root.appendChild(band);
+  });
+}
+
 function renderModels(){
   const grid = $("#mgrid");
   MODELS.forEach((m, i) => {
@@ -571,6 +662,11 @@ function openDialog(kind, data){
     cat.textContent = "Skill";
     title.textContent = data.cmd;
     addField(body, "Use it when", data.when);
+  } else if(kind === "template"){
+    cat.textContent = "Agent template";
+    title.textContent = data.cmd;
+    addField(body, "What it does", data.d);
+    addField(body, "Where it fits", data.group);
   } else {
     cat.textContent = data.group + " principle";
     title.textContent = data.n;
@@ -642,6 +738,7 @@ function init(){
   renderPlaybooks();
   renderSkills();
   renderPrinciples();
+  renderTemplates();
   renderModels();
   renderExamples();
 

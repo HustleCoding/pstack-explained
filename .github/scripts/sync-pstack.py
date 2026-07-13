@@ -14,7 +14,7 @@ UPSTREAM_BRANCH = "main"
 CHANGELOG_FILE = "changelog.json"
 
 PER_PAGE = 100
-MAX_PAGES = 2
+MAX_PAGES = 100
 MAX_ENTRIES = 100
 
 SOURCE_URL = f"https://github.com/{UPSTREAM_OWNER}/{UPSTREAM_REPO}/tree/{UPSTREAM_BRANCH}/{UPSTREAM_PATH}"
@@ -47,8 +47,9 @@ def api_request(url, token):
         raise
 
 
-def fetch_commits(token, last_sha=None):
+def fetch_commits(token, since=None, last_sha=None):
     commits = []
+    truncated = False
     for page in range(1, MAX_PAGES + 1):
         params = {
             "path": UPSTREAM_PATH,
@@ -56,6 +57,8 @@ def fetch_commits(token, last_sha=None):
             "per_page": PER_PAGE,
             "page": page,
         }
+        if since:
+            params["since"] = since
         qs = urllib.parse.urlencode(params)
         url = f"https://api.github.com/repos/{UPSTREAM_OWNER}/{UPSTREAM_REPO}/commits?{qs}"
         page_commits = api_request(url, token)
@@ -66,6 +69,10 @@ def fetch_commits(token, last_sha=None):
             break
         if len(page_commits) < PER_PAGE:
             break
+        if page == MAX_PAGES:
+            truncated = True
+    if truncated:
+        print(f"Warning: reached max page limit ({MAX_PAGES}); fetched {len(commits)} commits. Some older commits may be missing.", file=sys.stderr)
     return commits
 
 
@@ -120,10 +127,12 @@ def main():
         print("No GITHUB_TOKEN found; using unauthenticated requests (low rate limit).", file=sys.stderr)
 
     old = load_changelog()
+    entries = old.get("entries", [])
     last_sha = old.get("lastCommitSha", "")
+    since = entries[0].get("date") if entries else None
 
     try:
-        commits = fetch_commits(token, last_sha=last_sha)
+        commits = fetch_commits(token, since=since, last_sha=last_sha)
     except Exception as e:
         print(f"Failed to fetch upstream commits: {e}", file=sys.stderr)
         sys.exit(1)
@@ -136,8 +145,10 @@ def main():
         try:
             idx = next(i for i, c in enumerate(commits) if c.get("sha") == last_sha)
             new_commits = commits[:idx]
+            print(f"Found last known commit {last_sha[:8]} at index {idx}.")
         except StopIteration:
             new_commits = commits
+            print(f"Warning: last known commit {last_sha[:8]} not in fetched history; using {len(commits)} commits since {since}.", file=sys.stderr)
     else:
         new_commits = commits
 
@@ -147,6 +158,7 @@ def main():
 
     new_entries = [parse_entry(c) for c in new_commits]
     existing_map = {e["sha"]: e for e in old.get("entries", [])}
+    new_count = sum(1 for e in new_entries if e["sha"] not in existing_map)
     for entry in new_entries:
         existing_map[entry["sha"]] = entry
 
@@ -162,7 +174,7 @@ def main():
         "entries": combined,
     }
     save_changelog(data)
-    print(f"Updated {CHANGELOG_FILE}: +{len(new_entries)} new entries, {len(combined)} total, last={latest['sha'][:8]}.")
+    print(f"Updated {CHANGELOG_FILE}: +{new_count} new entries, {len(combined)} total, last={latest['sha'][:8]}.")
 
 
 if __name__ == "__main__":

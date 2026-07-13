@@ -30,9 +30,22 @@ jobs:
           python-version: '3.12'
 
       - name: Poll upstream pstack changes
-        run: python3 .github/scripts/sync-pstack.py
+        id: sync
+        run: python3 .github/scripts/sync-pstack.py 2>&1 | tee sync.log
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync summary
+        if: always()
+        run: |
+          echo '### pstack sync summary' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f sync.log ]; then
+            cat sync.log >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if grep -q 'Warning:' sync.log 2>/dev/null; then
+            echo '' >> "$GITHUB_STEP_SUMMARY"
+            echo 'Warning: Sync completed with warnings. Review the log above to ensure no commits were missed.' >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Check for changes
         id: changes

@@ -1,9 +1,73 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-07-10T15:04:06+00:00",
-  "lastCommitSha": "0dda29e839d15464a137af9935665a5a47ee09b8",
+  "lastUpdatedAt": "2026-07-13T11:10:51+00:00",
+  "lastCommitSha": "a29f5a8ca161b1de4ffc5484454958bebc04eaa5",
   "entries": [
+    {
+      "sha": "a29f5a8ca161b1de4ffc5484454958bebc04eaa5",
+      "date": "2026-07-12T04:18:44Z",
+      "title": "pstack: bump version to 0.11.2 (#154)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/a29f5a8ca161b1de4ffc5484454958bebc04eaa5"
+    },
+    {
+      "sha": "8f008c41981dca484d5beaf688d3aa2ea4ecf89b",
+      "date": "2026-07-12T04:14:01Z",
+      "title": "pstack: add the teach skill (compose how + why into one explanation) (#153)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/8f008c41981dca484d5beaf688d3aa2ea4ecf89b"
+    },
+    {
+      "sha": "20bdb6cdfdd8ffa683befe62d76104e5654c861d",
+      "date": "2026-07-12T03:30:46Z",
+      "title": "pstack: bump version to 0.11.1 (#152)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/20bdb6cdfdd8ffa683befe62d76104e5654c861d"
+    },
+    {
+      "sha": "6714489fa233263f00e419f6cfc4759b07c81056",
+      "date": "2026-07-12T01:10:09Z",
+      "title": "maintain-verification-skill: cleanup granularity, re-doctor, evidence checks (#151)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/6714489fa233263f00e419f6cfc4759b07c81056"
+    },
+    {
+      "sha": "e42d29fd5c8fe4f13e3bee7f53b35f410f65aee8",
+      "date": "2026-07-12T00:17:43Z",
+      "title": "pstack: add create-verification-skill and maintain-verification-skill (#150)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/e42d29fd5c8fe4f13e3bee7f53b35f410f65aee8"
+    },
+    {
+      "sha": "9d2a3f2d12bbe0dca3e61bbc0e9dbfe2df09fb56",
+      "date": "2026-07-11T23:32:28Z",
+      "title": "pstack: give poteto-mode a human display name (#149)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/9d2a3f2d12bbe0dca3e61bbc0e9dbfe2df09fb56"
+    },
+    {
+      "sha": "9251b2666bc9876396825c1f0df5685dbdaaddb5",
+      "date": "2026-07-11T23:21:33Z",
+      "title": "pstack: lead the README with the two-step quickstart (#148)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/9251b2666bc9876396825c1f0df5685dbdaaddb5"
+    },
+    {
+      "sha": "a8145426e541afa424a403e3866496216c1b8142",
+      "date": "2026-07-11T02:25:05Z",
+      "title": "pstack: add model-the-domain principle; true up README (#147)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/a8145426e541afa424a403e3866496216c1b8142"
+    },
     {
       "sha": "0dda29e839d15464a137af9935665a5a47ee09b8",
       "date": "2026-07-09T01:49:43Z",

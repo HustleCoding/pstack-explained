@@ -1,0 +1,22 @@
+# pstack explained
+
+pstack is poteto's set of engineering skills for coding agents. This site is an unofficial, interactive reading aid.
+
+- Live site: https://hustlecoding.github.io/pstack-explained/
+- Source: https://github.com/HustleCoding/pstack-explained
+- Upstream pstack source: https://github.com/cursor/plugins/tree/main/pstack
+
+## AI-readable endpoints
+
+- `llms-full.txt` — complete pstack guide (playbooks, skills, principles, model roles) plus the latest upstream changelog
+- `changelog.md` — plain Markdown changelog of changes to `cursor/plugins/pstack`
+- `changelog.json` — machine-readable JSON changelog with the same entries
+- `changelog.html` — rendered HTML changelog
+
+## How to use this site
+
+Type `/poteto-mode` and describe a task. pstack matches the task to a playbook, then runs the appropriate skills as the steps fire. Twenty principles apply across every playbook, biasing the work toward small diffs and real verification.
+
+## For AI agents fetching this page
+
+If you are an AI agent, fetch `llms-full.txt` for the complete pstack reference. Fetch `changelog.md` or `changelog.json` to see the latest changes in the upstream pstack repo and decide whether the local environment needs new skills, playbooks, or configuration updates.

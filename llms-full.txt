@@ -1,0 +1,283 @@
+# pstack explained
+
+pstack is poteto's set of engineering skills for coding agents, installed with `/add-plugin pstack`.
+This site is an unofficial reading aid at https://hustlecoding.github.io/pstack-explained/.
+
+## Overview
+
+Type `/poteto-mode` and describe a task. pstack matches the task to a playbook, then runs the appropriate skills as the steps fire.
+Twenty principles apply across every playbook, biasing the work toward small diffs and real verification.
+
+## Playbooks
+
+A playbook is a step-by-step recipe for one kind of task. `/poteto-mode` copies the matched one in full before any work starts.
+
+### Investigation
+Trigger: A read-only question. How does X work, why was Y built this way, are we sure about Z, should we do X or Y.
+Detail: Read-only. The deliverable is a cited answer, not a change. Stay in the evidence instead of building a sketch to settle an empirical fork.
+
+### Bug fix
+Trigger: A reported defect to reproduce, root-cause, and fix with runtime evidence.
+Detail: Reproduce first on the same surface yourself. Trace each symptom to its root cause. Fix there, then verify against the real artifact.
+
+### Perf issue
+Trigger: A measured slowness to trace and improve against a baseline.
+Detail: One-off fix against a measured baseline, not a sustained loop. That distinguishes it from Hillclimb.
+
+### Hillclimb
+Trigger: Sustained, scientific improvement of one metric against a target. Loop hypotheses with before/after measurement and one commit per accepted win.
+Detail: Distinct from Perf issue, which is a one-off. Here you keep looping, logging each accepted win as its own commit.
+
+### Runtime forensics
+Trigger: Diagnose a runtime symptom like a leak, idle-CPU spin, or glitch from live instrumentation.
+Detail: The deliverable is a diagnosis, not a fix. Instrument the live system and read the symptom.
+
+### Trace forensics
+Trigger: Diagnose a captured profiling artifact like a cpuprofile, trace, spindump, or heap snapshot handed to you after the fact.
+Detail: The deliverable is a diagnosis, not a fix. The artifact is already captured; you read it.
+
+### Feature
+Trigger: New or changed behavior, built from a named data shape.
+Detail: Name the data shape first. Build the lever. Verify it works against the real artifact, not a proxy.
+
+### Refactoring
+Trigger: A behavior-preserving change to structure or shape. Rename, extract, inline, dedupe, or move.
+Detail: Behavior must stay identical. Bias to deletion and the smallest diff. Remove dead weight before restructuring.
+
+### Prototype
+Trigger: A throwaway sketch to make a design or behavioral decision cheaply, or to settle an empirical fork by observing it instead of asking.
+Detail: Built to decide, not to ship. The throwaway probe answers faster than a question to the human and hands back a result to react to.
+
+### Visual parity
+Trigger: Pixel-exact UI equivalence. Matching two implementations or migrating a styling system.
+Detail: Reproduce the drift first. Fix until it matches the reference, measured on the real surface.
+
+### Authoring a skill
+Trigger: Writing or editing a SKILL.md.
+Detail: Shape the trigger, the steps, and the reply contract. Encode lessons in structure rather than more text.
+
+### Eval
+Trigger: Testing how a skill, structure, or prompt change affects agent behavior before promoting it.
+Detail: Blinded comparison against a baseline. Measure behavior change before you promote the new version.
+
+### Autonomous run
+Trigger: A long task to drive to completion without stopping. Run until done, /loop until X, going to bed.
+Detail: Keep a decision trail via show-me-your-work so the human can audit it when they return. Commit the trail when stakes need a record.
+
+### Session pickup
+Trigger: Resuming or taking over a prior agent's in-flight work from a transcript, cloud-agent URL, or pushed branch.
+Detail: Reconstruct state from the record. Fire a fresh subagent with consolidated scope rather than trusting a done summary.
+
+### Pause safely
+Trigger: Suspending in-flight work cleanly so it can be resumed. On an explicit pause, going offline, a restart, or imminent compaction.
+Detail: The complement to Session pickup. Leave the work in a state another agent can pick up without guessing.
+
+### Multi-phase plan
+Trigger: Work that spans phases or stacked PRs.
+Detail: Break the work into verifiable units. Order delivery so the sequence proves itself, each unit green before the next.
+
+### Figure it out
+Trigger: No bundled playbook fits. Design a bespoke, rigorous playbook for the task.
+Detail: Used for large or cross-cutting efforts like a migration across many call sites, or work the user steps away from to trust later.
+
+### Opening a PR (meta playbook)
+Trigger: Invoked at the end of every other playbook.
+Detail: Not a task shape of its own. It fires once the matched playbook's work is done, to package and ship the result.
+
+## Skills
+
+Skills are the individual moves. Reach for one directly when you want a specific result instead of the full route.
+
+### /poteto-mode
+When to use: Default entry point for any non-trivial task. Reads your request, picks a playbook, and routes the other skills as the steps fire.
+
+### /how
+When to use: You want a walkthrough of how a subsystem works.
+
+### /why
+When to use: You want to know why something was built this way. Discovers MCPs at runtime and queries each evidence category in parallel.
+
+### /recall
+When to use: You are starting or resuming work and want your recent context on a topic rebuilt from your chat history and the shared record.
+
+### /blast-radius
+When to use: A small-looking change and you want to know what else it could break, proven by running code rather than asserted.
+
+### /architect
+When to use: About to write code that crosses a function boundary and want the caller's usage, types, and module shape settled first.
+
+### /arena
+When to use: You want N parallel attempts at the same thing, then grab the best parts of each.
+
+### /interrogate
+When to use: You have a diff and want four different models to try to break it, including a strict code-quality lens.
+
+### /automate-me
+When to use: You want your own -mode skill, drafted from how you have actually worked.
+
+### /setup-pstack
+When to use: You want to pick which models pstack uses per role. Detects your models and writes a config rule.
+
+### /reflect
+When to use: A long task landed and you want the recipe captured as a skill edit so the next run does not repeat it.
+
+### /tdd
+When to use: You are fixing a bug and there is a cheap local test path. Write the failing test first, then the fix.
+
+### /typescript-best-practices
+When to use: You are reading or editing TypeScript. Grounds the type-system-discipline principle in syntax.
+
+### /figure-it-out
+When to use: No bundled playbook fits. Designs a rigorous, auditable playbook for the task.
+
+### /show-me-your-work
+When to use: You want a reviewable decision trail. Logs decisions to a TSV you can commit.
+
+### /unslop
+When to use: You are cleaning up writing. Removes AI tells.
+
+## Principles
+
+Twenty rules in five families. Each principle has a name, when it applies, and the rule to follow.
+
+### Core
+How to sequence work and scope it. The bias to delete before you add.
+
+- **Laziness Protocol**
+  - Applies when: Refactoring, sizing a diff, or tempted to add abstractions, layers, or signal threading.
+  - Rule: Bias to deletion and the smallest change that solves the problem. If a human maintainer would find it exhausting, it is a bad solution.
+
+- **Foundational Thinking**
+  - Applies when: Before writing logic. Core types and data structures, scaffold-vs-feature sequencing, what concurrent actors share.
+  - Rule: Get the data shape right before writing logic. The right shape makes downstream code obvious.
+
+- **Redesign From First Principles**
+  - Applies when: Integrating a new requirement into an existing design.
+  - Rule: Do not bolt it on. Redesign as if the requirement had been there from day one.
+
+- **Subtract Before You Add**
+  - Applies when: Sequencing an addition, refactor, or rewrite.
+  - Rule: Remove complexity first, then build. Deletion gives a simpler base, which makes the next addition smaller and less brittle.
+
+- **Minimize Reader Load**
+  - Applies when: Reviewing or shaping code that is hard to trace.
+  - Rule: Count layers and hidden state. Collapse one-caller wrappers and shrink mutable scope.
+
+- **Outcome-Oriented Execution**
+  - Applies when: Planned rewrites and migrations with explicit phase boundaries.
+  - Rule: Optimize for the intended, verifiable end state. Do not preserve smooth intermediate states.
+
+- **Experience First**
+  - Applies when: Product, UX, or feature-scope tradeoffs.
+  - Rule: Choose user delight over implementation convenience. Ship fewer polished features over more rough ones.
+
+- **Exhaust the Design Space**
+  - Applies when: A novel interaction or architectural decision with no precedent.
+  - Rule: Build 2 to 3 competing prototypes and compare before committing.
+
+- **Build the Lever**
+  - Applies when: Any non-trivial work.
+  - Rule: Build the tool that does or proves it. The tool is the artifact a reviewer reruns.
+
+### Architecture
+Boundaries, types, and shared state across concurrent actors.
+
+- **Boundary Discipline**
+  - Applies when: Wiring validation, error handling, or framework adapters.
+  - Rule: Guards at system boundaries. Trust internal types. Keep business logic in pure functions.
+
+- **Type System Discipline**
+  - Applies when: Designing types or a signature in any typed language.
+  - Rule: Make illegal states unrepresentable. The type checker is a proof assistant.
+
+- **Make Operations Idempotent**
+  - Applies when: Designing commands, lifecycle steps, or loops that run amid crashes and retries.
+  - Rule: Converge to the same end state regardless of partial prior runs.
+
+- **Migrate Callers Then Delete Legacy APIs**
+  - Applies when: Introducing a new internal API while old callers exist.
+  - Rule: Migrate callers and remove the old API in the same wave. No compatibility layers.
+
+- **Separate Before Serializing Shared State**
+  - Applies when: Concurrent actors might write the same file, branch, key, or object.
+  - Rule: Eliminate the sharing first. When sharing is real, enforce serialization structurally.
+
+### Verification
+Proving it works against the real artifact, and ordering the work so each step can be checked.
+
+- **Prove It Works**
+  - Applies when: After a task, before declaring done.
+  - Rule: Verify against the real artifact. Not a proxy. Not that it compiles.
+
+- **Fix Root Causes**
+  - Applies when: Debugging.
+  - Rule: Trace each symptom to its root cause. Reproduce first. Ask why until you reach it.
+
+- **Sequence Work into Verifiable Units**
+  - Applies when: Multi-step work and how you stack commits and PRs.
+  - Rule: Order work as small units, each ending in a state you can check. Do not advance until the current one is green.
+
+### Delegation
+Keeping context lean and staying unblocked on the human.
+
+- **Guard the Context Window**
+  - Applies when: Context fills up. Large outputs, long files, repeated reads, fan-out planning.
+  - Rule: Route bulk to subagents. Keep summaries in the main thread, not raw payloads.
+
+- **Never Block on the Human**
+  - Applies when: Tempted to ask should I do X on reversible work.
+  - Rule: Proceed. Present the result. Let the human course-correct after the fact.
+
+### Meta
+Turning repeated corrections into structure that enforces itself.
+
+- **Encode Lessons in Structure**
+  - Applies when: You catch yourself writing the same instruction a second time.
+  - Rule: Encode it as a lint, metadata flag, runtime check, or script instead of more text.
+
+## Models per role
+
+pstack can use a different model for each role. Some roles run several models in parallel so the reviews come from different angles.
+Run `/setup-pstack` to detect your models and write the rule. Skills read it and fall back to their own defaults when a line is missing, so you override only what you want.
+
+- **feature, refactoring** (single) — Code work that builds or restructures.
+- **bug-fix** (single) — Reproduce, root-cause, and fix with evidence.
+- **perf-issue** (single) — Trace measured slowness against a baseline.
+- **hillclimb** (single) — Loop hypotheses against a target metric.
+- **judgment and prose** (single) — Where judgment and writing quality matter most.
+- **how explorer** (single) — Maps the subsystem inside the /how skill.
+- **how explainer** (single) — Writes the /how walkthrough.
+- **how critics** (panel) — One subagent per model reviews the explanation.
+- **why investigators** (single) — Queries one evidence category inside /why.
+- **why synthesizer** (single) — Combines the evidence into the cited answer.
+- **reflect tooling** (single) — Captures the tooling recipe in /reflect.
+- **reflect judgment, divergent, synthesizer** (single) — Captures the judgment recipe in /reflect.
+- **arena runners** (panel) — One subagent per model produces a competing attempt.
+- **architect runners** (panel) — One subagent per model explores a design.
+- **interrogate reviewers** (panel) — One subagent per model tries to break the diff.
+
+## Recent upstream changelog
+
+Source: https://github.com/cursor/plugins/tree/main/pstack
+Last synced: 2026-07-13T11:10:51+00:00
+
+- [2026-07-12] pstack: bump version to 0.11.2 (#154) (a29f5a8) by poteto
+- [2026-07-12] pstack: add the teach skill (compose how + why into one explanation) (#153) (8f008c4) by poteto
+- [2026-07-12] pstack: bump version to 0.11.1 (#152) (20bdb6c) by poteto
+- [2026-07-12] maintain-verification-skill: cleanup granularity, re-doctor, evidence checks (#151) (6714489) by poteto
+- [2026-07-12] pstack: add create-verification-skill and maintain-verification-skill (#150) (e42d29f) by poteto
+- [2026-07-11] pstack: give poteto-mode a human display name (#149) (9d2a3f2) by poteto
+- [2026-07-11] pstack: lead the README with the two-step quickstart (#148) (9251b26) by poteto
+- [2026-07-11] pstack: add model-the-domain principle; true up README (#147) (a814542) by poteto
+- [2026-07-09] pstack: make poteto-mode a sticky mode with a conditional reminder (#144) (0dda29e) by poteto
+- [2026-07-08] pstack: route hardest tasks to claude-fable-5-thinking-max (#143) (9b80b53) by poteto
+- [2026-07-08] pstack: route composer slots to grok-4.5-fast-xhigh (#142) (dc2fae6) by poteto
+- [2026-06-24] pstack: add Benny issue automation pack (#137) (0452e08) by poteto
+- [2026-06-17] pstack: add recall and blast-radius skills (#135) (e46364b) by poteto
+- [2026-06-14] pstack: bump to 0.9.1, list the hillclimb playbook in the README (#133) (cfd81b3) by poteto
+- [2026-06-14] poteto-mode: add the Hillclimb playbook and tighten Autonomous run stop semantics (#132) (b64f02a) by poteto
+- [2026-06-07] pstack: sync README with shipped principles and playbooks (#126) (74dd229) by poteto
+- [2026-06-07] pstack: bump version to 0.9.0 (#125) (a5cda8b) by poteto
+- [2026-06-06] poteto-mode: shape refactoring commits before opening the PR (#124) (9170757) by poteto
+- [2026-06-06] pstack: self-unblock empirical forks with a sketch instead of asking (#122) (318e8f7) by poteto
+- [2026-06-06] pstack: add 'sequence work into verifiable units' principle (#123) (27daaa3) by poteto

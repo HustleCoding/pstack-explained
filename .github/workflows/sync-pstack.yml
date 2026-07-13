@@ -29,11 +29,19 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Poll upstream pstack changes
         id: sync
         run: python3 .github/scripts/sync-pstack.py 2>&1 | tee sync.log
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate AI-friendly site files
+        run: python3 .github/scripts/generate.py
 
       - name: Sync summary
         if: always()
@@ -56,13 +64,13 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Commit and push changelog
+      - name: Commit and push generated files
         if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add changelog.json
-          git commit -m "chore: sync pstack changelog"
+          git add changelog.json changelog.html changelog.md llms-full.txt
+          git commit -m "chore: sync pstack changelog and regenerate AI files"
           git push
 
       - name: Setup Pages

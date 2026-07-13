@@ -205,9 +205,9 @@
       <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
       <h1 class="wordmark">p<span>stack</span></h1>
     </div>
-    <p class="count">20 principles · 17 playbooks · 16 skills</p>
+    <p class="count">21 principles · 17 playbooks · 19 skills</p>
     <p class="tagline">Engineering skills that turn a coding agent into a careful crew. You describe a task, and pstack matches it to a <em>playbook</em>.</p>
-    <p class="intro-lead">Type <code>/poteto-mode</code> and describe a task. pstack matches it to a playbook and runs the skills as the steps fire. Twenty principles apply across every playbook, biasing the work toward small diffs and real verification.</p>
+    <p class="intro-lead">Type <code>/poteto-mode</code> and describe a task. pstack matches it to a playbook and runs the skills as the steps fire. Twenty-one principles apply across every playbook, biasing the work toward small diffs and real verification.</p>
   </div>
 </header>
 
@@ -269,7 +269,7 @@
     <div class="sh">
       <span class="num">04</span>
       <h2>Principles</h2>
-      <p class="lead">Twenty rules in five families. Tap any one to see when it applies and what it says.</p>
+      <p class="lead">Twenty-one rules in five families. Tap any one to see when it applies and what it says.</p>
     </div>
     <div id="pstack"></div>
   </div>
@@ -359,7 +359,10 @@ const SKILLS = [
   {cmd:"/typescript-best-practices", when:"You are reading or editing TypeScript. Grounds the type-system-discipline principle in syntax."},
   {cmd:"/figure-it-out", when:"No bundled playbook fits. Designs a rigorous, auditable playbook for the task."},
   {cmd:"/show-me-your-work", when:"You want a reviewable decision trail. Logs decisions to a TSV you can commit."},
-  {cmd:"/unslop", when:"You are cleaning up writing. Removes AI tells."}
+  {cmd:"/unslop", when:"You are cleaning up writing. Removes AI tells."},
+  {cmd:"/teach", when:"Explain a body of work plainly so a person actually understands it. Runs `how` and `why` and weaves what they find into one clear explanation."},
+  {cmd:"/create-verification-skill", when:"Generate a project-local verification skill that drives your app the way a user does — any language, framework, or platform."},
+  {cmd:"/maintain-verification-skill", when:"Periodic pass that keeps a project's verification skill and feature map honest."}
 ];
 
 const GROUPS = [
@@ -386,6 +389,7 @@ const PRINCIPLES = [
   {g:"arch", n:"Make Operations Idempotent", applies:"Designing commands, lifecycle steps, or loops that run amid crashes and retries.", rule:"Converge to the same end state regardless of partial prior runs."},
   {g:"arch", n:"Migrate Callers Then Delete Legacy APIs", applies:"Introducing a new internal API while old callers exist.", rule:"Migrate callers and remove the old API in the same wave. No compatibility layers."},
   {g:"arch", n:"Separate Before Serializing Shared State", applies:"Concurrent actors might write the same file, branch, key, or object.", rule:"Eliminate the sharing first. When sharing is real, enforce serialization structurally."},
+  {g:"arch", n:"Model the Domain", applies:"When writing stateful logic, or when code branches a lot or repeats a shape assumption across files.", rule:"Encode the real domain in a data structure instead of scattering it across conditionals. Reach for state machines, typed models, lookup tables, reducers, or small module boundaries that gather repeated behavior. Don't force an abstraction if the current shape is already clear and local."},
 
   {g:"verif", n:"Prove It Works", applies:"After a task, before declaring done.", rule:"Verify against the real artifact. Not a proxy. Not that it compiles."},
   {g:"verif", n:"Fix Root Causes", applies:"Debugging.", rule:"Trace each symptom to its root cause. Reproduce first. Ask why until you reach it."},

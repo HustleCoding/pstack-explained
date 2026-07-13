@@ -136,6 +136,15 @@ When to use: You want a reviewable decision trail. Logs decisions to a TSV you c
 ### /unslop
 When to use: You are cleaning up writing. Removes AI tells.
 
+### /teach
+When to use: Explain a body of work plainly so a person actually understands it. Runs `how` and `why` and weaves what they find into one clear explanation.
+
+### /create-verification-skill
+When to use: Generate a project-local verification skill that drives your app the way a user does — any language, framework, or platform.
+
+### /maintain-verification-skill
+When to use: Periodic pass that keeps a project's verification skill and feature map honest.
+
 ## Principles
 
 Twenty rules in five families. Each principle has a name, when it applies, and the rule to follow.
@@ -201,6 +210,10 @@ Boundaries, types, and shared state across concurrent actors.
 - **Separate Before Serializing Shared State**
   - Applies when: Concurrent actors might write the same file, branch, key, or object.
   - Rule: Eliminate the sharing first. When sharing is real, enforce serialization structurally.
+
+- **Model the Domain**
+  - Applies when: When writing stateful logic, or when code branches a lot or repeats a shape assumption across files.
+  - Rule: Encode the real domain in a data structure instead of scattering it across conditionals. Reach for state machines, typed models, lookup tables, reducers, or small module boundaries that gather repeated behavior. Don't force an abstraction if the current shape is already clear and local.
 
 ### Verification
 Proving it works against the real artifact, and ordering the work so each step can be checked.

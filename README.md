@@ -26,6 +26,8 @@ Open `index.html` or `changelog.html` in any browser, or run `python3 -m http.se
 
 `changelog.html` is the standalone, pre-rendered changelog page.
 
+`agent-templates.html` is a standalone page explaining the [lionbenjamin/agent-templates](https://github.com/lionbenjamin/agent-templates) toolkit.
+
 `changelog.md` is a plain Markdown version of the changelog for AI agents.
 
 `llms.txt` and `llms-full.txt` provide LLM-readable context about the whole site.

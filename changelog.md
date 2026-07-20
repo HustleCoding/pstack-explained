@@ -1,11 +1,13 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-07-13T11:10:51+00:00
-Last commit: a29f5a8ca161b1de4ffc5484454958bebc04eaa5
+Last synced: 2026-07-20T11:39:54+00:00
+Last commit: 3fe2823ce17c1656c222d4b7c59d3f82fbf20143
 
 ## Recent changes
 
+- [2026-07-14] [pstack: parity sweep with the private skill tree (#156)](https://github.com/cursor/plugins/commit/3fe2823ce17c1656c222d4b7c59d3f82fbf20143) (3fe2823) by poteto
+- [2026-07-13] [poteto-mode: give the perf playbook its eight strategy families (#155)](https://github.com/cursor/plugins/commit/f4d9e39d979815fee68af6398c693144d5d38521) (f4d9e39) by poteto
 - [2026-07-12] [pstack: bump version to 0.11.2 (#154)](https://github.com/cursor/plugins/commit/a29f5a8ca161b1de4ffc5484454958bebc04eaa5) (a29f5a8) by poteto
 - [2026-07-12] [pstack: add the teach skill (compose how + why into one explanation) (#153)](https://github.com/cursor/plugins/commit/8f008c41981dca484d5beaf688d3aa2ea4ecf89b) (8f008c4) by poteto
 - [2026-07-12] [pstack: bump version to 0.11.1 (#152)](https://github.com/cursor/plugins/commit/20bdb6cdfdd8ffa683befe62d76104e5654c861d) (20bdb6c) by poteto

@@ -1,9 +1,25 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-07-13T11:10:51+00:00",
-  "lastCommitSha": "a29f5a8ca161b1de4ffc5484454958bebc04eaa5",
+  "lastUpdatedAt": "2026-07-20T11:39:54+00:00",
+  "lastCommitSha": "3fe2823ce17c1656c222d4b7c59d3f82fbf20143",
   "entries": [
+    {
+      "sha": "3fe2823ce17c1656c222d4b7c59d3f82fbf20143",
+      "date": "2026-07-14T00:09:30Z",
+      "title": "pstack: parity sweep with the private skill tree (#156)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/3fe2823ce17c1656c222d4b7c59d3f82fbf20143"
+    },
+    {
+      "sha": "f4d9e39d979815fee68af6398c693144d5d38521",
+      "date": "2026-07-13T21:44:29Z",
+      "title": "poteto-mode: give the perf playbook its eight strategy families (#155)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/f4d9e39d979815fee68af6398c693144d5d38521"
+    },
     {
       "sha": "a29f5a8ca161b1de4ffc5484454958bebc04eaa5",
       "date": "2026-07-12T04:18:44Z",

@@ -1,11 +1,19 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-07-20T11:39:54+00:00
-Last commit: 3fe2823ce17c1656c222d4b7c59d3f82fbf20143
+Last synced: 2026-07-27T12:15:56+00:00
+Last commit: ba7b5907843e1e21ec692418c180e1f912cbf7d3
 
 ## Recent changes
 
+- [2026-07-26] [Clarify ownership of autonomous run discoveries (#170)](https://github.com/cursor/plugins/commit/ba7b5907843e1e21ec692418c180e1f912cbf7d3) (ba7b590) by poteto
+- [2026-07-26] [pstack: add Opus 5 to model panels (#169)](https://github.com/cursor/plugins/commit/d45ad028b7d50fca8550a33e7b40842e67fea284) (d45ad02) by poteto
+- [2026-07-23] [pstack: cut model-config prose to its definition sites (#167)](https://github.com/cursor/plugins/commit/04166ac89136d36de2a87f24429e6cc307594953) (04166ac) by poteto
+- [2026-07-22] [pstack: add public usage tutorial (#164)](https://github.com/cursor/plugins/commit/02c03a9deddad3aef581da053cecf9603b8caba1) (02c03a9) by poteto
+- [2026-07-22] [pstack: default explorer roles to grok (#166)](https://github.com/cursor/plugins/commit/03e087aebe707ddeed6ba6d13880d50e23e6bed6) (03e087a) by poteto
+- [2026-07-22] [pstack: default panels to fable sol grok (#165)](https://github.com/cursor/plugins/commit/e1007b141f5574a340460414a23f5e18f56c3121) (e1007b1) by poteto
+- [2026-07-22] [pstack: honor inherit-parent / auto (omit Task model) (#163)](https://github.com/cursor/plugins/commit/63432f3196d77c3a04425d65d988819fe89069ff) (63432f3) by poteto
+- [2026-07-22] [fix-root-causes: flag verbose workaround comments (#162)](https://github.com/cursor/plugins/commit/fe77e7792d99b57dd6ad6281022791d7ef2db266) (fe77e77) by poteto
 - [2026-07-14] [pstack: parity sweep with the private skill tree (#156)](https://github.com/cursor/plugins/commit/3fe2823ce17c1656c222d4b7c59d3f82fbf20143) (3fe2823) by poteto
 - [2026-07-13] [poteto-mode: give the perf playbook its eight strategy families (#155)](https://github.com/cursor/plugins/commit/f4d9e39d979815fee68af6398c693144d5d38521) (f4d9e39) by poteto
 - [2026-07-12] [pstack: bump version to 0.11.2 (#154)](https://github.com/cursor/plugins/commit/a29f5a8ca161b1de4ffc5484454958bebc04eaa5) (a29f5a8) by poteto

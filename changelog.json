@@ -1,9 +1,73 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-07-20T11:39:54+00:00",
-  "lastCommitSha": "3fe2823ce17c1656c222d4b7c59d3f82fbf20143",
+  "lastUpdatedAt": "2026-07-27T12:15:56+00:00",
+  "lastCommitSha": "ba7b5907843e1e21ec692418c180e1f912cbf7d3",
   "entries": [
+    {
+      "sha": "ba7b5907843e1e21ec692418c180e1f912cbf7d3",
+      "date": "2026-07-26T09:12:33Z",
+      "title": "Clarify ownership of autonomous run discoveries (#170)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/ba7b5907843e1e21ec692418c180e1f912cbf7d3"
+    },
+    {
+      "sha": "d45ad028b7d50fca8550a33e7b40842e67fea284",
+      "date": "2026-07-26T00:56:42Z",
+      "title": "pstack: add Opus 5 to model panels (#169)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/d45ad028b7d50fca8550a33e7b40842e67fea284"
+    },
+    {
+      "sha": "04166ac89136d36de2a87f24429e6cc307594953",
+      "date": "2026-07-23T22:11:47Z",
+      "title": "pstack: cut model-config prose to its definition sites (#167)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/04166ac89136d36de2a87f24429e6cc307594953"
+    },
+    {
+      "sha": "02c03a9deddad3aef581da053cecf9603b8caba1",
+      "date": "2026-07-22T23:18:26Z",
+      "title": "pstack: add public usage tutorial (#164)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/02c03a9deddad3aef581da053cecf9603b8caba1"
+    },
+    {
+      "sha": "03e087aebe707ddeed6ba6d13880d50e23e6bed6",
+      "date": "2026-07-22T22:38:38Z",
+      "title": "pstack: default explorer roles to grok (#166)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/03e087aebe707ddeed6ba6d13880d50e23e6bed6"
+    },
+    {
+      "sha": "e1007b141f5574a340460414a23f5e18f56c3121",
+      "date": "2026-07-22T21:59:34Z",
+      "title": "pstack: default panels to fable sol grok (#165)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/e1007b141f5574a340460414a23f5e18f56c3121"
+    },
+    {
+      "sha": "63432f3196d77c3a04425d65d988819fe89069ff",
+      "date": "2026-07-22T21:53:14Z",
+      "title": "pstack: honor inherit-parent / auto (omit Task model) (#163)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/63432f3196d77c3a04425d65d988819fe89069ff"
+    },
+    {
+      "sha": "fe77e7792d99b57dd6ad6281022791d7ef2db266",
+      "date": "2026-07-22T17:20:13Z",
+      "title": "fix-root-causes: flag verbose workaround comments (#162)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/fe77e7792d99b57dd6ad6281022791d7ef2db266"
+    },
     {
       "sha": "3fe2823ce17c1656c222d4b7c59d3f82fbf20143",
       "date": "2026-07-14T00:09:30Z",

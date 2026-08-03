@@ -1,11 +1,20 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-07-27T12:15:56+00:00
-Last commit: ba7b5907843e1e21ec692418c180e1f912cbf7d3
+Last synced: 2026-08-03T12:16:43+00:00
+Last commit: 424829e3e0f7e5a8b9181412ca04e84e026a0c02
 
 ## Recent changes
 
+- [2026-08-02] [docs(pstack): bring guide current with new skills and playbooks (#188)](https://github.com/cursor/plugins/commit/424829e3e0f7e5a8b9181412ca04e84e026a0c02) (424829e) by poteto
+- [2026-08-02] [pstack: add bro, babysit/shipping/orchestrate/worktree-cleanup, and catch-up ports (0.14.0) (#187)](https://github.com/cursor/plugins/commit/99559f2f52047978602ef365589275831e76af07) (99559f2) by poteto
+- [2026-08-02] [pstack: add autopilot playbooks, /no-comments, Comment Sicko, and /technical-writing (0.13.0) (#185)](https://github.com/cursor/plugins/commit/b047069f4f3a73e87dd1f11f7913386d25876b91) (b047069) by poteto
+- [2026-07-30] [Address swarm review feedback](https://github.com/cursor/plugins/commit/91dd7b7119883318831e54b00aea544fef96bc8d) (91dd7b7) by cursoragent
+- [2026-07-30] [docs(pstack): refresh guide for 0.12.0](https://github.com/cursor/plugins/commit/0b7ef5b61f39d60645c54101ebac762fbb493494) (0b7ef5b) by cursoragent
+- [2026-07-30] [Add swarm skill to pstack](https://github.com/cursor/plugins/commit/b79f8ca89e36b8d4f2d51e51a77a83ef7d5b5c3a) (b79f8ca) by cursoragent
+- [2026-07-30] [Add feature map reference to create-verification-skill (#178)](https://github.com/cursor/plugins/commit/4483dcd246c3212ff38890bd53977c16d7b54fb7) (4483dcd) by poteto
+- [2026-07-29] [feat(pstack): deepen architect interface guidance (#175)](https://github.com/cursor/plugins/commit/45c66fde1f1681a902a30d1ae8bca1cc64465d6e) (45c66fd) by poteto
+- [2026-07-27] [feat(pstack): teach constructive type modeling (#174)](https://github.com/cursor/plugins/commit/91be0f994b5de7a75f4d6f2b3b00958126d9195e) (91be0f9) by poteto
 - [2026-07-26] [Clarify ownership of autonomous run discoveries (#170)](https://github.com/cursor/plugins/commit/ba7b5907843e1e21ec692418c180e1f912cbf7d3) (ba7b590) by poteto
 - [2026-07-26] [pstack: add Opus 5 to model panels (#169)](https://github.com/cursor/plugins/commit/d45ad028b7d50fca8550a33e7b40842e67fea284) (d45ad02) by poteto
 - [2026-07-23] [pstack: cut model-config prose to its definition sites (#167)](https://github.com/cursor/plugins/commit/04166ac89136d36de2a87f24429e6cc307594953) (04166ac) by poteto

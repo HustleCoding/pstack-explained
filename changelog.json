@@ -1,9 +1,81 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-07-27T12:15:56+00:00",
-  "lastCommitSha": "ba7b5907843e1e21ec692418c180e1f912cbf7d3",
+  "lastUpdatedAt": "2026-08-03T12:16:43+00:00",
+  "lastCommitSha": "424829e3e0f7e5a8b9181412ca04e84e026a0c02",
   "entries": [
+    {
+      "sha": "424829e3e0f7e5a8b9181412ca04e84e026a0c02",
+      "date": "2026-08-02T20:25:40Z",
+      "title": "docs(pstack): bring guide current with new skills and playbooks (#188)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/424829e3e0f7e5a8b9181412ca04e84e026a0c02"
+    },
+    {
+      "sha": "99559f2f52047978602ef365589275831e76af07",
+      "date": "2026-08-02T19:49:20Z",
+      "title": "pstack: add bro, babysit/shipping/orchestrate/worktree-cleanup, and catch-up ports (0.14.0) (#187)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/99559f2f52047978602ef365589275831e76af07"
+    },
+    {
+      "sha": "b047069f4f3a73e87dd1f11f7913386d25876b91",
+      "date": "2026-08-02T03:29:30Z",
+      "title": "pstack: add autopilot playbooks, /no-comments, Comment Sicko, and /technical-writing (0.13.0) (#185)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/b047069f4f3a73e87dd1f11f7913386d25876b91"
+    },
+    {
+      "sha": "91dd7b7119883318831e54b00aea544fef96bc8d",
+      "date": "2026-07-30T19:30:44Z",
+      "title": "Address swarm review feedback",
+      "author": "cursoragent",
+      "authorUrl": "https://github.com/cursoragent",
+      "url": "https://github.com/cursor/plugins/commit/91dd7b7119883318831e54b00aea544fef96bc8d"
+    },
+    {
+      "sha": "0b7ef5b61f39d60645c54101ebac762fbb493494",
+      "date": "2026-07-30T19:18:03Z",
+      "title": "docs(pstack): refresh guide for 0.12.0",
+      "author": "cursoragent",
+      "authorUrl": "https://github.com/cursoragent",
+      "url": "https://github.com/cursor/plugins/commit/0b7ef5b61f39d60645c54101ebac762fbb493494"
+    },
+    {
+      "sha": "b79f8ca89e36b8d4f2d51e51a77a83ef7d5b5c3a",
+      "date": "2026-07-30T18:18:38Z",
+      "title": "Add swarm skill to pstack",
+      "author": "cursoragent",
+      "authorUrl": "https://github.com/cursoragent",
+      "url": "https://github.com/cursor/plugins/commit/b79f8ca89e36b8d4f2d51e51a77a83ef7d5b5c3a"
+    },
+    {
+      "sha": "4483dcd246c3212ff38890bd53977c16d7b54fb7",
+      "date": "2026-07-30T17:18:40Z",
+      "title": "Add feature map reference to create-verification-skill (#178)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/4483dcd246c3212ff38890bd53977c16d7b54fb7"
+    },
+    {
+      "sha": "45c66fde1f1681a902a30d1ae8bca1cc64465d6e",
+      "date": "2026-07-29T05:29:45Z",
+      "title": "feat(pstack): deepen architect interface guidance (#175)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/45c66fde1f1681a902a30d1ae8bca1cc64465d6e"
+    },
+    {
+      "sha": "91be0f994b5de7a75f4d6f2b3b00958126d9195e",
+      "date": "2026-07-27T21:14:44Z",
+      "title": "feat(pstack): teach constructive type modeling (#174)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/91be0f994b5de7a75f4d6f2b3b00958126d9195e"
+    },
     {
       "sha": "ba7b5907843e1e21ec692418c180e1f912cbf7d3",
       "date": "2026-07-26T09:12:33Z",

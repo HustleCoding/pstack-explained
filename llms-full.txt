@@ -6,7 +6,7 @@ This site is an unofficial reading aid at https://hustlecoding.github.io/pstack-
 ## Overview
 
 Type `/poteto-mode` and describe a task. pstack matches the task to a playbook, then runs the appropriate skills as the steps fire.
-Twenty principles apply across every playbook, biasing the work toward small diffs and real verification.
+Twenty-one principles apply across every playbook, biasing the work toward small diffs and real verification. The official guide covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.
 
 ## Playbooks
 
@@ -60,9 +60,29 @@ Detail: Shape the trigger, the steps, and the reply contract. Encode lessons in 
 Trigger: Testing how a skill, structure, or prompt change affects agent behavior before promoting it.
 Detail: Blinded comparison against a baseline. Measure behavior change before you promote the new version.
 
+### Babysit
+Trigger: Driving a PR or stack to merge-ready: conflicts, review threads, and CI.
+Detail: Own the merge frontier one PR at a time. Clear conflicts and review threads before CI, then stop at a merge-ready verdict.
+
+### Shipping
+Trigger: Landing a green stack after independent verification.
+Detail: Verify every PR from the root, land only the contiguous verified run, then let Graphite drain it without touching the queue.
+
 ### Autonomous run
 Trigger: A long task to drive to completion without stopping. Run until done, /loop until X, going to bed.
 Detail: Keep a decision trail via show-me-your-work so the human can audit it when they return. Commit the trail when stakes need a record.
+
+### Orchestrate
+Trigger: A standing project for many stacked PRs and agents, run by one coordinator over multiple days.
+Detail: Run a program, not one task. Frame the finish predicate, pilot the unit, scale workers, drain the queue, and keep the frontier green.
+
+### Autopilot-full
+Trigger: A queue of independent PRs run to merged with one owner per PR.
+Detail: Owners build through merge. The root swarm-verifies every merge-ready head before the owner merges.
+
+### Autopilot-stack
+Trigger: A queue built and verified as one linear reviewed stack for the operator to land.
+Detail: Owners build and prove each PR, while the root owns topology. Deliver one verified Graphite chain and never auto-ship it.
 
 ### Session pickup
 Trigger: Resuming or taking over a prior agent's in-flight work from a transcript, cloud-agent URL, or pushed branch.
@@ -75,6 +95,10 @@ Detail: The complement to Session pickup. Leave the work in a state another agen
 ### Multi-phase plan
 Trigger: Work that spans phases or stacked PRs.
 Detail: Break the work into verifiable units. Order delivery so the sequence proves itself, each unit green before the next.
+
+### Worktree and simulator cleanup
+Trigger: Reclaiming local disk by pruning safe worktrees and stale iOS simulators.
+Detail: Audit usage, uncommitted work, and pinned chats before deleting. Recheck disk space and report what stayed behind.
 
 ### Figure it out
 Trigger: No bundled playbook fits. Design a bespoke, rigorous playbook for the task.
@@ -89,7 +113,10 @@ Detail: Not a task shape of its own. It fires once the matched playbook's work i
 Skills are the individual moves. Reach for one directly when you want a specific result instead of the full route.
 
 ### /poteto-mode
-When to use: Default entry point for any non-trivial task. Reads your request, picks a playbook, and routes the other skills as the steps fire.
+When to use: Default entry point for any non-trivial task. Routes through poteto-agent, picks a playbook, and calls the other skills as the steps fire.
+
+### /bro
+When to use: The last message is dense or full of jargon and you want it restated plainly.
 
 ### /how
 When to use: You want a walkthrough of how a subsystem works.
@@ -145,9 +172,18 @@ When to use: Generate a project-local verification skill that drives your app th
 ### /maintain-verification-skill
 When to use: Periodic pass that keeps a project's verification skill and feature map honest.
 
+### /swarm
+When to use: You want N parallel workers over slices or races, drained into one aggregated report.
+
+### /no-comments
+When to use: You want Comment Sicko to hunt comments, then fix accepted findings at the root cause.
+
+### /technical-writing
+When to use: You are writing docs and need Diátaxis, Google style, STE, and Global English applied together.
+
 ## Principles
 
-Twenty rules in five families. Each principle has a name, when it applies, and the rule to follow.
+Twenty-one rules in five families. Each principle has a name, when it applies, and the rule to follow.
 
 ### Core
 How to sequence work and scope it. The bias to delete before you add.
@@ -258,6 +294,7 @@ Run `/setup-pstack` to detect your models and write the rule. Skills read it and
 - **perf-issue** (single) — Trace measured slowness against a baseline.
 - **hillclimb** (single) — Loop hypotheses against a target metric.
 - **judgment and prose** (single) — Where judgment and writing quality matter most.
+- **hardest tasks** (single) — The default model for the hardest tasks.
 - **how explorer** (single) — Maps the subsystem inside the /how skill.
 - **how explainer** (single) — Writes the /how walkthrough.
 - **how critics** (panel) — One subagent per model reviews the explanation.
@@ -266,6 +303,8 @@ Run `/setup-pstack` to detect your models and write the rule. Skills read it and
 - **reflect tooling** (single) — Captures the tooling recipe in /reflect.
 - **reflect judgment, divergent, synthesizer** (single) — Captures the judgment recipe in /reflect.
 - **arena runners** (panel) — One subagent per model produces a competing attempt.
+- **arena cross-judge pool** (panel) — Arena picks a judge from a different model family than the parent when possible.
+- **swarm workers** (single) — The default model for every swarm worker.
 - **architect runners** (panel) — One subagent per model explores a design.
 - **interrogate reviewers** (panel) — One subagent per model tries to break the diff.
 

@@ -205,7 +205,7 @@
       <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
       <h1 class="wordmark">p<span>stack</span></h1>
     </div>
-    <p class="count">21 principles · 17 playbooks · 19 skills</p>
+    <p class="count">21 principles · 23 playbooks · 23 skills</p>
     <p class="tagline">Engineering skills that turn a coding agent into a careful crew. You describe a task, and pstack matches it to a <em>playbook</em>.</p>
     <p class="intro-lead">Type <code>/poteto-mode</code> and describe a task. pstack matches it to a playbook and runs the skills as the steps fire. Twenty-one principles apply across every playbook, biasing the work toward small diffs and real verification.</p>
   </div>
@@ -218,6 +218,7 @@
     <a href="#skills">Skills</a>
     <a href="#principles">Principles</a>
     <a href="#models">Models</a>
+    <a href="#guide">Guide</a>
     <a href="agent-templates.html">Agent Templates</a>
     <a href="changelog.html">Changelog</a>
   </div>
@@ -248,7 +249,7 @@
     <div class="sh">
       <span class="num">02</span>
       <h2>Playbooks</h2>
-      <p class="lead">A playbook is a step-by-step recipe for one kind of task. There are seventeen. <code>/poteto-mode</code> copies the matched one in full before any work starts.</p>
+      <p class="lead">A playbook is a step-by-step recipe for one kind of task. There are twenty-three. <code>/poteto-mode</code> copies the matched one in full before any work starts.</p>
     </div>
     <div class="grid pb" id="pbgrid"></div>
   </div>
@@ -285,6 +286,29 @@
     </div>
     <div class="mgrid" id="mgrid"></div>
     <p class="models-note">Run <code>/setup-pstack</code> to detect your models and write the rule. Skills read it and fall back to their own defaults when a line is missing, so you override only what you want.</p>
+  </div>
+</section>
+
+<section id="guide">
+  <div class="wrap">
+    <div class="sh">
+      <span class="num">06</span>
+      <h2>Guide</h2>
+      <p class="lead">Ten short chapters on setting up pstack, routing work, designing changes, proving them, and making the system yours.</p>
+    </div>
+    <div class="grid sk">
+      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/01-setup.md" target="_blank" rel="noopener"><div class="cmd">01 · Set up pstack</div><div class="when">Install the plugin, choose models, and run your first task.</div></a>
+      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/02-poteto-mode.md" target="_blank" rel="noopener"><div class="cmd">02 · Route work through /poteto-mode</div><div class="when">Write a goal that lets the front door choose the playbook.</div></a>
+      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/03-understand.md" target="_blank" rel="noopener"><div class="cmd">03 · Understand the code</div><div class="when">Use /how, /why, /teach, and /recall before editing.</div></a>
+      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/04-design.md" target="_blank" rel="noopener"><div class="cmd">04 · Design before you write code</div><div class="when">Settle boundaries with /architect, /arena, /swarm, and /interrogate.</div></a>
+      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/05-build-and-clean.md" target="_blank" rel="noopener"><div class="cmd">05 · Build and clean the change</div><div class="when">Choose a build playbook, then keep the diff reviewable.</div></a>
+      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/06-verify-and-ship.md" target="_blank" rel="noopener"><div class="cmd">06 · Verify the result and open a PR</div><div class="when">Prove behavior on the real app, then drive the focused PR to merged.</div></a>
+      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/07-overnight.md" target="_blank" rel="noopener"><div class="cmd">07 · Run work while you sleep</div><div class="when">Set a checkable finish condition, an isolated worktree, and a decision log.</div></a>
+      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/08-principles.md" target="_blank" rel="noopener"><div class="cmd">08 · Steer with principle names</div><div class="when">Use the 21 principle names to redirect an agent mid-task.</div></a>
+      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/09-make-it-yours.md" target="_blank" rel="noopener"><div class="cmd">09 · Make it yours</div><div class="when">Create a personal mode, author a skill, and test its changes.</div></a>
+      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/10-recipes-and-pitfalls.md" target="_blank" rel="noopener"><div class="cmd">10 · Recipes and pitfalls</div><div class="when">Copy useful prompts and avoid the mistakes that recur.</div></a>
+    </div>
+    <p class="models-note">pstack now ships subagents including <code>poteto-agent</code> and Comment Sicko, plus the dormant <code>benny</code> Slack-issue automation pack.</p>
   </div>
 </section>
 
@@ -330,14 +354,26 @@ const PLAYBOOKS = [
    detail:"Shape the trigger, the steps, and the reply contract. Encode lessons in structure rather than more text."},
   {id:"eval", n:"Eval", t:"Testing how a skill, structure, or prompt change affects agent behavior before promoting it.",
    detail:"Blinded comparison against a baseline. Measure behavior change before you promote the new version."},
+  {id:"babysit", n:"Babysit", t:"Driving a PR or stack to merge-ready: conflicts, review threads, and CI.",
+   detail:"Own the merge frontier one PR at a time. Clear conflicts and review threads before CI, then stop at a merge-ready verdict."},
+  {id:"shipping", n:"Shipping", t:"Landing a green stack after independent verification.",
+   detail:"Verify every PR from the root, land only the contiguous verified run, then let Graphite drain it without touching the queue."},
   {id:"autonomous-run", n:"Autonomous run", t:"A long task to drive to completion without stopping. Run until done, /loop until X, going to bed.",
    detail:"Keep a decision trail via show-me-your-work so the human can audit it when they return. Commit the trail when stakes need a record."},
+  {id:"orchestrate", n:"Orchestrate", t:"A standing project for many stacked PRs and agents, run by one coordinator over multiple days.",
+   detail:"Run a program, not one task. Frame the finish predicate, pilot the unit, scale workers, drain the queue, and keep the frontier green."},
+  {id:"autopilot-full", n:"Autopilot-full", t:"A queue of independent PRs run to merged with one owner per PR.",
+   detail:"Owners build through merge. The root swarm-verifies every merge-ready head before the owner merges."},
+  {id:"autopilot-stack", n:"Autopilot-stack", t:"A queue built and verified as one linear reviewed stack for the operator to land.",
+   detail:"Owners build and prove each PR, while the root owns topology. Deliver one verified Graphite chain and never auto-ship it."},
   {id:"session-pickup", n:"Session pickup", t:"Resuming or taking over a prior agent's in-flight work from a transcript, cloud-agent URL, or pushed branch.",
    detail:"Reconstruct state from the record. Fire a fresh subagent with consolidated scope rather than trusting a done summary."},
   {id:"pause-safely", n:"Pause safely", t:"Suspending in-flight work cleanly so it can be resumed. On an explicit pause, going offline, a restart, or imminent compaction.",
    detail:"The complement to Session pickup. Leave the work in a state another agent can pick up without guessing."},
   {id:"multi-phase-plan", n:"Multi-phase plan", t:"Work that spans phases or stacked PRs.",
    detail:"Break the work into verifiable units. Order delivery so the sequence proves itself, each unit green before the next."},
+  {id:"worktree-cleanup", n:"Worktree and simulator cleanup", t:"Reclaiming local disk by pruning safe worktrees and stale iOS simulators.",
+   detail:"Audit usage, uncommitted work, and pinned chats before deleting. Recheck disk space and report what stayed behind."},
   {id:"figure-it-out", n:"Figure it out", t:"No bundled playbook fits. Design a bespoke, rigorous playbook for the task.",
    detail:"Used for large or cross-cutting efforts like a migration across many call sites, or work the user steps away from to trust later."},
   {id:"opening-a-pr", n:"Opening a PR", t:"Invoked at the end of every other playbook.", meta:true,
@@ -345,7 +381,8 @@ const PLAYBOOKS = [
 ];
 
 const SKILLS = [
-  {cmd:"/poteto-mode", when:"Default entry point for any non-trivial task. Reads your request, picks a playbook, and routes the other skills as the steps fire."},
+  {cmd:"/poteto-mode", when:"Default entry point for any non-trivial task. Routes through poteto-agent, picks a playbook, and calls the other skills as the steps fire."},
+  {cmd:"/bro", when:"The last message is dense or full of jargon and you want it restated plainly."},
   {cmd:"/how", when:"You want a walkthrough of how a subsystem works."},
   {cmd:"/why", when:"You want to know why something was built this way. Discovers MCPs at runtime and queries each evidence category in parallel."},
   {cmd:"/recall", when:"You are starting or resuming work and want your recent context on a topic rebuilt from your chat history and the shared record."},
@@ -363,7 +400,10 @@ const SKILLS = [
   {cmd:"/unslop", when:"You are cleaning up writing. Removes AI tells."},
   {cmd:"/teach", when:"Explain a body of work plainly so a person actually understands it. Runs `how` and `why` and weaves what they find into one clear explanation."},
   {cmd:"/create-verification-skill", when:"Generate a project-local verification skill that drives your app the way a user does — any language, framework, or platform."},
-  {cmd:"/maintain-verification-skill", when:"Periodic pass that keeps a project's verification skill and feature map honest."}
+  {cmd:"/maintain-verification-skill", when:"Periodic pass that keeps a project's verification skill and feature map honest."},
+  {cmd:"/swarm", when:"You want N parallel workers over slices or races, drained into one aggregated report."},
+  {cmd:"/no-comments", when:"You want Comment Sicko to hunt comments, then fix accepted findings at the root cause."},
+  {cmd:"/technical-writing", when:"You are writing docs and need Diátaxis, Google style, STE, and Global English applied together."}
 ];
 
 const GROUPS = [
@@ -408,6 +448,7 @@ const MODELS = [
   {r:"perf-issue", k:"single", o:"Trace measured slowness against a baseline."},
   {r:"hillclimb", k:"single", o:"Loop hypotheses against a target metric."},
   {r:"judgment and prose", k:"single", o:"Where judgment and writing quality matter most."},
+  {r:"hardest tasks", k:"single", o:"The default model for the hardest tasks."},
   {r:"how explorer", k:"single", o:"Maps the subsystem inside the /how skill."},
   {r:"how explainer", k:"single", o:"Writes the /how walkthrough."},
   {r:"how critics", k:"panel", o:"One subagent per model reviews the explanation."},
@@ -416,6 +457,8 @@ const MODELS = [
   {r:"reflect tooling", k:"single", o:"Captures the tooling recipe in /reflect."},
   {r:"reflect judgment, divergent, synthesizer", k:"single", o:"Captures the judgment recipe in /reflect."},
   {r:"arena runners", k:"panel", o:"One subagent per model produces a competing attempt."},
+  {r:"arena cross-judge pool", k:"panel", o:"Arena picks a judge from a different model family than the parent when possible."},
+  {r:"swarm workers", k:"single", o:"The default model for every swarm worker."},
   {r:"architect runners", k:"panel", o:"One subagent per model explores a design."},
   {r:"interrogate reviewers", k:"panel", o:"One subagent per model tries to break the diff."}
 ];
@@ -433,10 +476,16 @@ const KEYWORDS = {
   "visual-parity":["visual parity","pixel","match the design","spacing","styling system","row spacing","matches","pixel-exact"],
   "authoring-a-skill":["write a skill","edit a skill","skill.md","authoring a skill","new skill","modify a skill"],
   eval:["eval","evaluate the skill","affects agent behavior","blinded","promote the skill","skill change","prompt change"],
+  babysit:["check on pr","get it green","address the bugbot comments","babysit this","merge-ready"],
   "autonomous-run":["going to bed","run until","overnight","autonomous","don't stop","loop until","many hours","i'm away","while i sleep"],
+  shipping:["land the stack","ship the stack","ship it","enable merge when ready"],
+  orchestrate:["run this whole project","own this migration until it lands","standing project","many stacked prs"],
+  "autopilot-full":["autopilot this queue","full autopilot","one-owner-per-pr"],
+  "autopilot-stack":["autopilot-stack","stack them, don't ship","build the stack, i'll land it"],
   "session-pickup":["resume","take over","prior agent","in-flight","in flight","transcript","pickup","cloud-agent","pick up where"],
   "pause-safely":["pause","suspend","going offline","restart","cleanly so it can be resumed","step away","context compaction"],
   "multi-phase-plan":["multi-phase","stacked pr","spans phases","migration across","many call sites","multi-pr","across the codebase"],
+  "worktree-cleanup":["clean up worktrees","what's using my disk","free up space","delete old simulators","prune safe-to-prune worktrees"],
   "figure-it-out":["no playbook","bespoke","cross-cutting","ambitious","step away","trust it when","trust it was done","when i'm back","migrate every caller","migrate all callers","keeping behavior identical","figure it out","unprecedented"]
 };
 

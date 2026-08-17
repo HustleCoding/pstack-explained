@@ -1,9 +1,17 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-08-03T12:16:43+00:00",
-  "lastCommitSha": "424829e3e0f7e5a8b9181412ca04e84e026a0c02",
+  "lastUpdatedAt": "2026-08-17T09:34:56+00:00",
+  "lastCommitSha": "63d938c2e4a165a0fec1bd0f61a8e325f0cb751e",
   "entries": [
+    {
+      "sha": "63d938c2e4a165a0fec1bd0f61a8e325f0cb751e",
+      "date": "2026-08-13T19:40:59Z",
+      "title": "chore(pstack): bump Grok default from 4.5 to 4.6 (#210)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/63d938c2e4a165a0fec1bd0f61a8e325f0cb751e"
+    },
     {
       "sha": "424829e3e0f7e5a8b9181412ca04e84e026a0c02",
       "date": "2026-08-02T20:25:40Z",

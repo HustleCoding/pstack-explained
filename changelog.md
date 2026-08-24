@@ -1,11 +1,12 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-08-17T09:34:56+00:00
-Last commit: 63d938c2e4a165a0fec1bd0f61a8e325f0cb751e
+Last synced: 2026-08-24T09:40:08+00:00
+Last commit: 46125561306434d8a1d7745d540d8932ab0cd2a2
 
 ## Recent changes
 
+- [2026-08-21] [docs(pstack): port workflow and boundary guidance (#238)](https://github.com/cursor/plugins/commit/46125561306434d8a1d7745d540d8932ab0cd2a2) (4612556) by poteto
 - [2026-08-13] [chore(pstack): bump Grok default from 4.5 to 4.6 (#210)](https://github.com/cursor/plugins/commit/63d938c2e4a165a0fec1bd0f61a8e325f0cb751e) (63d938c) by poteto
 - [2026-08-02] [docs(pstack): bring guide current with new skills and playbooks (#188)](https://github.com/cursor/plugins/commit/424829e3e0f7e5a8b9181412ca04e84e026a0c02) (424829e) by poteto
 - [2026-08-02] [pstack: add bro, babysit/shipping/orchestrate/worktree-cleanup, and catch-up ports (0.14.0) (#187)](https://github.com/cursor/plugins/commit/99559f2f52047978602ef365589275831e76af07) (99559f2) by poteto

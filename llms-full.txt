@@ -311,8 +311,9 @@ Run `/setup-pstack` to detect your models and write the rule. Skills read it and
 ## Recent upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-08-17T09:34:56+00:00
+Last synced: 2026-08-24T09:40:08+00:00
 
+- [2026-08-21] docs(pstack): port workflow and boundary guidance (#238) (4612556) by poteto
 - [2026-08-13] chore(pstack): bump Grok default from 4.5 to 4.6 (#210) (63d938c) by poteto
 - [2026-08-02] docs(pstack): bring guide current with new skills and playbooks (#188) (424829e) by poteto
 - [2026-08-02] pstack: add bro, babysit/shipping/orchestrate/worktree-cleanup, and catch-up ports (0.14.0) (#187) (99559f2) by poteto
@@ -332,4 +333,3 @@ Last synced: 2026-08-17T09:34:56+00:00
 - [2026-07-22] pstack: honor inherit-parent / auto (omit Task model) (#163) (63432f3) by poteto
 - [2026-07-22] fix-root-causes: flag verbose workaround comments (#162) (fe77e77) by poteto
 - [2026-07-14] pstack: parity sweep with the private skill tree (#156) (3fe2823) by poteto
-- [2026-07-13] poteto-mode: give the perf playbook its eight strategy families (#155) (f4d9e39) by poteto

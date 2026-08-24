@@ -1,9 +1,17 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-08-17T09:34:56+00:00",
-  "lastCommitSha": "63d938c2e4a165a0fec1bd0f61a8e325f0cb751e",
+  "lastUpdatedAt": "2026-08-24T09:40:08+00:00",
+  "lastCommitSha": "46125561306434d8a1d7745d540d8932ab0cd2a2",
   "entries": [
+    {
+      "sha": "46125561306434d8a1d7745d540d8932ab0cd2a2",
+      "date": "2026-08-21T03:10:04Z",
+      "title": "docs(pstack): port workflow and boundary guidance (#238)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/46125561306434d8a1d7745d540d8932ab0cd2a2"
+    },
     {
       "sha": "63d938c2e4a165a0fec1bd0f61a8e325f0cb751e",
       "date": "2026-08-13T19:40:59Z",

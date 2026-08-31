@@ -1,11 +1,14 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-08-24T09:40:08+00:00
-Last commit: 46125561306434d8a1d7745d540d8932ab0cd2a2
+Last synced: 2026-08-31T16:37:06+00:00
+Last commit: 6fecddba65801f9b9c08b8b328d998ee5b09d290
 
 ## Recent changes
 
+- [2026-08-27] [fix(pstack): register make-bot-ui at skills root (#275)](https://github.com/cursor/plugins/commit/6fecddba65801f9b9c08b8b328d998ee5b09d290) (6fecddb) by poteto
+- [2026-08-27] [feat(pstack): add make-bot-ui skill (#271)](https://github.com/cursor/plugins/commit/799151d91b6e12ee7dbd09f708eec108d7de9b3b) (799151d) by poteto
+- [2026-08-25] [docs(pstack): make the multi-PR plan a verified checklist (#258)](https://github.com/cursor/plugins/commit/bdf7aa355337897f167153e05069aca505dae17c) (bdf7aa3) by poteto
 - [2026-08-21] [docs(pstack): port workflow and boundary guidance (#238)](https://github.com/cursor/plugins/commit/46125561306434d8a1d7745d540d8932ab0cd2a2) (4612556) by poteto
 - [2026-08-13] [chore(pstack): bump Grok default from 4.5 to 4.6 (#210)](https://github.com/cursor/plugins/commit/63d938c2e4a165a0fec1bd0f61a8e325f0cb751e) (63d938c) by poteto
 - [2026-08-02] [docs(pstack): bring guide current with new skills and playbooks (#188)](https://github.com/cursor/plugins/commit/424829e3e0f7e5a8b9181412ca04e84e026a0c02) (424829e) by poteto

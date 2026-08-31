@@ -1,9 +1,33 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-08-24T09:40:08+00:00",
-  "lastCommitSha": "46125561306434d8a1d7745d540d8932ab0cd2a2",
+  "lastUpdatedAt": "2026-08-31T16:37:06+00:00",
+  "lastCommitSha": "6fecddba65801f9b9c08b8b328d998ee5b09d290",
   "entries": [
+    {
+      "sha": "6fecddba65801f9b9c08b8b328d998ee5b09d290",
+      "date": "2026-08-27T17:33:06Z",
+      "title": "fix(pstack): register make-bot-ui at skills root (#275)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/6fecddba65801f9b9c08b8b328d998ee5b09d290"
+    },
+    {
+      "sha": "799151d91b6e12ee7dbd09f708eec108d7de9b3b",
+      "date": "2026-08-27T01:42:39Z",
+      "title": "feat(pstack): add make-bot-ui skill (#271)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/799151d91b6e12ee7dbd09f708eec108d7de9b3b"
+    },
+    {
+      "sha": "bdf7aa355337897f167153e05069aca505dae17c",
+      "date": "2026-08-25T04:25:16Z",
+      "title": "docs(pstack): make the multi-PR plan a verified checklist (#258)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/bdf7aa355337897f167153e05069aca505dae17c"
+    },
     {
       "sha": "46125561306434d8a1d7745d540d8932ab0cd2a2",
       "date": "2026-08-21T03:10:04Z",

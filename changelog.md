@@ -1,11 +1,15 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-08-31T16:37:06+00:00
-Last commit: 6fecddba65801f9b9c08b8b328d998ee5b09d290
+Last synced: 2026-09-07T14:41:08+00:00
+Last commit: 7314f723a487ec406b6369fe5865ba034cfed166
 
 ## Recent changes
 
+- [2026-09-03] [fix(pstack): shrink logo under 512KiB (#309)](https://github.com/cursor/plugins/commit/7314f723a487ec406b6369fe5865ba034cfed166) (7314f72) by poteto
+- [2026-09-02] [feat(pstack): add plugin logo (#303)](https://github.com/cursor/plugins/commit/efa2a531985e0a8084d36ff3cf87233be8a9f34b) (efa2a53) by poteto
+- [2026-09-01] [docs(pstack): port forge-neutral playbooks and Fable 5.1 defaults](https://github.com/cursor/plugins/commit/23a56e2dac2efd54788056db8eced26e371d7b5e) (23a56e2) by poteto
+- [2026-09-01] [fix(pstack): disable model invocation for five skills (#300)](https://github.com/cursor/plugins/commit/73f8be4873ea4ba2b7378243a036d3360c69e04d) (73f8be4) by poteto
 - [2026-08-27] [fix(pstack): register make-bot-ui at skills root (#275)](https://github.com/cursor/plugins/commit/6fecddba65801f9b9c08b8b328d998ee5b09d290) (6fecddb) by poteto
 - [2026-08-27] [feat(pstack): add make-bot-ui skill (#271)](https://github.com/cursor/plugins/commit/799151d91b6e12ee7dbd09f708eec108d7de9b3b) (799151d) by poteto
 - [2026-08-25] [docs(pstack): make the multi-PR plan a verified checklist (#258)](https://github.com/cursor/plugins/commit/bdf7aa355337897f167153e05069aca505dae17c) (bdf7aa3) by poteto

@@ -1,9 +1,41 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-08-31T16:37:06+00:00",
-  "lastCommitSha": "6fecddba65801f9b9c08b8b328d998ee5b09d290",
+  "lastUpdatedAt": "2026-09-07T14:41:08+00:00",
+  "lastCommitSha": "7314f723a487ec406b6369fe5865ba034cfed166",
   "entries": [
+    {
+      "sha": "7314f723a487ec406b6369fe5865ba034cfed166",
+      "date": "2026-09-03T04:37:11Z",
+      "title": "fix(pstack): shrink logo under 512KiB (#309)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/7314f723a487ec406b6369fe5865ba034cfed166"
+    },
+    {
+      "sha": "efa2a531985e0a8084d36ff3cf87233be8a9f34b",
+      "date": "2026-09-02T04:38:22Z",
+      "title": "feat(pstack): add plugin logo (#303)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/efa2a531985e0a8084d36ff3cf87233be8a9f34b"
+    },
+    {
+      "sha": "23a56e2dac2efd54788056db8eced26e371d7b5e",
+      "date": "2026-09-01T20:06:07Z",
+      "title": "docs(pstack): port forge-neutral playbooks and Fable 5.1 defaults",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/23a56e2dac2efd54788056db8eced26e371d7b5e"
+    },
+    {
+      "sha": "73f8be4873ea4ba2b7378243a036d3360c69e04d",
+      "date": "2026-09-01T19:15:40Z",
+      "title": "fix(pstack): disable model invocation for five skills (#300)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/73f8be4873ea4ba2b7378243a036d3360c69e04d"
+    },
     {
       "sha": "6fecddba65801f9b9c08b8b328d998ee5b09d290",
       "date": "2026-08-27T17:33:06Z",

@@ -1,9 +1,65 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-09-07T14:41:08+00:00",
-  "lastCommitSha": "7314f723a487ec406b6369fe5865ba034cfed166",
+  "lastUpdatedAt": "2026-09-14T15:33:52+00:00",
+  "lastCommitSha": "5bf2b1544db739998121a306340631963c2ff3de",
   "entries": [
+    {
+      "sha": "5bf2b1544db739998121a306340631963c2ff3de",
+      "date": "2026-09-13T03:38:59Z",
+      "title": "feat(pstack): setup-pstack budget ask (max/xhigh/high/medium) (#366)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/5bf2b1544db739998121a306340631963c2ff3de"
+    },
+    {
+      "sha": "889ec4b68fa5aab0e867dad71ec3fdf386ae48f3",
+      "date": "2026-09-12T05:40:22Z",
+      "title": "fix(pstack): bug-fix/perf/hillclimb defaults to grok 4.6 (#365)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/889ec4b68fa5aab0e867dad71ec3fdf386ae48f3"
+    },
+    {
+      "sha": "f5bdd6826fd0a0d9cbc4347134c3a74a200b9d9d",
+      "date": "2026-09-11T01:17:03Z",
+      "title": "fix(pstack): operator-neutral pronouns + in-chat status tick (#362)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/f5bdd6826fd0a0d9cbc4347134c3a74a200b9d9d"
+    },
+    {
+      "sha": "f8abeddd1862dc73704e3d719dd73df0d51b8c71",
+      "date": "2026-09-09T19:17:39Z",
+      "title": "pstack: every claim carries its evidence or its label (#341)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/f8abeddd1862dc73704e3d719dd73df0d51b8c71"
+    },
+    {
+      "sha": "71ed0d1076fec562c1b74ee353121a8d00f75382",
+      "date": "2026-09-08T05:16:53Z",
+      "title": "chore(pstack): bump to 0.15.0 and sync README/docs counts (#333)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/71ed0d1076fec562c1b74ee353121a8d00f75382"
+    },
+    {
+      "sha": "d7cde2b84eadbcd6fd890302c876f4436ccb6d82",
+      "date": "2026-09-08T00:00:12Z",
+      "title": "pstack: replace semicolons, em dashes, and connector colons in skill prose with periods or commas (#331)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/d7cde2b84eadbcd6fd890302c876f4436ccb6d82"
+    },
+    {
+      "sha": "e8d856f0273b42ebafe0ec3546bd645709e7c1b0",
+      "date": "2026-09-07T22:14:11Z",
+      "title": "pstack: density and mannered-prose pass across the skills, two new principle leaves (#329)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/e8d856f0273b42ebafe0ec3546bd645709e7c1b0"
+    },
     {
       "sha": "7314f723a487ec406b6369fe5865ba034cfed166",
       "date": "2026-09-03T04:37:11Z",

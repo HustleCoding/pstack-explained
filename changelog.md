@@ -1,11 +1,18 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-09-07T14:41:08+00:00
-Last commit: 7314f723a487ec406b6369fe5865ba034cfed166
+Last synced: 2026-09-14T15:33:52+00:00
+Last commit: 5bf2b1544db739998121a306340631963c2ff3de
 
 ## Recent changes
 
+- [2026-09-13] [feat(pstack): setup-pstack budget ask (max/xhigh/high/medium) (#366)](https://github.com/cursor/plugins/commit/5bf2b1544db739998121a306340631963c2ff3de) (5bf2b15) by poteto
+- [2026-09-12] [fix(pstack): bug-fix/perf/hillclimb defaults to grok 4.6 (#365)](https://github.com/cursor/plugins/commit/889ec4b68fa5aab0e867dad71ec3fdf386ae48f3) (889ec4b) by poteto
+- [2026-09-11] [fix(pstack): operator-neutral pronouns + in-chat status tick (#362)](https://github.com/cursor/plugins/commit/f5bdd6826fd0a0d9cbc4347134c3a74a200b9d9d) (f5bdd68) by poteto
+- [2026-09-09] [pstack: every claim carries its evidence or its label (#341)](https://github.com/cursor/plugins/commit/f8abeddd1862dc73704e3d719dd73df0d51b8c71) (f8abedd) by poteto
+- [2026-09-08] [chore(pstack): bump to 0.15.0 and sync README/docs counts (#333)](https://github.com/cursor/plugins/commit/71ed0d1076fec562c1b74ee353121a8d00f75382) (71ed0d1) by poteto
+- [2026-09-08] [pstack: replace semicolons, em dashes, and connector colons in skill prose with periods or commas (#331)](https://github.com/cursor/plugins/commit/d7cde2b84eadbcd6fd890302c876f4436ccb6d82) (d7cde2b) by poteto
+- [2026-09-07] [pstack: density and mannered-prose pass across the skills, two new principle leaves (#329)](https://github.com/cursor/plugins/commit/e8d856f0273b42ebafe0ec3546bd645709e7c1b0) (e8d856f) by poteto
 - [2026-09-03] [fix(pstack): shrink logo under 512KiB (#309)](https://github.com/cursor/plugins/commit/7314f723a487ec406b6369fe5865ba034cfed166) (7314f72) by poteto
 - [2026-09-02] [feat(pstack): add plugin logo (#303)](https://github.com/cursor/plugins/commit/efa2a531985e0a8084d36ff3cf87233be8a9f34b) (efa2a53) by poteto
 - [2026-09-01] [docs(pstack): port forge-neutral playbooks and Fable 5.1 defaults](https://github.com/cursor/plugins/commit/23a56e2dac2efd54788056db8eced26e371d7b5e) (23a56e2) by poteto

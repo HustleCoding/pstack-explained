@@ -1,9 +1,41 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-09-14T15:33:52+00:00",
-  "lastCommitSha": "5bf2b1544db739998121a306340631963c2ff3de",
+  "lastUpdatedAt": "2026-09-28T17:15:26+00:00",
+  "lastCommitSha": "12d587dfb20741cafc376c42c696c5f6e2a64487",
   "entries": [
+    {
+      "sha": "12d587dfb20741cafc376c42c696c5f6e2a64487",
+      "date": "2026-09-23T20:03:21Z",
+      "title": "fix(pstack): resolve rule conflicts and read the model rule the same way (#422)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/12d587dfb20741cafc376c42c696c5f6e2a64487"
+    },
+    {
+      "sha": "b0b9c7a0baf8b6aa1d00bf77d4101e577d4ba411",
+      "date": "2026-09-23T17:37:17Z",
+      "title": "docs(pstack): cut 19 more instructions Opus 5.5 does not need (#419)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/b0b9c7a0baf8b6aa1d00bf77d4101e577d4ba411"
+    },
+    {
+      "sha": "b42effe0aa50f59c693d7e2924714e015e00bf7c",
+      "date": "2026-09-23T07:40:34Z",
+      "title": "fix(pstack): scrub old model names from public upgrade help (#416)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/b42effe0aa50f59c693d7e2924714e015e00bf7c"
+    },
+    {
+      "sha": "70b2dc8b4b85c8d5648624ca40d692c421fff32f",
+      "date": "2026-09-23T02:21:59Z",
+      "title": "feat(pstack): port skill updates and default to Opus 5.5 and Grok 4.7 (#414)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/70b2dc8b4b85c8d5648624ca40d692c421fff32f"
+    },
     {
       "sha": "5bf2b1544db739998121a306340631963c2ff3de",
       "date": "2026-09-13T03:38:59Z",

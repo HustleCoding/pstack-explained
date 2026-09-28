@@ -1,11 +1,15 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-09-14T15:33:52+00:00
-Last commit: 5bf2b1544db739998121a306340631963c2ff3de
+Last synced: 2026-09-28T17:15:26+00:00
+Last commit: 12d587dfb20741cafc376c42c696c5f6e2a64487
 
 ## Recent changes
 
+- [2026-09-23] [fix(pstack): resolve rule conflicts and read the model rule the same way (#422)](https://github.com/cursor/plugins/commit/12d587dfb20741cafc376c42c696c5f6e2a64487) (12d587d) by poteto
+- [2026-09-23] [docs(pstack): cut 19 more instructions Opus 5.5 does not need (#419)](https://github.com/cursor/plugins/commit/b0b9c7a0baf8b6aa1d00bf77d4101e577d4ba411) (b0b9c7a) by poteto
+- [2026-09-23] [fix(pstack): scrub old model names from public upgrade help (#416)](https://github.com/cursor/plugins/commit/b42effe0aa50f59c693d7e2924714e015e00bf7c) (b42effe) by poteto
+- [2026-09-23] [feat(pstack): port skill updates and default to Opus 5.5 and Grok 4.7 (#414)](https://github.com/cursor/plugins/commit/70b2dc8b4b85c8d5648624ca40d692c421fff32f) (70b2dc8) by poteto
 - [2026-09-13] [feat(pstack): setup-pstack budget ask (max/xhigh/high/medium) (#366)](https://github.com/cursor/plugins/commit/5bf2b1544db739998121a306340631963c2ff3de) (5bf2b15) by poteto
 - [2026-09-12] [fix(pstack): bug-fix/perf/hillclimb defaults to grok 4.6 (#365)](https://github.com/cursor/plugins/commit/889ec4b68fa5aab0e867dad71ec3fdf386ae48f3) (889ec4b) by poteto
 - [2026-09-11] [fix(pstack): operator-neutral pronouns + in-chat status tick (#362)](https://github.com/cursor/plugins/commit/f5bdd6826fd0a0d9cbc4347134c3a74a200b9d9d) (f5bdd68) by poteto

@@ -20,134 +20,82 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="shortcut icon" href="favicon.ico">
-<meta name="theme-color" content="#20242e">
+<meta name="theme-color" content="#f7f4ee">
 <style>
-@font-face{
-  font-family:"IBM VGA";
-  src:url("fonts/WebPlus_IBM_VGA_8x16.woff") format("woff");
-  font-weight:400; font-style:normal; font-display:swap;
-}
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600&display=swap");
 :root{
-  --bg:#20242e; --ink:#e7eef2; --soft:#c5d0d8; --dim:#9aabba; --faint:#7d8b99;
-  --rule:#313846; --rule2:#3e4858; --panel:#262b36;
-  --sel:#243e4c; --accent:#9fd4e0; --accent-soft:#243e4c; --accent-line:#3d6474;
-  --t-setup:#c678dd; --t-sdlc:#e6c07b; --t-orch:#e06c75; --t-special:#7ec8d4;
-  --maxw:920px; --navh:52px;
-  --ff:"IBM VGA", ui-monospace, monospace;
-  --ff-mono:var(--ff);
+  --bg:#e6e1d6; --paper:#f7f4ee; --ink:#1c1915; --soft:#3d3832; --dim:#6a635a; --faint:#8d867c;
+  --line:#e0d9cc; --mark:#7f2d22;
+  --t-setup:#7f2d22; --t-sdlc:#3d3832; --t-orch:#7f2d22; --t-special:#3d3832;
+  --maxw:760px; --navh:0px;
+  --ff:"Source Sans 3", sans-serif;
+  --ff-mono:"IBM Plex Mono", ui-monospace, monospace;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth; -webkit-text-size-adjust:100%; scroll-padding-top:var(--navh); color-scheme:dark}
-body{
-  margin:0; background:var(--bg); color:var(--ink);
-  font-family:var(--ff); font-size:16px; line-height:1.5; font-weight:400;
-  font-synthesis:none; -webkit-font-smoothing:none; -moz-osx-font-smoothing:auto;
-  text-rendering:optimizeSpeed;
-}
-h1,h2,h3,strong,b,button{font-weight:400}
-::selection{background:var(--sel); color:var(--ink)}
-.wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(16px,4vw,32px); position:relative}
-code{font-family:var(--ff-mono); font-size:1em; color:var(--accent)}
-.unofficial{
-  background:#181b24; color:var(--dim); font-size:16px; line-height:1.5;
-  padding:8px 0; border-bottom:1px solid var(--rule); border-top:2px solid #3d7d96;
-}
-.unofficial .wrap{display:flex; gap:10px; align-items:baseline; flex-wrap:wrap}
-.unofficial strong{color:var(--ink)}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--ff); font-size:18px; line-height:1.55}
+h1,h2,h3{font-family:"Fraunces", Palatino, serif; font-weight:560; letter-spacing:-.02em}
+code{font-family:var(--ff-mono); font-size:.86em}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+.sheet{max-width:860px; margin:28px auto; background:var(--paper); border:1px solid #d4ccbe; min-height:calc(100vh - 56px); padding-bottom:28px}
+.unofficial{padding:18px 0 0; color:var(--dim); font-size:14px}
+.unofficial .wrap{display:flex; gap:10px; flex-wrap:wrap; align-items:baseline}
+.unofficial strong{font-weight:600; color:var(--ink); font-size:14px}
 .unofficial span{color:var(--dim)}
-.unofficial a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-line)}
-.unofficial a:hover{border-bottom-color:var(--accent)}
-
-header.mast{padding:clamp(28px,5vw,48px) 0 clamp(20px,3vw,28px)}
-.mark{display:flex; align-items:center; gap:12px; margin-bottom:16px}
-h1.wordmark{font-family:var(--ff); font-weight:400; font-size:32px; letter-spacing:0; margin:0; line-height:1}
-h1.wordmark span{color:var(--accent)}
-.count{font-family:var(--ff-mono); font-size:16px; color:var(--faint); margin:8px 0 16px; letter-spacing:0}
-.tagline{font-size:16px; line-height:1.5; color:var(--ink); max-width:68ch; margin:0 0 12px; font-weight:400; letter-spacing:0}
-.tagline em{font-style:normal; color:var(--ink)}
-.intro-lead{color:var(--dim); font-size:16px; line-height:1.5; max-width:68ch; margin:0}
-
-nav.bar{position:sticky; top:0; z-index:20; background:rgba(32,36,46,.94); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule)}
-nav.bar .wrap{display:flex; gap:0; padding-top:4px; padding-bottom:4px; overflow-x:auto; scrollbar-width:none}
-nav.bar .wrap::-webkit-scrollbar{display:none}
-nav.bar a{color:var(--dim); text-decoration:none; font-size:16px; font-weight:400; white-space:nowrap; padding:8px 10px; border-radius:0}
-nav.bar a:hover,nav.bar a:focus-visible,nav.bar a.on,nav.bar a[aria-current="page"]{background:var(--sel); color:var(--ink); outline:none}
-
-section{padding:clamp(36px,6vw,56px) 0; border-bottom:1px solid var(--rule); scroll-margin-top:var(--navh)}
-.sh{margin-bottom:clamp(18px,3vw,28px); max-width:72ch}
-.sh .num{color:var(--accent); font-family:var(--ff-mono); font-size:16px; letter-spacing:0}
-.sh h2{font-weight:400; font-size:32px; margin:8px 0 12px; letter-spacing:0; line-height:1}
-.sh .lead{color:var(--dim); font-size:16px; line-height:1.5; margin:0; max-width:68ch}
-.sh .lead a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-line)}
-.sh .lead a:hover{border-bottom-color:var(--accent)}
-
-.flow{margin:0 0 22px; font-size:16px; color:var(--dim); line-height:1.8}
-.flow .cmd-tok{font-family:var(--ff-mono); color:var(--accent); font-size:16px}
-.flow .arr{color:var(--faint); margin:0 2px}
-
-.band{margin-bottom:clamp(28px,4vw,40px); animation:rise .5s both}
-.band:last-child{margin-bottom:0}
-.band-head{display:flex; align-items:center; gap:10px; margin-bottom:8px}
-.band-head .tick{width:8px; height:8px; border-radius:0; flex:none}
-.band-head h3{font-weight:400; font-size:16px; margin:0; letter-spacing:0}
-.band-head .ct{color:var(--faint); font-family:var(--ff-mono); font-size:16px}
-.band-head .ln{flex:1; height:1px; background:var(--rule)}
-.band-desc{color:var(--dim); font-size:16px; margin:0 0 12px; max-width:68ch}
-.bricks{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:8px}
+.unofficial a{color:var(--mark); font-size:14px}
+header.mast{padding:28px 0 8px}
+h1.wordmark{font-size:clamp(36px,5vw,48px); margin:0 0 12px; line-height:1.1}
+h1.wordmark span{color:var(--ink)}
+.count{font-family:var(--ff-mono); font-size:13px; color:var(--faint); margin:0 0 12px}
+.tagline{font-size:18px; color:var(--soft); margin:0 0 10px; max-width:46ch}
+.intro-lead{color:var(--dim); font-size:16px; margin:0}
+nav.bar{position:sticky; top:0; background:var(--paper); border-bottom:1px solid var(--line); z-index:2}
+nav.bar .wrap{display:flex; gap:14px; flex-wrap:wrap; padding-top:10px; padding-bottom:10px}
+nav.bar a{color:var(--dim); text-decoration:none; font-size:15px}
+nav.bar a:hover,nav.bar a[aria-current="page"]{color:var(--mark)}
+section{padding:28px 0; border-bottom:1px solid var(--line)}
+.sh h2{font-size:32px; margin:0 0 8px}
+.sh .num{display:none}
+.sh .lead{color:var(--dim); margin:0}
+.flow{color:var(--dim); font-size:16px}
+.flow .cmd-tok{font-family:var(--ff-mono); color:var(--mark); font-size:14px}
+.band{margin:22px 0}
+.band-head{display:flex; gap:10px; align-items:baseline}
+.band-head h3{font-family:var(--ff); font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); margin:0}
+.band-head .ct{color:var(--faint); font-size:13px}
+.band-head .ln,.band-head .tick{display:none}
+.band-desc{color:var(--dim); font-size:15px; margin:4px 0 0}
+.bricks{display:block}
 .brick{
-  text-align:left; background:var(--panel); border:1px solid var(--rule); border-left:3px solid var(--c);
-  color:var(--ink); padding:12px 14px; border-radius:0; cursor:pointer; font-family:var(--ff);
-  transition:background .18s; animation:rise .5s both;
+  display:block; width:100%; text-align:left; background:transparent; color:var(--ink);
+  border:0; border-top:1px solid var(--line); border-left:0; border-radius:0; padding:12px 0; cursor:pointer; font-family:var(--ff);
 }
-.brick:hover{background:#2a3140}
-.brick:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
-.brick .pn{font-weight:400; font-size:16px; line-height:1.35}
-.brick .pa{color:var(--faint); font-size:16px; margin-top:6px; line-height:1.45}
-.tmpl-note{color:var(--faint); font-size:16px; margin-top:16px; max-width:70ch; line-height:1.5}
-.tmpl-note a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-line)}
-.tmpl-note a:hover{border-bottom-color:var(--accent)}
-
-.changelog-meta{margin:0 0 16px; font-size:16px; color:var(--dim); line-height:1.5}
-.changelog-meta a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-line)}
-.changelog-meta a:hover{border-bottom-color:var(--accent)}
-.changelog-meta .ch-time{font-family:var(--ff-mono); color:var(--faint)}
-.changelog-list{animation:rise .5s both}
-.changelog-entry{display:flex; gap:16px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--rule); animation:rise .5s both}
-.changelog-entry:last-child{border-bottom:none}
-.changelog-date{flex:none; width:112px; font-family:var(--ff-mono); font-size:16px; color:var(--faint); text-align:right; padding-top:0}
-.changelog-body{flex:1}
-.changelog-title{font-weight:400; font-size:16px; line-height:1.45; color:var(--ink); margin-bottom:4px}
-.changelog-title a{color:inherit; text-decoration:none; border-bottom:1px solid var(--rule)}
-.changelog-title a:hover{color:var(--accent); border-bottom-color:var(--accent)}
-.changelog-meta .ch-sha{font-family:var(--ff-mono); font-size:16px; color:var(--faint)}
-.changelog-empty{color:var(--faint); font-size:16px; margin:12px 0 0}
-
-footer{padding:clamp(32px,5vw,48px) 0 calc(32px + env(safe-area-inset-bottom)); color:var(--faint); font-size:16px; line-height:1.5}
-footer p{margin:0 0 10px; max-width:70ch}
-footer a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-line)}
-footer a:hover{border-bottom-color:var(--accent)}
-
-.overlay{position:fixed; inset:0; background:rgba(8,10,14,.82); display:none; align-items:center; justify-content:center; z-index:60; padding:clamp(16px,4vw,24px)}
-.overlay.open{display:flex; animation:fade .2s}
-.dialog{background:#2c3342; border:1px solid var(--accent-line); border-radius:0; max-width:640px; width:100%; padding:clamp(20px,4vw,28px); position:relative; animation:rise .26s both; max-height:86vh; overflow:auto}
-.dialog .cat{font-family:var(--ff-mono); font-size:16px; letter-spacing:0; text-transform:uppercase; color:var(--accent)}
-.dialog h3{font-weight:400; font-size:32px; margin:8px 0 16px; line-height:1; letter-spacing:0}
-.dialog .field{margin:14px 0}
-.dialog .field .k{color:var(--faint); font-size:16px; letter-spacing:0; text-transform:uppercase; margin-bottom:4px; font-family:var(--ff-mono)}
-.dialog .field .v{color:var(--ink); font-size:16px; line-height:1.5}
-.dialog .close{position:absolute; top:12px; right:12px; background:transparent; border:1px solid var(--rule2); color:var(--dim); width:36px; height:36px; border-radius:0; cursor:pointer; font-family:var(--ff); font-size:18px; line-height:1; display:flex; align-items:center; justify-content:center}
-.dialog .close:hover{color:var(--ink); border-color:var(--accent); background:var(--sel)}
-
-@keyframes rise{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
-@keyframes fade{from{opacity:0} to{opacity:1}}
-@media (prefers-reduced-motion:reduce){
-  *{animation:none !important; transition:none !important}
-  html{scroll-behavior:auto}
-}
+.brick:hover{background:transparent}
+.brick .pn{font-family:"Fraunces", serif; font-size:20px}
+.brick .pa{color:var(--dim); font-size:15px; margin-top:3px}
+.tmpl-note{color:var(--dim); font-size:15px}
+.tmpl-note a{color:var(--mark)}
+.changelog-meta{color:var(--dim); font-size:15px}
+.changelog-meta a{color:var(--mark)}
+.changelog-entry{display:flex; gap:16px; padding:12px 0; border-bottom:1px solid var(--line)}
+.changelog-entry:last-child{border-bottom:0}
+.changelog-date{width:120px; flex:none; font-family:var(--ff-mono); font-size:13px; color:var(--faint); text-align:right}
+.changelog-title{font-size:16px}
+.changelog-title a{color:var(--ink); text-decoration:none}
+.changelog-title a:hover{color:var(--mark)}
+.changelog-meta .ch-sha,.changelog-meta .ch-time{font-family:var(--ff-mono); font-size:13px; color:var(--faint)}
+footer{padding:20px 0 8px; color:var(--dim); font-size:14px}
+footer a{color:var(--mark)}
+.overlay{position:fixed; inset:0; background:rgba(28,25,21,.28); display:none; align-items:center; justify-content:center; z-index:60; padding:24px}
+.overlay.open{display:flex}
+.dialog{background:var(--paper); border:1px solid #d4ccbe; border-radius:0; max-width:560px; width:100%; padding:28px; position:relative; max-height:86vh; overflow:auto}
+.dialog .cat{font-family:var(--ff-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint)}
+.dialog h3{font-size:32px; margin:8px 0 12px}
+.dialog .field .k{font-family:var(--ff-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint)}
+.dialog .close{position:absolute; top:16px; right:16px; background:none; border:0; color:var(--dim); cursor:pointer; font-family:var(--ff); font-size:15px; text-decoration:underline; text-underline-offset:3px}
 @media (max-width:640px){
-  .bricks{grid-template-columns:1fr}
-  .flow{line-height:1.8}
-  .changelog-entry{flex-direction:column; gap:6px}
+  .sheet{margin:0; border:0}
+  .changelog-entry{flex-direction:column; gap:4px}
   .changelog-date{text-align:left; width:auto}
 }
 </style>
@@ -165,7 +113,7 @@ footer a:hover{border-bottom-color:var(--accent)}
 <header class="mast">
   <div class="wrap">
     <div class="mark">
-      <h1 class="wordmark"><span>&gt;</span> agent-templates</h1>
+      <h1 class="wordmark">Agent templates</h1>
     </div>
     <p class="count">31 templates · 4 groups</p>
     <p class="tagline">A companion toolkit for coding agents: spec-driven workflows that turn an idea into a deployed change.</p>
@@ -202,7 +150,6 @@ footer a:hover{border-bottom-color:var(--accent)}
   <div class="wrap">
     <p>Agent Templates is an unofficial companion to <a href="index.html">pstack explained</a>, documenting <a href="https://github.com/lionbenjamin/agent-templates" target="_blank" rel="noopener">lionbenjamin/agent-templates</a>. It is not part of pstack.</p>
     <p>Source and deploy: <a href="https://github.com/HustleCoding/pstack-explained" target="_blank" rel="noopener">HustleCoding/pstack-explained</a>, live at this URL via GitHub Actions.</p>
-    <p>Terminal face: <a href="https://int10h.org/oldschool-pc-fonts/" target="_blank" rel="noopener">PxPlus IBM VGA 8x16</a> by VileR, CC BY-SA 4.0.</p>
   </div>
 </footer>
 

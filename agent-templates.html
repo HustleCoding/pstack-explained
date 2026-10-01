@@ -43,8 +43,17 @@
   }
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,40px); position:relative}
   code{font-family:var(--ff-mono); font-size:.92em; color:var(--accent)}
+  .unofficial{
+    background:#111; color:#f3e6d4; font-size:13px; letter-spacing:.01em;
+    padding:9px 0; border-bottom:1px solid #2a2a2a;
+  }
+  .unofficial .wrap{display:flex; gap:10px; align-items:baseline; flex-wrap:wrap}
+  .unofficial strong{font-weight:600; color:#fff}
+  .unofficial span{color:#c9b8a2}
+  .unofficial a{color:#f3c27a; text-decoration:none; border-bottom:1px solid rgba(243,194,122,.4)}
+  .unofficial a:hover{border-bottom-color:#f3c27a}
 
-  header.mast{padding:clamp(56px,9vw,96px) 0 clamp(36px,5vw,52px)}
+  header.mast{padding:clamp(40px,7vw,72px) 0 clamp(28px,4vw,40px)}
   .mark{display:flex; align-items:center; gap:13px; margin-bottom:22px}
   .glyph{width:26px; height:26px; position:relative; flex:none}
   .glyph i{position:absolute; left:0; height:20%; background:var(--accent); border-radius:1px}
@@ -129,6 +138,14 @@
 </head>
 <body>
 
+<div class="unofficial">
+  <div class="wrap">
+    <strong>Unofficial companion.</strong>
+    <span>Not part of pstack. Documents lionbenjamin/agent-templates as a related toolkit.</span>
+    <a href="index.html">Back to pstack explained</a>
+  </div>
+</div>
+
 <header class="mast">
   <div class="wrap">
     <div class="mark">
@@ -144,7 +161,10 @@
 <nav class="bar">
   <div class="wrap">
     <a href="index.html">Home</a>
-    <a href="agent-templates.html" aria-current="page">Agent Templates</a>
+    <a href="index.html#start">Start</a>
+    <a href="index.html#playbooks">Playbooks</a>
+    <a href="index.html#skills">Skills</a>
+    <a href="agent-templates.html" aria-current="page">Templates</a>
     <a href="changelog.html">Changelog</a>
   </div>
 </nav>
@@ -164,7 +184,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Agent Templates is an unofficial companion to <a href="https://github.com/HustleCoding/pstack-explained" target="_blank" rel="noopener">pstack-explained</a>, documenting <a href="https://github.com/lionbenjamin/agent-templates" target="_blank" rel="noopener">lionbenjamin/agent-templates</a>.</p>
+    <p>Agent Templates is an unofficial companion to <a href="index.html">pstack explained</a>, documenting <a href="https://github.com/lionbenjamin/agent-templates" target="_blank" rel="noopener">lionbenjamin/agent-templates</a>. It is not part of pstack.</p>
     <p>Source and deploy: <a href="https://github.com/HustleCoding/pstack-explained" target="_blank" rel="noopener">HustleCoding/pstack-explained</a>, live at this URL via GitHub Actions.</p>
   </div>
 </footer>

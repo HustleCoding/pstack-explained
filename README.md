@@ -1,8 +1,8 @@
 # pstack-explained
 
-An unofficial, interactive reading aid for **pstack**, [poteto's](https://x.com/poteto) set of engineering skills for coding agents.
+An unofficial, interactive reading aid for **pstack**, [poteto's](https://x.com/poteto) set of engineering skills for coding agents. Not affiliated with poteto, pstack, or Cursor.
 
-A pair of static HTML pages (`index.html` and `changelog.html`) that explain pstack's playbooks, skills, and principles, with a live playbook router and a standalone upstream changelog. No build step, no dependencies.
+Static HTML pages that explain what pstack is, how to start, and when each playbook and skill applies. Includes a live playbook router, grouped catalogs with copyable prompts, and a standalone upstream changelog. No build step, no dependencies.
 
 ## Live site
 
@@ -18,7 +18,7 @@ Open `index.html` or `changelog.html` in any browser, or run `python3 -m http.se
 
 ## Contents
 
-`index.html` is the whole app. Markup, styles, data, and router logic live inline.
+`index.html` is the main app: start-here path, routing demo, playbooks, skills, principles, and models. Markup, styles, data, and router logic live inline.
 
 `.github/workflows/deploy.yml` is the GitHub Pages deployment workflow.
 

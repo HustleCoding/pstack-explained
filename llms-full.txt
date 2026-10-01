@@ -5,185 +5,323 @@ This site is an unofficial reading aid at https://hustlecoding.github.io/pstack-
 
 ## Overview
 
+Start in a Cursor chat with `/add-plugin pstack`, then `/setup-pstack`, then one real task via `/poteto-mode`.
 Type `/poteto-mode` and describe a task. pstack matches the task to a playbook, then runs the appropriate skills as the steps fire.
-Twenty-one principles apply across every playbook, biasing the work toward small diffs and real verification. The [official guide](https://github.com/cursor/plugins/blob/main/pstack/docs/guide/README.md) covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.
+Twenty-three principles apply across every playbook, biasing the work toward small diffs and real verification. The [official guide](https://github.com/cursor/plugins/blob/main/pstack/docs/guide/README.md) covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.
+This site is unofficial and is not affiliated with poteto, pstack, or Cursor.
 
 ## Playbooks
 
 A playbook is a step-by-step recipe for one kind of task. `/poteto-mode` copies the matched one in full before any work starts.
 
 ### Investigation
+Group: understand
 Trigger: A read-only question. How does X work, why was Y built this way, are we sure about Z, should we do X or Y.
 Detail: Read-only. The deliverable is a cited answer, not a change. Stay in the evidence instead of building a sketch to settle an empirical fork.
+Try: /poteto-mode how do we cancel runs? do we have an n+1 when we look up every run to cancel? don't change any code yet.
+Skills often nearby: /how, /why, /teach
 
 ### Bug fix
+Group: fix
 Trigger: A reported defect to reproduce, root-cause, and fix with runtime evidence.
 Detail: Reproduce first on the same surface yourself. Trace each symptom to its root cause. Fix there, then verify against the real artifact.
+Try: /poteto-mode this PR has a subtle bug where scroll drifts every 750ms when idle. repro first, then fix and verify.
+Skills often nearby: /tdd, /blast-radius
 
 ### Perf issue
+Group: fix
 Trigger: A measured slowness to trace and improve against a baseline.
 Detail: One-off fix against a measured baseline, not a sustained loop. That distinguishes it from Hillclimb.
+Try: /poteto-mode a big list takes a second to load even though we virtualize. run a cpu trace and tell me why.
+Skills often nearby: /how
 
 ### Hillclimb
+Group: fix
 Trigger: Sustained, scientific improvement of one metric against a target. Loop hypotheses with before/after measurement and one commit per accepted win.
 Detail: Distinct from Perf issue, which is a one-off. Here you keep looping, logging each accepted win as its own commit.
+Try: /poteto-mode keep improving the p95 of this import against 400ms. one commit per accepted win. log the decisions.
+Skills often nearby: /show-me-your-work
 
 ### Runtime forensics
+Group: fix
 Trigger: Diagnose a runtime symptom like a leak, idle-CPU spin, or glitch from live instrumentation.
 Detail: The deliverable is a diagnosis, not a fix. Instrument the live system and read the symptom.
+Try: /poteto-mode diagnose the idle-CPU spin. instrument it live. diagnosis only, no fix yet.
+Skills often nearby: /how
 
 ### Trace forensics
+Group: fix
 Trigger: Diagnose a captured profiling artifact like a cpuprofile, trace, spindump, or heap snapshot handed to you after the fact.
 Detail: The deliverable is a diagnosis, not a fix. The artifact is already captured; you read it.
+Try: /poteto-mode read this cpuprofile and tell me why the list hitch is 200ms. diagnosis only.
+Skills often nearby: /how
 
 ### Feature
+Group: build
 Trigger: New or changed behavior, built from a named data shape.
 Detail: Name the data shape first. Build the lever. Verify it works against the real artifact, not a proxy.
+Try: /poteto-mode add a --json flag to this command. text output stays byte-identical. verify both.
+Skills often nearby: /architect, /tdd
 
 ### Refactoring
+Group: build
 Trigger: A behavior-preserving change to structure or shape. Rename, extract, inline, dedupe, or move.
 Detail: Behavior must stay identical. Bias to deletion and the smallest diff. Remove dead weight before restructuring.
+Try: /poteto-mode rename this helper across the whole codebase without changing behavior.
+Skills often nearby: /blast-radius, /tdd
 
 ### Prototype
+Group: build
 Trigger: A throwaway sketch to make a design or behavioral decision cheaply, or to settle an empirical fork by observing it instead of asking.
 Detail: Built to decide, not to ship. The throwaway probe answers faster than a question to the human and hands back a result to react to.
+Try: /poteto-mode build two prototypes of the markdown renderer so we can compare. spawn an agent for each.
+Skills often nearby: /arena
 
 ### Visual parity
+Group: build
 Trigger: Pixel-exact UI equivalence. Matching two implementations or migrating a styling system.
 Detail: Reproduce the drift first. Fix until it matches the reference, measured on the real surface.
+Try: /poteto-mode the row spacing is too tall when this flag is on. the second image is correct. fix until it matches.
 
 ### Authoring a skill
+Group: meta
 Trigger: Writing or editing a SKILL.md.
 Detail: Shape the trigger, the steps, and the reply contract. Encode lessons in structure rather than more text.
+Try: /poteto-mode write a skill that reviews migration PRs for leftover sync-store callers.
+Skills often nearby: /unslop, /automate-me
 
 ### Eval
+Group: meta
 Trigger: Testing how a skill, structure, or prompt change affects agent behavior before promoting it.
 Detail: Blinded comparison against a baseline. Measure behavior change before you promote the new version.
+Try: /poteto-mode eval this skill change against the last three tasks before we promote it.
 
 ### Babysit
+Group: ship
 Trigger: Driving a PR or stack to merge-ready: conflicts, review threads, and CI.
 Detail: Own the merge frontier one PR at a time. Clear conflicts and review threads before CI, then stop at a merge-ready verdict.
+Try: /poteto-mode check on pr 123. anything outstanding?
 
 ### Shipping
+Group: ship
 Trigger: Landing a green stack after independent verification.
 Detail: Verify every PR from the root, land only the contiguous verified run, then let Graphite drain it without touching the queue.
+Try: /poteto-mode the stack is green. verify each PR independently, then land the contiguous verified run.
+Skills often nearby: /interrogate
 
 ### Autonomous run
+Group: scale
 Trigger: A long task to drive to completion without stopping. Run until done, /loop until X, going to bed.
 Detail: Keep a decision trail via show-me-your-work so the human can audit it when they return. Commit the trail when stakes need a record.
+Try: /poteto-mode i'm going to bed. keep going until every fixture passes. log your decisions.
+Skills often nearby: /show-me-your-work, /figure-it-out
 
 ### Orchestrate
+Group: scale
 Trigger: A standing project for many stacked PRs and agents, run by one coordinator over multiple days.
 Detail: Run a program, not one task. Frame the finish predicate, pilot the unit, scale workers, drain the queue, and keep the frontier green.
+Try: /poteto-mode own this migration until it lands. many stacked PRs, one coordinator, keep the frontier green.
+Skills often nearby: /swarm, /show-me-your-work
 
 ### Autopilot-full
+Group: scale
 Trigger: A queue of independent PRs run to merged with one owner per PR.
 Detail: Owners build through merge. The root swarm-verifies every merge-ready head before the owner merges.
+Try: /poteto-mode autopilot this queue. one owner per PR, merge when the root swarm-verifies.
+Skills often nearby: /swarm
 
 ### Autopilot-stack
+Group: scale
 Trigger: A queue built and verified as one linear reviewed stack for the operator to land.
 Detail: Owners build and prove each PR, while the root owns topology. Deliver one verified Graphite chain and never auto-ship it.
+Try: /poteto-mode autopilot-stack these changes. build the stack, I'll land it.
+Skills often nearby: /swarm
 
 ### Session pickup
+Group: scale
 Trigger: Resuming or taking over a prior agent's in-flight work from a transcript, cloud-agent URL, or pushed branch.
 Detail: Reconstruct state from the record. Fire a fresh subagent with consolidated scope rather than trusting a done summary.
+Try: /poteto-mode take over this branch. read the decision log, figure out what's done, and continue. don't redo finished work.
+Skills often nearby: /recall, /show-me-your-work
 
 ### Pause safely
+Group: scale
 Trigger: Suspending in-flight work cleanly so it can be resumed. On an explicit pause, going offline, a restart, or imminent compaction.
 Detail: The complement to Session pickup. Leave the work in a state another agent can pick up without guessing.
+Try: /poteto-mode pause this cleanly so another agent can resume from the decision log.
+Skills often nearby: /show-me-your-work
 
 ### Multi-phase plan
+Group: scale
 Trigger: Work that spans phases or stacked PRs.
 Detail: Break the work into verifiable units. Order delivery so the sequence proves itself, each unit green before the next.
+Try: /poteto-mode this spans three PRs. sequence them so each one is green before the next starts.
+Skills often nearby: /show-me-your-work
 
 ### Worktree and simulator cleanup
+Group: meta
 Trigger: Reclaiming local disk by pruning safe worktrees and stale iOS simulators.
 Detail: Audit usage, uncommitted work, and pinned chats before deleting. Recheck disk space and report what stayed behind.
+Try: /poteto-mode what's eating my disk? prune the worktrees that are safe to prune.
 
 ### Figure it out
+Group: meta
 Trigger: No bundled playbook fits. Design a bespoke, rigorous playbook for the task.
 Detail: Used for large or cross-cutting efforts like a migration across many call sites, or work the user steps away from to trust later.
+Try: /poteto-mode i'm stepping away. migrate every caller from the synchronous store to the new async one, keeping behavior identical.
+Skills often nearby: /figure-it-out, /show-me-your-work
 
 ### Opening a PR (meta playbook)
+Group: ship
 Trigger: Invoked at the end of every other playbook.
 Detail: Not a task shape of its own. It fires once the matched playbook's work is done, to package and ship the result.
+Try: Usually not typed. It runs at the end of the matched playbook to open a focused PR.
+Skills often nearby: /technical-writing, /unslop
 
 ## Skills
 
 Skills are the individual moves. Reach for one directly when you want a specific result instead of the full route.
 
 ### /poteto-mode
+Group: start
 When to use: Default entry point for any non-trivial task. Routes through poteto-agent, picks a playbook, and calls the other skills as the steps fire.
-
-### /bro
-When to use: The last message is dense or full of jargon and you want it restated plainly.
-
-### /how
-When to use: You want a walkthrough of how a subsystem works.
-
-### /why
-When to use: You want to know why something was built this way. Discovers MCPs at runtime and queries each evidence category in parallel.
-
-### /recall
-When to use: You are starting or resuming work and want your recent context on a topic rebuilt from your chat history and the shared record.
-
-### /blast-radius
-When to use: A small-looking change and you want to know what else it could break, proven by running code rather than asserted.
-
-### /architect
-When to use: About to write code that crosses a function boundary and want the caller's usage, types, and module shape settled first.
-
-### /arena
-When to use: You want N parallel attempts at the same thing, then grab the best parts of each.
-
-### /interrogate
-When to use: You have a diff and want four different models to try to break it, including a strict code-quality lens.
-
-### /automate-me
-When to use: You want your own -mode skill, drafted from how you have actually worked.
+Try: /poteto-mode the export writes duplicate rows when a retry lands mid-run. repro first, then fix and verify.
+Related playbooks: bug-fix, feature, investigation
 
 ### /setup-pstack
+Group: start
 When to use: You want to pick which models pstack uses per role. Detects your models and writes a config rule.
+Try: /setup-pstack
 
-### /reflect
-When to use: A long task landed and you want the recipe captured as a skill edit so the next run does not repeat it.
+### /how
+Group: understand
+When to use: You want a walkthrough of how a subsystem works.
+Try: /how do we dedupe notifications? is there an n+1 when we look up subscribers?
+Related playbooks: investigation
 
-### /tdd
-When to use: You are fixing a bug and there is a cheap local test path. Write the failing test first, then the fix.
-
-### /typescript-best-practices
-When to use: You are reading or editing TypeScript. Grounds the type-system-discipline principle in syntax.
-
-### /figure-it-out
-When to use: No bundled playbook fits. Designs a rigorous, auditable playbook for the task.
-
-### /show-me-your-work
-When to use: You want a reviewable decision trail. Logs decisions to a TSV you can commit.
-
-### /unslop
-When to use: You are cleaning up writing. Removes AI tells.
+### /why
+Group: understand
+When to use: You want to know why something was built this way. Discovers MCPs at runtime and queries each evidence category in parallel.
+Try: /why was the retry limit set to five? does the reason still hold?
+Related playbooks: investigation
 
 ### /teach
+Group: understand
 When to use: Explain a body of work plainly so a person actually understands it. Runs `how` and `why` and weaves what they find into one clear explanation.
+Try: /teach me how this PR changes retries. convince me it fixes the cause and not the symptom.
+Related playbooks: investigation
 
-### /create-verification-skill
-When to use: Generate a project-local verification skill that drives your app the way a user does — any language, framework, or platform.
+### /recall
+Group: understand
+When to use: You are starting or resuming work and want your recent context on a topic rebuilt from your chat history and the shared record.
+Try: /recall catch me up on the export work from last week
+Related playbooks: session-pickup
 
-### /maintain-verification-skill
-When to use: Periodic pass that keeps a project's verification skill and feature map honest.
+### /bro
+Group: understand
+When to use: The last message is dense or full of jargon and you want it restated plainly.
+Try: /bro
+
+### /architect
+Group: design
+When to use: About to write code that crosses a function boundary and want the caller's usage, types, and module shape settled first.
+Try: /architect design the import pipeline before writing any code. i care most about how callers use it.
+Related playbooks: feature
+
+### /arena
+Group: design
+When to use: You want N parallel attempts at the same thing, then grab the best parts of each.
+Try: /arena take my prompt to the arena verbatim. i want to compare their proposals with yours.
+Related playbooks: prototype
 
 ### /swarm
+Group: design
 When to use: You want N parallel workers over slices or races, drained into one aggregated report.
+Try: /swarm check every package under packages/ against its check.sh. one worker per package. one report.
+Related playbooks: orchestrate, autopilot-full
+
+### /interrogate
+Group: design
+When to use: You have a diff and want four different models to try to break it, including a strict code-quality lens.
+Try: /interrogate the whole branch, but skeptically. don't change anything yet. no nitpicks unless it's an actual bug.
+Related playbooks: shipping
+
+### /blast-radius
+Group: prove
+When to use: A small-looking change and you want to know what else it could break, proven by running code rather than asserted.
+Try: /blast-radius this helper rename. prove what else it could break by running code.
+Related playbooks: refactoring, bug-fix
+
+### /tdd
+Group: prove
+When to use: You are fixing a bug and there is a cheap local test path. Write the failing test first, then the fix.
+Try: /tdd implement
+Related playbooks: bug-fix, feature
+
+### /create-verification-skill
+Group: prove
+When to use: Generate a project-local verification skill that drives your app the way a user does — any language, framework, or platform.
+Try: /create-verification-skill
+
+### /maintain-verification-skill
+Group: prove
+When to use: Periodic pass that keeps a project's verification skill and feature map honest.
+Try: /maintain-verification-skill
+
+### /unslop
+Group: write
+When to use: You are cleaning up writing. Removes AI tells.
+Try: /unslop that, no emdashes
+Related playbooks: opening-a-pr
 
 ### /no-comments
+Group: write
 When to use: You want Comment Sicko to hunt comments, then fix accepted findings at the root cause.
+Try: /no-comments
+
+### /typescript-best-practices
+Group: write
+When to use: You are reading or editing TypeScript. Grounds the type-system-discipline principle in syntax.
+Try: /typescript-best-practices
 
 ### /technical-writing
+Group: write
 When to use: You are writing docs and need Diátaxis, Google style, STE, and Global English applied together.
+Try: /technical-writing
+Related playbooks: opening-a-pr
+
+### /figure-it-out
+Group: run
+When to use: No bundled playbook fits. Designs a rigorous, auditable playbook for the task.
+Try: /figure-it-out migrate every caller, keep behavior identical, and leave a decision log.
+Related playbooks: figure-it-out, autonomous-run
+
+### /show-me-your-work
+Group: run
+When to use: You want a reviewable decision trail. Logs decisions to a TSV you can commit.
+Try: /show-me-your-work keep a decision trail i can review when i'm back.
+Related playbooks: autonomous-run, session-pickup
+
+### /reflect
+Group: run
+When to use: A long task landed and you want the recipe captured as a skill edit so the next run does not repeat it.
+Try: /reflect that took too long. capture what we learned so the next run doesn't repeat it.
+Related playbooks: authoring-a-skill
+
+### /automate-me
+Group: yours
+When to use: You want your own -mode skill, drafted from how you have actually worked.
+Try: /automate-me
+Related playbooks: authoring-a-skill
+
+### /make-bot-ui
+Group: yours
+When to use: You want a page or dashboard whose buttons wake a Grok Bot over a webhook, including the sender-key handoff and Tailscale.
+Try: /make-bot-ui
 
 ## Principles
 
-Twenty-one rules in five families. Each principle has a name, when it applies, and the rule to follow.
+Twenty-three rules in five families. Each principle has a name, when it applies, the rule to follow, and a phrase you can say to steer.
 
 ### Core
 How to sequence work and scope it. The bias to delete before you add.
@@ -191,38 +329,52 @@ How to sequence work and scope it. The bias to delete before you add.
 - **Laziness Protocol**
   - Applies when: Refactoring, sizing a diff, or tempted to add abstractions, layers, or signal threading.
   - Rule: Bias to deletion and the smallest change that solves the problem. If a human maintainer would find it exhausting, it is a bad solution.
+  - Say this to steer: use laziness protocol. delete first. the smallest change that solves it.
 
 - **Foundational Thinking**
   - Applies when: Before writing logic. Core types and data structures, scaffold-vs-feature sequencing, what concurrent actors share.
   - Rule: Get the data shape right before writing logic. The right shape makes downstream code obvious.
+  - Say this to steer: foundational thinking. name the data shape before any logic.
 
 - **Redesign From First Principles**
   - Applies when: Integrating a new requirement into an existing design.
   - Rule: Do not bolt it on. Redesign as if the requirement had been there from day one.
+  - Say this to steer: redesign from first principles. treat this requirement as if it had always been there.
+
+- **Attack the Premise**
+  - Applies when: Two or more fixes that share one premise have failed the same gate.
+  - Rule: Write the premise down. Take a census of which actors hold the imbalance. Then question the premise instead of writing another fix that assumes it.
+  - Say this to steer: attack the premise. the last two fixes assumed the same thing. write that premise down and census the actors before the next fix.
 
 - **Subtract Before You Add**
   - Applies when: Sequencing an addition, refactor, or rewrite.
   - Rule: Remove complexity first, then build. Deletion gives a simpler base, which makes the next addition smaller and less brittle.
+  - Say this to steer: use subtract before you add. delete the obsolete adapters first, then design what's left.
 
 - **Minimize Reader Load**
   - Applies when: Reviewing or shaping code that is hard to trace.
   - Rule: Count layers and hidden state. Collapse one-caller wrappers and shrink mutable scope.
+  - Say this to steer: minimize reader load. collapse the one-caller wrappers.
 
 - **Outcome-Oriented Execution**
   - Applies when: Planned rewrites and migrations with explicit phase boundaries.
   - Rule: Optimize for the intended, verifiable end state. Do not preserve smooth intermediate states.
+  - Say this to steer: outcome-oriented execution. converge on the target design, no throwaway compatibility.
 
 - **Experience First**
   - Applies when: Product, UX, or feature-scope tradeoffs.
   - Rule: Choose user delight over implementation convenience. Ship fewer polished features over more rough ones.
+  - Say this to steer: experience first. optimize for the person using this, not the easy implementation.
 
 - **Exhaust the Design Space**
   - Applies when: A novel interaction or architectural decision with no precedent.
   - Rule: Build 2 to 3 competing prototypes and compare before committing.
+  - Say this to steer: exhaust the design space. two or three prototypes before we commit.
 
 - **Build the Lever**
   - Applies when: Any non-trivial work.
   - Rule: Build the tool that does or proves it. The tool is the artifact a reviewer reruns.
+  - Say this to steer: build the lever. write the script a reviewer can rerun, don't do it by hand.
 
 ### Architecture
 Boundaries, types, and shared state across concurrent actors.
@@ -230,26 +382,32 @@ Boundaries, types, and shared state across concurrent actors.
 - **Boundary Discipline**
   - Applies when: Wiring validation, error handling, or framework adapters.
   - Rule: Guards at system boundaries. Trust internal types. Keep business logic in pure functions.
+  - Say this to steer: boundary discipline. validate at the edge, trust internal types.
 
 - **Type System Discipline**
   - Applies when: Designing types or a signature in any typed language.
   - Rule: Make illegal states unrepresentable. The type checker is a proof assistant.
+  - Say this to steer: type system discipline. make the illegal state unrepresentable.
 
 - **Make Operations Idempotent**
   - Applies when: Designing commands, lifecycle steps, or loops that run amid crashes and retries.
   - Rule: Converge to the same end state regardless of partial prior runs.
+  - Say this to steer: make operations idempotent. a retry should land on the same end state.
 
 - **Migrate Callers Then Delete Legacy APIs**
   - Applies when: Introducing a new internal API while old callers exist.
   - Rule: Migrate callers and remove the old API in the same wave. No compatibility layers.
+  - Say this to steer: migrate callers then delete legacy APIs. no compatibility layer.
 
 - **Separate Before Serializing Shared State**
   - Applies when: Concurrent actors might write the same file, branch, key, or object.
   - Rule: Eliminate the sharing first. When sharing is real, enforce serialization structurally.
+  - Say this to steer: separate before serializing shared state. give each attempt its own worktree, no locks.
 
 - **Model the Domain**
   - Applies when: When writing stateful logic, or when code branches a lot or repeats a shape assumption across files.
   - Rule: Encode the real domain in a data structure instead of scattering it across conditionals. Reach for state machines, typed models, lookup tables, reducers, or small module boundaries that gather repeated behavior. Don't force an abstraction if the current shape is already clear and local.
+  - Say this to steer: model the domain. put the repeated rule in one structure, not more ifs.
 
 ### Verification
 Proving it works against the real artifact, and ordering the work so each step can be checked.
@@ -257,14 +415,22 @@ Proving it works against the real artifact, and ordering the work so each step c
 - **Prove It Works**
   - Applies when: After a task, before declaring done.
   - Rule: Verify against the real artifact. Not a proxy. Not that it compiles.
+  - Say this to steer: apply prove it works. run the real flow and show me the written records.
 
 - **Fix Root Causes**
   - Applies when: Debugging.
   - Rule: Trace each symptom to its root cause. Reproduce first. Ask why until you reach it.
+  - Say this to steer: fix root causes. i said the goal is to repro. i did not ask for a fix yet.
 
 - **Sequence Work into Verifiable Units**
   - Applies when: Multi-step work and how you stack commits and PRs.
   - Rule: Order work as small units, each ending in a state you can check. Do not advance until the current one is green.
+  - Say this to steer: sequence work into verifiable units. this unit isn't green yet.
+
+- **Test Behavior, Not Implementation**
+  - Applies when: Writing, changing, or keeping a test.
+  - Rule: Call the code the way its users do and assert a literal expected value. If the test would still pass when every imported function returns undefined, rewrite the assertion or delete the test.
+  - Say this to steer: test behavior, not implementation. assert the result a user would see, not which functions were called.
 
 ### Delegation
 Keeping context lean and staying unblocked on the human.
@@ -272,10 +438,12 @@ Keeping context lean and staying unblocked on the human.
 - **Guard the Context Window**
   - Applies when: Context fills up. Large outputs, long files, repeated reads, fan-out planning.
   - Rule: Route bulk to subagents. Keep summaries in the main thread, not raw payloads.
+  - Say this to steer: guard the context window. send the bulk read to a subagent and keep the summary here.
 
 - **Never Block on the Human**
   - Applies when: Tempted to ask should I do X on reversible work.
   - Rule: Proceed. Present the result. Let the human course-correct after the fact.
+  - Say this to steer: never block on the human. this is reversible. do it and show me.
 
 ### Meta
 Turning repeated corrections into structure that enforces itself.
@@ -283,6 +451,7 @@ Turning repeated corrections into structure that enforces itself.
 - **Encode Lessons in Structure**
   - Applies when: You catch yourself writing the same instruction a second time.
   - Rule: Encode it as a lint, metadata flag, runtime check, or script instead of more text.
+  - Say this to steer: encode lessons in structure. don't add another paragraph. make it a check.
 
 ## Models per role
 

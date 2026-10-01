@@ -163,8 +163,17 @@ def generate_changelog_html(changelog):
   }}
   .wrap{{max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,40px); position:relative}}
   code{{font-family:var(--ff-mono); font-size:.92em; color:var(--accent)}}
+  .unofficial{{
+    background:#111; color:#f3e6d4; font-size:13px; letter-spacing:.01em;
+    padding:9px 0; border-bottom:1px solid #2a2a2a;
+  }}
+  .unofficial .wrap{{display:flex; gap:10px; align-items:baseline; flex-wrap:wrap}}
+  .unofficial strong{{font-weight:600; color:#fff}}
+  .unofficial span{{color:#c9b8a2}}
+  .unofficial a{{color:#f3c27a; text-decoration:none; border-bottom:1px solid rgba(243,194,122,.4)}}
+  .unofficial a:hover{{border-bottom-color:#f3c27a}}
 
-  header.mast{{padding:clamp(56px,9vw,96px) 0 clamp(36px,5vw,52px)}}
+  header.mast{{padding:clamp(40px,7vw,72px) 0 clamp(28px,4vw,40px)}}
   .mark{{display:flex; align-items:center; gap:13px; margin-bottom:22px}}
   .glyph{{width:26px; height:26px; position:relative; flex:none}}
   .glyph i{{position:absolute; left:0; height:20%; background:var(--accent); border-radius:1px}}
@@ -224,6 +233,14 @@ def generate_changelog_html(changelog):
 </head>
 <body>
 
+<div class="unofficial">
+  <div class="wrap">
+    <strong>Unofficial reading aid.</strong>
+    <span>Not affiliated with poteto, pstack, or Cursor.</span>
+    <a href="https://github.com/cursor/plugins/tree/main/pstack" target="_blank" rel="noopener">Upstream source</a>
+  </div>
+</div>
+
 <header class="mast">
   <div class="wrap">
     <div class="mark">
@@ -238,6 +255,10 @@ def generate_changelog_html(changelog):
 <nav class="bar">
   <div class="wrap">
     <a href="index.html">Home</a>
+    <a href="index.html#start">Start</a>
+    <a href="index.html#playbooks">Playbooks</a>
+    <a href="index.html#skills">Skills</a>
+    <a href="agent-templates.html">Templates</a>
     <a href="changelog.html" aria-current="page">Changelog</a>
   </div>
 </nav>
@@ -256,8 +277,8 @@ def generate_changelog_html(changelog):
 
 <footer>
   <div class="wrap">
-    <p>pstack is <a href="https://x.com/poteto" target="_blank" rel="noopener">poteto's</a> set of engineering skills for coding agents, installed with <code>/add-plugin pstack</code>. This page is an unofficial reading aid.</p>
-    <p>Source and deploy: <a href="https://github.com/HustleCoding/pstack-explained" target="_blank" rel="noopener">HustleCoding/pstack-explained</a>, live at this URL via GitHub Actions.</p>
+    <p>pstack is <a href="https://x.com/poteto" target="_blank" rel="noopener">poteto's</a> set of engineering skills for coding agents, installed with <code>/add-plugin pstack</code>. This page is an unofficial reading aid and is not affiliated with poteto, pstack, or Cursor.</p>
+    <p>Source and deploy: <a href="https://github.com/HustleCoding/pstack-explained" target="_blank" rel="noopener">HustleCoding/pstack-explained</a>. Agent-readable context: <a href="llms.txt">llms.txt</a> and <a href="changelog.md">changelog.md</a>.</p>
   </div>
 </footer>
 
@@ -275,8 +296,10 @@ def generate_llms_full(data, changelog):
         "",
         "## Overview",
         "",
+        "Start in a Cursor chat with `/add-plugin pstack`, then `/setup-pstack`, then one real task via `/poteto-mode`.",
         "Type `/poteto-mode` and describe a task. pstack matches the task to a playbook, then runs the appropriate skills as the steps fire.",
-        "Twenty-one principles apply across every playbook, biasing the work toward small diffs and real verification. The [official guide](https://github.com/cursor/plugins/blob/main/pstack/docs/guide/README.md) covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.",
+        "Twenty-three principles apply across every playbook, biasing the work toward small diffs and real verification. The [official guide](https://github.com/cursor/plugins/blob/main/pstack/docs/guide/README.md) covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.",
+        "This site is unofficial and is not affiliated with poteto, pstack, or Cursor.",
         "",
         "## Playbooks",
         "",
@@ -286,9 +309,15 @@ def generate_llms_full(data, changelog):
     for pb in data.get("PLAYBOOKS", []):
         meta = "(meta playbook)" if pb.get("meta") else ""
         lines.append(f"### {pb.get('n', '')} {meta}".strip())
+        if pb.get("g"):
+            lines.append(f"Group: {pb.get('g')}")
         lines.append(f"Trigger: {pb.get('t', '')}")
         if pb.get("detail"):
             lines.append(f"Detail: {pb.get('detail')}")
+        if pb.get("example"):
+            lines.append(f"Try: {pb.get('example')}")
+        if pb.get("skills"):
+            lines.append("Skills often nearby: " + ", ".join(pb.get("skills") or []))
         lines.append("")
 
     lines.extend([
@@ -299,13 +328,19 @@ def generate_llms_full(data, changelog):
     ])
     for sk in data.get("SKILLS", []):
         lines.append(f"### {sk.get('cmd', '')}")
+        if sk.get("g"):
+            lines.append(f"Group: {sk.get('g')}")
         lines.append(f"When to use: {sk.get('when', '')}")
+        if sk.get("example"):
+            lines.append(f"Try: {sk.get('example')}")
+        if sk.get("playbooks"):
+            lines.append("Related playbooks: " + ", ".join(sk.get("playbooks") or []))
         lines.append("")
 
     lines.extend([
         "## Principles",
         "",
-        "Twenty-one rules in five families. Each principle has a name, when it applies, and the rule to follow.",
+        "Twenty-three rules in five families. Each principle has a name, when it applies, the rule to follow, and a phrase you can say to steer.",
         "",
     ])
     groups = {g["key"]: g for g in data.get("GROUPS", [])}
@@ -319,6 +354,8 @@ def generate_llms_full(data, changelog):
                 lines.append(f"- **{p.get('n', '')}**")
                 lines.append(f"  - Applies when: {p.get('applies', '')}")
                 lines.append(f"  - Rule: {p.get('rule', '')}")
+                if p.get("steer"):
+                    lines.append(f"  - Say this to steer: {p.get('steer')}")
                 lines.append("")
 
     lines.extend([

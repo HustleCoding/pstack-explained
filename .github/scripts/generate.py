@@ -143,79 +143,90 @@ def generate_changelog_html(changelog):
 <link rel="shortcut icon" href="favicon.ico">
 <meta name="theme-color" content="#f7f4ee">
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600&display=swap");
+@font-face{{
+  font-family:"IBM VGA";
+  src:url("fonts/WebPlus_IBM_VGA_8x16.woff") format("woff");
+  font-weight:400; font-style:normal; font-display:swap;
+}}
 :root{{
   --bg:#e6e1d6; --paper:#f7f4ee; --ink:#1c1915; --soft:#3d3832; --dim:#6a635a; --faint:#8d867c;
   --line:#e0d9cc; --mark:#7f2d22;
   --t-setup:#7f2d22; --t-sdlc:#3d3832; --t-orch:#7f2d22; --t-special:#3d3832;
   --maxw:760px; --navh:0px;
-  --ff:"Source Sans 3", sans-serif;
-  --ff-mono:"IBM Plex Mono", ui-monospace, monospace;
+  --ff:"IBM VGA", ui-monospace, monospace;
+  --ff-mono:"IBM VGA", ui-monospace, monospace;
 }}
 *{{box-sizing:border-box}}
 html{{scroll-behavior:smooth; -webkit-text-size-adjust:100%}}
-body{{margin:0; background:var(--paper); color:var(--ink); font-family:var(--ff); font-size:18px; line-height:1.55}}
-h1,h2,h3{{font-family:"Fraunces", Palatino, serif; font-weight:560; letter-spacing:-.02em}}
-code{{font-family:var(--ff-mono); font-size:.86em}}
+body{{
+  margin:0; background:var(--paper); color:var(--ink); font-family:var(--ff);
+  font-size:16px; line-height:24px; font-weight:400; letter-spacing:0; font-synthesis:none;
+  -webkit-font-smoothing:none; font-smooth:never;
+}}
+button,input,textarea,select{{font-family:inherit; font-weight:400; letter-spacing:0; font-synthesis:none; appearance:none; -webkit-appearance:none}}
+button:focus,button:focus-visible{{outline:none}}
+h1,h2,h3{{font-family:var(--ff); font-weight:400; letter-spacing:0; line-height:40px}}
+code{{font-family:var(--ff-mono); font-size:16px}}
 .wrap{{max-width:var(--maxw); margin:0 auto; padding:0 24px}}
 .sheet{{max-width:860px; margin:28px auto; background:var(--paper); border:1px solid #d4ccbe; min-height:calc(100vh - 56px); padding-bottom:28px}}
-.unofficial{{padding:18px 0 0; color:var(--dim); font-size:14px}}
+.unofficial{{padding:18px 0 0; color:var(--dim); font-size:16px}}
 .unofficial .wrap{{display:flex; gap:10px; flex-wrap:wrap; align-items:baseline}}
-.unofficial strong{{font-weight:600; color:var(--ink); font-size:14px}}
+.unofficial strong{{font-weight:400; color:var(--ink); font-size:16px}}
 .unofficial span{{color:var(--dim)}}
-.unofficial a{{color:var(--mark); font-size:14px}}
+.unofficial a{{color:var(--mark); font-size:16px}}
 header.mast{{padding:28px 0 8px}}
-h1.wordmark{{font-size:clamp(36px,5vw,48px); margin:0 0 12px; line-height:1.1}}
+h1.wordmark{{font-size:32px; margin:0 0 12px; line-height:40px}}
 h1.wordmark span{{color:var(--ink)}}
-.count{{font-family:var(--ff-mono); font-size:13px; color:var(--faint); margin:0 0 12px}}
-.tagline{{font-size:18px; color:var(--soft); margin:0 0 10px; max-width:46ch}}
+.count{{font-family:var(--ff-mono); font-size:16px; color:var(--faint); margin:0 0 12px}}
+.tagline{{font-size:16px; color:var(--soft); margin:0 0 10px; max-width:62ch; line-height:24px}}
 .intro-lead{{color:var(--dim); font-size:16px; margin:0}}
 nav.bar{{position:sticky; top:0; background:var(--paper); border-bottom:1px solid var(--line); z-index:2}}
 nav.bar .wrap{{display:flex; gap:14px; flex-wrap:wrap; padding-top:10px; padding-bottom:10px}}
-nav.bar a{{color:var(--dim); text-decoration:none; font-size:15px}}
+nav.bar a{{color:var(--dim); text-decoration:none; font-size:16px}}
 nav.bar a:hover,nav.bar a[aria-current="page"]{{color:var(--mark)}}
 section{{padding:28px 0; border-bottom:1px solid var(--line)}}
-.sh h2{{font-size:32px; margin:0 0 8px}}
+.sh h2{{font-size:32px; margin:0 0 8px; line-height:40px}}
 .sh .num{{display:none}}
-.sh .lead{{color:var(--dim); margin:0}}
+.sh .lead{{color:var(--dim); margin:0; font-size:16px; line-height:24px}}
 .flow{{color:var(--dim); font-size:16px}}
-.flow .cmd-tok{{font-family:var(--ff-mono); color:var(--mark); font-size:14px}}
+.flow .cmd-tok{{font-family:var(--ff-mono); color:var(--mark); font-size:16px}}
 .band{{margin:22px 0}}
 .band-head{{display:flex; gap:10px; align-items:baseline}}
-.band-head h3{{font-family:var(--ff); font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); margin:0}}
-.band-head .ct{{color:var(--faint); font-size:13px}}
+.band-head h3{{font-family:var(--ff); font-size:16px; font-weight:400; letter-spacing:0; line-height:24px; text-transform:uppercase; color:var(--dim); margin:0}}
+.band-head .ct{{color:var(--faint); font-size:16px}}
 .band-head .ln,.band-head .tick{{display:none}}
-.band-desc{{color:var(--dim); font-size:15px; margin:4px 0 0}}
+.band-desc{{color:var(--dim); font-size:16px; margin:4px 0 0}}
 .bricks{{display:block}}
 .brick{{
   display:block; width:100%; text-align:left; background:transparent; color:var(--ink);
   border:0; border-top:1px solid var(--line); border-left:0; border-radius:0; padding:12px 0; cursor:pointer; font-family:var(--ff);
 }}
 .brick:hover{{background:transparent}}
-.brick .pn{{font-family:"Fraunces", serif; font-size:20px}}
-.brick .pa{{color:var(--dim); font-size:15px; margin-top:3px}}
-.tmpl-note{{color:var(--dim); font-size:15px}}
+.brick .pn{{font-family:var(--ff); font-size:16px; font-weight:400; line-height:24px}}
+.brick .pa{{color:var(--dim); font-size:16px; margin-top:3px}}
+.tmpl-note{{color:var(--dim); font-size:16px}}
 .tmpl-note a{{color:var(--mark)}}
-.changelog-meta{{color:var(--dim); font-size:15px}}
+.changelog-meta{{color:var(--dim); font-size:16px}}
 .changelog-meta a{{color:var(--mark)}}
 .changelog-entry{{display:flex; gap:16px; padding:12px 0; border-bottom:1px solid var(--line)}}
 .changelog-entry:last-child{{border-bottom:0}}
-.changelog-date{{width:120px; flex:none; font-family:var(--ff-mono); font-size:13px; color:var(--faint); text-align:right}}
-.changelog-title{{font-size:16px}}
+.changelog-date{{width:160px; flex:none; font-family:var(--ff-mono); font-size:16px; color:var(--faint); text-align:right}}
+.changelog-title{{font-size:16px; line-height:24px}}
 .changelog-title a{{color:var(--ink); text-decoration:none}}
 .changelog-title a:hover{{color:var(--mark)}}
-.changelog-meta .ch-sha,.changelog-meta .ch-time{{font-family:var(--ff-mono); font-size:13px; color:var(--faint)}}
-footer{{padding:20px 0 8px; color:var(--dim); font-size:14px}}
+.changelog-meta .ch-sha,.changelog-meta .ch-time{{font-family:var(--ff-mono); font-size:16px; color:var(--faint)}}
+footer{{padding:20px 0 8px; color:var(--dim); font-size:16px; line-height:24px}}
 footer a{{color:var(--mark)}}
 .overlay{{position:fixed; inset:0; background:rgba(28,25,21,.28); display:none; align-items:center; justify-content:center; z-index:60; padding:24px}}
 .overlay.open{{display:flex}}
 .dialog{{background:var(--paper); border:1px solid #d4ccbe; border-radius:0; max-width:560px; width:100%; padding:28px; position:relative; max-height:86vh; overflow:auto}}
-.dialog .cat{{font-family:var(--ff-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint)}}
-.dialog h3{{font-size:32px; margin:8px 0 12px}}
-.dialog .field .k{{font-family:var(--ff-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint)}}
-.dialog .close{{position:absolute; top:16px; right:16px; background:none; border:0; color:var(--dim); cursor:pointer; font-family:var(--ff); font-size:15px; text-decoration:underline; text-underline-offset:3px}}
+.dialog .cat{{font-family:var(--ff-mono); font-size:16px; letter-spacing:0; text-transform:uppercase; color:var(--faint)}}
+.dialog h3{{font-size:32px; line-height:40px; margin:8px 0 12px}}
+.dialog .field .k{{font-family:var(--ff-mono); font-size:16px; letter-spacing:0; text-transform:uppercase; color:var(--faint)}}
+.dialog .close{{position:absolute; top:16px; right:16px; background:none; border:0; color:var(--dim); cursor:pointer; font-family:var(--ff); font-size:16px; text-decoration:underline; text-underline-offset:3px}}
 @media (max-width:640px){{
   .sheet{{margin:0; border:0}}
+  h1.wordmark{{font-size:32px}}
   .changelog-entry{{flex-direction:column; gap:4px}}
   .changelog-date{{text-align:left; width:auto}}
 }}
@@ -269,6 +280,7 @@ footer a{{color:var(--mark)}}
   <div class="wrap">
     <p>pstack is <a href="https://x.com/poteto" target="_blank" rel="noopener">poteto's</a> set of engineering skills for coding agents, installed with <code>/add-plugin pstack</code>. This page is an unofficial reading aid and is not affiliated with poteto, pstack, or Cursor.</p>
     <p>Source and deploy: <a href="https://github.com/HustleCoding/pstack-explained" target="_blank" rel="noopener">HustleCoding/pstack-explained</a>. Agent-readable context: <a href="llms.txt">llms.txt</a> and <a href="changelog.md">changelog.md</a>.</p>
+    <p>Type: <a href="https://int10h.org/oldschool-pc-fonts/" target="_blank" rel="noopener">PxPlus IBM VGA 8x16</a> by VileR, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</p>
   </div>
 </footer>
 

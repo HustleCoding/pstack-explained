@@ -70,15 +70,16 @@ h1.wordmark span{color:var(--accent)}
 .intro-lead{color:var(--dim); font-size:16px; line-height:1.5; max-width:68ch; margin:0 0 12px}
 .intro-lead em{font-style:normal; color:var(--ink)}
 .when-line{color:var(--soft); font-size:16px; line-height:1.5; max-width:68ch; margin:0 0 18px}
-.hero-actions{display:flex; gap:8px; flex-wrap:wrap}
+.hero-actions{display:flex; flex-direction:column; align-items:flex-start; gap:2px; margin-top:4px}
 .cta{
-  display:inline-flex; align-items:center; gap:8px; text-decoration:none;
-  background:var(--sel); color:var(--ink); font-weight:400; font-size:16px;
-  padding:8px 12px; border-radius:0; border:1px solid var(--accent-line);
+  display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+  background:transparent; color:var(--ink); font-weight:400; font-size:16px;
+  padding:2px 8px 2px 0; border:0; border-radius:0;
 }
-.cta:hover{background:#2c5164}
-.cta.ghost{background:transparent; color:var(--ink); border-color:var(--rule2)}
-.cta.ghost:hover{background:var(--panel)}
+.cta::before{content:">"; color:var(--accent)}
+.cta:hover,.cta:focus-visible{background:var(--sel); color:var(--ink); outline:none}
+.cta.ghost{color:var(--dim)}
+.cta.ghost:hover,.cta.ghost:focus-visible{color:var(--ink)}
 
 nav.bar{position:sticky; top:0; z-index:20; background:rgba(32,36,46,.94); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule)}
 nav.bar .wrap{display:flex; gap:0; padding-top:4px; padding-bottom:4px; overflow-x:auto; scrollbar-width:none}
@@ -290,14 +291,14 @@ a.chip{color:var(--ink); text-decoration:none; display:block}
 
 .findwrap{flex:none}
 .find-btn{
-  border:1px solid var(--rule2); background:transparent; color:var(--ink);
+  border:0; background:transparent; color:var(--dim);
   font-family:var(--ff); font-size:16px; font-weight:400;
-  padding:6px 10px; border-radius:0; cursor:pointer; display:inline-flex; align-items:center; gap:8px;
+  padding:8px 10px; border-radius:0; cursor:pointer; display:inline-flex; align-items:center; gap:8px;
 }
-.find-btn:hover,.find-btn[aria-expanded="true"]{border-color:var(--accent-line); color:var(--ink); background:var(--sel)}
+.find-btn:hover,.find-btn[aria-expanded="true"]{color:var(--ink); background:var(--sel)}
 .find-btn kbd{
-  font-family:var(--ff-mono); font-size:16px; font-weight:400; color:var(--dim);
-  border:1px solid var(--rule2); border-bottom-width:1px; border-radius:0; padding:0 4px; background:var(--bg);
+  font-family:var(--ff-mono); font-size:16px; font-weight:400; color:var(--faint);
+  border:0; border-radius:0; padding:0; background:transparent;
 }
 .findpop{
   display:none; position:fixed; z-index:40; top:calc(var(--navh) + 8px); left:50%; transform:translateX(-50%);

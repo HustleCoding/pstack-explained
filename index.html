@@ -30,12 +30,12 @@
     --rule:#ededed; --rule2:#e0e0e0;
     --accent:#b45309; --accent-soft:#fdf4ea; --accent-line:#e8c39a;
     --core:#b45309; --arch:#1f6f8b; --verif:#4d7c2f; --deleg:#b13a5a; --meta:#7c4d9e;
-    --maxw:900px; --navh:54px;
+    --maxw:900px; --navh:64px;
     --ff:"Hanken Grotesk",system-ui,-apple-system,sans-serif;
     --ff-mono:"IBM Plex Mono",ui-monospace,monospace;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+  html{scroll-behavior:smooth; -webkit-text-size-adjust:100%; scroll-padding-top:var(--navh)}
   body{
     margin:0; background:var(--bg); color:var(--ink);
     font-family:var(--ff); font-size:17px; line-height:1.65;
@@ -144,7 +144,7 @@
   .flow .cmd-tok{font-family:var(--ff-mono); color:var(--accent); font-size:14px}
   .flow .arr{color:var(--faint); margin:0 2px}
 
-  fieldset.chooser{border:none; padding:0; margin:0; max-width:680px}
+  fieldset.chooser{border:none; padding:0; margin:0; max-width:680px; scroll-margin-top:calc(var(--navh) + 12px)}
   .chooser label{display:block; font-weight:500; font-size:15px; margin-bottom:9px; color:var(--ink)}
   .chooser label .hint{color:var(--faint); font-weight:400; font-size:13.5px}
   #task,.finder{
@@ -1085,9 +1085,9 @@ function renderExamples(){
       const input = $("#task");
       input.value = c.text;
       showVerdict(c.text);
-      input.focus();
-      const card = document.querySelector("#pbgrid .card.recommended");
-      if(card) setTimeout(() => card.scrollIntoView({ behavior:"smooth", block:"center" }), 120);
+      input.focus({ preventScroll: true });
+      const verdict = $("#verdict");
+      if(verdict) setTimeout(() => verdict.scrollIntoView({ behavior:"smooth", block:"nearest" }), 60);
     });
     wrap.appendChild(b);
   });

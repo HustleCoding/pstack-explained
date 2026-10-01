@@ -16,7 +16,17 @@ pstack is poteto's set of engineering skills for coding agents. This site is an 
 
 ## How to use this site
 
-Type `/poteto-mode` and describe a task. pstack matches the task to a playbook, then runs the appropriate skills as the steps fire. Twenty-one principles apply across every playbook, biasing the work toward small diffs and real verification. The official guide covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.
+This site is unofficial and is not affiliated with poteto, pstack, or Cursor.
+
+Start in a Cursor chat:
+
+1. `/add-plugin pstack`
+2. `/setup-pstack`
+3. `/poteto-mode` plus one real task, including how you will know it is done
+
+`/poteto-mode` matches the task to a playbook, then runs the appropriate skills as the steps fire. Twenty-three principles apply across every playbook, biasing the work toward small diffs and real verification. The official guide covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.
+
+The live site also has a situation board (what to type), a which-one chooser for lookalike playbooks, one-line steering phrases, and a page finder. Fetch `llms-full.txt` for the complete reference, including those prompts.
 
 ## For AI agents fetching this page
 

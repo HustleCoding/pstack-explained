@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>pstack · a guided tour</title>
-<meta name="description" content="An unofficial, interactive reading aid for pstack, poteto's set of engineering skills for coding agents.">
-<meta property="og:title" content="pstack · a guided tour">
-<meta property="og:description" content="An unofficial, interactive reading aid for pstack, poteto's set of engineering skills for coding agents.">
+<title>pstack explained</title>
+<meta name="description" content="An unofficial reading aid for pstack. What it is, when to use it, how playbooks and skills fit together, and what to type next.">
+<meta property="og:title" content="pstack explained · start here">
+<meta property="og:description" content="An unofficial reading aid for pstack. What it is, when to use it, how playbooks and skills fit together, and what to type next.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://hustlecoding.github.io/pstack-explained/">
 <meta property="og:image" content="https://hustlecoding.github.io/pstack-explained/og.png">
@@ -20,393 +20,669 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="shortcut icon" href="favicon.ico">
-<meta name="theme-color" content="#ffffff">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#e6e1d6">
 <style>
-  :root{
-    --bg:#ffffff; --ink:#1a1a1a; --soft:#3d3d3d; --dim:#6b6b6b; --faint:#9b9b9b;
-    --rule:#ededed; --rule2:#e0e0e0;
-    --accent:#b45309; --accent-soft:#fdf4ea; --accent-line:#e8c39a;
-    --core:#b45309; --arch:#1f6f8b; --verif:#4d7c2f; --deleg:#b13a5a; --meta:#7c4d9e;
-    --maxw:880px; --navh:54px;
-    --ff:"Hanken Grotesk",system-ui,-apple-system,sans-serif;
-    --ff-mono:"IBM Plex Mono",ui-monospace,monospace;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
-  body{
-    margin:0; background:var(--bg); color:var(--ink);
-    font-family:var(--ff); font-size:17px; line-height:1.65;
-    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-  }
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,40px); position:relative}
-  code{font-family:var(--ff-mono); font-size:.92em; color:var(--accent)}
+@font-face{
+  font-family:"IBM VGA";
+  src:url("fonts/WebPlus_IBM_VGA_8x16.woff") format("woff");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+:root{
+  --bg:#e6e1d6;
+  --paper:#f7f4ee;
+  --ink:#1c1915;
+  --soft:#3d3832;
+  --dim:#6a635a;
+  --faint:#8d867c;
+  --line:#e0d9cc;
+  --mark:#7f2d22;
+  --navw:176px;
+  --navh:0px;
+  --ff:"IBM VGA", ui-monospace, monospace;
+  --ff-serif:"IBM VGA", ui-monospace, monospace;
+  --ff-mono:"IBM VGA", ui-monospace, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:24px; -webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--ff); font-size:16px; line-height:24px; font-weight:400;
+  letter-spacing:0; font-synthesis:none;
+  -webkit-font-smoothing:none; font-smooth:never;
+}
+button,input,textarea,select{font-family:inherit; font-weight:400; letter-spacing:0; font-synthesis:none; appearance:none; -webkit-appearance:none}
+button:focus,button:focus-visible{outline:none}
+button:focus-visible{color:var(--mark)}
+h1,h2,h3{font-family:var(--ff-serif); font-weight:400; letter-spacing:0; line-height:40px}
+code{font-family:var(--ff-mono); font-size:16px}
+a{color:var(--mark)}
+.skip{position:absolute; left:-999px; top:8px; background:var(--ink); color:var(--paper); padding:8px 12px; z-index:80}
+.skip:focus{left:16px}
 
-  /* masthead */
-  header.mast{padding:clamp(56px,9vw,96px) 0 clamp(36px,5vw,52px)}
-  .mark{display:flex; align-items:center; gap:13px; margin-bottom:22px}
-  .glyph{width:26px; height:26px; position:relative; flex:none}
-  .glyph i{position:absolute; left:0; height:20%; background:var(--accent); border-radius:1px}
-  .glyph i:nth-child(1){bottom:0; width:100%; opacity:.4}
-  .glyph i:nth-child(2){bottom:40%; width:68%; opacity:.65}
-  .glyph i:nth-child(3){bottom:80%; width:40%}
-  h1.wordmark{font-family:var(--ff); font-weight:700; font-size:clamp(36px,6vw,50px); letter-spacing:-.025em; margin:0; line-height:1}
-  h1.wordmark span{color:var(--accent)}
-  .count{font-family:var(--ff-mono); font-size:13px; color:var(--faint); margin:0 0 26px; letter-spacing:.02em}
-  .tagline{font-size:clamp(19px,2.6vw,23px); line-height:1.45; color:var(--soft); max-width:52ch; margin:0 0 18px; font-weight:500; letter-spacing:-.005em}
-  .tagline em{font-style:normal; color:var(--ink); border-bottom:2px solid var(--accent-line)}
-  .intro-lead{color:var(--dim); font-size:16px; line-height:1.6; max-width:62ch; margin:0}
+.sheet{
+  max-width:1080px; margin:28px auto; background:var(--paper);
+  border:1px solid #d4ccbe; min-height:calc(100vh - 56px);
+}
+.top{
+  display:flex; justify-content:space-between; gap:16px; align-items:baseline;
+  padding:22px 32px 0; 
+}
+.brand{font-family:var(--ff-serif); font-size:16px; color:var(--ink); text-decoration:none; letter-spacing:0}
+.brand:hover{color:var(--mark)}
+.disclaimer{margin:0; color:var(--dim); font-size:16px; max-width:42ch; text-align:right; line-height:24px}
+.disclaimer a{color:var(--dim)}
 
-  /* nav */
-  nav.bar{position:sticky; top:0; z-index:20; background:rgba(255,255,255,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule)}
-  nav.bar .wrap{display:flex; gap:2px; padding-top:7px; padding-bottom:7px; overflow-x:auto; scrollbar-width:none}
-  nav.bar .wrap::-webkit-scrollbar{display:none}
-  nav.bar a{color:var(--dim); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; padding:8px 13px; border-radius:8px; transition:background .15s,color .15s}
-  nav.bar a:hover,nav.bar a:focus-visible{background:var(--accent-soft); color:var(--accent); outline:none}
+.frame{display:grid; grid-template-columns:var(--navw) minmax(0,1fr); gap:8px; padding:12px 32px 48px 20px}
+nav.bar{
+  position:sticky; top:20px; align-self:start;
+  display:flex; flex-direction:column; gap:2px; padding:28px 12px 0 12px;
+  background:transparent; border:0; z-index:2;
+}
+nav.bar a, nav.bar .find-btn{
+  display:block; width:100%; text-align:left;
+  color:var(--dim); text-decoration:none; background:transparent; border:0;
+  font-family:var(--ff); font-size:16px; padding:3px 0; cursor:pointer; border-radius:0; line-height:24px;
+}
+nav.bar a:hover, nav.bar a:focus-visible, nav.bar a.on,
+nav.bar .find-btn:hover, nav.bar .find-btn[aria-expanded="true"]{
+  color:var(--mark); background:transparent; outline:none;
+}
+nav.bar kbd{font-family:var(--ff-mono); font-size:16px; color:var(--faint); border:0; background:transparent; padding:0}
 
-  section{padding:clamp(52px,8vw,84px) 0; border-bottom:1px solid var(--rule); scroll-margin-top:var(--navh)}
-  .sh{margin-bottom:clamp(26px,4vw,38px); max-width:64ch}
-  .sh .num{color:var(--accent); font-family:var(--ff-mono); font-size:12px; letter-spacing:.04em}
-  .sh h2{font-weight:600; font-size:clamp(24px,3.6vw,31px); margin:7px 0 12px; letter-spacing:-.018em; line-height:1.15}
-  .sh .lead{color:var(--dim); font-size:16px; line-height:1.6; margin:0; max-width:60ch}
-  .sh .lead a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-line)}
-  .sh .lead a:hover{border-bottom-color:var(--accent)}
+main{padding:20px 12px 12px 8px; min-width:0; max-width:740px}
+.lede h1{font-size:32px; margin:0 0 16px; max-width:22em; line-height:40px}
+.lede .deck{margin:0 0 22px; color:var(--soft); font-size:16px; max-width:68ch; line-height:24px}
+.ask{margin:0 0 8px}
+.ask label{display:block; font-size:16px; color:var(--dim); margin-bottom:6px}
+#findq,#task,#pbq,#skq{
+  width:100%; background:transparent; border:0; border-bottom:1px solid var(--ink);
+  color:var(--ink); font-family:var(--ff); font-size:16px; padding:8px 0 10px; border-radius:0; outline:none; line-height:24px;
+}
+#findq:focus,#task:focus,#pbq:focus,#skq:focus{border-bottom-color:var(--mark)}
+#findq::placeholder,#task::placeholder,#pbq::placeholder,#skq::placeholder{color:var(--faint)}
+.findpop{
+  display:block; position:static; transform:none; width:auto; left:auto; top:auto;
+  background:transparent; border:0; box-shadow:none; padding:0; margin:0 0 8px;
+}
+.findhits{margin-top:8px}
+.findhit{
+  width:100%; text-align:left; border:0; border-top:1px solid var(--line);
+  background:transparent; padding:10px 0; cursor:pointer; font-family:var(--ff); color:var(--ink); display:block;
+}
+.findhit:hover,.findhit:focus-visible{background:transparent; color:var(--mark); outline:none}
+.findhit .fk{font-family:var(--ff-mono); font-size:16px; letter-spacing:0; text-transform:uppercase; color:var(--faint)}
+.findhit .ft{font-family:var(--ff-serif); font-size:16px; margin-top:2px}
+.findhit .fs{color:var(--dim); font-size:16px; margin-top:2px}
 
-  /* routing */
-  .flow{margin:0 0 28px; font-size:15px; color:var(--dim); line-height:1.9}
-  .flow .cmd-tok{font-family:var(--ff-mono); color:var(--accent); font-size:14px}
-  .flow .arr{color:var(--faint); margin:0 2px}
-  fieldset.chooser{border:none; padding:0; margin:0; max-width:680px}
-  .chooser label{display:block; font-weight:500; font-size:15px; margin-bottom:9px; color:var(--ink)}
-  .chooser label .hint{color:var(--faint); font-weight:400; font-size:13.5px}
-  #task{
-    width:100%; background:var(--bg); border:1px solid var(--rule2); color:var(--ink);
-    font-family:var(--ff); font-size:16px; padding:14px 16px; border-radius:10px; outline:none;
-    transition:border-color .15s, box-shadow .15s;
-  }
-  #task:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
-  #task::placeholder{color:var(--faint)}
-  .examples{margin:18px 0 0}
-  .examples .elbl{font-size:13px; color:var(--faint); margin-bottom:10px}
-  .exchips{display:flex; gap:8px; flex-wrap:wrap}
-  .exchip{
-    background:var(--bg); border:1px solid var(--rule2); color:var(--soft);
-    font-family:var(--ff); font-size:14px; padding:7px 13px; border-radius:999px;
-    cursor:pointer; transition:border-color .15s,background .15s,color .15s;
-  }
-  .exchip:hover,.exchip:focus-visible{border-color:var(--accent-line); background:var(--accent-soft); color:var(--accent); outline:none}
-  .verdict{margin:22px 0 0; min-height:26px; font-size:15.5px; color:var(--soft); line-height:1.55}
-  .verdict .pick{font-weight:600; color:var(--accent)}
-  .verdict .kw{font-family:var(--ff-mono); font-size:12px; color:var(--accent); background:var(--accent-soft); padding:2px 7px; border-radius:5px; margin:0 2px; white-space:nowrap}
-  .verdict .why{color:var(--faint); font-size:13.5px}
-  .verdict .none{color:var(--faint)}
+section{padding:40px 0 8px; border:0; scroll-margin-top:20px}
+.sh{margin:0 0 16px; max-width:62ch}
+.sh .num{display:none}
+.sh h2{font-size:32px; margin:0 0 8px; line-height:40px}
+.sh .lead{margin:0; color:var(--dim); font-size:16px; line-height:24px}
+.sh .lead a{color:var(--mark)}
 
-  /* grids */
-  .grid{display:grid; gap:12px}
-  .pb.grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-  .card{
-    text-align:left; background:var(--bg); border:1px solid var(--rule); color:var(--ink);
-    padding:17px 18px; border-radius:12px; cursor:pointer; font-family:var(--ff); font-size:15px;
-    position:relative; transition:border-color .18s, background .18s, transform .18s; overflow:hidden;
-    animation:rise .5s both;
-  }
-  .card:hover{border-color:var(--rule2); background:#fafafa; transform:translateY(-1px)}
-  .card:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
-  .card .idx{display:none}
-  .card .nm{font-weight:600; font-size:16.5px; line-height:1.25}
-  .card .tr{color:var(--dim); font-size:14px; margin-top:8px; line-height:1.5}
-  .card.recommended{border:1.5px solid var(--accent); background:var(--accent-soft)}
-  .card.recommended .nm{color:var(--accent)}
-  .card.recommended::after{
-    content:"match"; position:absolute; top:0; right:0; background:var(--accent); color:#fff;
-    font-size:10px; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; font-weight:600;
-    font-family:var(--ff-mono); border-bottom-left-radius:10px;
-  }
-  .card.meta-card{border-style:dashed; grid-column:1/-1; background:transparent}
-  .card.meta-card .nm{color:var(--dim)}
+.cmdrow{display:flex; gap:16px; align-items:baseline; padding:12px 0; border-top:1px solid var(--line)}
+.cmdbox{font-family:var(--ff-mono); font-size:16px; color:var(--ink); line-height:24px}
+.step{padding:0 0 8px}
+.step h3{font-family:var(--ff); font-weight:400; font-size:16px; margin:16px 0 4px; letter-spacing:0; line-height:24px}
+.step p{margin:0 0 4px; color:var(--dim); font-size:16px}
+.step .sn{display:none}
+.steps{display:block}
+.copy,.pin,button.copy{
+  background:none; border:0; border-radius:0; color:var(--mark);
+  font-family:var(--ff); font-size:16px; padding:0; min-height:0; cursor:pointer;
+  text-decoration:underline; text-underline-offset:3px;
+}
+.copy:hover,.pin:hover,.pin.on{background:none; color:var(--ink)}
+.copy.ok{color:var(--ink); text-decoration:none}
+.nowacts{display:flex; gap:14px; margin-top:8px}
 
-  .sk.grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
-  .chip{
-    text-align:left; background:var(--bg); border:1px solid var(--rule); color:var(--ink);
-    padding:14px 15px; border-radius:12px; cursor:pointer; font-family:var(--ff);
-    transition:border-color .18s,background .18s,transform .18s; animation:rise .5s both;
-  }
-  a.chip{color:var(--ink); text-decoration:none}
-  .chip:hover{border-color:var(--rule2); background:#fafafa; transform:translateY(-1px)}
-  .chip:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
-  .chip .cmd{color:var(--accent); font-family:var(--ff-mono); font-weight:500; font-size:14px}
-  .chip .when{color:var(--dim); font-size:13.5px; margin-top:7px; line-height:1.5}
+.hintrow,.uses,.use{color:var(--dim)}
+.uses{display:block; margin-top:8px}
+.use{border:0; border-top:1px solid var(--line); border-radius:0; background:transparent; padding:12px 0}
+.use strong{font-family:var(--ff); font-weight:400; font-size:16px}
 
-  /* principles */
-  .band{margin-bottom:clamp(34px,5vw,52px); animation:rise .5s both}
-  .band:last-child{margin-bottom:0}
-  .band-head{display:flex; align-items:center; gap:10px; margin-bottom:8px}
-  .band-head .tick{width:9px; height:9px; border-radius:2px; flex:none}
-  .band-head h3{font-weight:600; font-size:18px; margin:0; letter-spacing:-.01em}
-  .band-head .ct{color:var(--faint); font-family:var(--ff-mono); font-size:12px}
-  .band-head .ln{flex:1; height:1px; background:var(--rule)}
-  .band-desc{color:var(--dim); font-size:14.5px; margin:0 0 16px; max-width:60ch}
-  .bricks{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px}
-  .brick{
-    text-align:left; background:var(--bg); border:1px solid var(--rule); border-left:3px solid var(--c);
-    color:var(--ink); padding:13px 15px; border-radius:3px 12px 12px 3px; cursor:pointer; font-family:var(--ff);
-    transition:background .18s,transform .18s; animation:rise .5s both;
-  }
-  .brick:hover{background:#fafafa; transform:translateY(-1px)}
-  .brick:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
-  .brick .pn{font-weight:600; font-size:15px; line-height:1.25}
-  .brick .pa{color:var(--faint); font-size:12.5px; margin-top:6px; line-height:1.45}
+.layers{border:0; margin:8px 0 0}
+.layer{display:grid; grid-template-columns:88px 1fr; gap:12px; padding:14px 0; border:0; border-top:1px solid var(--line); background:transparent}
+.layer .lk{font-family:var(--ff-mono); font-size:16px; color:var(--faint); padding-top:4px}
+.layer strong{font-family:var(--ff-serif); font-size:16px; font-weight:400}
+.layer p{margin:4px 0 0; color:var(--dim); font-size:16px}
+.flow{color:var(--dim); font-size:16px}
+.flow .cmd-tok{font-family:var(--ff-mono); color:var(--ink); font-size:16px}
 
-  /* models */
-  .mgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:10px}
-  .mcard{
-    background:var(--bg); border:1px solid var(--rule); border-radius:12px; padding:15px 16px;
-    display:flex; flex-direction:column; gap:7px; animation:rise .5s both;
-  }
-  .mrole{font-weight:600; font-size:15px; line-height:1.3; color:var(--ink)}
-  .kind{align-self:flex-start; font-size:11px; padding:3px 8px; border-radius:999px; border:1px solid var(--rule2); color:var(--dim); font-family:var(--ff-mono)}
-  .kind.panel{color:var(--arch); border-color:rgba(31,111,139,.35); background:rgba(31,111,139,.06)}
-  .mowns{color:var(--dim); font-size:13.5px; line-height:1.5}
-  .models-note{color:var(--faint); font-size:13.5px; margin-top:20px; max-width:60ch; line-height:1.6}
+.filters,.exchips{display:flex; flex-wrap:wrap; gap:4px 14px; margin:8px 0 4px}
+.filter,.exchip{
+  background:none; border:0; border-radius:0; color:var(--dim);
+  font-family:var(--ff); font-size:16px; padding:0; cursor:pointer;
+}
+.filter.on,.filter:hover,.exchip:hover,.exchip:focus-visible{color:var(--ink); background:none; text-decoration:underline; text-underline-offset:3px; outline:none}
+.elbl{font-size:16px; color:var(--dim); margin:12px 0 4px}
+.pinned-label{font-size:16px; color:var(--faint); margin:14px 0 0}
 
-  /* modal */
-  .overlay{position:fixed; inset:0; background:rgba(20,20,20,.45); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; z-index:60; padding:clamp(16px,4vw,24px)}
-  .overlay.open{display:flex; animation:fade .2s}
-  .dialog{background:var(--bg); border:1px solid var(--rule2); border-radius:14px; max-width:540px; width:100%; padding:clamp(24px,4vw,32px); position:relative; animation:rise .26s both; max-height:86vh; overflow:auto; box-shadow:0 16px 48px -16px rgba(0,0,0,.22)}
-  .dialog .cat{font-family:var(--ff-mono); font-size:12px; letter-spacing:.04em; text-transform:uppercase; color:var(--accent)}
-  .dialog h3{font-weight:600; font-size:clamp(22px,3.5vw,27px); margin:8px 0 18px; line-height:1.15; letter-spacing:-.015em}
-  .dialog .field{margin:15px 0}
-  .dialog .field .k{color:var(--faint); font-size:11px; letter-spacing:.06em; text-transform:uppercase; margin-bottom:5px; font-family:var(--ff-mono)}
-  .dialog .field .v{color:var(--ink); font-size:15.5px; line-height:1.6}
-  .dialog .close{position:absolute; top:13px; right:13px; background:var(--bg); border:1px solid var(--rule2); color:var(--dim); width:34px; height:34px; border-radius:9px; cursor:pointer; font-family:var(--ff); font-size:18px; line-height:1; display:flex; align-items:center; justify-content:center}
-  .dialog .close:hover{color:var(--accent); border-color:var(--accent-line)}
+.nowgrid{display:block}
+.nowcard{
+  border:0; border-top:1px solid var(--line); border-radius:0; background:transparent;
+  padding:16px 0 14px; display:block;
+}
+.nowcard h3{margin:0 0 4px; font-size:16px; line-height:24px}
+.nowcard .blurb{margin:0 0 8px; color:var(--dim); font-size:16px}
+.promptmini,.prompt{
+  font-family:var(--ff-mono); font-size:16px; line-height:24px; color:var(--ink);
+  background:transparent; border:0; border-left:2px solid var(--mark); border-radius:0;
+  padding:2px 0 2px 12px; margin:0;
+  display:block; -webkit-line-clamp:unset; overflow:visible;
+}
 
-  footer{padding:clamp(40px,6vw,60px) 0 calc(40px + env(safe-area-inset-bottom)); color:var(--faint); font-size:14px; line-height:1.7}
-  footer p{margin:0 0 8px; max-width:62ch}
-  footer a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-line)}
-  footer a:hover{border-bottom-color:var(--accent)}
+.pairs{display:block}
+.pair{border:0; border-top:1px solid var(--line); border-radius:0; overflow:visible; margin:0}
+.pair .q{margin:0; padding:16px 0 6px; background:transparent; border:0; font-family:var(--ff-serif); font-size:16px; font-weight:400; line-height:24px}
+.sides{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+.side{background:transparent; border:0; padding:4px 0 16px; text-align:left; cursor:pointer; font-family:var(--ff); color:var(--ink)}
+.side:hover,.side:focus-visible{background:transparent; outline:none}
+.side .snm{font-family:var(--ff-serif); color:var(--mark); font-size:16px}
+.side .swhen{color:var(--dim); font-size:16px; margin-top:4px}
 
-  @keyframes rise{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
-  @keyframes fade{from{opacity:0} to{opacity:1}}
-  @media (prefers-reduced-motion:reduce){
-    *{animation:none !important; transition:none !important}
-    html{scroll-behavior:auto}
-  }
-  @media (max-width:640px){
-    .pb.grid,.sk.grid,.bricks,.mgrid{grid-template-columns:1fr}
-    .flow{line-height:2}
-  }
+.drifts{display:block}
+.drift{
+  display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr) auto; gap:16px; align-items:baseline;
+  border:0; border-top:1px solid var(--line); border-radius:0; background:transparent; padding:12px 0;
+}
+.drift .see{font-size:16px}
+.drift .say{font-family:var(--ff-mono); font-size:16px; color:var(--soft); background:transparent; padding:0; line-height:24px}
+
+.toolbar{margin:0 0 8px}
+.verdict{margin-top:16px; color:var(--soft); font-size:16px}
+.verdict .pick{color:var(--mark); font-family:var(--ff-serif)}
+.verdict .kw{font-family:var(--ff-mono); font-size:16px; color:var(--ink)}
+.vcard{border-top:1px solid var(--line); padding-top:12px; margin-top:8px; background:transparent}
+.vcard .vnext{color:var(--dim)}
+.vactions,.rel,.chiprow{display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:8px}
+.rel button,.chiprow button{
+  background:none; border:0; color:var(--mark); font-family:var(--ff-mono); font-size:16px;
+  padding:0; cursor:pointer; text-decoration:underline; text-underline-offset:3px; border-radius:0;
+}
+.rel button:hover,.chiprow button:hover{background:none; color:var(--ink)}
+
+.band{margin:22px 0}
+.band-head{display:flex; gap:10px; align-items:baseline; margin-bottom:4px}
+.band-head h3{font-family:var(--ff); font-size:16px; font-weight:400; letter-spacing:0; text-transform:uppercase; margin:0; color:var(--dim); line-height:24px}
+.band-head .ct{color:var(--faint); font-size:16px}
+.band-head .ln,.band-head .tick{display:none}
+.band-desc{color:var(--dim); font-size:16px; margin:0 0 4px}
+.grid,.pb.grid,.sk.grid,.bricks,.mgrid,.uses{display:block}
+.card,.chip,.brick,a.chip{
+  display:block; width:100%; text-align:left; background:transparent; color:var(--ink);
+  border:0; border-top:1px solid var(--line); border-radius:0; padding:12px 0;
+  font-family:var(--ff); cursor:pointer; text-decoration:none; box-shadow:none;
+}
+.card:hover,.chip:hover,.brick:hover{background:transparent; transform:none; border-color:var(--line)}
+.card .nm,.brick .pn{font-family:var(--ff-serif); font-size:16px; font-weight:400; line-height:24px}
+.card .tr,.chip .when,.brick .pa{color:var(--dim); font-size:16px; margin-top:3px}
+.chip .cmd{font-family:var(--ff-mono); color:var(--mark); font-size:16px}
+.card.recommended{border-left:2px solid var(--mark); padding-left:12px; background:transparent}
+.card.recommended .nm{color:var(--ink)}
+.card.recommended::after{
+  content:" match"; position:static; background:none; color:var(--mark);
+  font-family:var(--ff); font-size:16px; letter-spacing:0; text-transform:none; padding:0; font-weight:400;
+}
+.card.dimmed{opacity:.35}
+.card.meta-card{background:transparent}
+.mcard{border:0; border-top:1px solid var(--line); border-radius:0; background:transparent; padding:12px 0}
+.mrole{font-family:var(--ff-serif); font-size:16px; line-height:24px}
+.kind{font-family:var(--ff-mono); font-size:16px; color:var(--faint); border:0; padding:0; background:none}
+.mowns{color:var(--dim); font-size:16px}
+.models-note,.empty{color:var(--dim); font-size:16px}
+.guide-list{list-style:none; margin:0; padding:0}
+.guide-list li{border-top:1px solid var(--line); padding:12px 0}
+.guide-list a{color:var(--ink); text-decoration:none; font-family:var(--ff-serif); font-size:16px}
+.guide-list a:hover{color:var(--mark)}
+.guide-list span{display:block; color:var(--dim); font-family:var(--ff); font-size:16px; margin-top:3px}
+
+.overlay{position:fixed; inset:0; background:rgba(28,25,21,.28); display:none; align-items:center; justify-content:center; z-index:60; padding:24px}
+.overlay.open{display:flex}
+.dialog{
+  background:var(--paper); color:var(--ink); border:1px solid #d4ccbe; border-radius:0;
+  max-width:560px; width:100%; padding:28px 28px 24px; position:relative; max-height:86vh; overflow:auto;
+  box-shadow:none;
+}
+.dialog .cat{font-family:var(--ff-mono); font-size:16px; letter-spacing:0; text-transform:uppercase; color:var(--faint)}
+.dialog h3{font-size:32px; line-height:40px; margin:8px 0 12px}
+.dialog .field{margin:14px 0}
+.dialog .field .k{font-family:var(--ff-mono); font-size:16px; letter-spacing:0; text-transform:uppercase; color:var(--faint); margin-bottom:4px}
+.dialog .field .v{font-size:16px; line-height:24px}
+.dialog .close{
+  position:absolute; top:16px; right:16px; background:none; border:0; color:var(--dim);
+  width:auto; height:auto; font-family:var(--ff); font-size:16px; cursor:pointer; text-decoration:underline; text-underline-offset:3px;
+}
+.dialog .close:hover,.dialog .close:focus,.dialog .close:focus-visible{color:var(--mark); background:none; outline:none}
+
+.toast{
+  position:fixed; bottom:18px; left:50%; transform:translateX(-50%) translateY(8px);
+  background:var(--paper); color:var(--ink); border:1px solid #d4ccbe; border-radius:0;
+  font-size:16px; padding:8px 12px; opacity:0; pointer-events:none; z-index:70;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+footer{padding:8px 32px 28px; color:var(--dim); font-size:16px; line-height:24px}
+footer p{margin:0 0 8px; max-width:68ch}
+footer a{color:var(--mark)}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important}
+  html{scroll-behavior:auto}
+}
+@media (max-width:800px){
+  .sheet{margin:0; border:0; min-height:100vh}
+  .top{flex-direction:column; padding:18px 18px 0; align-items:flex-start}
+  .disclaimer{text-align:left}
+  .frame{grid-template-columns:1fr; padding:8px 18px 32px}
+  nav.bar{position:static; flex-direction:row; flex-wrap:wrap; gap:4px 14px; padding:8px 0 12px; border-bottom:1px solid var(--line)}
+  nav.bar a, nav.bar .find-btn{width:auto; display:inline}
+  main{padding:16px 0 0}
+  .lede h1{font-size:32px}
+  .sides,.drift,.layer{grid-template-columns:1fr}
+  .side{border-bottom:0; padding-bottom:8px}
+}
 </style>
 </head>
 <body>
-
-<header class="mast">
-  <div class="wrap">
-    <div class="mark">
-      <div class="glyph" aria-hidden="true"><i></i><i></i><i></i></div>
-      <h1 class="wordmark">p<span>stack</span></h1>
-    </div>
-    <p class="count">21 principles · 23 playbooks · 23 skills</p>
-    <p class="tagline">Engineering skills that turn a coding agent into a careful crew. You describe a task, and pstack matches it to a <em>playbook</em>.</p>
-    <p class="intro-lead">Type <code>/poteto-mode</code> and describe a task. pstack matches it to a playbook and runs the skills as the steps fire. Twenty-one principles apply across every playbook, biasing the work toward small diffs and real verification.</p>
-  </div>
+<a class="skip" href="#start">Skip to start</a>
+<div class="sheet">
+<header class="top">
+  <a class="brand" href="index.html">pstack explained</a>
+  <p class="disclaimer">Unofficial reading aid. Not affiliated with poteto, pstack, or Cursor. <a href="https://github.com/cursor/plugins/tree/main/pstack" target="_blank" rel="noopener">Upstream source</a></p>
 </header>
-
-<nav class="bar">
-  <div class="wrap">
-    <a href="#routing">Routing</a>
-    <a href="#playbooks">Playbooks</a>
-    <a href="#skills">Skills</a>
-    <a href="#principles">Principles</a>
-    <a href="#models">Models</a>
-    <a href="#guide">Guide</a>
-    <a href="agent-templates.html">Agent Templates</a>
-    <a href="changelog.html">Changelog</a>
-  </div>
+<div class="frame">
+<nav class="bar" aria-label="On this page">
+  <button class="find-btn" id="findbtn" type="button" aria-expanded="false" aria-controls="findq">Search <kbd>/</kbd></button>
+  <a href="#start">Start</a>
+  <a href="#map">How it fits</a>
+  <a href="#now">What to type</a>
+  <a href="#choose">Which one</a>
+  <a href="#steer">If it drifts</a>
+  <a href="#routing">Try a task</a>
+  <a href="#playbooks">Playbooks</a>
+  <a href="#skills">Skills</a>
+  <a href="#principles">Principles</a>
+  <a href="#models">Models</a>
+  <a href="#guide">Guide</a>
+  <a href="agent-templates.html">Templates</a>
+  <a href="changelog.html">Changelog</a>
 </nav>
+<main>
+  <div class="lede">
+    <h1>Say the goal. pstack does the careful part.</h1>
+    <p class="deck">pstack is poteto’s Cursor plugin for coding agents. You describe a task. <code>/poteto-mode</code> matches a playbook and runs the skills as the steps fire. You steer by saying a principle name.</p>
+    <div class="ask">
+      <label for="findq">Search prompts, playbooks, skills, and principles</label>
+      <div class="findpop" id="findpop">
+        <input id="findq" type="search" placeholder="bug, /how, hillclimb" aria-label="Search the guide" autocomplete="off">
+        <div class="findhits" id="findhits" role="listbox"></div>
+      </div>
+    </div>
+  </div>
+
+<section id="start">
+  <div class="sh">
+    <h2>Start</h2>
+    <p class="lead">Three commands in a Cursor chat. Install, pick models, then give <code>/poteto-mode</code> one real task. You do not name a playbook or list skills.</p>
+  </div>
+  <div class="steps">
+    <article class="step">
+      <h3>Install the plugin</h3>
+      <p>Cursor confirms when it is installed.</p>
+      <div class="cmdrow">
+        <div class="cmdbox">/add-plugin pstack</div>
+        <button class="copy" type="button" data-copy="/add-plugin pstack">Copy</button>
+      </div>
+    </article>
+    <article class="step">
+      <h3>Pick the models</h3>
+      <p>Writes <code>~/.cursor/rules/pstack-models.mdc</code>. Start a new chat after it finishes.</p>
+      <div class="cmdrow">
+        <div class="cmdbox">/setup-pstack</div>
+        <button class="copy" type="button" data-copy="/setup-pstack">Copy</button>
+      </div>
+    </article>
+    <article class="step">
+      <h3>One real task</h3>
+      <p>Say the goal and how you will know it is done. This one routes to Feature.</p>
+      <div class="cmdrow">
+        <div class="cmdbox">/poteto-mode add a --json flag to this command. text output stays byte-identical. verify both.</div>
+        <button class="copy" type="button" data-copy="/poteto-mode add a --json flag to this command. text output stays byte-identical. verify both.">Copy</button>
+      </div>
+    </article>
+  </div>
+  <div class="uses">
+    <div class="use"><strong>Reach for it</strong><span>A defect, a feature you can verify, a cited question, or work you will leave running.</span></div>
+    <div class="use"><strong>Skip it</strong><span>A one-line edit you already understand.</span></div>
+    <div class="use"><strong>Name a skill to override</strong><span>Use /how, /interrogate, or /bro when you want that move only.</span></div>
+  </div>
+</section>
+
+<section id="map">
+  <div class="sh">
+    <h2>How the pieces fit</h2>
+    <p class="lead">You talk in goals. pstack supplies the recipe, the moves, and the standing rules.</p>
+  </div>
+  <div class="layers">
+    <div class="layer"><div class="lk">playbooks</div><div><strong>A recipe for one kind of task</strong><p><code>/poteto-mode</code> copies the matched playbook into the todo list before any work starts. Twenty-three of them, plus a fallback when none fit.</p></div></div>
+    <div class="layer"><div class="lk">skills</div><div><strong>Named moves</strong><p><code>/how</code>, <code>/architect</code>, <code>/tdd</code>. The playbook calls them. Type one when you want that result without the full route.</p></div></div>
+    <div class="layer"><div class="lk">principles</div><div><strong>Standing rules</strong><p>Twenty-three rules in five families. You do not invoke them. You say their names to steer.</p></div></div>
+  </div>
+  <p class="flow"><span class="cmd-tok">/poteto-mode</span> matches a playbook, skills fire as steps, principles steer, and the reply names what it checked.</p>
+</section>
+
+<section id="now">
+  <div class="sh">
+    <h2>What to type</h2>
+    <p class="lead">Pick the situation and copy the prompt. Swap in your own paths and finish condition.</p>
+  </div>
+  <div class="filters" id="nowfilters"></div>
+  <p class="pinned-label" id="pinnedlabel" hidden>Pinned in this browser</p>
+  <div class="nowgrid" id="pinned" hidden></div>
+  <div class="nowgrid" id="nowgrid"></div>
+</section>
+
+<section id="choose">
+  <div class="sh">
+    <h2>Which one</h2>
+    <p class="lead">Pairs people mix up. Open the side that matches the job.</p>
+  </div>
+  <div class="pairs" id="pairs"></div>
+</section>
+
+<section id="steer">
+  <div class="sh">
+    <h2>If it drifts</h2>
+    <p class="lead">One sentence redirects the run. Expect the reply to name the decision that sentence changed.</p>
+  </div>
+  <div class="drifts" id="drifts"></div>
+</section>
 
 <section id="routing">
-  <div class="wrap">
-    <div class="sh">
-      <span class="num">01</span>
-      <h2>See the routing in action</h2>
-      <p class="lead">This is the whole idea behind <code>/poteto-mode</code>. Type a task, or tap an example, and watch the matching playbook light up below.</p>
-    </div>
-    <p class="flow"><span class="cmd-tok">/poteto-mode</span> <span class="arr">→</span> match a playbook <span class="arr">→</span> skills fire as steps <span class="arr">→</span> clean reply</p>
-    <fieldset class="chooser">
-      <label for="task">Describe a task <span class="hint">(keyword matching, not the real router)</span></label>
-      <input id="task" type="text" autocomplete="off" spellcheck="false" placeholder="Describe a task and watch the playbook light up…" aria-label="Describe a task">
-    </fieldset>
-    <div class="examples">
-      <div class="elbl">Or tap an example</div>
-      <div class="exchips" id="exchips"></div>
-    </div>
-    <div class="verdict" id="verdict" aria-live="polite"></div>
+  <div class="sh">
+    <h2>Try a task</h2>
+    <p class="lead">Type a task and this page lights up a playbook. Keyword matching, not the real router.</p>
   </div>
+  <label class="elbl" for="task">Describe a task</label>
+  <input id="task" type="text" autocomplete="off" spellcheck="false" placeholder="users get two notifications after a retry" aria-label="Describe a task">
+  <div class="examples">
+    <div class="elbl">Examples</div>
+    <div class="exchips" id="exchips"></div>
+  </div>
+  <div class="verdict" id="verdict" aria-live="polite"></div>
 </section>
 
 <section id="playbooks">
-  <div class="wrap">
-    <div class="sh">
-      <span class="num">02</span>
-      <h2>Playbooks</h2>
-      <p class="lead">A playbook is a step-by-step recipe for one kind of task. There are twenty-three. <code>/poteto-mode</code> copies the matched one in full before any work starts.</p>
-    </div>
-    <div class="grid pb" id="pbgrid"></div>
+  <div class="sh">
+    <h2>Playbooks</h2>
+    <p class="lead">A recipe for one kind of job. Open a row for when it applies and what to type.</p>
   </div>
+  <label class="elbl" for="pbq">Find a playbook</label>
+  <input class="finder" id="pbq" type="search" placeholder="bug, overnight, pixel match" aria-label="Find a playbook">
+  <div class="filters" id="pbfilters"></div>
+  <div id="pbgrid"></div>
 </section>
 
 <section id="skills">
-  <div class="wrap">
-    <div class="sh">
-      <span class="num">03</span>
-      <h2>Skills</h2>
-      <p class="lead">Skills are the individual moves. Reach for one directly when you want a specific result instead of the full route.</p>
-    </div>
-    <div class="grid sk" id="skgrid"></div>
+  <div class="sh">
+    <h2>Skills</h2>
+    <p class="lead">Individual moves. <code>/poteto-mode</code> runs most of them. Reach for one when you want that result only.</p>
   </div>
+  <label class="elbl" for="skq">Find a skill</label>
+  <input class="finder" id="skq" type="search" placeholder="/how, decision log" aria-label="Find a skill">
+  <div class="filters" id="skfilters"></div>
+  <div id="skgrid"></div>
 </section>
 
 <section id="principles">
-  <div class="wrap">
-    <div class="sh">
-      <span class="num">04</span>
-      <h2>Principles</h2>
-      <p class="lead">Twenty-one rules in five families. Tap any one to see when it applies and what it says.</p>
-    </div>
-    <div id="pstack"></div>
+  <div class="sh">
+    <h2>Principles</h2>
+    <p class="lead">Twenty-three rules. Say the name to redirect an agent mid-task.</p>
   </div>
+  <div id="pstack"></div>
 </section>
 
 <section id="models">
-  <div class="wrap">
-    <div class="sh">
-      <span class="num">05</span>
-      <h2>Models per role</h2>
-      <p class="lead">pstack can use a different model for each role. Some roles run several models in parallel so the reviews come from different angles.</p>
-    </div>
-    <div class="mgrid" id="mgrid"></div>
-    <p class="models-note">Run <code>/setup-pstack</code> to detect your models and write the rule. Skills read it and fall back to their own defaults when a line is missing, so you override only what you want.</p>
+  <div class="sh">
+    <h2>Models per role</h2>
+    <p class="lead">A different model can own each role. You only override the roles you care about.</p>
   </div>
+  <div class="mgrid" id="mgrid"></div>
+  <p class="models-note">Run <code>/setup-pstack</code> to detect your models and write the rule. A role with no line keeps the skill default. <code>auto</code> and <code>inherit-parent</code> mean the parent chat model.</p>
 </section>
 
 <section id="guide">
-  <div class="wrap">
-    <div class="sh">
-      <span class="num">06</span>
-      <h2>Guide</h2>
-      <p class="lead">Ten short chapters on <a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/README.md" target="_blank" rel="noopener">setting up pstack, routing work, designing changes, proving them, and making the system yours</a>.</p>
-    </div>
-    <div class="grid sk">
-      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/01-setup.md" target="_blank" rel="noopener"><div class="cmd">01 · Set up pstack</div><div class="when">Install the plugin, choose models, and run your first task.</div></a>
-      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/02-poteto-mode.md" target="_blank" rel="noopener"><div class="cmd">02 · Route work through /poteto-mode</div><div class="when">Write a goal that lets the front door choose the playbook.</div></a>
-      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/03-understand.md" target="_blank" rel="noopener"><div class="cmd">03 · Understand the code</div><div class="when">Use /how, /why, /teach, and /recall before editing.</div></a>
-      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/04-design.md" target="_blank" rel="noopener"><div class="cmd">04 · Design before you write code</div><div class="when">Settle boundaries with /architect, /arena, /swarm, and /interrogate.</div></a>
-      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/05-build-and-clean.md" target="_blank" rel="noopener"><div class="cmd">05 · Build and clean the change</div><div class="when">Choose a build playbook, then keep the diff reviewable.</div></a>
-      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/06-verify-and-ship.md" target="_blank" rel="noopener"><div class="cmd">06 · Verify the result and open a PR</div><div class="when">Prove behavior on the real app, then drive the focused PR to merged.</div></a>
-      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/07-overnight.md" target="_blank" rel="noopener"><div class="cmd">07 · Run work while you sleep</div><div class="when">Set a checkable finish condition, an isolated worktree, and a decision log.</div></a>
-      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/08-principles.md" target="_blank" rel="noopener"><div class="cmd">08 · Steer with principle names</div><div class="when">Use the 21 principle names to redirect an agent mid-task.</div></a>
-      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/09-make-it-yours.md" target="_blank" rel="noopener"><div class="cmd">09 · Make it yours</div><div class="when">Create a personal mode, author a skill, and test its changes.</div></a>
-      <a class="chip" href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/10-recipes-and-pitfalls.md" target="_blank" rel="noopener"><div class="cmd">10 · Recipes and pitfalls</div><div class="when">Copy useful prompts and avoid the mistakes that recur.</div></a>
-    </div>
-    <p class="models-note">pstack now ships subagents including <code>poteto-agent</code> and Comment Sicko, plus the dormant <code>benny</code> Slack-issue automation pack.</p>
+  <div class="sh">
+    <h2>Official guide</h2>
+    <p class="lead">Ten short chapters. Read them in order the first time. <a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/README.md" target="_blank" rel="noopener">Guide index</a></p>
   </div>
+  <ol class="guide-list">
+    <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/01-setup.md" target="_blank" rel="noopener">Set up pstack</a><span>Install the plugin, choose models, and run your first task.</span></li>
+    <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/02-poteto-mode.md" target="_blank" rel="noopener">Route work through /poteto-mode</a><span>Write a goal that lets the front door choose the playbook.</span></li>
+    <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/03-understand.md" target="_blank" rel="noopener">Understand the code</a><span>Use /how, /why, /teach, and /recall before editing.</span></li>
+    <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/04-design.md" target="_blank" rel="noopener">Design before you write code</a><span>/architect, /arena, /swarm, and /interrogate.</span></li>
+    <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/05-build-and-clean.md" target="_blank" rel="noopener">Build and clean the change</a><span>Choose a build playbook, then keep the diff reviewable.</span></li>
+    <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/06-verify-and-ship.md" target="_blank" rel="noopener">Verify the result and open a PR</a><span>Prove behavior on the real app, then drive the PR to merged.</span></li>
+    <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/07-overnight.md" target="_blank" rel="noopener">Run work while you sleep</a><span>A checkable finish, an isolated worktree, and a decision log.</span></li>
+    <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/08-principles.md" target="_blank" rel="noopener">Steer with principle names</a><span>Use the 23 names to redirect an agent mid-task.</span></li>
+    <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/09-make-it-yours.md" target="_blank" rel="noopener">Make it yours</a><span>A personal mode, a skill you author, and a test of its changes.</span></li>
+    <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/10-recipes-and-pitfalls.md" target="_blank" rel="noopener">Recipes and pitfalls</a><span>Prompts worth copying, and the mistakes that recur.</span></li>
+  </ol>
+  <p class="models-note">pstack also ships the <code>poteto-agent</code> and Comment Sicko subagents, plus a dormant <code>benny</code> Slack-issue automation pack. <code>/deslop</code>, <code>control-cli</code>, and <code>control-ui</code> live in the separate <code>cursor-team-kit</code> plugin.</p>
 </section>
-
+</main>
+</div>
 <footer>
-  <div class="wrap">
-    <p>pstack is <a href="https://x.com/poteto" target="_blank" rel="noopener">poteto's</a> set of engineering skills for coding agents, installed with <code>/add-plugin pstack</code>. This page is an unofficial reading aid.</p>
-    <p>Source and deploy: <a href="https://github.com/HustleCoding/pstack-explained" target="_blank" rel="noopener">HustleCoding/pstack-explained</a>, live at this URL via GitHub Actions.</p>
-  </div>
+  <p>pstack is <a href="https://x.com/poteto" target="_blank" rel="noopener">poteto's</a> set of engineering skills for coding agents, installed with <code>/add-plugin pstack</code>. This page is an unofficial reading aid and is not affiliated with poteto, pstack, or Cursor.</p>
+  <p>Source: <a href="https://github.com/HustleCoding/pstack-explained" target="_blank" rel="noopener">HustleCoding/pstack-explained</a>. Agent-readable context: <a href="llms.txt">llms.txt</a> and <a href="llms-full.txt">llms-full.txt</a>.</p>
+  <p>Type: <a href="https://int10h.org/oldschool-pc-fonts/" target="_blank" rel="noopener">PxPlus IBM VGA 8x16</a> by VileR, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</p>
 </footer>
+</div>
 
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="dtitle">
   <div class="dialog">
-    <button class="close" id="close" aria-label="Close">×</button>
+    <button class="close" id="close" aria-label="Close">Close</button>
     <div class="cat" id="dcat"></div>
     <h3 id="dtitle"></h3>
     <div id="dbody"></div>
   </div>
 </div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
+const PLAYBOOK_GROUPS = [
+  {key:"understand", label:"Understand", desc:"Read-only questions. The deliverable is a cited answer, not a change."},
+  {key:"fix", label:"Diagnose and fix", desc:"Something is wrong or slow. Reproduce or measure, then change it."},
+  {key:"build", label:"Build and reshape", desc:"New behavior, a cleaner shape, a throwaway sketch, or pixel match."},
+  {key:"ship", label:"Ship", desc:"Drive a PR or stack to merged, or package the result."},
+  {key:"scale", label:"Leave it running", desc:"Overnight work, many PRs, pickup, pause, or a multi-phase plan."},
+  {key:"meta", label:"Extend pstack", desc:"Author a skill, eval a change, clean disk, or design a bespoke playbook."}
+];
+
+const SKILL_GROUPS = [
+  {key:"start", label:"Start here", desc:"Configure models, then let the front door route."},
+  {key:"understand", label:"Understand", desc:"Walk through the code, the history, or the last reply."},
+  {key:"design", label:"Design and review", desc:"Settle the shape, fan out attempts, or try to break a diff."},
+  {key:"prove", label:"Prove it", desc:"A failing test, a verification skill, or the blast radius of a small change."},
+  {key:"write", label:"Write cleanly", desc:"Prose, comments, TypeScript, and docs."},
+  {key:"run", label:"Long runs", desc:"A custom playbook, a decision log, or a captured recipe."},
+  {key:"yours", label:"Make it yours", desc:"Your own -mode skill, or a page that wakes a Grok Bot."}
+];
+
 const PLAYBOOKS = [
-  {id:"investigation", n:"Investigation", t:"A read-only question. How does X work, why was Y built this way, are we sure about Z, should we do X or Y.",
-   detail:"Read-only. The deliverable is a cited answer, not a change. Stay in the evidence instead of building a sketch to settle an empirical fork."},
-  {id:"bug-fix", n:"Bug fix", t:"A reported defect to reproduce, root-cause, and fix with runtime evidence.",
-   detail:"Reproduce first on the same surface yourself. Trace each symptom to its root cause. Fix there, then verify against the real artifact."},
-  {id:"perf-issue", n:"Perf issue", t:"A measured slowness to trace and improve against a baseline.",
-   detail:"One-off fix against a measured baseline, not a sustained loop. That distinguishes it from Hillclimb."},
-  {id:"hillclimb", n:"Hillclimb", t:"Sustained, scientific improvement of one metric against a target. Loop hypotheses with before/after measurement and one commit per accepted win.",
-   detail:"Distinct from Perf issue, which is a one-off. Here you keep looping, logging each accepted win as its own commit."},
-  {id:"runtime-forensics", n:"Runtime forensics", t:"Diagnose a runtime symptom like a leak, idle-CPU spin, or glitch from live instrumentation.",
-   detail:"The deliverable is a diagnosis, not a fix. Instrument the live system and read the symptom."},
-  {id:"trace-forensics", n:"Trace forensics", t:"Diagnose a captured profiling artifact like a cpuprofile, trace, spindump, or heap snapshot handed to you after the fact.",
-   detail:"The deliverable is a diagnosis, not a fix. The artifact is already captured; you read it."},
-  {id:"feature", n:"Feature", t:"New or changed behavior, built from a named data shape.",
-   detail:"Name the data shape first. Build the lever. Verify it works against the real artifact, not a proxy."},
-  {id:"refactoring", n:"Refactoring", t:"A behavior-preserving change to structure or shape. Rename, extract, inline, dedupe, or move.",
-   detail:"Behavior must stay identical. Bias to deletion and the smallest diff. Remove dead weight before restructuring."},
-  {id:"prototype", n:"Prototype", t:"A throwaway sketch to make a design or behavioral decision cheaply, or to settle an empirical fork by observing it instead of asking.",
-   detail:"Built to decide, not to ship. The throwaway probe answers faster than a question to the human and hands back a result to react to."},
-  {id:"visual-parity", n:"Visual parity", t:"Pixel-exact UI equivalence. Matching two implementations or migrating a styling system.",
-   detail:"Reproduce the drift first. Fix until it matches the reference, measured on the real surface."},
-  {id:"authoring-a-skill", n:"Authoring a skill", t:"Writing or editing a SKILL.md.",
-   detail:"Shape the trigger, the steps, and the reply contract. Encode lessons in structure rather than more text."},
-  {id:"eval", n:"Eval", t:"Testing how a skill, structure, or prompt change affects agent behavior before promoting it.",
-   detail:"Blinded comparison against a baseline. Measure behavior change before you promote the new version."},
-  {id:"babysit", n:"Babysit", t:"Driving a PR or stack to merge-ready: conflicts, review threads, and CI.",
-   detail:"Own the merge frontier one PR at a time. Clear conflicts and review threads before CI, then stop at a merge-ready verdict."},
-  {id:"shipping", n:"Shipping", t:"Landing a green stack after independent verification.",
-   detail:"Verify every PR from the root, land only the contiguous verified run, then let Graphite drain it without touching the queue."},
-  {id:"autonomous-run", n:"Autonomous run", t:"A long task to drive to completion without stopping. Run until done, /loop until X, going to bed.",
-   detail:"Keep a decision trail via show-me-your-work so the human can audit it when they return. Commit the trail when stakes need a record."},
-  {id:"orchestrate", n:"Orchestrate", t:"A standing project for many stacked PRs and agents, run by one coordinator over multiple days.",
-   detail:"Run a program, not one task. Frame the finish predicate, pilot the unit, scale workers, drain the queue, and keep the frontier green."},
-  {id:"autopilot-full", n:"Autopilot-full", t:"A queue of independent PRs run to merged with one owner per PR.",
-   detail:"Owners build through merge. The root swarm-verifies every merge-ready head before the owner merges."},
-  {id:"autopilot-stack", n:"Autopilot-stack", t:"A queue built and verified as one linear reviewed stack for the operator to land.",
-   detail:"Owners build and prove each PR, while the root owns topology. Deliver one verified Graphite chain and never auto-ship it."},
-  {id:"session-pickup", n:"Session pickup", t:"Resuming or taking over a prior agent's in-flight work from a transcript, cloud-agent URL, or pushed branch.",
-   detail:"Reconstruct state from the record. Fire a fresh subagent with consolidated scope rather than trusting a done summary."},
-  {id:"pause-safely", n:"Pause safely", t:"Suspending in-flight work cleanly so it can be resumed. On an explicit pause, going offline, a restart, or imminent compaction.",
-   detail:"The complement to Session pickup. Leave the work in a state another agent can pick up without guessing."},
-  {id:"multi-phase-plan", n:"Multi-phase plan", t:"Work that spans phases or stacked PRs.",
-   detail:"Break the work into verifiable units. Order delivery so the sequence proves itself, each unit green before the next."},
-  {id:"worktree-cleanup", n:"Worktree and simulator cleanup", t:"Reclaiming local disk by pruning safe worktrees and stale iOS simulators.",
-   detail:"Audit usage, uncommitted work, and pinned chats before deleting. Recheck disk space and report what stayed behind."},
-  {id:"figure-it-out", n:"Figure it out", t:"No bundled playbook fits. Design a bespoke, rigorous playbook for the task.",
-   detail:"Used for large or cross-cutting efforts like a migration across many call sites, or work the user steps away from to trust later."},
-  {id:"opening-a-pr", n:"Opening a PR", t:"Invoked at the end of every other playbook.", meta:true,
-   detail:"Not a task shape of its own. It fires once the matched playbook's work is done, to package and ship the result."}
+  {id:"investigation", g:"understand", n:"Investigation", t:"A read-only question. How does X work, why was Y built this way, are we sure about Z, should we do X or Y.",
+   detail:"Read-only. The deliverable is a cited answer, not a change. Stay in the evidence instead of building a sketch to settle an empirical fork.",
+   example:"/poteto-mode how do we cancel runs? do we have an n+1 when we look up every run to cancel? don't change any code yet.",
+   skills:["/how","/why","/teach"]},
+  {id:"bug-fix", g:"fix", n:"Bug fix", t:"A reported defect to reproduce, root-cause, and fix with runtime evidence.",
+   detail:"Reproduce first on the same surface yourself. Trace each symptom to its root cause. Fix there, then verify against the real artifact.",
+   example:"/poteto-mode this PR has a subtle bug where scroll drifts every 750ms when idle. repro first, then fix and verify.",
+   skills:["/tdd","/blast-radius"]},
+  {id:"perf-issue", g:"fix", n:"Perf issue", t:"A measured slowness to trace and improve against a baseline.",
+   detail:"One-off fix against a measured baseline, not a sustained loop. That distinguishes it from Hillclimb.",
+   example:"/poteto-mode a big list takes a second to load even though we virtualize. run a cpu trace and tell me why.",
+   skills:["/how"]},
+  {id:"hillclimb", g:"fix", n:"Hillclimb", t:"Sustained, scientific improvement of one metric against a target. Loop hypotheses with before/after measurement and one commit per accepted win.",
+   detail:"Distinct from Perf issue, which is a one-off. Here you keep looping, logging each accepted win as its own commit.",
+   example:"/poteto-mode keep improving the p95 of this import against 400ms. one commit per accepted win. log the decisions.",
+   skills:["/show-me-your-work"]},
+  {id:"runtime-forensics", g:"fix", n:"Runtime forensics", t:"Diagnose a runtime symptom like a leak, idle-CPU spin, or glitch from live instrumentation.",
+   detail:"The deliverable is a diagnosis, not a fix. Instrument the live system and read the symptom.",
+   example:"/poteto-mode diagnose the idle-CPU spin. instrument it live. diagnosis only, no fix yet.",
+   skills:["/how"]},
+  {id:"trace-forensics", g:"fix", n:"Trace forensics", t:"Diagnose a captured profiling artifact like a cpuprofile, trace, spindump, or heap snapshot handed to you after the fact.",
+   detail:"The deliverable is a diagnosis, not a fix. The artifact is already captured; you read it.",
+   example:"/poteto-mode read this cpuprofile and tell me why the list hitch is 200ms. diagnosis only.",
+   skills:["/how"]},
+  {id:"feature", g:"build", n:"Feature", t:"New or changed behavior, built from a named data shape.",
+   detail:"Name the data shape first. Build the lever. Verify it works against the real artifact, not a proxy.",
+   example:"/poteto-mode add a --json flag to this command. text output stays byte-identical. verify both.",
+   skills:["/architect","/tdd"]},
+  {id:"refactoring", g:"build", n:"Refactoring", t:"A behavior-preserving change to structure or shape. Rename, extract, inline, dedupe, or move.",
+   detail:"Behavior must stay identical. Bias to deletion and the smallest diff. Remove dead weight before restructuring.",
+   example:"/poteto-mode rename this helper across the whole codebase without changing behavior.",
+   skills:["/blast-radius","/tdd"]},
+  {id:"prototype", g:"build", n:"Prototype", t:"A throwaway sketch to make a design or behavioral decision cheaply, or to settle an empirical fork by observing it instead of asking.",
+   detail:"Built to decide, not to ship. The throwaway probe answers faster than a question to the human and hands back a result to react to.",
+   example:"/poteto-mode build two prototypes of the markdown renderer so we can compare. spawn an agent for each.",
+   skills:["/arena"]},
+  {id:"visual-parity", g:"build", n:"Visual parity", t:"Pixel-exact UI equivalence. Matching two implementations or migrating a styling system.",
+   detail:"Reproduce the drift first. Fix until it matches the reference, measured on the real surface.",
+   example:"/poteto-mode the row spacing is too tall when this flag is on. the second image is correct. fix until it matches.",
+   skills:[]},
+  {id:"authoring-a-skill", g:"meta", n:"Authoring a skill", t:"Writing or editing a SKILL.md.",
+   detail:"Shape the trigger, the steps, and the reply contract. Encode lessons in structure rather than more text.",
+   example:"/poteto-mode write a skill that reviews migration PRs for leftover sync-store callers.",
+   skills:["/unslop","/automate-me"]},
+  {id:"eval", g:"meta", n:"Eval", t:"Testing how a skill, structure, or prompt change affects agent behavior before promoting it.",
+   detail:"Blinded comparison against a baseline. Measure behavior change before you promote the new version.",
+   example:"/poteto-mode eval this skill change against the last three tasks before we promote it.",
+   skills:[]},
+  {id:"babysit", g:"ship", n:"Babysit", t:"Driving a PR or stack to merge-ready: conflicts, review threads, and CI.",
+   detail:"Own the merge frontier one PR at a time. Clear conflicts and review threads before CI, then stop at a merge-ready verdict.",
+   example:"/poteto-mode check on pr 123. anything outstanding?",
+   skills:[]},
+  {id:"shipping", g:"ship", n:"Shipping", t:"Landing a green stack after independent verification.",
+   detail:"Verify every PR from the root, land only the contiguous verified run, then let Graphite drain it without touching the queue.",
+   example:"/poteto-mode the stack is green. verify each PR independently, then land the contiguous verified run.",
+   skills:["/interrogate"]},
+  {id:"autonomous-run", g:"scale", n:"Autonomous run", t:"A long task to drive to completion without stopping. Run until done, /loop until X, going to bed.",
+   detail:"Keep a decision trail via show-me-your-work so the human can audit it when they return. Commit the trail when stakes need a record.",
+   example:"/poteto-mode i'm going to bed. keep going until every fixture passes. log your decisions.",
+   skills:["/show-me-your-work","/figure-it-out"]},
+  {id:"orchestrate", g:"scale", n:"Orchestrate", t:"A standing project for many stacked PRs and agents, run by one coordinator over multiple days.",
+   detail:"Run a program, not one task. Frame the finish predicate, pilot the unit, scale workers, drain the queue, and keep the frontier green.",
+   example:"/poteto-mode own this migration until it lands. many stacked PRs, one coordinator, keep the frontier green.",
+   skills:["/swarm","/show-me-your-work"]},
+  {id:"autopilot-full", g:"scale", n:"Autopilot-full", t:"A queue of independent PRs run to merged with one owner per PR.",
+   detail:"Owners build through merge. The root swarm-verifies every merge-ready head before the owner merges.",
+   example:"/poteto-mode autopilot this queue. one owner per PR, merge when the root swarm-verifies.",
+   skills:["/swarm"]},
+  {id:"autopilot-stack", g:"scale", n:"Autopilot-stack", t:"A queue built and verified as one linear reviewed stack for the operator to land.",
+   detail:"Owners build and prove each PR, while the root owns topology. Deliver one verified Graphite chain and never auto-ship it.",
+   example:"/poteto-mode autopilot-stack these changes. build the stack, I'll land it.",
+   skills:["/swarm"]},
+  {id:"session-pickup", g:"scale", n:"Session pickup", t:"Resuming or taking over a prior agent's in-flight work from a transcript, cloud-agent URL, or pushed branch.",
+   detail:"Reconstruct state from the record. Fire a fresh subagent with consolidated scope rather than trusting a done summary.",
+   example:"/poteto-mode take over this branch. read the decision log, figure out what's done, and continue. don't redo finished work.",
+   skills:["/recall","/show-me-your-work"]},
+  {id:"pause-safely", g:"scale", n:"Pause safely", t:"Suspending in-flight work cleanly so it can be resumed. On an explicit pause, going offline, a restart, or imminent compaction.",
+   detail:"The complement to Session pickup. Leave the work in a state another agent can pick up without guessing.",
+   example:"/poteto-mode pause this cleanly so another agent can resume from the decision log.",
+   skills:["/show-me-your-work"]},
+  {id:"multi-phase-plan", g:"scale", n:"Multi-phase plan", t:"Work that spans phases or stacked PRs.",
+   detail:"Break the work into verifiable units. Order delivery so the sequence proves itself, each unit green before the next.",
+   example:"/poteto-mode this spans three PRs. sequence them so each one is green before the next starts.",
+   skills:["/show-me-your-work"]},
+  {id:"worktree-cleanup", g:"meta", n:"Worktree and simulator cleanup", t:"Reclaiming local disk by pruning safe worktrees and stale iOS simulators.",
+   detail:"Audit usage, uncommitted work, and pinned chats before deleting. Recheck disk space and report what stayed behind.",
+   example:"/poteto-mode what's eating my disk? prune the worktrees that are safe to prune.",
+   skills:[]},
+  {id:"figure-it-out", g:"meta", n:"Figure it out", t:"No bundled playbook fits. Design a bespoke, rigorous playbook for the task.",
+   detail:"Used for large or cross-cutting efforts like a migration across many call sites, or work the user steps away from to trust later.",
+   example:"/poteto-mode i'm stepping away. migrate every caller from the synchronous store to the new async one, keeping behavior identical.",
+   skills:["/figure-it-out","/show-me-your-work"]},
+  {id:"opening-a-pr", g:"ship", n:"Opening a PR", t:"Invoked at the end of every other playbook.", meta:true,
+   detail:"Not a task shape of its own. It fires once the matched playbook's work is done, to package and ship the result.",
+   example:"Usually not typed. It runs at the end of the matched playbook to open a focused PR.",
+   skills:["/technical-writing","/unslop"]}
 ];
 
 const SKILLS = [
-  {cmd:"/poteto-mode", when:"Default entry point for any non-trivial task. Routes through poteto-agent, picks a playbook, and calls the other skills as the steps fire."},
-  {cmd:"/bro", when:"The last message is dense or full of jargon and you want it restated plainly."},
-  {cmd:"/how", when:"You want a walkthrough of how a subsystem works."},
-  {cmd:"/why", when:"You want to know why something was built this way. Discovers MCPs at runtime and queries each evidence category in parallel."},
-  {cmd:"/recall", when:"You are starting or resuming work and want your recent context on a topic rebuilt from your chat history and the shared record."},
-  {cmd:"/blast-radius", when:"A small-looking change and you want to know what else it could break, proven by running code rather than asserted."},
-  {cmd:"/architect", when:"About to write code that crosses a function boundary and want the caller's usage, types, and module shape settled first."},
-  {cmd:"/arena", when:"You want N parallel attempts at the same thing, then grab the best parts of each."},
-  {cmd:"/interrogate", when:"You have a diff and want four different models to try to break it, including a strict code-quality lens."},
-  {cmd:"/automate-me", when:"You want your own -mode skill, drafted from how you have actually worked."},
-  {cmd:"/setup-pstack", when:"You want to pick which models pstack uses per role. Detects your models and writes a config rule."},
-  {cmd:"/reflect", when:"A long task landed and you want the recipe captured as a skill edit so the next run does not repeat it."},
-  {cmd:"/tdd", when:"You are fixing a bug and there is a cheap local test path. Write the failing test first, then the fix."},
-  {cmd:"/typescript-best-practices", when:"You are reading or editing TypeScript. Grounds the type-system-discipline principle in syntax."},
-  {cmd:"/figure-it-out", when:"No bundled playbook fits. Designs a rigorous, auditable playbook for the task."},
-  {cmd:"/show-me-your-work", when:"You want a reviewable decision trail. Logs decisions to a TSV you can commit."},
-  {cmd:"/unslop", when:"You are cleaning up writing. Removes AI tells."},
-  {cmd:"/teach", when:"Explain a body of work plainly so a person actually understands it. Runs `how` and `why` and weaves what they find into one clear explanation."},
-  {cmd:"/create-verification-skill", when:"Generate a project-local verification skill that drives your app the way a user does — any language, framework, or platform."},
-  {cmd:"/maintain-verification-skill", when:"Periodic pass that keeps a project's verification skill and feature map honest."},
-  {cmd:"/swarm", when:"You want N parallel workers over slices or races, drained into one aggregated report."},
-  {cmd:"/no-comments", when:"You want Comment Sicko to hunt comments, then fix accepted findings at the root cause."},
-  {cmd:"/technical-writing", when:"You are writing docs and need Diátaxis, Google style, STE, and Global English applied together."}
+  {cmd:"/poteto-mode", g:"start", when:"Default entry point for any non-trivial task. Routes through poteto-agent, picks a playbook, and calls the other skills as the steps fire.",
+   example:"/poteto-mode the export writes duplicate rows when a retry lands mid-run. repro first, then fix and verify.",
+   playbooks:["bug-fix","feature","investigation"]},
+  {cmd:"/setup-pstack", g:"start", when:"You want to pick which models pstack uses per role. Detects your models and writes a config rule.",
+   example:"/setup-pstack",
+   playbooks:[]},
+  {cmd:"/how", g:"understand", when:"You want a walkthrough of how a subsystem works.",
+   example:"/how do we dedupe notifications? is there an n+1 when we look up subscribers?",
+   playbooks:["investigation"]},
+  {cmd:"/why", g:"understand", when:"You want to know why something was built this way. Discovers MCPs at runtime and queries each evidence category in parallel.",
+   example:"/why was the retry limit set to five? does the reason still hold?",
+   playbooks:["investigation"]},
+  {cmd:"/teach", g:"understand", when:"Explain a body of work plainly so a person actually understands it. Runs `how` and `why` and weaves what they find into one clear explanation.",
+   example:"/teach me how this PR changes retries. convince me it fixes the cause and not the symptom.",
+   playbooks:["investigation"]},
+  {cmd:"/recall", g:"understand", when:"You are starting or resuming work and want your recent context on a topic rebuilt from your chat history and the shared record.",
+   example:"/recall catch me up on the export work from last week",
+   playbooks:["session-pickup"]},
+  {cmd:"/bro", g:"understand", when:"The last message is dense or full of jargon and you want it restated plainly.",
+   example:"/bro",
+   playbooks:[]},
+  {cmd:"/architect", g:"design", when:"About to write code that crosses a function boundary and want the caller's usage, types, and module shape settled first.",
+   example:"/architect design the import pipeline before writing any code. i care most about how callers use it.",
+   playbooks:["feature"]},
+  {cmd:"/arena", g:"design", when:"You want N parallel attempts at the same thing, then grab the best parts of each.",
+   example:"/arena take my prompt to the arena verbatim. i want to compare their proposals with yours.",
+   playbooks:["prototype"]},
+  {cmd:"/swarm", g:"design", when:"You want N parallel workers over slices or races, drained into one aggregated report.",
+   example:"/swarm check every package under packages/ against its check.sh. one worker per package. one report.",
+   playbooks:["orchestrate","autopilot-full"]},
+  {cmd:"/interrogate", g:"design", when:"You have a diff and want four different models to try to break it, including a strict code-quality lens.",
+   example:"/interrogate the whole branch, but skeptically. don't change anything yet. no nitpicks unless it's an actual bug.",
+   playbooks:["shipping"]},
+  {cmd:"/blast-radius", g:"prove", when:"A small-looking change and you want to know what else it could break, proven by running code rather than asserted.",
+   example:"/blast-radius this helper rename. prove what else it could break by running code.",
+   playbooks:["refactoring","bug-fix"]},
+  {cmd:"/tdd", g:"prove", when:"You are fixing a bug and there is a cheap local test path. Write the failing test first, then the fix.",
+   example:"/tdd implement",
+   playbooks:["bug-fix","feature"]},
+  {cmd:"/create-verification-skill", g:"prove", when:"Generate a project-local verification skill that drives your app the way a user does — any language, framework, or platform.",
+   example:"/create-verification-skill",
+   playbooks:[]},
+  {cmd:"/maintain-verification-skill", g:"prove", when:"Periodic pass that keeps a project's verification skill and feature map honest.",
+   example:"/maintain-verification-skill",
+   playbooks:[]},
+  {cmd:"/unslop", g:"write", when:"You are cleaning up writing. Removes AI tells.",
+   example:"/unslop that, no emdashes",
+   playbooks:["opening-a-pr"]},
+  {cmd:"/no-comments", g:"write", when:"You want Comment Sicko to hunt comments, then fix accepted findings at the root cause.",
+   example:"/no-comments",
+   playbooks:[]},
+  {cmd:"/typescript-best-practices", g:"write", when:"You are reading or editing TypeScript. Grounds the type-system-discipline principle in syntax.",
+   example:"/typescript-best-practices",
+   playbooks:[]},
+  {cmd:"/technical-writing", g:"write", when:"You are writing docs and need Diátaxis, Google style, STE, and Global English applied together.",
+   example:"/technical-writing",
+   playbooks:["opening-a-pr"]},
+  {cmd:"/figure-it-out", g:"run", when:"No bundled playbook fits. Designs a rigorous, auditable playbook for the task.",
+   example:"/figure-it-out migrate every caller, keep behavior identical, and leave a decision log.",
+   playbooks:["figure-it-out","autonomous-run"]},
+  {cmd:"/show-me-your-work", g:"run", when:"You want a reviewable decision trail. Logs decisions to a TSV you can commit.",
+   example:"/show-me-your-work keep a decision trail i can review when i'm back.",
+   playbooks:["autonomous-run","session-pickup"]},
+  {cmd:"/reflect", g:"run", when:"A long task landed and you want the recipe captured as a skill edit so the next run does not repeat it.",
+   example:"/reflect that took too long. capture what we learned so the next run doesn't repeat it.",
+   playbooks:["authoring-a-skill"]},
+  {cmd:"/automate-me", g:"yours", when:"You want your own -mode skill, drafted from how you have actually worked.",
+   example:"/automate-me",
+   playbooks:["authoring-a-skill"]},
+  {cmd:"/make-bot-ui", g:"yours", when:"You want a page or dashboard whose buttons wake a Grok Bot over a webhook, including the sender-key handoff and Tailscale.",
+   example:"/make-bot-ui",
+   playbooks:[]}
 ];
 
 const GROUPS = [
@@ -418,31 +694,56 @@ const GROUPS = [
 ];
 
 const PRINCIPLES = [
-  {g:"core", n:"Laziness Protocol", applies:"Refactoring, sizing a diff, or tempted to add abstractions, layers, or signal threading.", rule:"Bias to deletion and the smallest change that solves the problem. If a human maintainer would find it exhausting, it is a bad solution."},
-  {g:"core", n:"Foundational Thinking", applies:"Before writing logic. Core types and data structures, scaffold-vs-feature sequencing, what concurrent actors share.", rule:"Get the data shape right before writing logic. The right shape makes downstream code obvious."},
-  {g:"core", n:"Redesign From First Principles", applies:"Integrating a new requirement into an existing design.", rule:"Do not bolt it on. Redesign as if the requirement had been there from day one."},
-  {g:"core", n:"Subtract Before You Add", applies:"Sequencing an addition, refactor, or rewrite.", rule:"Remove complexity first, then build. Deletion gives a simpler base, which makes the next addition smaller and less brittle."},
-  {g:"core", n:"Minimize Reader Load", applies:"Reviewing or shaping code that is hard to trace.", rule:"Count layers and hidden state. Collapse one-caller wrappers and shrink mutable scope."},
-  {g:"core", n:"Outcome-Oriented Execution", applies:"Planned rewrites and migrations with explicit phase boundaries.", rule:"Optimize for the intended, verifiable end state. Do not preserve smooth intermediate states."},
-  {g:"core", n:"Experience First", applies:"Product, UX, or feature-scope tradeoffs.", rule:"Choose user delight over implementation convenience. Ship fewer polished features over more rough ones."},
-  {g:"core", n:"Exhaust the Design Space", applies:"A novel interaction or architectural decision with no precedent.", rule:"Build 2 to 3 competing prototypes and compare before committing."},
-  {g:"core", n:"Build the Lever", applies:"Any non-trivial work.", rule:"Build the tool that does or proves it. The tool is the artifact a reviewer reruns."},
+  {g:"core", n:"Laziness Protocol", applies:"Refactoring, sizing a diff, or tempted to add abstractions, layers, or signal threading.", rule:"Bias to deletion and the smallest change that solves the problem. If a human maintainer would find it exhausting, it is a bad solution.",
+   steer:"use laziness protocol. delete first. the smallest change that solves it."},
+  {g:"core", n:"Foundational Thinking", applies:"Before writing logic. Core types and data structures, scaffold-vs-feature sequencing, what concurrent actors share.", rule:"Get the data shape right before writing logic. The right shape makes downstream code obvious.",
+   steer:"foundational thinking. name the data shape before any logic."},
+  {g:"core", n:"Redesign From First Principles", applies:"Integrating a new requirement into an existing design.", rule:"Do not bolt it on. Redesign as if the requirement had been there from day one.",
+   steer:"redesign from first principles. treat this requirement as if it had always been there."},
+  {g:"core", n:"Attack the Premise", applies:"Two or more fixes that share one premise have failed the same gate.", rule:"Write the premise down. Take a census of which actors hold the imbalance. Then question the premise instead of writing another fix that assumes it.",
+   steer:"attack the premise. the last two fixes assumed the same thing. write that premise down and census the actors before the next fix."},
+  {g:"core", n:"Subtract Before You Add", applies:"Sequencing an addition, refactor, or rewrite.", rule:"Remove complexity first, then build. Deletion gives a simpler base, which makes the next addition smaller and less brittle.",
+   steer:"use subtract before you add. delete the obsolete adapters first, then design what's left."},
+  {g:"core", n:"Minimize Reader Load", applies:"Reviewing or shaping code that is hard to trace.", rule:"Count layers and hidden state. Collapse one-caller wrappers and shrink mutable scope.",
+   steer:"minimize reader load. collapse the one-caller wrappers."},
+  {g:"core", n:"Outcome-Oriented Execution", applies:"Planned rewrites and migrations with explicit phase boundaries.", rule:"Optimize for the intended, verifiable end state. Do not preserve smooth intermediate states.",
+   steer:"outcome-oriented execution. converge on the target design, no throwaway compatibility."},
+  {g:"core", n:"Experience First", applies:"Product, UX, or feature-scope tradeoffs.", rule:"Choose user delight over implementation convenience. Ship fewer polished features over more rough ones.",
+   steer:"experience first. optimize for the person using this, not the easy implementation."},
+  {g:"core", n:"Exhaust the Design Space", applies:"A novel interaction or architectural decision with no precedent.", rule:"Build 2 to 3 competing prototypes and compare before committing.",
+   steer:"exhaust the design space. two or three prototypes before we commit."},
+  {g:"core", n:"Build the Lever", applies:"Any non-trivial work.", rule:"Build the tool that does or proves it. The tool is the artifact a reviewer reruns.",
+   steer:"build the lever. write the script a reviewer can rerun, don't do it by hand."},
 
-  {g:"arch", n:"Boundary Discipline", applies:"Wiring validation, error handling, or framework adapters.", rule:"Guards at system boundaries. Trust internal types. Keep business logic in pure functions."},
-  {g:"arch", n:"Type System Discipline", applies:"Designing types or a signature in any typed language.", rule:"Make illegal states unrepresentable. The type checker is a proof assistant."},
-  {g:"arch", n:"Make Operations Idempotent", applies:"Designing commands, lifecycle steps, or loops that run amid crashes and retries.", rule:"Converge to the same end state regardless of partial prior runs."},
-  {g:"arch", n:"Migrate Callers Then Delete Legacy APIs", applies:"Introducing a new internal API while old callers exist.", rule:"Migrate callers and remove the old API in the same wave. No compatibility layers."},
-  {g:"arch", n:"Separate Before Serializing Shared State", applies:"Concurrent actors might write the same file, branch, key, or object.", rule:"Eliminate the sharing first. When sharing is real, enforce serialization structurally."},
-  {g:"arch", n:"Model the Domain", applies:"When writing stateful logic, or when code branches a lot or repeats a shape assumption across files.", rule:"Encode the real domain in a data structure instead of scattering it across conditionals. Reach for state machines, typed models, lookup tables, reducers, or small module boundaries that gather repeated behavior. Don't force an abstraction if the current shape is already clear and local."},
+  {g:"arch", n:"Boundary Discipline", applies:"Wiring validation, error handling, or framework adapters.", rule:"Guards at system boundaries. Trust internal types. Keep business logic in pure functions.",
+   steer:"boundary discipline. validate at the edge, trust internal types."},
+  {g:"arch", n:"Type System Discipline", applies:"Designing types or a signature in any typed language.", rule:"Make illegal states unrepresentable. The type checker is a proof assistant.",
+   steer:"type system discipline. make the illegal state unrepresentable."},
+  {g:"arch", n:"Make Operations Idempotent", applies:"Designing commands, lifecycle steps, or loops that run amid crashes and retries.", rule:"Converge to the same end state regardless of partial prior runs.",
+   steer:"make operations idempotent. a retry should land on the same end state."},
+  {g:"arch", n:"Migrate Callers Then Delete Legacy APIs", applies:"Introducing a new internal API while old callers exist.", rule:"Migrate callers and remove the old API in the same wave. No compatibility layers.",
+   steer:"migrate callers then delete legacy APIs. no compatibility layer."},
+  {g:"arch", n:"Separate Before Serializing Shared State", applies:"Concurrent actors might write the same file, branch, key, or object.", rule:"Eliminate the sharing first. When sharing is real, enforce serialization structurally.",
+   steer:"separate before serializing shared state. give each attempt its own worktree, no locks."},
+  {g:"arch", n:"Model the Domain", applies:"When writing stateful logic, or when code branches a lot or repeats a shape assumption across files.", rule:"Encode the real domain in a data structure instead of scattering it across conditionals. Reach for state machines, typed models, lookup tables, reducers, or small module boundaries that gather repeated behavior. Don't force an abstraction if the current shape is already clear and local.",
+   steer:"model the domain. put the repeated rule in one structure, not more ifs."},
 
-  {g:"verif", n:"Prove It Works", applies:"After a task, before declaring done.", rule:"Verify against the real artifact. Not a proxy. Not that it compiles."},
-  {g:"verif", n:"Fix Root Causes", applies:"Debugging.", rule:"Trace each symptom to its root cause. Reproduce first. Ask why until you reach it."},
-  {g:"verif", n:"Sequence Work into Verifiable Units", applies:"Multi-step work and how you stack commits and PRs.", rule:"Order work as small units, each ending in a state you can check. Do not advance until the current one is green."},
+  {g:"verif", n:"Prove It Works", applies:"After a task, before declaring done.", rule:"Verify against the real artifact. Not a proxy. Not that it compiles.",
+   steer:"apply prove it works. run the real flow and show me the written records."},
+  {g:"verif", n:"Fix Root Causes", applies:"Debugging.", rule:"Trace each symptom to its root cause. Reproduce first. Ask why until you reach it.",
+   steer:"fix root causes. i said the goal is to repro. i did not ask for a fix yet."},
+  {g:"verif", n:"Sequence Work into Verifiable Units", applies:"Multi-step work and how you stack commits and PRs.", rule:"Order work as small units, each ending in a state you can check. Do not advance until the current one is green.",
+   steer:"sequence work into verifiable units. this unit isn't green yet."},
+  {g:"verif", n:"Test Behavior, Not Implementation", applies:"Writing, changing, or keeping a test.", rule:"Call the code the way its users do and assert a literal expected value. If the test would still pass when every imported function returns undefined, rewrite the assertion or delete the test.",
+   steer:"test behavior, not implementation. assert the result a user would see, not which functions were called."},
 
-  {g:"deleg", n:"Guard the Context Window", applies:"Context fills up. Large outputs, long files, repeated reads, fan-out planning.", rule:"Route bulk to subagents. Keep summaries in the main thread, not raw payloads."},
-  {g:"deleg", n:"Never Block on the Human", applies:"Tempted to ask should I do X on reversible work.", rule:"Proceed. Present the result. Let the human course-correct after the fact."},
+  {g:"deleg", n:"Guard the Context Window", applies:"Context fills up. Large outputs, long files, repeated reads, fan-out planning.", rule:"Route bulk to subagents. Keep summaries in the main thread, not raw payloads.",
+   steer:"guard the context window. send the bulk read to a subagent and keep the summary here."},
+  {g:"deleg", n:"Never Block on the Human", applies:"Tempted to ask should I do X on reversible work.", rule:"Proceed. Present the result. Let the human course-correct after the fact.",
+   steer:"never block on the human. this is reversible. do it and show me."},
 
-  {g:"meta", n:"Encode Lessons in Structure", applies:"You catch yourself writing the same instruction a second time.", rule:"Encode it as a lint, metadata flag, runtime check, or script instead of more text."}
+  {g:"meta", n:"Encode Lessons in Structure", applies:"You catch yourself writing the same instruction a second time.", rule:"Encode it as a lint, metadata flag, runtime check, or script instead of more text.",
+   steer:"encode lessons in structure. don't add another paragraph. make it a check."}
 ];
 
 const MODELS = [
@@ -466,14 +767,82 @@ const MODELS = [
   {r:"interrogate reviewers", k:"panel", o:"One subagent per model tries to break the diff."}
 ];
 
+const NOW_GROUPS = ["All", "Understand", "Build", "Review", "Ship", "Away"];
+
+const NOW = [
+  {g:"Understand", title:"Understand before I edit", blurb:"Mechanics first, history second.", prompt:"use /how first to understand how this works. then use /why to figure out why it broke recently.", open:{kind:"skill", cmd:"/how"}},
+  {g:"Understand", title:"Catch me up", blurb:"Your own recent context. Not someone else's branch.", prompt:"/recall catch me up on the export work from last week", open:{kind:"skill", cmd:"/recall"}},
+  {g:"Understand", title:"Plain words", blurb:"The whole prompt is /bro.", prompt:"/bro", open:{kind:"skill", cmd:"/bro"}},
+  {g:"Understand", title:"Switch tasks", blurb:"Say new task, or the previous playbook keeps going.", prompt:"/poteto-mode new task. figure out why the cache entry survives logout. don't change any code yet.", open:{kind:"playbook", id:"investigation"}},
+  {g:"Build", title:"Fix a bug I can repro", blurb:"Bug fix. Repro first is a real constraint.", prompt:"/poteto-mode users get two notifications after a retry. repro first, then fix and verify.", open:{kind:"playbook", id:"bug-fix"}},
+  {g:"Build", title:"Fix through a failing test", blurb:"Only when a local test is cheap. Otherwise run the real command.", prompt:"/poteto-mode repro the duplicate write first. if there's a cheap test path, /tdd it. then fix and rerun.", open:{kind:"skill", cmd:"/tdd"}},
+  {g:"Build", title:"Add a small feature", blurb:"Name the check. This routes to Feature.", prompt:"/poteto-mode add a --json flag to this command. text output stays byte-identical. verify both.", open:{kind:"playbook", id:"feature"}},
+  {g:"Build", title:"Second opinion on a design", blurb:"Arena. Same brief, several attempts, then graft the best parts.", prompt:"/arena take my prompt to the arena verbatim. i want to compare their proposals with yours.", open:{kind:"skill", cmd:"/arena"}},
+  {g:"Review", title:"Check many slices", blurb:"Swarm. One worker per slice, one report. Not a design bakeoff.", prompt:"/swarm check every package under packages/ against its check.sh. one worker per package. one report.", open:{kind:"skill", cmd:"/swarm"}},
+  {g:"Review", title:"Review a branch", blurb:"Interrogate. Read-only, and skip the nitpicks.", prompt:"/interrogate the whole branch, but skeptically. don't change anything yet. no nitpicks unless it's an actual bug or regression in behavior.", open:{kind:"skill", cmd:"/interrogate"}},
+  {g:"Review", title:"What else could this break?", blurb:"Blast radius, proven by running code.", prompt:"/blast-radius this change. prove what else it could break by running code.", open:{kind:"skill", cmd:"/blast-radius"}},
+  {g:"Ship", title:"Get a PR green", blurb:"Babysit. Stop when it is merge-ready.", prompt:"/poteto-mode check on pr 123. anything outstanding?", open:{kind:"playbook", id:"babysit"}},
+  {g:"Ship", title:"Land a green stack", blurb:"Shipping. Verify each PR, then land only the contiguous verified run.", prompt:"/poteto-mode the stack is green. verify each PR independently, then land the contiguous verified run.", open:{kind:"playbook", id:"shipping"}},
+  {g:"Away", title:"Leave it overnight", blurb:"One task, a check that can pass or fail, and a decision log.", prompt:"im going to bed, keep going autonomously until every fixture passes. do not stop. keep a decision log i can audit in the morning.", open:{kind:"playbook", id:"autonomous-run"}},
+  {g:"Away", title:"Take over a branch", blurb:"Session pickup. Do not redo finished work.", prompt:"/poteto-mode take over this branch. read the decision log, figure out what's done, and continue from there. don't redo finished work.", open:{kind:"playbook", id:"session-pickup"}},
+  {g:"Away", title:"Free the disk", blurb:"Worktree cleanup pauses if a tree still has uncommitted work.", prompt:"/poteto-mode what's eating my disk? prune the worktrees that are safe to prune.", open:{kind:"playbook", id:"worktree-cleanup"}}
+];
+
+const CHOICES = [
+  {q:"Do I name a skill, or just describe the task?",
+    a:{label:"/poteto-mode", kind:"skill", cmd:"/poteto-mode", when:"Any non-trivial task. Say the goal and how you will know it is done. The playbook sequences the skills."},
+    b:{label:"One skill", kind:"skill", cmd:"/how", when:"You want that move only. A walkthrough, a skeptical review, or the last reply in plain words."}},
+  {q:"I have a question. Do I read, or build a sketch?",
+    a:{label:"Investigation", kind:"playbook", id:"investigation", when:"The answer is in the code or the record. The deliverable is a cited answer, and you do not change code."},
+    b:{label:"Prototype", kind:"playbook", id:"prototype", when:"The answer is a fact you could observe by running something. Build the throwaway and look. Do not ask the human."}},
+  {q:"Something is slow. One fix, or a loop?",
+    a:{label:"Perf issue", kind:"playbook", id:"perf-issue", when:"One measured slowness. Trace it, improve it against a baseline, and stop."},
+    b:{label:"Hillclimb", kind:"playbook", id:"hillclimb", when:"You will keep beating one metric. Each accepted win is its own commit, with a before and after."}},
+  {q:"I have a symptom. Is the evidence live, or already captured?",
+    a:{label:"Runtime forensics", kind:"playbook", id:"runtime-forensics", when:"Instrument the running system. Leak, spin, or glitch. Diagnosis, not a fix."},
+    b:{label:"Trace forensics", kind:"playbook", id:"trace-forensics", when:"Someone handed you a cpuprofile, trace, spindump, or heap snapshot. Read that artifact."}},
+  {q:"Several agents. Same brief, or different slices?",
+    a:{label:"/arena", kind:"skill", cmd:"/arena", when:"Every attempt gets the same design or code brief. Pick a base and graft the best parts."},
+    b:{label:"/swarm", kind:"skill", cmd:"/swarm", when:"Each worker owns a different slice or a declared race. You get one aggregated report."}},
+  {q:"I'm coming back. My memory, or their branch?",
+    a:{label:"/recall", kind:"skill", cmd:"/recall", when:"Rebuild your own recent context on a topic from chats and the shared record."},
+    b:{label:"Session pickup", kind:"playbook", id:"session-pickup", when:"Take over one in-flight branch, transcript, or cloud agent. Do not redo finished work."}},
+  {q:"I'm leaving. One task, or a multi-day program?",
+    a:{label:"Autonomous run", kind:"playbook", id:"autonomous-run", when:"One task, a checkable finish, and a decision log you can audit when you return."},
+    b:{label:"Orchestrate", kind:"playbook", id:"orchestrate", when:"A standing program. Many stacked PRs, one coordinator, over more than this session."}},
+  {q:"A queue of PRs. Merge them, or hand me a stack?",
+    a:{label:"Autopilot-full", kind:"playbook", id:"autopilot-full", when:"Independent PRs. One owner each, through merge, after a root swarm verdict."},
+    b:{label:"Autopilot-stack", kind:"playbook", id:"autopilot-stack", when:"Build and verify one linear stack. You land it. The agent does not ship it."}},
+  {q:"The PR exists. Get it green, or land the stack?",
+    a:{label:"Babysit", kind:"playbook", id:"babysit", when:"Conflicts, review threads, and CI. Stop at a merge-ready verdict."},
+    b:{label:"Shipping", kind:"playbook", id:"shipping", when:"The stack is already green. Verify each PR, then land only the contiguous verified run."}},
+  {q:"The change is big. A feature, or figure it out?",
+    a:{label:"Feature", kind:"playbook", id:"feature", when:"New behavior with a nameable data shape, finished in this session."},
+    b:{label:"Figure it out", kind:"playbook", id:"figure-it-out", when:"No bundled playbook fits, or you will step away from a cross-cutting change and want to trust it later."}}
+];
+
+const DRIFT = [
+  {see:"It started fixing before it reproduced", say:"i said the goal is to repro. i did not ask for a fix yet."},
+  {see:"It calls success because the build passed", say:"apply prove it works. show me the real output, not the build log."},
+  {see:"It bolted a new requirement onto the old design", say:"use subtract before you add. delete the obsolete path first, then design what's left."},
+  {see:"Two attempts are about to share a branch", say:"separate before serializing shared state. give each attempt its own worktree, no locks."},
+  {see:"Two fixes failed and it is writing a third", say:"attack the premise. write down what those fixes assumed, and census the actors before the next fix."},
+  {see:"The reply is dense and I still don't get it", say:"/bro"},
+  {see:"The writing sounds like a model", say:"/unslop that, no emdashes"},
+  {see:"It asked me something it could just run", say:"don't ask me. prototype it and show me the result."},
+  {see:"I listed skills and the steps came out wrong", say:"drop the skill list. state the goal and the check. let the playbook sequence the steps."},
+  {see:"Done means make it better", say:"done means this command exits 0. paste the check. a vague finish gives the loop nothing to test."},
+  {see:"I'm changing subjects in a long chat", say:"/poteto-mode new task. <goal>. <the constraint that must hold>."}
+];
+
 const KEYWORDS = {
-  investigation:["how does","how do","how is","how are","how can","how should","why was","why is","why do","why are","are we sure","should we","read-only","understand","walkthrough","explain","how x works","how it works","how does x"],
+  investigation:["how does","how do","how is","how are","how can","how should","why was","why is","why do","why are","are we sure","should we","read-only","understand","walkthrough","explain","how x works","how it works","how does x","don't change any code"],
   "bug-fix":["bug","defect","reproduc","broken","crash","error","fix","regression","wrong","fails","incorrect","doesn't work","does not work","wrong output"],
   "perf-issue":["slow","latency","performance","baseline","takes a second","takes a","takes a second to load","seconds to load","load time","takes forever","laggy","optimize","sluggish","jank","throughput","run a cpu trace","run a trace"],
   hillclimb:["improve the metric","against a target","sustained","loop hypotheses","metric","benchmark","hillclimb","keep improving","before/after"],
   "runtime-forensics":["leak","idle cpu","cpu spin","spin","glitch","stutter","live instrumentation","diagnose a symptom","memory leak"],
   "trace-forensics":["cpuprofile","cpu profile file","spindump","heap snapshot","heap dump","profiling artifact","profile file","flame graph","trace file","captured trace","a cpuprofile"],
-  feature:["build a feature","new feature","add a","implement","feature flag","new behavior","change behavior","add support","build a small"],
+  feature:["build a feature","new feature","add a","implement","feature flag","new behavior","change behavior","add support","build a small","--json"],
   refactoring:["refactor","rename","extract","inline","dedupe","deduplicate","move","restructure","behavior-preserving","clean up the code"],
   prototype:["prototype","mock","sketch","compare two","two prototypes","try this layout","mock it up","throwaway","build two"],
   "visual-parity":["visual parity","pixel","match the design","spacing","styling system","row spacing","matches","pixel-exact"],
@@ -517,40 +886,354 @@ const EXAMPLE_CHIPS = [
 ];
 
 const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
 const el = (tag, cls) => { const e = document.createElement(tag); if(cls) e.className = cls; return e; };
 
-function renderPlaybooks(){
-  const grid = $("#pbgrid");
-  PLAYBOOKS.forEach((p, i) => {
-    const b = el("button", "card" + (p.meta ? " meta-card" : ""));
-    b.dataset.id = p.id;
+const state = { pbGroup:"all", skGroup:"all", pbQuery:"", skQuery:"", nowGroup:"All", hashBeforeDialog:"" };
+
+function slug(n){
+  return String(n || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+function slugPrinciple(n){ return slug(n); }
+
+const PIN_KEY = "pstack-explained-pins";
+function loadPins(){
+  try { const v = JSON.parse(localStorage.getItem(PIN_KEY) || "[]"); return Array.isArray(v) ? v : []; }
+  catch { return []; }
+}
+function savePins(ids){
+  try { localStorage.setItem(PIN_KEY, JSON.stringify(ids)); } catch {}
+}
+function togglePin(id){
+  const pins = loadPins();
+  const next = pins.includes(id) ? pins.filter(x => x !== id) : pins.concat(id);
+  savePins(next);
+  renderNow();
+}
+
+function openTarget(open){
+  if(!open) return;
+  if(open.kind === "playbook"){
+    const p = PLAYBOOKS.find(x => x.id === open.id);
+    if(p) openDialog("playbook", p);
+  } else if(open.kind === "skill"){
+    const s = SKILLS.find(x => x.cmd === open.cmd);
+    if(s) openDialog("skill", s);
+  }
+}
+
+function nowCard(item, pinned){
+  const card = el("article", "nowcard");
+  card.id = "now-" + slug(item.title);
+  const h = el("h3"); h.textContent = item.title;
+  const blurb = el("p", "blurb"); blurb.textContent = item.blurb;
+  const mini = el("p", "promptmini"); mini.textContent = item.prompt;
+  const acts = el("div", "nowacts");
+  const copy = el("button", "copy");
+  copy.type = "button";
+  copy.textContent = "Copy";
+  copy.addEventListener("click", () => copyText(item.prompt, copy));
+  const pin = el("button", "pin" + (pinned ? " on" : ""));
+  pin.type = "button";
+  pin.textContent = pinned ? "Pinned" : "Pin";
+  pin.setAttribute("aria-pressed", pinned ? "true" : "false");
+  pin.addEventListener("click", () => togglePin(slug(item.title)));
+  const more = el("button", "copy");
+  more.type = "button";
+  more.textContent = "Open";
+  more.addEventListener("click", () => openTarget(item.open));
+  acts.append(copy, pin, more);
+  card.append(h, blurb, mini, acts);
+  return card;
+}
+
+function renderNow(){
+  const pins = loadPins();
+  const filters = $("#nowfilters");
+  const current = state.nowGroup || "All";
+  filters.innerHTML = "";
+  NOW_GROUPS.forEach(name => {
+    const b = el("button", "filter" + (current === name ? " on" : ""));
     b.type = "button";
-    b.style.animationDelay = (i * 30) + "ms";
-    const idx = el("span", "idx"); idx.textContent = String(i + 1).padStart(2, "0");
-    const nm = el("div", "nm"); nm.textContent = p.n;
-    const tr = el("div", "tr"); tr.textContent = p.t;
-    b.append(idx, nm, tr);
-    b.addEventListener("click", () => openDialog("playbook", p));
-    grid.appendChild(b);
+    b.textContent = name;
+    b.addEventListener("click", () => { state.nowGroup = name; renderNow(); });
+    filters.appendChild(b);
+  });
+  const pinHost = $("#pinned");
+  const pinLabel = $("#pinnedlabel");
+  pinHost.innerHTML = "";
+  const pinnedItems = pins.map(id => NOW.find(n => slug(n.title) === id)).filter(Boolean);
+  if(pinnedItems.length){
+    pinLabel.hidden = false;
+    pinHost.hidden = false;
+    pinnedItems.forEach(item => pinHost.appendChild(nowCard(item, true)));
+  } else {
+    pinLabel.hidden = true;
+    pinHost.hidden = true;
+  }
+  const grid = $("#nowgrid");
+  grid.innerHTML = "";
+  NOW.filter(n => current === "All" || n.g === current).forEach(item => {
+    grid.appendChild(nowCard(item, pins.includes(slug(item.title))));
   });
 }
 
-function renderSkills(){
-  const grid = $("#skgrid");
-  SKILLS.forEach((s, i) => {
-    const b = el("button", "chip");
-    b.type = "button";
-    b.style.animationDelay = (i * 25) + "ms";
-    const cmd = el("div", "cmd"); cmd.textContent = s.cmd;
-    const when = el("div", "when"); when.textContent = s.when;
-    b.append(cmd, when);
-    b.addEventListener("click", () => openDialog("skill", s));
-    grid.appendChild(b);
+function renderChoices(){
+  const root = $("#pairs");
+  CHOICES.forEach(pair => {
+    const box = el("div", "pair");
+    const q = el("p", "q"); q.textContent = pair.q;
+    const sides = el("div", "sides");
+    [pair.a, pair.b].forEach(side => {
+      const b = el("button", "side");
+      b.type = "button";
+      const nm = el("div", "snm"); nm.textContent = side.label;
+      const when = el("div", "swhen"); when.textContent = side.when;
+      b.append(nm, when);
+      b.addEventListener("click", () => openTarget(side));
+      sides.appendChild(b);
+    });
+    box.append(q, sides);
+    root.appendChild(box);
   });
+}
+
+function renderDrift(){
+  const root = $("#drifts");
+  DRIFT.forEach(d => {
+    const row = el("div", "drift");
+    const see = el("div", "see"); see.textContent = d.see;
+    const say = el("div", "say"); say.textContent = d.say;
+    const copy = el("button", "copy");
+    copy.type = "button";
+    copy.textContent = "Copy";
+    copy.addEventListener("click", () => copyText(d.say, copy));
+    row.append(see, say, copy);
+    root.appendChild(row);
+  });
+}
+
+function findIndex(){
+  const items = [];
+  NOW.forEach(n => items.push({kind:"prompt", title:n.title, text:n.prompt, open:n.open, hay:(n.g + " " + n.title + " " + n.blurb + " " + n.prompt).toLowerCase()}));
+  PLAYBOOKS.forEach(p => items.push({kind:"playbook", title:p.n, text:p.t, open:{kind:"playbook", id:p.id}, hay:(p.n + " " + p.t + " " + p.detail + " " + (p.example || "")).toLowerCase()}));
+  SKILLS.forEach(s => items.push({kind:"skill", title:s.cmd, text:s.when, open:{kind:"skill", cmd:s.cmd}, hay:(s.cmd + " " + s.when + " " + (s.example || "")).toLowerCase()}));
+  PRINCIPLES.forEach(p => items.push({kind:"principle", title:p.n, text:p.steer || p.rule, open:{kind:"principle", name:p.n}, hay:(p.n + " " + p.applies + " " + p.rule + " " + (p.steer || "")).toLowerCase()}));
+  DRIFT.forEach(d => items.push({kind:"steer", title:d.see, text:d.say, say:d.say, hay:(d.see + " " + d.say).toLowerCase()}));
+  return items;
+}
+
+function renderFindHits(q){
+  const host = $("#findhits");
+  host.innerHTML = "";
+  const query = q.trim().toLowerCase();
+  const all = findIndex();
+  if(!query){ host.innerHTML = ""; return; }
+  const hits = all.filter(item => item.hay.includes(query))
+    .sort((a, b) => {
+      const score = item => {
+        if(!query) return 0;
+        const title = item.title.toLowerCase();
+        if(title === query || title.startsWith(query)) return 3;
+        if(title.includes(query)) return 2;
+        return 1;
+      };
+      return score(b) - score(a);
+    })
+    .slice(0, 8);
+  if(!hits.length){
+    const empty = el("p", "empty");
+    empty.textContent = "Nothing matches. Try a shorter word, a /command, or a principle name.";
+    host.appendChild(empty);
+    return;
+  }
+  hits.forEach(item => {
+    const b = el("button", "findhit");
+    b.type = "button";
+    b.setAttribute("role", "option");
+    const k = el("div", "fk"); k.textContent = item.kind;
+    const t = el("div", "ft"); t.textContent = item.title;
+    const s = el("div", "fs"); s.textContent = item.text;
+    b.append(k, t, s);
+    b.addEventListener("click", () => {
+      closeFind();
+      if(item.kind === "principle"){
+        const p = PRINCIPLES.find(x => x.n === item.open.name);
+        const g = GROUPS.find(x => x.key === (p && p.g));
+        if(p) openDialog("principle", { ...p, group: g ? g.label : p.g });
+      } else if(item.kind === "steer"){
+        copyText(item.say);
+      } else if(item.open){
+        openTarget(item.open);
+      }
+    });
+    host.appendChild(b);
+  });
+}
+
+function openFind(){
+  const btn = $("#findbtn");
+  if(btn) btn.setAttribute("aria-expanded", "true");
+  const input = $("#findq");
+  input.focus();
+  renderFindHits(input.value);
+}
+function closeFind(){
+  const btn = $("#findbtn");
+  if(btn) btn.setAttribute("aria-expanded", "false");
+}
+
+function toast(msg){
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => t.classList.remove("show"), 1400);
+}
+
+async function copyText(text, btn){
+  try {
+    await navigator.clipboard.writeText(text);
+    if(btn){
+      const prev = btn.textContent;
+      btn.classList.add("ok");
+      btn.textContent = "Copied";
+      setTimeout(() => { btn.classList.remove("ok"); btn.textContent = prev; }, 1200);
+    }
+    toast("Copied to clipboard");
+  } catch {
+    toast("Could not copy");
+  }
+}
+
+function haystackPlaybook(p){
+  return [p.n, p.t, p.detail, p.example, (p.skills || []).join(" "), p.id].join(" ").toLowerCase();
+}
+function haystackSkill(s){
+  return [s.cmd, s.when, s.example, (s.playbooks || []).join(" ")].join(" ").toLowerCase();
+}
+
+function renderPlaybookFilters(){
+  const wrap = $("#pbfilters");
+  wrap.innerHTML = "";
+  const all = el("button", "filter" + (state.pbGroup === "all" ? " on" : ""));
+  all.type = "button";
+  all.textContent = "All";
+  all.addEventListener("click", () => { state.pbGroup = "all"; renderPlaybooks(); renderPlaybookFilters(); });
+  wrap.appendChild(all);
+  PLAYBOOK_GROUPS.forEach(g => {
+    const b = el("button", "filter" + (state.pbGroup === g.key ? " on" : ""));
+    b.type = "button";
+    b.textContent = g.label;
+    b.addEventListener("click", () => { state.pbGroup = g.key; renderPlaybooks(); renderPlaybookFilters(); });
+    wrap.appendChild(b);
+  });
+}
+
+function renderSkillFilters(){
+  const wrap = $("#skfilters");
+  wrap.innerHTML = "";
+  const all = el("button", "filter" + (state.skGroup === "all" ? " on" : ""));
+  all.type = "button";
+  all.textContent = "All";
+  all.addEventListener("click", () => { state.skGroup = "all"; renderSkills(); renderSkillFilters(); });
+  wrap.appendChild(all);
+  SKILL_GROUPS.forEach(g => {
+    const b = el("button", "filter" + (state.skGroup === g.key ? " on" : ""));
+    b.type = "button";
+    b.textContent = g.label;
+    b.addEventListener("click", () => { state.skGroup = g.key; renderSkills(); renderSkillFilters(); });
+    wrap.appendChild(b);
+  });
+}
+
+function renderPlaybooks(){
+  const root = $("#pbgrid");
+  root.innerHTML = "";
+  const q = state.pbQuery.trim().toLowerCase();
+  let shown = 0;
+  PLAYBOOK_GROUPS.forEach((g, gi) => {
+    if(state.pbGroup !== "all" && state.pbGroup !== g.key) return;
+    const items = PLAYBOOKS.filter(p => p.g === g.key && (!q || haystackPlaybook(p).includes(q)));
+    if(!items.length) return;
+    const band = el("div", "band");
+    band.style.animationDelay = (gi * 40) + "ms";
+    const head = el("div", "band-head");
+    const h3 = el("h3"); h3.textContent = g.label;
+    const ct = el("span", "ct"); ct.textContent = items.length + (items.length === 1 ? " playbook" : " playbooks");
+    const ln = el("span", "ln");
+    head.append(h3, ct, ln);
+    band.appendChild(head);
+    const desc = el("p", "band-desc"); desc.textContent = g.desc;
+    band.appendChild(desc);
+    const grid = el("div", "grid pb");
+    items.forEach((p, i) => {
+      const b = el("button", "card" + (p.meta ? " meta-card" : ""));
+      b.dataset.id = p.id;
+      b.type = "button";
+      b.style.animationDelay = (i * 25) + "ms";
+      const nm = el("div", "nm"); nm.textContent = p.n;
+      const tr = el("div", "tr"); tr.textContent = p.t;
+      b.append(nm, tr);
+      b.addEventListener("click", () => openDialog("playbook", p));
+      grid.appendChild(b);
+      shown++;
+    });
+    band.appendChild(grid);
+    root.appendChild(band);
+  });
+  if(!shown){
+    const empty = el("p", "empty");
+    empty.textContent = "No playbook matches that. Try a shorter word, or tap Figure it out.";
+    root.appendChild(empty);
+  }
+}
+
+function renderSkills(){
+  const root = $("#skgrid");
+  root.innerHTML = "";
+  const q = state.skQuery.trim().toLowerCase();
+  let shown = 0;
+  SKILL_GROUPS.forEach((g, gi) => {
+    if(state.skGroup !== "all" && state.skGroup !== g.key) return;
+    const items = SKILLS.filter(s => s.g === g.key && (!q || haystackSkill(s).includes(q)));
+    if(!items.length) return;
+    const band = el("div", "band");
+    band.style.animationDelay = (gi * 40) + "ms";
+    const head = el("div", "band-head");
+    const h3 = el("h3"); h3.textContent = g.label;
+    const ct = el("span", "ct"); ct.textContent = items.length + (items.length === 1 ? " skill" : " skills");
+    const ln = el("span", "ln");
+    head.append(h3, ct, ln);
+    band.appendChild(head);
+    const desc = el("p", "band-desc"); desc.textContent = g.desc;
+    band.appendChild(desc);
+    const grid = el("div", "grid sk");
+    items.forEach((s, i) => {
+      const b = el("button", "chip");
+      b.type = "button";
+      b.dataset.cmd = s.cmd;
+      b.style.animationDelay = (i * 20) + "ms";
+      const cmd = el("div", "cmd"); cmd.textContent = s.cmd;
+      const when = el("div", "when"); when.textContent = s.when;
+      b.append(cmd, when);
+      b.addEventListener("click", () => openDialog("skill", s));
+      grid.appendChild(b);
+      shown++;
+    });
+    band.appendChild(grid);
+    root.appendChild(band);
+  });
+  if(!shown){
+    const empty = el("p", "empty");
+    empty.textContent = "No skill matches that. Try the command name, like /how.";
+    root.appendChild(empty);
+  }
 }
 
 function renderPrinciples(){
   const root = $("#pstack");
+  root.innerHTML = "";
   GROUPS.forEach((g, gi) => {
     const band = el("div", "band");
     band.style.animationDelay = (gi * 60) + "ms";
@@ -567,6 +1250,7 @@ function renderPrinciples(){
     PRINCIPLES.filter(p => p.g === g.key).forEach((p, i) => {
       const bk = el("button", "brick");
       bk.type = "button";
+      bk.dataset.slug = slugPrinciple(p.n);
       bk.style.setProperty("--c", g.color);
       bk.style.animationDelay = (i * 35) + "ms";
       const pn = el("div", "pn"); pn.textContent = p.n;
@@ -604,35 +1288,12 @@ function renderExamples(){
       const input = $("#task");
       input.value = c.text;
       showVerdict(c.text);
-      input.focus();
-      const card = document.querySelector("#pbgrid .card.recommended");
-      if(card) setTimeout(() => card.scrollIntoView({ behavior:"smooth", block:"center" }), 120);
+      input.focus({ preventScroll: true });
+      const verdict = $("#verdict");
+      if(verdict) setTimeout(() => verdict.scrollIntoView({ behavior:"smooth", block:"nearest" }), 60);
     });
     wrap.appendChild(b);
   });
-}
-
-function openDialog(kind, data){
-  const cat = $("#dcat"), title = $("#dtitle"), body = $("#dbody");
-  body.innerHTML = "";
-  if(kind === "playbook"){
-    cat.textContent = "Playbook";
-    title.textContent = data.n;
-    addField(body, "Matches when", data.t);
-    addField(body, "What it does", data.detail);
-  } else if(kind === "skill"){
-    cat.textContent = "Skill";
-    title.textContent = data.cmd;
-    addField(body, "Use it when", data.when);
-  } else {
-    cat.textContent = data.group + " principle";
-    title.textContent = data.n;
-    addField(body, "When it applies", data.applies);
-    addField(body, "The rule", data.rule);
-  }
-  $("#overlay").classList.add("open");
-  document.body.style.overflow = "hidden";
-  $("#close").focus();
 }
 
 function addField(parent, k, v){
@@ -643,9 +1304,85 @@ function addField(parent, k, v){
   parent.appendChild(f);
 }
 
+function addPrompt(parent, label, text){
+  const f = el("div", "field");
+  const kk = el("div", "k"); kk.textContent = label;
+  const box = el("div", "prompt"); box.textContent = text;
+  const btn = el("button", "copy");
+  btn.type = "button";
+  btn.textContent = "Copy prompt";
+  btn.style.marginTop = "8px";
+  btn.addEventListener("click", () => copyText(text, btn));
+  f.append(kk, box, btn);
+  parent.appendChild(f);
+}
+
+function addChipRow(parent, label, items, onClick){
+  if(!items || !items.length) return;
+  const f = el("div", "field");
+  const kk = el("div", "k"); kk.textContent = label;
+  const row = el("div", "chiprow");
+  items.forEach(item => {
+    const b = el("button");
+    b.type = "button";
+    b.textContent = item.label;
+    b.addEventListener("click", () => onClick(item));
+    row.appendChild(b);
+  });
+  f.append(kk, row);
+  parent.appendChild(f);
+}
+
+function setHash(h){
+  if(location.hash === h) return;
+  history.replaceState(null, "", h || location.pathname + location.search);
+}
+
+function openDialog(kind, data){
+  const cat = $("#dcat"), title = $("#dtitle"), body = $("#dbody");
+  body.innerHTML = "";
+  if(kind === "playbook"){
+    cat.textContent = "Playbook";
+    title.textContent = data.n;
+    addField(body, "Matches when", data.t);
+    addField(body, "What it does", data.detail);
+    if(data.example) addPrompt(body, "What to type", data.example);
+    addChipRow(body, "Skills often nearby", (data.skills || []).map(cmd => ({label: cmd, cmd})), item => {
+      const s = SKILLS.find(x => x.cmd === item.cmd);
+      if(s) openDialog("skill", s);
+    });
+    setHash("#pb-" + data.id);
+  } else if(kind === "skill"){
+    cat.textContent = "Skill";
+    title.textContent = data.cmd;
+    addField(body, "Use it when", data.when);
+    if(data.example) addPrompt(body, "What to type", data.example);
+    addChipRow(body, "Related playbooks", (data.playbooks || []).map(id => {
+      const p = PLAYBOOKS.find(x => x.id === id);
+      return p ? {label: p.n, id: p.id} : null;
+    }).filter(Boolean), item => {
+      const p = PLAYBOOKS.find(x => x.id === item.id);
+      if(p) openDialog("playbook", p);
+    });
+    setHash("#sk-" + data.cmd.replace(/^\//, ""));
+  } else {
+    cat.textContent = data.group + " principle";
+    title.textContent = data.n;
+    addField(body, "When it applies", data.applies);
+    addField(body, "The rule", data.rule);
+    if(data.steer) addPrompt(body, "Say this to steer", data.steer);
+    setHash("#pr-" + slugPrinciple(data.n));
+  }
+  $("#overlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+  $("#close").focus();
+}
+
 function closeDialog(){
   $("#overlay").classList.remove("open");
   document.body.style.overflow = "";
+  const h = location.hash;
+  if(/^#(pb|sk|pr)-/.test(h)) setHash(state.hashBeforeDialog || "#playbooks");
 }
 
 function scorePlaybooks(text){
@@ -661,25 +1398,137 @@ function scorePlaybooks(text){
 }
 
 function clearHighlights(){
-  document.querySelectorAll("#pbgrid .card").forEach(c => c.classList.remove("recommended"));
+  document.querySelectorAll("#pbgrid .card").forEach(c => {
+    c.classList.remove("recommended", "dimmed");
+  });
+}
+
+function revealPlaybook(id){
+  const pb = PLAYBOOKS.find(p => p.id === id);
+  if(!pb) return;
+  if(state.pbQuery.trim()){
+    state.pbQuery = "";
+    const box = $("#pbq");
+    if(box) box.value = "";
+  }
+  if(state.pbGroup !== pb.g){
+    state.pbGroup = pb.g;
+    renderPlaybookFilters();
+  }
+  renderPlaybooks();
 }
 
 function showVerdict(text){
   const v = $("#verdict");
   const results = scorePlaybooks(text);
+  if(!text.trim()){
+    if(state.pbGroup !== "all" || state.pbQuery.trim()){
+      state.pbGroup = "all";
+      state.pbQuery = "";
+      const box = $("#pbq");
+      if(box) box.value = "";
+      renderPlaybookFilters();
+      renderPlaybooks();
+    }
+    clearHighlights();
+    v.innerHTML = "";
+    return;
+  }
+  const focusId = results.length ? results[0].id : "figure-it-out";
+  revealPlaybook(focusId);
   clearHighlights();
-  if(!text.trim()){ v.innerHTML = ""; return; }
   if(!results.length){
-    v.innerHTML = '<span class="none">No clear match here. When no playbook fits, pstack uses <span class="pick">Figure it out</span>.</span>';
+    const fig = PLAYBOOKS.find(p => p.id === "figure-it-out");
+    const card = document.querySelector('#pbgrid .card[data-id="figure-it-out"]');
+    if(card) card.classList.add("recommended");
+    const prompt = fig && fig.example ? fig.example : "/poteto-mode " + text.trim();
+    v.innerHTML =
+      '<div class="vcard">' +
+        '<p class="vtop">No clear keyword match. pstack would use <span class="pick">Figure it out</span>.</p>' +
+        '<p class="vnext">That fallback designs a bespoke playbook when none of the bundled recipes fit.</p>' +
+        '<div class="vactions">' +
+          '<button class="copy" type="button" data-copy-prompt="' + prompt.replace(/"/g, "&quot;") + '">Copy what to type</button>' +
+          '<button class="copy" type="button" data-open-pb="figure-it-out">Open playbook</button>' +
+        "</div>" +
+      "</div>";
+    const copyBtn = v.querySelector("[data-copy-prompt]");
+    if(copyBtn) copyBtn.addEventListener("click", () => copyText(copyBtn.getAttribute("data-copy-prompt"), copyBtn));
+    const openBtn = v.querySelector("[data-open-pb]");
+    if(openBtn && fig) openBtn.addEventListener("click", () => openDialog("playbook", fig));
     return;
   }
   const top = results[0];
   const pb = PLAYBOOKS.find(p => p.id === top.id);
-  const card = document.querySelector('#pbgrid .card[data-id="' + top.id + '"]');
-  if(card) card.classList.add("recommended");
-  const kwHtml = top.hits.slice(0, 5).map(h => '<span class="kw">' + h + '</span>').join("");
-  const tail = results.length > 1 ? ' <span class="why">also in range: ' + results.slice(1, 3).map(r => PLAYBOOKS.find(p => p.id === r.id).n).join(", ") + "</span>" : "";
-  v.innerHTML = 'pstack would route this to the <span class="pick">' + pb.n + '</span> playbook. <span class="why">matched ' + kwHtml + tail + "</span>";
+  document.querySelectorAll("#pbgrid .card").forEach(c => {
+    if(c.dataset.id === top.id) c.classList.add("recommended");
+    else c.classList.add("dimmed");
+  });
+  const kwHtml = top.hits.slice(0, 5).map(h => '<span class="kw">' + h + "</span>").join("");
+  const also = results.length > 1
+    ? ' <span class="why">also in range: ' + results.slice(1, 3).map(r => PLAYBOOKS.find(p => p.id === r.id).n).join(", ") + "</span>"
+    : "";
+  const prompt = pb.example && !pb.meta ? pb.example : "/poteto-mode " + text.trim();
+  const skillBtns = (pb.skills || []).map(cmd => '<button type="button" data-open-skill="' + cmd + '">' + cmd + "</button>").join("");
+  v.innerHTML =
+    '<div class="vcard">' +
+      '<p class="vtop">This demo would route to <span class="pick">' + pb.n + "</span>.</p>" +
+      '<p class="vnext">matched ' + kwHtml + also + "</p>" +
+      '<div class="vactions">' +
+        '<button class="copy" type="button" data-copy-prompt="' + prompt.replace(/"/g, "&quot;") + '">Copy what to type</button>' +
+        '<button class="copy" type="button" data-open-pb="' + pb.id + '">Open playbook</button>' +
+      "</div>" +
+      (skillBtns ? '<div class="rel">' + skillBtns + "</div>" : "") +
+    "</div>";
+  const copyBtn = v.querySelector("[data-copy-prompt]");
+  if(copyBtn) copyBtn.addEventListener("click", () => copyText(copyBtn.getAttribute("data-copy-prompt"), copyBtn));
+  const openBtn = v.querySelector("[data-open-pb]");
+  if(openBtn) openBtn.addEventListener("click", () => openDialog("playbook", pb));
+  v.querySelectorAll("[data-open-skill]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const s = SKILLS.find(x => x.cmd === btn.getAttribute("data-open-skill"));
+      if(s) openDialog("skill", s);
+    });
+  });
+}
+
+function openFromHash(){
+  const h = decodeURIComponent(location.hash || "");
+  if(h.startsWith("#pb-")){
+    const p = PLAYBOOKS.find(x => x.id === h.slice(4));
+    if(p){ state.hashBeforeDialog = "#playbooks"; openDialog("playbook", p); }
+  } else if(h.startsWith("#sk-")){
+    const s = SKILLS.find(x => x.cmd.replace(/^\//, "") === h.slice(4));
+    if(s){ state.hashBeforeDialog = "#skills"; openDialog("skill", s); }
+  } else if(h.startsWith("#pr-")){
+    const p = PRINCIPLES.find(x => slugPrinciple(x.n) === h.slice(4));
+    if(p){
+      const g = GROUPS.find(x => x.key === p.g);
+      state.hashBeforeDialog = "#principles";
+      openDialog("principle", { ...p, group: g ? g.label : p.g });
+    }
+  }
+}
+
+function watchNav(){
+  if(typeof IntersectionObserver !== "function") return;
+  const links = $$("nav.bar a").filter(a => a.hash);
+  const sections = links.map(a => document.querySelector(a.hash)).filter(Boolean);
+  const io = new IntersectionObserver(entries => {
+    const vis = entries.filter(e => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if(!vis) return;
+    links.forEach(a => a.classList.toggle("on", a.hash === "#" + vis.target.id));
+  }, { rootMargin:"-20% 0px -65% 0px", threshold:[0.1, 0.25, 0.5] });
+  sections.forEach(s => io.observe(s));
+}
+
+function openNowHash(){
+  const id = (location.hash || "").replace(/^#/, "");
+  if(!id.startsWith("now-")) return;
+  const node = document.getElementById(id);
+  if(!node) return;
+  node.scrollIntoView({ behavior:"smooth", block:"center" });
+  node.classList.add("flash");
+  setTimeout(() => node.classList.remove("flash"), 1600);
 }
 
 let exIdx = 0, exFrozen = false;
@@ -692,20 +1541,57 @@ function rotateExample(){
 }
 
 function init(){
+  renderNow();
+  renderChoices();
+  renderDrift();
+  renderPlaybookFilters();
+  renderSkillFilters();
   renderPlaybooks();
   renderSkills();
   renderPrinciples();
   renderModels();
   renderExamples();
+  watchNav();
 
   const input = $("#task");
   input.addEventListener("input", () => { showVerdict(input.value); });
   input.addEventListener("focus", () => { exFrozen = true; if(input.placeholder.startsWith("Describe")) input.placeholder = "e.g. " + EXAMPLES[0]; });
   input.addEventListener("blur", () => { exFrozen = false; if(!input.value) input.placeholder = "Describe a task and watch the playbook light up…"; });
 
+  $("#pbq").addEventListener("input", e => { state.pbQuery = e.target.value; renderPlaybooks(); showVerdict(input.value); });
+  $("#skq").addEventListener("input", e => { state.skQuery = e.target.value; renderSkills(); });
+  $("#findq").addEventListener("input", e => renderFindHits(e.target.value));
+  $("#findbtn").addEventListener("click", () => {
+    if($("#findpop").classList.contains("open")) closeFind();
+    else openFind();
+  });
+
+  document.addEventListener("click", e => {
+    const btn = e.target.closest("[data-copy]");
+    if(btn) copyText(btn.getAttribute("data-copy"), btn);
+    if($("#findpop").classList.contains("open") && !e.target.closest("#findpop") && !e.target.closest("#findbtn")) closeFind();
+  });
+
   $("#close").addEventListener("click", closeDialog);
   $("#overlay").addEventListener("click", e => { if(e.target === $("#overlay")) closeDialog(); });
-  document.addEventListener("keydown", e => { if(e.key === "Escape") closeDialog(); });
+  document.addEventListener("keydown", e => {
+    if(e.key === "Escape"){
+      if($("#findpop").classList.contains("open")){ closeFind(); return; }
+      closeDialog();
+      return;
+    }
+    if(e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey){
+      const tag = document.activeElement && document.activeElement.tagName;
+      if(tag === "INPUT" || tag === "TEXTAREA") return;
+      if($("#overlay").classList.contains("open") || $("#findpop").classList.contains("open")) return;
+      e.preventDefault();
+      openFind();
+    }
+  });
+
+  window.addEventListener("hashchange", () => { openFromHash(); openNowHash(); });
+  if(/^#(pb|sk|pr)-/.test(location.hash)) openFromHash();
+  openNowHash();
 
   setInterval(rotateExample, 3400);
   rotateExample();

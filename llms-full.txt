@@ -10,6 +10,143 @@ Type `/poteto-mode` and describe a task. pstack matches the task to a playbook, 
 Twenty-three principles apply across every playbook, biasing the work toward small diffs and real verification. The [official guide](https://github.com/cursor/plugins/blob/main/pstack/docs/guide/README.md) covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.
 This site is unofficial and is not affiliated with poteto, pstack, or Cursor.
 
+## What to type
+
+Pick the situation and copy the prompt. Swap in your own paths and finish condition.
+
+### Understand before I edit (Understand)
+Mechanics first, history second.
+Prompt: use /how first to understand how this works. then use /why to figure out why it broke recently.
+
+### Catch me up (Understand)
+Your own recent context. Not someone else's branch.
+Prompt: /recall catch me up on the export work from last week
+
+### Plain words (Understand)
+The whole prompt is /bro.
+Prompt: /bro
+
+### Switch tasks (Understand)
+Say new task, or the previous playbook keeps going.
+Prompt: /poteto-mode new task. figure out why the cache entry survives logout. don't change any code yet.
+
+### Fix a bug I can repro (Build)
+Bug fix. Repro first is a real constraint.
+Prompt: /poteto-mode users get two notifications after a retry. repro first, then fix and verify.
+
+### Fix through a failing test (Build)
+Only when a local test is cheap. Otherwise run the real command.
+Prompt: /poteto-mode repro the duplicate write first. if there's a cheap test path, /tdd it. then fix and rerun.
+
+### Add a small feature (Build)
+Name the check. This routes to Feature.
+Prompt: /poteto-mode add a --json flag to this command. text output stays byte-identical. verify both.
+
+### Second opinion on a design (Build)
+Arena. Same brief, several attempts, then graft the best parts.
+Prompt: /arena take my prompt to the arena verbatim. i want to compare their proposals with yours.
+
+### Check many slices (Review)
+Swarm. One worker per slice, one report. Not a design bakeoff.
+Prompt: /swarm check every package under packages/ against its check.sh. one worker per package. one report.
+
+### Review a branch (Review)
+Interrogate. Read-only, and skip the nitpicks.
+Prompt: /interrogate the whole branch, but skeptically. don't change anything yet. no nitpicks unless it's an actual bug or regression in behavior.
+
+### What else could this break? (Review)
+Blast radius, proven by running code.
+Prompt: /blast-radius this change. prove what else it could break by running code.
+
+### Get a PR green (Ship)
+Babysit. Stop when it is merge-ready.
+Prompt: /poteto-mode check on pr 123. anything outstanding?
+
+### Land a green stack (Ship)
+Shipping. Verify each PR, then land only the contiguous verified run.
+Prompt: /poteto-mode the stack is green. verify each PR independently, then land the contiguous verified run.
+
+### Leave it overnight (Away)
+One task, a check that can pass or fail, and a decision log.
+Prompt: im going to bed, keep going autonomously until every fixture passes. do not stop. keep a decision log i can audit in the morning.
+
+### Take over a branch (Away)
+Session pickup. Do not redo finished work.
+Prompt: /poteto-mode take over this branch. read the decision log, figure out what's done, and continue from there. don't redo finished work.
+
+### Free the disk (Away)
+Worktree cleanup pauses if a tree still has uncommitted work.
+Prompt: /poteto-mode what's eating my disk? prune the worktrees that are safe to prune.
+
+## Which one
+
+Pairs that are easy to mix up. Use the side that matches the job.
+
+### Do I name a skill, or just describe the task?
+- /poteto-mode: Any non-trivial task. Say the goal and how you will know it is done. The playbook sequences the skills.
+- One skill: You want that move only. A walkthrough, a skeptical review, or the last reply in plain words.
+
+### I have a question. Do I read, or build a sketch?
+- Investigation: The answer is in the code or the record. The deliverable is a cited answer, and you do not change code.
+- Prototype: The answer is a fact you could observe by running something. Build the throwaway and look. Do not ask the human.
+
+### Something is slow. One fix, or a loop?
+- Perf issue: One measured slowness. Trace it, improve it against a baseline, and stop.
+- Hillclimb: You will keep beating one metric. Each accepted win is its own commit, with a before and after.
+
+### I have a symptom. Is the evidence live, or already captured?
+- Runtime forensics: Instrument the running system. Leak, spin, or glitch. Diagnosis, not a fix.
+- Trace forensics: Someone handed you a cpuprofile, trace, spindump, or heap snapshot. Read that artifact.
+
+### Several agents. Same brief, or different slices?
+- /arena: Every attempt gets the same design or code brief. Pick a base and graft the best parts.
+- /swarm: Each worker owns a different slice or a declared race. You get one aggregated report.
+
+### I'm coming back. My memory, or their branch?
+- /recall: Rebuild your own recent context on a topic from chats and the shared record.
+- Session pickup: Take over one in-flight branch, transcript, or cloud agent. Do not redo finished work.
+
+### I'm leaving. One task, or a multi-day program?
+- Autonomous run: One task, a checkable finish, and a decision log you can audit when you return.
+- Orchestrate: A standing program. Many stacked PRs, one coordinator, over more than this session.
+
+### A queue of PRs. Merge them, or hand me a stack?
+- Autopilot-full: Independent PRs. One owner each, through merge, after a root swarm verdict.
+- Autopilot-stack: Build and verify one linear stack. You land it. The agent does not ship it.
+
+### The PR exists. Get it green, or land the stack?
+- Babysit: Conflicts, review threads, and CI. Stop at a merge-ready verdict.
+- Shipping: The stack is already green. Verify each PR, then land only the contiguous verified run.
+
+### The change is big. A feature, or figure it out?
+- Feature: New behavior with a nameable data shape, finished in this session.
+- Figure it out: No bundled playbook fits, or you will step away from a cross-cutting change and want to trust it later.
+
+## If it drifts, say this
+
+- When: It started fixing before it reproduced
+  Say: i said the goal is to repro. i did not ask for a fix yet.
+- When: It calls success because the build passed
+  Say: apply prove it works. show me the real output, not the build log.
+- When: It bolted a new requirement onto the old design
+  Say: use subtract before you add. delete the obsolete path first, then design what's left.
+- When: Two attempts are about to share a branch
+  Say: separate before serializing shared state. give each attempt its own worktree, no locks.
+- When: Two fixes failed and it is writing a third
+  Say: attack the premise. write down what those fixes assumed, and census the actors before the next fix.
+- When: The reply is dense and I still don't get it
+  Say: /bro
+- When: The writing sounds like a model
+  Say: /unslop that, no emdashes
+- When: It asked me something it could just run
+  Say: don't ask me. prototype it and show me the result.
+- When: I listed skills and the steps came out wrong
+  Say: drop the skill list. state the goal and the check. let the playbook sequence the steps.
+- When: Done means make it better
+  Say: done means this command exits 0. paste the check. a vague finish gives the loop nothing to test.
+- When: I'm changing subjects in a long chat
+  Say: /poteto-mode new task. <goal>. <the constraint that must hold>.
+
 ## Playbooks
 
 A playbook is a step-by-step recipe for one kind of task. `/poteto-mode` copies the matched one in full before any work starts.

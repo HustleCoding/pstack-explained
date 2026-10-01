@@ -18,7 +18,7 @@ Open `index.html` or `changelog.html` in any browser, or run `python3 -m http.se
 
 ## Contents
 
-`index.html` is the main app: start-here path, routing demo, playbooks, skills, principles, and models. Markup, styles, data, and router logic live inline.
+`index.html` is the main app: a copyable "what do I type?" board, a which-one chooser, drift corrections, a page finder, the routing demo, and the playbook, skill, and principle catalogs. Markup, styles, data, and router logic live inline.
 
 `.github/workflows/deploy.yml` is the GitHub Pages deployment workflow.
 

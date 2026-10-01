@@ -17,6 +17,6 @@ const script = scriptMatch[1];
 const splitMarker = script.match(/\nconst\s+\$\s*=/)?.index;
 const dataCode = splitMarker ? script.slice(0, splitMarker) : script;
 
-const code = `${dataCode.trim()}\nreturn {PLAYBOOKS, SKILLS, GROUPS, PRINCIPLES, MODELS, KEYWORDS, EXAMPLES, EXAMPLE_CHIPS};`;
+const code = `${dataCode.trim()}\nreturn {PLAYBOOKS, SKILLS, GROUPS, PRINCIPLES, MODELS, KEYWORDS, EXAMPLES, EXAMPLE_CHIPS, NOW, CHOICES, DRIFT};`;
 const fn = new Function(code);
 console.log(JSON.stringify(fn(), null, 2));

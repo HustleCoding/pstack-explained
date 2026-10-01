@@ -255,6 +255,7 @@ def generate_changelog_html(changelog):
 <nav class="bar">
   <div class="wrap">
     <a href="index.html">Home</a>
+    <a href="index.html#now">Now</a>
     <a href="index.html#start">Start</a>
     <a href="index.html#playbooks">Playbooks</a>
     <a href="index.html#skills">Skills</a>
@@ -301,11 +302,49 @@ def generate_llms_full(data, changelog):
         "Twenty-three principles apply across every playbook, biasing the work toward small diffs and real verification. The [official guide](https://github.com/cursor/plugins/blob/main/pstack/docs/guide/README.md) covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.",
         "This site is unofficial and is not affiliated with poteto, pstack, or Cursor.",
         "",
+        "## What to type",
+        "",
+        "Pick the situation and copy the prompt. Swap in your own paths and finish condition.",
+        "",
+    ]
+    for item in data.get("NOW", []):
+        lines.append(f"### {item.get('title', '')} ({item.get('g', '')})")
+        if item.get("blurb"):
+            lines.append(item.get("blurb"))
+        if item.get("prompt"):
+            lines.append(f"Prompt: {item.get('prompt')}")
+        lines.append("")
+
+    if data.get("CHOICES"):
+        lines.extend([
+            "## Which one",
+            "",
+            "Pairs that are easy to mix up. Use the side that matches the job.",
+            "",
+        ])
+        for pair in data.get("CHOICES", []):
+            lines.append(f"### {pair.get('q', '')}")
+            for key in ("a", "b"):
+                side = pair.get(key) or {}
+                lines.append(f"- {side.get('label', '')}: {side.get('when', '')}")
+            lines.append("")
+
+    if data.get("DRIFT"):
+        lines.extend([
+            "## If it drifts, say this",
+            "",
+        ])
+        for row in data.get("DRIFT", []):
+            lines.append(f"- When: {row.get('see', '')}")
+            lines.append(f"  Say: {row.get('say', '')}")
+        lines.append("")
+
+    lines.extend([
         "## Playbooks",
         "",
         "A playbook is a step-by-step recipe for one kind of task. `/poteto-mode` copies the matched one in full before any work starts.",
         "",
-    ]
+    ])
     for pb in data.get("PLAYBOOKS", []):
         meta = "(meta playbook)" if pb.get("meta") else ""
         lines.append(f"### {pb.get('n', '')} {meta}".strip())

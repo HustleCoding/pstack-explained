@@ -1,9 +1,73 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-09-28T17:15:26+00:00",
-  "lastCommitSha": "12d587dfb20741cafc376c42c696c5f6e2a64487",
+  "lastUpdatedAt": "2026-10-05T17:42:45+00:00",
+  "lastCommitSha": "2cbf58508f40de470d7490b55c51d71241928fa2",
   "entries": [
+    {
+      "sha": "2cbf58508f40de470d7490b55c51d71241928fa2",
+      "date": "2026-10-05T16:57:16Z",
+      "title": "docs(pstack): refresh guide for /correct, checklist, prompting tips (#508)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/2cbf58508f40de470d7490b55c51d71241928fa2"
+    },
+    {
+      "sha": "807c031086fcf71c88c863b4a4e6938b6785c58f",
+      "date": "2026-10-05T16:40:42Z",
+      "title": "feat(pstack): add prompting references to /poteto-help (#507)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/807c031086fcf71c88c863b4a4e6938b6785c58f"
+    },
+    {
+      "sha": "00b52d954a99ff67802cad428ff19218659f76fd",
+      "date": "2026-10-05T16:03:10Z",
+      "title": "fix(pstack): make /poteto-help typed-only (#506)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/00b52d954a99ff67802cad428ff19218659f76fd"
+    },
+    {
+      "sha": "4e5b1cf2ccb0ea3716f08c8ee0a5856b5ab93536",
+      "date": "2026-10-05T06:36:15Z",
+      "title": "feat(pstack): add /poteto-help skill (#502)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/4e5b1cf2ccb0ea3716f08c8ee0a5856b5ab93536"
+    },
+    {
+      "sha": "e43c7ee26e0038c6c1fa8380dd34ce86ff94cb2a",
+      "date": "2026-10-04T00:06:48Z",
+      "title": "refactor(pstack): use bare performance mantras in perf-issue step 2 (#496)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/e43c7ee26e0038c6c1fa8380dd34ce86ff94cb2a"
+    },
+    {
+      "sha": "a58628271271837ef5f386adca29c0812683a19a",
+      "date": "2026-10-03T23:19:16Z",
+      "title": "feat(pstack): make /architect designs resist agent mistakes (#495)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/a58628271271837ef5f386adca29c0812683a19a"
+    },
+    {
+      "sha": "9511e60321f7e533a187d62854a3d53a53752874",
+      "date": "2026-10-03T20:28:30Z",
+      "title": "feat(pstack): add /correct skill (#494)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/9511e60321f7e533a187d62854a3d53a53752874"
+    },
+    {
+      "sha": "23e4138daa01c42d4969f7a5465f82704e64f798",
+      "date": "2026-10-03T04:37:34Z",
+      "title": "feat(pstack): port explain-the-number, fresh subagents, hourly autopilot tick, PR headings, schema-first cast (0.15.6)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/23e4138daa01c42d4969f7a5465f82704e64f798"
+    },
     {
       "sha": "12d587dfb20741cafc376c42c696c5f6e2a64487",
       "date": "2026-09-23T20:03:21Z",

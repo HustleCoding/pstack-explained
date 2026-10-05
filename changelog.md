@@ -1,11 +1,19 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-09-28T17:15:26+00:00
-Last commit: 12d587dfb20741cafc376c42c696c5f6e2a64487
+Last synced: 2026-10-05T17:42:45+00:00
+Last commit: 2cbf58508f40de470d7490b55c51d71241928fa2
 
 ## Recent changes
 
+- [2026-10-05] [docs(pstack): refresh guide for /correct, checklist, prompting tips (#508)](https://github.com/cursor/plugins/commit/2cbf58508f40de470d7490b55c51d71241928fa2) (2cbf585) by poteto
+- [2026-10-05] [feat(pstack): add prompting references to /poteto-help (#507)](https://github.com/cursor/plugins/commit/807c031086fcf71c88c863b4a4e6938b6785c58f) (807c031) by poteto
+- [2026-10-05] [fix(pstack): make /poteto-help typed-only (#506)](https://github.com/cursor/plugins/commit/00b52d954a99ff67802cad428ff19218659f76fd) (00b52d9) by poteto
+- [2026-10-05] [feat(pstack): add /poteto-help skill (#502)](https://github.com/cursor/plugins/commit/4e5b1cf2ccb0ea3716f08c8ee0a5856b5ab93536) (4e5b1cf) by poteto
+- [2026-10-04] [refactor(pstack): use bare performance mantras in perf-issue step 2 (#496)](https://github.com/cursor/plugins/commit/e43c7ee26e0038c6c1fa8380dd34ce86ff94cb2a) (e43c7ee) by poteto
+- [2026-10-03] [feat(pstack): make /architect designs resist agent mistakes (#495)](https://github.com/cursor/plugins/commit/a58628271271837ef5f386adca29c0812683a19a) (a586282) by poteto
+- [2026-10-03] [feat(pstack): add /correct skill (#494)](https://github.com/cursor/plugins/commit/9511e60321f7e533a187d62854a3d53a53752874) (9511e60) by poteto
+- [2026-10-03] [feat(pstack): port explain-the-number, fresh subagents, hourly autopilot tick, PR headings, schema-first cast (0.15.6)](https://github.com/cursor/plugins/commit/23e4138daa01c42d4969f7a5465f82704e64f798) (23e4138) by poteto
 - [2026-09-23] [fix(pstack): resolve rule conflicts and read the model rule the same way (#422)](https://github.com/cursor/plugins/commit/12d587dfb20741cafc376c42c696c5f6e2a64487) (12d587d) by poteto
 - [2026-09-23] [docs(pstack): cut 19 more instructions Opus 5.5 does not need (#419)](https://github.com/cursor/plugins/commit/b0b9c7a0baf8b6aa1d00bf77d4101e577d4ba411) (b0b9c7a) by poteto
 - [2026-09-23] [fix(pstack): scrub old model names from public upgrade help (#416)](https://github.com/cursor/plugins/commit/b42effe0aa50f59c693d7e2924714e015e00bf7c) (b42effe) by poteto

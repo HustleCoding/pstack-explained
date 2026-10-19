@@ -1,11 +1,41 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-10-12T18:28:59+00:00
-Last commit: 997ffc7fe26bdaa6478a14e7f5b8d5f9ed747102
+Last synced: 2026-10-19T16:29:14+00:00
+Last commit: d457567332aa6989e753ea289f30ea2bfbc80bc0
 
 ## Recent changes
 
+- [2026-10-19] [chore(pstack): bump to 0.15.28, sync guide with create-formal-verification-skill (#724)](https://github.com/cursor/plugins/commit/d457567332aa6989e753ea289f30ea2bfbc80bc0) (d457567) by poteto
+- [2026-10-19] [pstack: add maintain-formal-verification-skill (#716)](https://github.com/cursor/plugins/commit/7b353f78f6ec193bdbe48ed8059444eb09b6878e) (7b353f7) by poteto
+- [2026-10-19] [fix(pstack): add TLA+ default and no-verifier fallback to create-formal-verification-skill (#721)](https://github.com/cursor/plugins/commit/6b78e9f4e46c75d1697d837e51f07c2692e60b24) (6b78e9f) by poteto
+- [2026-10-18] [pstack: offer formal verification in setup, sync help and guide (#715)](https://github.com/cursor/plugins/commit/f9be7aa00c2b2bf4b13562143a6918445e06b99d) (f9be7aa) by poteto
+- [2026-10-18] [chore(pstack): bump to 0.15.27 (#713)](https://github.com/cursor/plugins/commit/0148b78c56c72a1b8412055913c79f767095b217) (0148b78) by poteto
+- [2026-10-18] [pstack: drop the rewritten-prompt ban from sharpen (#712)](https://github.com/cursor/plugins/commit/75fabace38ce507ee044546eaca64167c8c1e21b) (75fabac) by poteto
+- [2026-10-18] [chore(pstack): bump to 0.15.26 (#710)](https://github.com/cursor/plugins/commit/0b8e952052d482ee6de06deebf14d590d77b1b34) (0b8e952) by poteto
+- [2026-10-18] [feat(pstack): add /create-formal-verification-skill (#709)](https://github.com/cursor/plugins/commit/4382e687a50b8d2c5ce4d141d001186589cff8d5) (4382e68) by poteto
+- [2026-10-18] [fix(pstack): say outright that ketchup never cuts items to stay under a word count (#708)](https://github.com/cursor/plugins/commit/bc1443790cc980d0ea857663260a831299884508) (bc14437) by poteto
+- [2026-10-18] [fix(pstack): list every waiting item so each ketchup call is decidable (#692)](https://github.com/cursor/plugins/commit/16541c6bc1ed6c8d808b2f78a33364003e82b967) (16541c6) by poteto
+- [2026-10-17] [pstack: refresh the docs and add a docs-vs-tree check (#704)](https://github.com/cursor/plugins/commit/019a6a20592c10bf92869e5740368f578a9997fd) (019a6a2) by poteto
+- [2026-10-17] [fix(pstack): close three gaps in the Claude Code plugin (#705)](https://github.com/cursor/plugins/commit/1b800800583ee8ff7f2676caf7a5cb7f0804be85) (1b80080) by poteto
+- [2026-10-17] [fix(pstack): name every skill after its folder (#702)](https://github.com/cursor/plugins/commit/a968159326d1fc6b7d483491ec5c457986a20af2) (a968159) by poteto
+- [2026-10-17] [fix(pstack): make a brand with a type guard, not as (#700)](https://github.com/cursor/plugins/commit/0317eb8b858c991c57721358daaee19dbe8c814d) (0317eb8) by poteto
+- [2026-10-16] [feat(pstack): install pstack in Claude Code from a generated tree (#637)](https://github.com/cursor/plugins/commit/182f2ce414e83224915c190d2f63239c1608d0a5) (182f2ce) by poteto
+- [2026-10-15] [refactor(pstack): cut marginal sections from four skills (#634)](https://github.com/cursor/plugins/commit/99743e9c151c8537cbbf1f98bb38f34ef3368453) (99743e9) by poteto
+- [2026-10-15] [pstack: restate four overspecified principles as reasoning, not rules (#633)](https://github.com/cursor/plugins/commit/e5136d82418d2db3165ea1050d17577cd618cc05) (e5136d8) by poteto
+- [2026-10-14] [chore(pstack): bump to 0.15.25 (#614)](https://github.com/cursor/plugins/commit/6ce45c59b9301a638c1fe1a7b8dc2a82b650898f) (6ce45c5) by poteto
+- [2026-10-14] [feat(pstack): have /ketchup explain changes with screenshots, videos, and diagrams (#628)](https://github.com/cursor/plugins/commit/afd51cf66a3100a95f878d6c4b93a01f6508e3b0) (afd51cf) by poteto
+- [2026-10-14] [chore(pstack): bump to 0.15.24 (#617)](https://github.com/cursor/plugins/commit/1e5c90a4b6f249917bd21fe361b3a2a7deb741b8) (1e5c90a) by poteto
+- [2026-10-14] [feat(pstack): add /sharpen (#615)](https://github.com/cursor/plugins/commit/79afd75d5bd51383fbb526b72f36db03180b8301) (79afd75) by poteto
+- [2026-10-14] [pstack: autopilot loops catch the operator up with /ketchup (#616)](https://github.com/cursor/plugins/commit/8043881e5cbb962f8948d1a1f8f8e28089d67c9a) (8043881) by poteto
+- [2026-10-14] [feat(pstack): match subagent effort to the job, drop Graphite from orchestrate, and cut playbooks to principles (#613)](https://github.com/cursor/plugins/commit/ce649c03ac3b75b6ae80cbd15b7e2c536caedb5a) (ce649c0) by poteto
+- [2026-10-13] [refactor(pstack): make /ketchup read like /bro in 150 words (#609)](https://github.com/cursor/plugins/commit/c86f349b102feb91f1966f8a6a60882a4e601b50) (c86f349) by poteto
+- [2026-10-13] [refactor(pstack): reword /in-your-own-words around goals and the problem (#606)](https://github.com/cursor/plugins/commit/dbf49813a39c1a5389c5e28cb8e4c1c2379e2454) (dbf4981) by poteto
+- [2026-10-13] [chore(pstack): bump to 0.15.22 (#605)](https://github.com/cursor/plugins/commit/3177dab5d4057724e6a02a198596664707795444) (3177dab) by poteto
+- [2026-10-13] [feat(pstack): propose a cheap always-on signal after a deep debugging dig (#604)](https://github.com/cursor/plugins/commit/36cecbf2b5089b275254d59cb4612d6f96f00fbd) (36cecbf) by poteto
+- [2026-10-13] [feat(pstack): shorten /ketchup replies and build them on real visuals (#595)](https://github.com/cursor/plugins/commit/d00ba6ee9b26ff3bb084b8a5051ff6436860cbdf) (d00ba6e) by poteto
+- [2026-10-13] [feat(pstack): add /in-your-own-words to play back the goal before work (#602)](https://github.com/cursor/plugins/commit/7d8d9091e59a1fe9600bb317a1b7f69a31daa349) (7d8d909) by poteto
+- [2026-10-13] [fix(pstack): let poteto-agent find poteto-mode, drop ignored frontmatter, document the / menu (#597)](https://github.com/cursor/plugins/commit/b93e8117880f695bc49ef7b1ef72c09bfcc7c1de) (b93e811) by poteto
 - [2026-10-12] [chore(pstack): bump to 0.15.21 (#584)](https://github.com/cursor/plugins/commit/997ffc7fe26bdaa6478a14e7f5b8d5f9ed747102) (997ffc7) by poteto
 - [2026-10-12] [fix(pstack): tell agents where bundled leaf skills live (#577)](https://github.com/cursor/plugins/commit/364a77eb358f16292410a7295fd8d103fb7dd40e) (364a77e) by poteto
 - [2026-10-12] [chore(pstack): bump to 0.15.20 (#581)](https://github.com/cursor/plugins/commit/1b6d44ff26d4e242f4e8f68c391e6d2f7ca16def) (1b6d44f) by poteto
@@ -76,33 +106,3 @@ Last commit: 997ffc7fe26bdaa6478a14e7f5b8d5f9ed747102
 - [2026-07-12] [maintain-verification-skill: cleanup granularity, re-doctor, evidence checks (#151)](https://github.com/cursor/plugins/commit/6714489fa233263f00e419f6cfc4759b07c81056) (6714489) by poteto
 - [2026-07-12] [pstack: add create-verification-skill and maintain-verification-skill (#150)](https://github.com/cursor/plugins/commit/e42d29fd5c8fe4f13e3bee7f53b35f410f65aee8) (e42d29f) by poteto
 - [2026-07-11] [pstack: give poteto-mode a human display name (#149)](https://github.com/cursor/plugins/commit/9d2a3f2d12bbe0dca3e61bbc0e9dbfe2df09fb56) (9d2a3f2) by poteto
-- [2026-07-11] [pstack: lead the README with the two-step quickstart (#148)](https://github.com/cursor/plugins/commit/9251b2666bc9876396825c1f0df5685dbdaaddb5) (9251b26) by poteto
-- [2026-07-11] [pstack: add model-the-domain principle; true up README (#147)](https://github.com/cursor/plugins/commit/a8145426e541afa424a403e3866496216c1b8142) (a814542) by poteto
-- [2026-07-09] [pstack: make poteto-mode a sticky mode with a conditional reminder (#144)](https://github.com/cursor/plugins/commit/0dda29e839d15464a137af9935665a5a47ee09b8) (0dda29e) by poteto
-- [2026-07-08] [pstack: route hardest tasks to claude-fable-5-thinking-max (#143)](https://github.com/cursor/plugins/commit/9b80b5349872b2a3404be58bd9236cc9b83833bb) (9b80b53) by poteto
-- [2026-07-08] [pstack: route composer slots to grok-4.5-fast-xhigh (#142)](https://github.com/cursor/plugins/commit/dc2fae6625a268361243ca044eb5af141c124704) (dc2fae6) by poteto
-- [2026-06-24] [pstack: add Benny issue automation pack (#137)](https://github.com/cursor/plugins/commit/0452e08a314c03621ec5ac1324f1ad1dd824f1a4) (0452e08) by poteto
-- [2026-06-17] [pstack: add recall and blast-radius skills (#135)](https://github.com/cursor/plugins/commit/e46364b8be46000b7df0f260550cd712afbb8d36) (e46364b) by poteto
-- [2026-06-14] [pstack: bump to 0.9.1, list the hillclimb playbook in the README (#133)](https://github.com/cursor/plugins/commit/cfd81b3961ef5fddc90e9f2994fa1c87cd454e61) (cfd81b3) by poteto
-- [2026-06-14] [poteto-mode: add the Hillclimb playbook and tighten Autonomous run stop semantics (#132)](https://github.com/cursor/plugins/commit/b64f02a456924867d0d293cdb2f94eaecd25b50a) (b64f02a) by poteto
-- [2026-06-07] [pstack: sync README with shipped principles and playbooks (#126)](https://github.com/cursor/plugins/commit/74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12) (74dd229) by poteto
-- [2026-06-07] [pstack: bump version to 0.9.0 (#125)](https://github.com/cursor/plugins/commit/a5cda8b561bb6536e880481734199a568cb647f4) (a5cda8b) by poteto
-- [2026-06-06] [poteto-mode: shape refactoring commits before opening the PR (#124)](https://github.com/cursor/plugins/commit/91707573f17bde34e376f772ef4dd8f504747cb6) (9170757) by poteto
-- [2026-06-06] [pstack: self-unblock empirical forks with a sketch instead of asking (#122)](https://github.com/cursor/plugins/commit/318e8f74ccc316b5f53e058de03fd1978ba5e041) (318e8f7) by poteto
-- [2026-06-06] [pstack: add 'sequence work into verifiable units' principle (#123)](https://github.com/cursor/plugins/commit/27daaa309189aabce2dcaa2554cc940d65749a25) (27daaa3) by poteto
-- [2026-06-06] [pstack: per-role model configuration via /setup-pstack (#121)](https://github.com/cursor/plugins/commit/6605d7adc3d4733b87273158c4cc49ae184409ab) (6605d7a) by poteto
-- [2026-06-06] [pstack: bump version to 0.7.0 (#117)](https://github.com/cursor/plugins/commit/881e794248cd8d3855807abd7e48f2083809d175) (881e794) by poteto
-- [2026-06-06] [pstack: add skeptical-reviewer trigger and arena routing for multi-shape work (#116)](https://github.com/cursor/plugins/commit/97d645a601330acf0257e51ce646aa497855c35f) (97d645a) by poteto
-- [2026-06-06] [pstack: add pause-safely playbook (clean checkpoint for suspending work) (#115)](https://github.com/cursor/plugins/commit/2f3a47e6c404daa4bd24e8a0686751be39ed889b) (2f3a47e) by poteto
-- [2026-06-05] [pstack: fold enforcement-strength rung into encode-lessons-in-structure (#114)](https://github.com/cursor/plugins/commit/64fe0147d32e0c05d2953501ddf9ff65ebcadc54) (64fe014) by poteto
-- [2026-05-30] [pstack: concision pass on how, interrogate, architect, reflect (#106)](https://github.com/cursor/plugins/commit/c8402bc8e3673b973719fe3acc2c4837fef34f86) (c8402bc) by poteto
-- [2026-05-30] [pstack: concision pass on why and poteto-mode (#105)](https://github.com/cursor/plugins/commit/f7e01457bba4499be1ce302484e4225f9a3c9eca) (f7e0145) by poteto
-- [2026-05-29] [pstack: bump to 0.6.0 and refresh README (#104)](https://github.com/cursor/plugins/commit/683cdbda983ea8be4b766ac3fe94b7b88e7f75ad) (683cdbd) by poteto
-- [2026-05-29] [pstack: frame reply impact for the consumer and the maintainer (#103)](https://github.com/cursor/plugins/commit/c532aa167cdbceb3440706ceacea2361e4d395df) (c532aa1) by poteto
-- [2026-05-29] [pstack: build-the-lever defaults to building the tool for any non-trivial work (#102)](https://github.com/cursor/plugins/commit/ba7781cce69f65bf3edc0e789d28233d9e967f96) (ba7781c) by poteto
-- [2026-05-29] [pstack: bump version to 0.5.0 (#101)](https://github.com/cursor/plugins/commit/bb3e1656658b12f0b1f2f1aa868449b678779487) (bb3e165) by poteto
-- [2026-05-29] [pstack: interrogate gains a multi-model code-quality lens (#100)](https://github.com/cursor/plugins/commit/939812915e8a1c2359b0ea8d93fee7c29c41f60e) (9398129) by poteto
-- [2026-05-29] [pstack: update Opus 4.7 references to 4.8 (#98)](https://github.com/cursor/plugins/commit/ec44aed93cda65227954d46c75be3a2f218144a3) (ec44aed) by poteto
-- [2026-05-28] [pstack: architect usage-first design (caller's usage as the spec) (#99)](https://github.com/cursor/plugins/commit/0fe5b8a0952fd8888f9068f0693099ae74d25902) (0fe5b8a) by poteto
-- [2026-05-28] [pstack: bump version to 0.4.0 (#93)](https://github.com/cursor/plugins/commit/9da4009e1278994a5623f23c262f8bde55830598) (9da4009) by poteto
-- [2026-05-28] [pstack: build-the-lever can be a skill your subagents follow (#91)](https://github.com/cursor/plugins/commit/65f4dacee2ed677a295de8d295b889bbfe2ad27c) (65f4dac) by poteto

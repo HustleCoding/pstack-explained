@@ -617,25 +617,25 @@ Run `/setup-pstack` to detect your models and write the rule. Skills read it and
 ## Recent upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-10-12T18:28:59+00:00
+Last synced: 2026-10-19T16:29:14+00:00
 
-- [2026-10-12] chore(pstack): bump to 0.15.21 (#584) (997ffc7) by poteto
-- [2026-10-12] fix(pstack): tell agents where bundled leaf skills live (#577) (364a77e) by poteto
-- [2026-10-12] chore(pstack): bump to 0.15.20 (#581) (1b6d44f) by poteto
-- [2026-10-12] fix(pstack): create-verification-skill readiness means the app is usable (#573) (c49b37a) by poteto
-- [2026-10-12] feat(pstack): add Agent Plugins v1 root manifest (#576) (e5a02f8) by poteto
-- [2026-10-12] fix(pstack): make the /poteto-mode chat the runner, poteto-agent a delegate (#575) (2bd5dd4) by poteto
-- [2026-10-12] fix(pstack): worktree-audit checks MERGED against the default branch, not origin/main (#574) (cf9a111) by poteto
-- [2026-10-12] fix(pstack): drop "Must always apply." from unslop description (#572) (bc697d0) by poteto
-- [2026-10-12] fix(watch-pr): paginate review threads instead of reading only the first 100 (#484) (ff8f83d) by Yi-111-a
-- [2026-10-12] fix(pstack): respect fenced code blocks in plan checks (#536) (87c8103) by Ehsan-hash
-- [2026-10-12] fix(pstack): rename Comment Sicko agent id so Grok can spawn it (#486) (de2dba6) by lab1207
-- [2026-10-12] refactor(pstack): cut unneeded sections from seven skills (#571) (08bd59b) by poteto
-- [2026-10-12] feat(pstack): show /ketchup decisions as before/after visuals (#570) (ea32d95) by poteto
-- [2026-10-10] feat(pstack): add /ketchup skill (#539) (978ca6e) by poteto
-- [2026-10-10] refactor(pstack): distill skill prompts to cut tokens (#538) (00b14f1) by poteto
-- [2026-10-06] feat(pstack): drop Sol, default to Opus xhigh and Grok (#511) (df58112) by poteto
-- [2026-10-06] feat(pstack): have /poteto-help ask about /setup-pstack when no model rule exists (#509) (1e56b29) by poteto
-- [2026-10-05] docs(pstack): refresh guide for /correct, checklist, prompting tips (#508) (2cbf585) by poteto
-- [2026-10-05] feat(pstack): add prompting references to /poteto-help (#507) (807c031) by poteto
-- [2026-10-05] fix(pstack): make /poteto-help typed-only (#506) (00b52d9) by poteto
+- [2026-10-19] chore(pstack): bump to 0.15.28, sync guide with create-formal-verification-skill (#724) (d457567) by poteto
+- [2026-10-19] pstack: add maintain-formal-verification-skill (#716) (7b353f7) by poteto
+- [2026-10-19] fix(pstack): add TLA+ default and no-verifier fallback to create-formal-verification-skill (#721) (6b78e9f) by poteto
+- [2026-10-18] pstack: offer formal verification in setup, sync help and guide (#715) (f9be7aa) by poteto
+- [2026-10-18] chore(pstack): bump to 0.15.27 (#713) (0148b78) by poteto
+- [2026-10-18] pstack: drop the rewritten-prompt ban from sharpen (#712) (75fabac) by poteto
+- [2026-10-18] chore(pstack): bump to 0.15.26 (#710) (0b8e952) by poteto
+- [2026-10-18] feat(pstack): add /create-formal-verification-skill (#709) (4382e68) by poteto
+- [2026-10-18] fix(pstack): say outright that ketchup never cuts items to stay under a word count (#708) (bc14437) by poteto
+- [2026-10-18] fix(pstack): list every waiting item so each ketchup call is decidable (#692) (16541c6) by poteto
+- [2026-10-17] pstack: refresh the docs and add a docs-vs-tree check (#704) (019a6a2) by poteto
+- [2026-10-17] fix(pstack): close three gaps in the Claude Code plugin (#705) (1b80080) by poteto
+- [2026-10-17] fix(pstack): name every skill after its folder (#702) (a968159) by poteto
+- [2026-10-17] fix(pstack): make a brand with a type guard, not as (#700) (0317eb8) by poteto
+- [2026-10-16] feat(pstack): install pstack in Claude Code from a generated tree (#637) (182f2ce) by poteto
+- [2026-10-15] refactor(pstack): cut marginal sections from four skills (#634) (99743e9) by poteto
+- [2026-10-15] pstack: restate four overspecified principles as reasoning, not rules (#633) (e5136d8) by poteto
+- [2026-10-14] chore(pstack): bump to 0.15.25 (#614) (6ce45c5) by poteto
+- [2026-10-14] feat(pstack): have /ketchup explain changes with screenshots, videos, and diagrams (#628) (afd51cf) by poteto
+- [2026-10-14] chore(pstack): bump to 0.15.24 (#617) (1e5c90a) by poteto

@@ -1,9 +1,145 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-10-19T16:29:14+00:00",
-  "lastCommitSha": "d457567332aa6989e753ea289f30ea2bfbc80bc0",
+  "lastUpdatedAt": "2026-10-26T15:43:11+00:00",
+  "lastCommitSha": "e73df471cd4bd918367e99f3dd9c51bd53ddf5f0",
   "entries": [
+    {
+      "sha": "e73df471cd4bd918367e99f3dd9c51bd53ddf5f0",
+      "date": "2026-10-23T22:56:09Z",
+      "title": "fix(pstack): renumber swarm's Phase A and fix its dangling table reference (#807)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0"
+    },
+    {
+      "sha": "a0b0ad99fc11efee2b18b50c33dc94abad4fd51e",
+      "date": "2026-10-23T22:55:46Z",
+      "title": "docs(pstack): note Claude Code auto-update is off for third-party marketplaces (#806)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/a0b0ad99fc11efee2b18b50c33dc94abad4fd51e"
+    },
+    {
+      "sha": "f83fbe695ee14badf3ac128d3718f9fb71a3a3f9",
+      "date": "2026-10-23T22:55:23Z",
+      "title": "fix(pstack): read transcript mtimes with GNU stat and date in worktree-audit (#805)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/f83fbe695ee14badf3ac128d3718f9fb71a3a3f9"
+    },
+    {
+      "sha": "3c596e701b5ca3d213e072464eec36baf0dee3e7",
+      "date": "2026-10-23T22:55:01Z",
+      "title": "fix(orch): prefer active PR over branch history (#804)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/3c596e701b5ca3d213e072464eec36baf0dee3e7"
+    },
+    {
+      "sha": "86c2448db179ad2f9193aecea549e664c5905895",
+      "date": "2026-10-23T22:54:39Z",
+      "title": "fix(pstack): recognize matching inline code delimiters (#803)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/86c2448db179ad2f9193aecea549e664c5905895"
+    },
+    {
+      "sha": "fe096ef31c94c30997207ffb6e30c51f15a34f16",
+      "date": "2026-10-23T22:54:14Z",
+      "title": "fix(watch-pr): cap polling sleeps at the deadline (#802)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/fe096ef31c94c30997207ffb6e30c51f15a34f16"
+    },
+    {
+      "sha": "96dec8ee58deb7b388fa080fbceaba4460a7c9dd",
+      "date": "2026-10-23T22:53:28Z",
+      "title": "fix(watch-pr): distinguish fork heads during stack discovery (#801)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/96dec8ee58deb7b388fa080fbceaba4460a7c9dd"
+    },
+    {
+      "sha": "7054003c3723e82d099fb7620e3bc8d7d63eebc6",
+      "date": "2026-10-23T22:40:13Z",
+      "title": "fix(pstack): route reflect edits out of the plugin cache (#800)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/7054003c3723e82d099fb7620e3bc8d7d63eebc6"
+    },
+    {
+      "sha": "b1a129891c49f6b84d0613477f5d021a0782b5e0",
+      "date": "2026-10-23T22:09:47Z",
+      "title": "chore(pstack): bump to 0.15.32 (#798)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/b1a129891c49f6b84d0613477f5d021a0782b5e0"
+    },
+    {
+      "sha": "3c0fdb4e76293ebcdaed16f0d096c788bd3b49b2",
+      "date": "2026-10-23T22:09:39Z",
+      "title": "feat(pstack): add the ketchup-video skill (#797)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/3c0fdb4e76293ebcdaed16f0d096c788bd3b49b2"
+    },
+    {
+      "sha": "00d5decc6f05669044fd092dec73da9ef6f7eec0",
+      "date": "2026-10-23T19:58:12Z",
+      "title": "feat(pstack): tell generated verify skills to read each model-check result with /statechart (#794)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/00d5decc6f05669044fd092dec73da9ef6f7eec0"
+    },
+    {
+      "sha": "642289e6b1eb01c25b02ea041dccaf7b5864e131",
+      "date": "2026-10-23T19:37:32Z",
+      "title": "chore(pstack): bump to 0.15.31 (#792)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/642289e6b1eb01c25b02ea041dccaf7b5864e131"
+    },
+    {
+      "sha": "076f4b2f57844ff9eb4ada914d4763884d40146e",
+      "date": "2026-10-23T19:37:18Z",
+      "title": "feat(pstack): bring the statechart skill up to date, with the Pele renderer (#791)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/076f4b2f57844ff9eb4ada914d4763884d40146e"
+    },
+    {
+      "sha": "4ec7ffa173eaa70d3d9467a627baf0954645a353",
+      "date": "2026-10-22T18:27:25Z",
+      "title": "refactor(pstack): delete statechart comments that repeat the code, and rename helpers (#779)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/4ec7ffa173eaa70d3d9467a627baf0954645a353"
+    },
+    {
+      "sha": "7698375f92a729f8bb89d113c633dce9ff9dc6db",
+      "date": "2026-10-22T16:57:12Z",
+      "title": "fix(pstack): bring the statechart skill up to date with six fixes (#776)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/7698375f92a729f8bb89d113c633dce9ff9dc6db"
+    },
+    {
+      "sha": "eb4db2b55b2b7dec3d9282754cddf0a56bf4ff10",
+      "date": "2026-10-22T06:08:55Z",
+      "title": "feat(pstack): add the statechart skill to draw TLA+ models as charts (#741)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/eb4db2b55b2b7dec3d9282754cddf0a56bf4ff10"
+    },
+    {
+      "sha": "88d47514b82e7c44f00f2b2a72ff6dd12158038c",
+      "date": "2026-10-20T02:24:33Z",
+      "title": "pstack: restore /sharpen to the original prompt, return only the rewrite (#729)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/88d47514b82e7c44f00f2b2a72ff6dd12158038c"
+    },
     {
       "sha": "d457567332aa6989e753ea289f30ea2bfbc80bc0",
       "date": "2026-10-19T05:35:26Z",
@@ -667,142 +803,6 @@
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/45c66fde1f1681a902a30d1ae8bca1cc64465d6e"
-    },
-    {
-      "sha": "91be0f994b5de7a75f4d6f2b3b00958126d9195e",
-      "date": "2026-07-27T21:14:44Z",
-      "title": "feat(pstack): teach constructive type modeling (#174)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/91be0f994b5de7a75f4d6f2b3b00958126d9195e"
-    },
-    {
-      "sha": "ba7b5907843e1e21ec692418c180e1f912cbf7d3",
-      "date": "2026-07-26T09:12:33Z",
-      "title": "Clarify ownership of autonomous run discoveries (#170)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/ba7b5907843e1e21ec692418c180e1f912cbf7d3"
-    },
-    {
-      "sha": "d45ad028b7d50fca8550a33e7b40842e67fea284",
-      "date": "2026-07-26T00:56:42Z",
-      "title": "pstack: add Opus 5 to model panels (#169)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/d45ad028b7d50fca8550a33e7b40842e67fea284"
-    },
-    {
-      "sha": "04166ac89136d36de2a87f24429e6cc307594953",
-      "date": "2026-07-23T22:11:47Z",
-      "title": "pstack: cut model-config prose to its definition sites (#167)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/04166ac89136d36de2a87f24429e6cc307594953"
-    },
-    {
-      "sha": "02c03a9deddad3aef581da053cecf9603b8caba1",
-      "date": "2026-07-22T23:18:26Z",
-      "title": "pstack: add public usage tutorial (#164)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/02c03a9deddad3aef581da053cecf9603b8caba1"
-    },
-    {
-      "sha": "03e087aebe707ddeed6ba6d13880d50e23e6bed6",
-      "date": "2026-07-22T22:38:38Z",
-      "title": "pstack: default explorer roles to grok (#166)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/03e087aebe707ddeed6ba6d13880d50e23e6bed6"
-    },
-    {
-      "sha": "e1007b141f5574a340460414a23f5e18f56c3121",
-      "date": "2026-07-22T21:59:34Z",
-      "title": "pstack: default panels to fable sol grok (#165)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/e1007b141f5574a340460414a23f5e18f56c3121"
-    },
-    {
-      "sha": "63432f3196d77c3a04425d65d988819fe89069ff",
-      "date": "2026-07-22T21:53:14Z",
-      "title": "pstack: honor inherit-parent / auto (omit Task model) (#163)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/63432f3196d77c3a04425d65d988819fe89069ff"
-    },
-    {
-      "sha": "fe77e7792d99b57dd6ad6281022791d7ef2db266",
-      "date": "2026-07-22T17:20:13Z",
-      "title": "fix-root-causes: flag verbose workaround comments (#162)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/fe77e7792d99b57dd6ad6281022791d7ef2db266"
-    },
-    {
-      "sha": "3fe2823ce17c1656c222d4b7c59d3f82fbf20143",
-      "date": "2026-07-14T00:09:30Z",
-      "title": "pstack: parity sweep with the private skill tree (#156)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/3fe2823ce17c1656c222d4b7c59d3f82fbf20143"
-    },
-    {
-      "sha": "f4d9e39d979815fee68af6398c693144d5d38521",
-      "date": "2026-07-13T21:44:29Z",
-      "title": "poteto-mode: give the perf playbook its eight strategy families (#155)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/f4d9e39d979815fee68af6398c693144d5d38521"
-    },
-    {
-      "sha": "a29f5a8ca161b1de4ffc5484454958bebc04eaa5",
-      "date": "2026-07-12T04:18:44Z",
-      "title": "pstack: bump version to 0.11.2 (#154)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/a29f5a8ca161b1de4ffc5484454958bebc04eaa5"
-    },
-    {
-      "sha": "8f008c41981dca484d5beaf688d3aa2ea4ecf89b",
-      "date": "2026-07-12T04:14:01Z",
-      "title": "pstack: add the teach skill (compose how + why into one explanation) (#153)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/8f008c41981dca484d5beaf688d3aa2ea4ecf89b"
-    },
-    {
-      "sha": "20bdb6cdfdd8ffa683befe62d76104e5654c861d",
-      "date": "2026-07-12T03:30:46Z",
-      "title": "pstack: bump version to 0.11.1 (#152)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/20bdb6cdfdd8ffa683befe62d76104e5654c861d"
-    },
-    {
-      "sha": "6714489fa233263f00e419f6cfc4759b07c81056",
-      "date": "2026-07-12T01:10:09Z",
-      "title": "maintain-verification-skill: cleanup granularity, re-doctor, evidence checks (#151)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/6714489fa233263f00e419f6cfc4759b07c81056"
-    },
-    {
-      "sha": "e42d29fd5c8fe4f13e3bee7f53b35f410f65aee8",
-      "date": "2026-07-12T00:17:43Z",
-      "title": "pstack: add create-verification-skill and maintain-verification-skill (#150)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/e42d29fd5c8fe4f13e3bee7f53b35f410f65aee8"
-    },
-    {
-      "sha": "9d2a3f2d12bbe0dca3e61bbc0e9dbfe2df09fb56",
-      "date": "2026-07-11T23:32:28Z",
-      "title": "pstack: give poteto-mode a human display name (#149)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/9d2a3f2d12bbe0dca3e61bbc0e9dbfe2df09fb56"
     }
   ]
 }

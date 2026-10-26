@@ -1,11 +1,28 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-10-19T16:29:14+00:00
-Last commit: d457567332aa6989e753ea289f30ea2bfbc80bc0
+Last synced: 2026-10-26T15:43:11+00:00
+Last commit: e73df471cd4bd918367e99f3dd9c51bd53ddf5f0
 
 ## Recent changes
 
+- [2026-10-23] [fix(pstack): renumber swarm's Phase A and fix its dangling table reference (#807)](https://github.com/cursor/plugins/commit/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0) (e73df47) by poteto
+- [2026-10-23] [docs(pstack): note Claude Code auto-update is off for third-party marketplaces (#806)](https://github.com/cursor/plugins/commit/a0b0ad99fc11efee2b18b50c33dc94abad4fd51e) (a0b0ad9) by poteto
+- [2026-10-23] [fix(pstack): read transcript mtimes with GNU stat and date in worktree-audit (#805)](https://github.com/cursor/plugins/commit/f83fbe695ee14badf3ac128d3718f9fb71a3a3f9) (f83fbe6) by poteto
+- [2026-10-23] [fix(orch): prefer active PR over branch history (#804)](https://github.com/cursor/plugins/commit/3c596e701b5ca3d213e072464eec36baf0dee3e7) (3c596e7) by poteto
+- [2026-10-23] [fix(pstack): recognize matching inline code delimiters (#803)](https://github.com/cursor/plugins/commit/86c2448db179ad2f9193aecea549e664c5905895) (86c2448) by poteto
+- [2026-10-23] [fix(watch-pr): cap polling sleeps at the deadline (#802)](https://github.com/cursor/plugins/commit/fe096ef31c94c30997207ffb6e30c51f15a34f16) (fe096ef) by poteto
+- [2026-10-23] [fix(watch-pr): distinguish fork heads during stack discovery (#801)](https://github.com/cursor/plugins/commit/96dec8ee58deb7b388fa080fbceaba4460a7c9dd) (96dec8e) by poteto
+- [2026-10-23] [fix(pstack): route reflect edits out of the plugin cache (#800)](https://github.com/cursor/plugins/commit/7054003c3723e82d099fb7620e3bc8d7d63eebc6) (7054003) by poteto
+- [2026-10-23] [chore(pstack): bump to 0.15.32 (#798)](https://github.com/cursor/plugins/commit/b1a129891c49f6b84d0613477f5d021a0782b5e0) (b1a1298) by poteto
+- [2026-10-23] [feat(pstack): add the ketchup-video skill (#797)](https://github.com/cursor/plugins/commit/3c0fdb4e76293ebcdaed16f0d096c788bd3b49b2) (3c0fdb4) by poteto
+- [2026-10-23] [feat(pstack): tell generated verify skills to read each model-check result with /statechart (#794)](https://github.com/cursor/plugins/commit/00d5decc6f05669044fd092dec73da9ef6f7eec0) (00d5dec) by poteto
+- [2026-10-23] [chore(pstack): bump to 0.15.31 (#792)](https://github.com/cursor/plugins/commit/642289e6b1eb01c25b02ea041dccaf7b5864e131) (642289e) by poteto
+- [2026-10-23] [feat(pstack): bring the statechart skill up to date, with the Pele renderer (#791)](https://github.com/cursor/plugins/commit/076f4b2f57844ff9eb4ada914d4763884d40146e) (076f4b2) by poteto
+- [2026-10-22] [refactor(pstack): delete statechart comments that repeat the code, and rename helpers (#779)](https://github.com/cursor/plugins/commit/4ec7ffa173eaa70d3d9467a627baf0954645a353) (4ec7ffa) by poteto
+- [2026-10-22] [fix(pstack): bring the statechart skill up to date with six fixes (#776)](https://github.com/cursor/plugins/commit/7698375f92a729f8bb89d113c633dce9ff9dc6db) (7698375) by poteto
+- [2026-10-22] [feat(pstack): add the statechart skill to draw TLA+ models as charts (#741)](https://github.com/cursor/plugins/commit/eb4db2b55b2b7dec3d9282754cddf0a56bf4ff10) (eb4db2b) by poteto
+- [2026-10-20] [pstack: restore /sharpen to the original prompt, return only the rewrite (#729)](https://github.com/cursor/plugins/commit/88d47514b82e7c44f00f2b2a72ff6dd12158038c) (88d4751) by poteto
 - [2026-10-19] [chore(pstack): bump to 0.15.28, sync guide with create-formal-verification-skill (#724)](https://github.com/cursor/plugins/commit/d457567332aa6989e753ea289f30ea2bfbc80bc0) (d457567) by poteto
 - [2026-10-19] [pstack: add maintain-formal-verification-skill (#716)](https://github.com/cursor/plugins/commit/7b353f78f6ec193bdbe48ed8059444eb09b6878e) (7b353f7) by poteto
 - [2026-10-19] [fix(pstack): add TLA+ default and no-verifier fallback to create-formal-verification-skill (#721)](https://github.com/cursor/plugins/commit/6b78e9f4e46c75d1697d837e51f07c2692e60b24) (6b78e9f) by poteto
@@ -89,20 +106,3 @@ Last commit: d457567332aa6989e753ea289f30ea2bfbc80bc0
 - [2026-07-30] [Add swarm skill to pstack](https://github.com/cursor/plugins/commit/b79f8ca89e36b8d4f2d51e51a77a83ef7d5b5c3a) (b79f8ca) by cursoragent
 - [2026-07-30] [Add feature map reference to create-verification-skill (#178)](https://github.com/cursor/plugins/commit/4483dcd246c3212ff38890bd53977c16d7b54fb7) (4483dcd) by poteto
 - [2026-07-29] [feat(pstack): deepen architect interface guidance (#175)](https://github.com/cursor/plugins/commit/45c66fde1f1681a902a30d1ae8bca1cc64465d6e) (45c66fd) by poteto
-- [2026-07-27] [feat(pstack): teach constructive type modeling (#174)](https://github.com/cursor/plugins/commit/91be0f994b5de7a75f4d6f2b3b00958126d9195e) (91be0f9) by poteto
-- [2026-07-26] [Clarify ownership of autonomous run discoveries (#170)](https://github.com/cursor/plugins/commit/ba7b5907843e1e21ec692418c180e1f912cbf7d3) (ba7b590) by poteto
-- [2026-07-26] [pstack: add Opus 5 to model panels (#169)](https://github.com/cursor/plugins/commit/d45ad028b7d50fca8550a33e7b40842e67fea284) (d45ad02) by poteto
-- [2026-07-23] [pstack: cut model-config prose to its definition sites (#167)](https://github.com/cursor/plugins/commit/04166ac89136d36de2a87f24429e6cc307594953) (04166ac) by poteto
-- [2026-07-22] [pstack: add public usage tutorial (#164)](https://github.com/cursor/plugins/commit/02c03a9deddad3aef581da053cecf9603b8caba1) (02c03a9) by poteto
-- [2026-07-22] [pstack: default explorer roles to grok (#166)](https://github.com/cursor/plugins/commit/03e087aebe707ddeed6ba6d13880d50e23e6bed6) (03e087a) by poteto
-- [2026-07-22] [pstack: default panels to fable sol grok (#165)](https://github.com/cursor/plugins/commit/e1007b141f5574a340460414a23f5e18f56c3121) (e1007b1) by poteto
-- [2026-07-22] [pstack: honor inherit-parent / auto (omit Task model) (#163)](https://github.com/cursor/plugins/commit/63432f3196d77c3a04425d65d988819fe89069ff) (63432f3) by poteto
-- [2026-07-22] [fix-root-causes: flag verbose workaround comments (#162)](https://github.com/cursor/plugins/commit/fe77e7792d99b57dd6ad6281022791d7ef2db266) (fe77e77) by poteto
-- [2026-07-14] [pstack: parity sweep with the private skill tree (#156)](https://github.com/cursor/plugins/commit/3fe2823ce17c1656c222d4b7c59d3f82fbf20143) (3fe2823) by poteto
-- [2026-07-13] [poteto-mode: give the perf playbook its eight strategy families (#155)](https://github.com/cursor/plugins/commit/f4d9e39d979815fee68af6398c693144d5d38521) (f4d9e39) by poteto
-- [2026-07-12] [pstack: bump version to 0.11.2 (#154)](https://github.com/cursor/plugins/commit/a29f5a8ca161b1de4ffc5484454958bebc04eaa5) (a29f5a8) by poteto
-- [2026-07-12] [pstack: add the teach skill (compose how + why into one explanation) (#153)](https://github.com/cursor/plugins/commit/8f008c41981dca484d5beaf688d3aa2ea4ecf89b) (8f008c4) by poteto
-- [2026-07-12] [pstack: bump version to 0.11.1 (#152)](https://github.com/cursor/plugins/commit/20bdb6cdfdd8ffa683befe62d76104e5654c861d) (20bdb6c) by poteto
-- [2026-07-12] [maintain-verification-skill: cleanup granularity, re-doctor, evidence checks (#151)](https://github.com/cursor/plugins/commit/6714489fa233263f00e419f6cfc4759b07c81056) (6714489) by poteto
-- [2026-07-12] [pstack: add create-verification-skill and maintain-verification-skill (#150)](https://github.com/cursor/plugins/commit/e42d29fd5c8fe4f13e3bee7f53b35f410f65aee8) (e42d29f) by poteto
-- [2026-07-11] [pstack: give poteto-mode a human display name (#149)](https://github.com/cursor/plugins/commit/9d2a3f2d12bbe0dca3e61bbc0e9dbfe2df09fb56) (9d2a3f2) by poteto

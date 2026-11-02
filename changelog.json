@@ -1,9 +1,65 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-10-26T15:43:11+00:00",
-  "lastCommitSha": "e73df471cd4bd918367e99f3dd9c51bd53ddf5f0",
+  "lastUpdatedAt": "2026-11-02T19:02:00+00:00",
+  "lastCommitSha": "c742dd61706fbacc1b95f1a20b7b988cf096ce6c",
   "entries": [
+    {
+      "sha": "c742dd61706fbacc1b95f1a20b7b988cf096ce6c",
+      "date": "2026-10-27T23:12:40Z",
+      "title": "feat(pstack): make Orchestrate agentic and delete the orch scripts (#1043)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/c742dd61706fbacc1b95f1a20b7b988cf096ce6c"
+    },
+    {
+      "sha": "ab1f702ce8e8b6557edb56b09f52cde8bfb83f17",
+      "date": "2026-10-27T18:49:18Z",
+      "title": "feat(pstack): port recent skill updates (#986)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/ab1f702ce8e8b6557edb56b09f52cde8bfb83f17"
+    },
+    {
+      "sha": "519d36aa98955bf680db01bcde5fdfba686dc901",
+      "date": "2026-10-27T05:52:45Z",
+      "title": "test(pstack): wait for the reap in the statechart SIGKILL view test (#981)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/519d36aa98955bf680db01bcde5fdfba686dc901"
+    },
+    {
+      "sha": "164ced10fa576ddf91e1f03b4fa9d1183c8272fe",
+      "date": "2026-10-27T04:33:31Z",
+      "title": "chore(pstack): bump to 0.15.34 (#983)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/164ced10fa576ddf91e1f03b4fa9d1183c8272fe"
+    },
+    {
+      "sha": "740d2c0786246cafac41906198f656b135194d3b",
+      "date": "2026-10-27T04:30:22Z",
+      "title": "fix(pstack): keep qualified action names in property traces (#982)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/740d2c0786246cafac41906198f656b135194d3b"
+    },
+    {
+      "sha": "7c7bde7033df2a83a23294571ef12c51cf560217",
+      "date": "2026-10-27T04:08:38Z",
+      "title": "chore(pstack): bump to 0.15.33 (#978)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/7c7bde7033df2a83a23294571ef12c51cf560217"
+    },
+    {
+      "sha": "34b1b7c96f09f81a21a6c78f65b7833f7dcb5b24",
+      "date": "2026-10-27T04:08:29Z",
+      "title": "feat(pstack): port the statechart compiler (#977)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/34b1b7c96f09f81a21a6c78f65b7833f7dcb5b24"
+    },
     {
       "sha": "e73df471cd4bd918367e99f3dd9c51bd53ddf5f0",
       "date": "2026-10-23T22:56:09Z",
@@ -747,62 +803,6 @@
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/424829e3e0f7e5a8b9181412ca04e84e026a0c02"
-    },
-    {
-      "sha": "99559f2f52047978602ef365589275831e76af07",
-      "date": "2026-08-02T19:49:20Z",
-      "title": "pstack: add bro, babysit/shipping/orchestrate/worktree-cleanup, and catch-up ports (0.14.0) (#187)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/99559f2f52047978602ef365589275831e76af07"
-    },
-    {
-      "sha": "b047069f4f3a73e87dd1f11f7913386d25876b91",
-      "date": "2026-08-02T03:29:30Z",
-      "title": "pstack: add autopilot playbooks, /no-comments, Comment Sicko, and /technical-writing (0.13.0) (#185)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/b047069f4f3a73e87dd1f11f7913386d25876b91"
-    },
-    {
-      "sha": "91dd7b7119883318831e54b00aea544fef96bc8d",
-      "date": "2026-07-30T19:30:44Z",
-      "title": "Address swarm review feedback",
-      "author": "cursoragent",
-      "authorUrl": "https://github.com/cursoragent",
-      "url": "https://github.com/cursor/plugins/commit/91dd7b7119883318831e54b00aea544fef96bc8d"
-    },
-    {
-      "sha": "0b7ef5b61f39d60645c54101ebac762fbb493494",
-      "date": "2026-07-30T19:18:03Z",
-      "title": "docs(pstack): refresh guide for 0.12.0",
-      "author": "cursoragent",
-      "authorUrl": "https://github.com/cursoragent",
-      "url": "https://github.com/cursor/plugins/commit/0b7ef5b61f39d60645c54101ebac762fbb493494"
-    },
-    {
-      "sha": "b79f8ca89e36b8d4f2d51e51a77a83ef7d5b5c3a",
-      "date": "2026-07-30T18:18:38Z",
-      "title": "Add swarm skill to pstack",
-      "author": "cursoragent",
-      "authorUrl": "https://github.com/cursoragent",
-      "url": "https://github.com/cursor/plugins/commit/b79f8ca89e36b8d4f2d51e51a77a83ef7d5b5c3a"
-    },
-    {
-      "sha": "4483dcd246c3212ff38890bd53977c16d7b54fb7",
-      "date": "2026-07-30T17:18:40Z",
-      "title": "Add feature map reference to create-verification-skill (#178)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/4483dcd246c3212ff38890bd53977c16d7b54fb7"
-    },
-    {
-      "sha": "45c66fde1f1681a902a30d1ae8bca1cc64465d6e",
-      "date": "2026-07-29T05:29:45Z",
-      "title": "feat(pstack): deepen architect interface guidance (#175)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/45c66fde1f1681a902a30d1ae8bca1cc64465d6e"
     }
   ]
 }

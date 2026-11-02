@@ -1,11 +1,18 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-10-26T15:43:11+00:00
-Last commit: e73df471cd4bd918367e99f3dd9c51bd53ddf5f0
+Last synced: 2026-11-02T19:02:00+00:00
+Last commit: c742dd61706fbacc1b95f1a20b7b988cf096ce6c
 
 ## Recent changes
 
+- [2026-10-27] [feat(pstack): make Orchestrate agentic and delete the orch scripts (#1043)](https://github.com/cursor/plugins/commit/c742dd61706fbacc1b95f1a20b7b988cf096ce6c) (c742dd6) by poteto
+- [2026-10-27] [feat(pstack): port recent skill updates (#986)](https://github.com/cursor/plugins/commit/ab1f702ce8e8b6557edb56b09f52cde8bfb83f17) (ab1f702) by poteto
+- [2026-10-27] [test(pstack): wait for the reap in the statechart SIGKILL view test (#981)](https://github.com/cursor/plugins/commit/519d36aa98955bf680db01bcde5fdfba686dc901) (519d36a) by poteto
+- [2026-10-27] [chore(pstack): bump to 0.15.34 (#983)](https://github.com/cursor/plugins/commit/164ced10fa576ddf91e1f03b4fa9d1183c8272fe) (164ced1) by poteto
+- [2026-10-27] [fix(pstack): keep qualified action names in property traces (#982)](https://github.com/cursor/plugins/commit/740d2c0786246cafac41906198f656b135194d3b) (740d2c0) by poteto
+- [2026-10-27] [chore(pstack): bump to 0.15.33 (#978)](https://github.com/cursor/plugins/commit/7c7bde7033df2a83a23294571ef12c51cf560217) (7c7bde7) by poteto
+- [2026-10-27] [feat(pstack): port the statechart compiler (#977)](https://github.com/cursor/plugins/commit/34b1b7c96f09f81a21a6c78f65b7833f7dcb5b24) (34b1b7c) by poteto
 - [2026-10-23] [fix(pstack): renumber swarm's Phase A and fix its dangling table reference (#807)](https://github.com/cursor/plugins/commit/e73df471cd4bd918367e99f3dd9c51bd53ddf5f0) (e73df47) by poteto
 - [2026-10-23] [docs(pstack): note Claude Code auto-update is off for third-party marketplaces (#806)](https://github.com/cursor/plugins/commit/a0b0ad99fc11efee2b18b50c33dc94abad4fd51e) (a0b0ad9) by poteto
 - [2026-10-23] [fix(pstack): read transcript mtimes with GNU stat and date in worktree-audit (#805)](https://github.com/cursor/plugins/commit/f83fbe695ee14badf3ac128d3718f9fb71a3a3f9) (f83fbe6) by poteto
@@ -99,10 +106,3 @@ Last commit: e73df471cd4bd918367e99f3dd9c51bd53ddf5f0
 - [2026-08-21] [docs(pstack): port workflow and boundary guidance (#238)](https://github.com/cursor/plugins/commit/46125561306434d8a1d7745d540d8932ab0cd2a2) (4612556) by poteto
 - [2026-08-13] [chore(pstack): bump Grok default from 4.5 to 4.6 (#210)](https://github.com/cursor/plugins/commit/63d938c2e4a165a0fec1bd0f61a8e325f0cb751e) (63d938c) by poteto
 - [2026-08-02] [docs(pstack): bring guide current with new skills and playbooks (#188)](https://github.com/cursor/plugins/commit/424829e3e0f7e5a8b9181412ca04e84e026a0c02) (424829e) by poteto
-- [2026-08-02] [pstack: add bro, babysit/shipping/orchestrate/worktree-cleanup, and catch-up ports (0.14.0) (#187)](https://github.com/cursor/plugins/commit/99559f2f52047978602ef365589275831e76af07) (99559f2) by poteto
-- [2026-08-02] [pstack: add autopilot playbooks, /no-comments, Comment Sicko, and /technical-writing (0.13.0) (#185)](https://github.com/cursor/plugins/commit/b047069f4f3a73e87dd1f11f7913386d25876b91) (b047069) by poteto
-- [2026-07-30] [Address swarm review feedback](https://github.com/cursor/plugins/commit/91dd7b7119883318831e54b00aea544fef96bc8d) (91dd7b7) by cursoragent
-- [2026-07-30] [docs(pstack): refresh guide for 0.12.0](https://github.com/cursor/plugins/commit/0b7ef5b61f39d60645c54101ebac762fbb493494) (0b7ef5b) by cursoragent
-- [2026-07-30] [Add swarm skill to pstack](https://github.com/cursor/plugins/commit/b79f8ca89e36b8d4f2d51e51a77a83ef7d5b5c3a) (b79f8ca) by cursoragent
-- [2026-07-30] [Add feature map reference to create-verification-skill (#178)](https://github.com/cursor/plugins/commit/4483dcd246c3212ff38890bd53977c16d7b54fb7) (4483dcd) by poteto
-- [2026-07-29] [feat(pstack): deepen architect interface guidance (#175)](https://github.com/cursor/plugins/commit/45c66fde1f1681a902a30d1ae8bca1cc64465d6e) (45c66fd) by poteto

@@ -617,8 +617,9 @@ Run `/setup-pstack` to detect your models and write the rule. Skills read it and
 ## Recent upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-11-02T19:02:00+00:00
+Last synced: 2026-11-16T19:09:26+00:00
 
+- [2026-11-15] feat(pstack): new default models, one-file why and how, statechart fixes, sharpen and reflect text (#1236) (bf0c7cd) by poteto
 - [2026-10-27] feat(pstack): make Orchestrate agentic and delete the orch scripts (#1043) (c742dd6) by poteto
 - [2026-10-27] feat(pstack): port recent skill updates (#986) (ab1f702) by poteto
 - [2026-10-27] test(pstack): wait for the reap in the statechart SIGKILL view test (#981) (519d36a) by poteto
@@ -638,4 +639,3 @@ Last synced: 2026-11-02T19:02:00+00:00
 - [2026-10-23] feat(pstack): add the ketchup-video skill (#797) (3c0fdb4) by poteto
 - [2026-10-23] feat(pstack): tell generated verify skills to read each model-check result with /statechart (#794) (00d5dec) by poteto
 - [2026-10-23] chore(pstack): bump to 0.15.31 (#792) (642289e) by poteto
-- [2026-10-23] feat(pstack): bring the statechart skill up to date, with the Pele renderer (#791) (076f4b2) by poteto

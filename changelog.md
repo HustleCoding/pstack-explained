@@ -1,11 +1,12 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-11-02T19:02:00+00:00
-Last commit: c742dd61706fbacc1b95f1a20b7b988cf096ce6c
+Last synced: 2026-11-16T19:09:26+00:00
+Last commit: bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7
 
 ## Recent changes
 
+- [2026-11-15] [feat(pstack): new default models, one-file why and how, statechart fixes, sharpen and reflect text (#1236)](https://github.com/cursor/plugins/commit/bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7) (bf0c7cd) by poteto
 - [2026-10-27] [feat(pstack): make Orchestrate agentic and delete the orch scripts (#1043)](https://github.com/cursor/plugins/commit/c742dd61706fbacc1b95f1a20b7b988cf096ce6c) (c742dd6) by poteto
 - [2026-10-27] [feat(pstack): port recent skill updates (#986)](https://github.com/cursor/plugins/commit/ab1f702ce8e8b6557edb56b09f52cde8bfb83f17) (ab1f702) by poteto
 - [2026-10-27] [test(pstack): wait for the reap in the statechart SIGKILL view test (#981)](https://github.com/cursor/plugins/commit/519d36aa98955bf680db01bcde5fdfba686dc901) (519d36a) by poteto
@@ -105,4 +106,3 @@ Last commit: c742dd61706fbacc1b95f1a20b7b988cf096ce6c
 - [2026-08-25] [docs(pstack): make the multi-PR plan a verified checklist (#258)](https://github.com/cursor/plugins/commit/bdf7aa355337897f167153e05069aca505dae17c) (bdf7aa3) by poteto
 - [2026-08-21] [docs(pstack): port workflow and boundary guidance (#238)](https://github.com/cursor/plugins/commit/46125561306434d8a1d7745d540d8932ab0cd2a2) (4612556) by poteto
 - [2026-08-13] [chore(pstack): bump Grok default from 4.5 to 4.6 (#210)](https://github.com/cursor/plugins/commit/63d938c2e4a165a0fec1bd0f61a8e325f0cb751e) (63d938c) by poteto
-- [2026-08-02] [docs(pstack): bring guide current with new skills and playbooks (#188)](https://github.com/cursor/plugins/commit/424829e3e0f7e5a8b9181412ca04e84e026a0c02) (424829e) by poteto

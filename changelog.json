@@ -1,9 +1,17 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-11-02T19:02:00+00:00",
-  "lastCommitSha": "c742dd61706fbacc1b95f1a20b7b988cf096ce6c",
+  "lastUpdatedAt": "2026-11-16T19:09:26+00:00",
+  "lastCommitSha": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7",
   "entries": [
+    {
+      "sha": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7",
+      "date": "2026-11-15T03:36:17Z",
+      "title": "feat(pstack): new default models, one-file why and how, statechart fixes, sharpen and reflect text (#1236)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7"
+    },
     {
       "sha": "c742dd61706fbacc1b95f1a20b7b988cf096ce6c",
       "date": "2026-10-27T23:12:40Z",
@@ -795,14 +803,6 @@
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/63d938c2e4a165a0fec1bd0f61a8e325f0cb751e"
-    },
-    {
-      "sha": "424829e3e0f7e5a8b9181412ca04e84e026a0c02",
-      "date": "2026-08-02T20:25:40Z",
-      "title": "docs(pstack): bring guide current with new skills and playbooks (#188)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/424829e3e0f7e5a8b9181412ca04e84e026a0c02"
     }
   ]
 }

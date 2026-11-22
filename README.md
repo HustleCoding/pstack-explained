@@ -42,4 +42,4 @@ The workflow in `.github/workflows/sync-pstack.yml` runs every Monday at 09:00 U
 
 ## Notes
 
-This page mirrors the pstack skills installed on the author's machine, not a live install. pstack itself ships as a plugin via `/add-plugin pstack`; this repository is an independent explanatory tool, not affiliated with pstack.
+The site covers the Cursor plugin and the [Codex port](https://github.com/HustleCoding/pstack-codex). The changelog tracks upstream pstack. The Codex introduction documents the port and its OpenAI model routes.

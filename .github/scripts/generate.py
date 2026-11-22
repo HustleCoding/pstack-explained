@@ -293,14 +293,15 @@ def generate_llms_full(data, changelog):
     lines = [
         "# pstack explained",
         "",
-        "pstack is poteto's set of engineering skills for coding agents, installed with `/add-plugin pstack`.",
+        "pstack is poteto's set of engineering skills for coding agents, available in Cursor and through the Codex port.",
         "This site is an unofficial reading aid at https://hustlecoding.github.io/pstack-explained/.",
         "",
         "## Overview",
         "",
         "Start in a Cursor chat with `/add-plugin pstack`, then `/setup-pstack`, then one real task via `/poteto-mode`.",
+        "For Codex, clone [pstack-codex](https://github.com/HustleCoding/pstack-codex), run `./scripts/install.sh`, and start a new task. Ask Codex to use `setup-pstack` or `poteto-mode`.",
         "Type `/poteto-mode` and describe a task. pstack matches the task to a playbook, then runs the appropriate skills as the steps fire.",
-        "Twenty-three principles apply across every playbook, biasing the work toward small diffs and real verification. The [official guide](https://github.com/cursor/plugins/blob/main/pstack/docs/guide/README.md) covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.",
+        "Twenty-four principles apply across every playbook, biasing the work toward small diffs and real verification. The [official guide](https://github.com/cursor/plugins/blob/main/pstack/docs/guide/README.md) covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.",
         "This site is unofficial and is not affiliated with poteto, pstack, or Cursor.",
         "",
         "## What to type",
@@ -380,7 +381,7 @@ def generate_llms_full(data, changelog):
     lines.extend([
         "## Principles",
         "",
-        "Twenty-three rules in five families. Each principle has a name, when it applies, the rule to follow, and a phrase you can say to steer.",
+        "Twenty-four rules in five families. Each principle has a name, when it applies, the rule to follow, and a phrase you can say to steer.",
         "",
     ])
     groups = {g["key"]: g for g in data.get("GROUPS", [])}
@@ -399,7 +400,16 @@ def generate_llms_full(data, changelog):
                 lines.append("")
 
     lines.extend([
-        "## Models per role",
+        "## Codex model defaults",
+        "",
+        "The Codex port tracks upstream 0.15.46. Choose the parent in Codex. Child overrides come from `~/.codex/pstack/config.md` when the active runtime supports them.",
+        "",
+    ])
+    for route in data["CODEX_MODELS"]:
+        lines.append(f"- **{route['role']}** {route['model']}")
+    lines.extend([
+        "",
+        "## Cursor model roles",
         "",
         "pstack can use a different model for each role. Some roles run several models in parallel so the reviews come from different angles.",
         "Run `/setup-pstack` to detect your models and write the rule. Skills read it and fall back to their own defaults when a line is missing, so you override only what you want.",

@@ -122,7 +122,7 @@ section{padding:40px 0 8px; border:0; scroll-margin-top:20px}
 .sh .lead a{color:var(--mark)}
 
 .cmdrow{display:flex; gap:16px; align-items:baseline; padding:12px 0; border-top:1px solid var(--line)}
-.cmdbox{font-family:var(--ff-mono); font-size:16px; color:var(--ink); line-height:24px}
+.cmdbox{min-width:0; overflow-wrap:anywhere; font-family:var(--ff-mono); font-size:16px; color:var(--ink); line-height:24px}
 .step{padding:0 0 8px}
 .step h3{font-family:var(--ff); font-weight:400; font-size:16px; margin:16px 0 4px; letter-spacing:0; line-height:24px}
 .step p{margin:0 0 4px; color:var(--dim); font-size:16px}
@@ -312,7 +312,7 @@ footer a{color:var(--mark)}
 <main>
   <div class="lede">
     <h1>Say the goal. pstack does the careful part.</h1>
-    <p class="deck">pstack is poteto’s Cursor plugin for coding agents. You describe a task. <code>/poteto-mode</code> matches a playbook and runs the skills as the steps fire. You steer by saying a principle name.</p>
+    <p class="deck">pstack is poteto’s set of engineering skills for coding agents, available in Cursor and through a Codex port. You describe a task. <code>/poteto-mode</code> matches a playbook and runs the skills as the steps fire. You steer by saying a principle name.</p>
     <div class="ask">
       <label for="findq">Search prompts, playbooks, skills, and principles</label>
       <div class="findpop" id="findpop">
@@ -325,11 +325,11 @@ footer a{color:var(--mark)}
 <section id="start">
   <div class="sh">
     <h2>Start</h2>
-    <p class="lead">Three commands in a Cursor chat. Install, pick models, then give <code>/poteto-mode</code> one real task. You do not name a playbook or list skills.</p>
+    <p class="lead">Choose your coding agent, install the skills, and give <code>poteto-mode</code> a task with a check that can pass or fail.</p>
   </div>
   <div class="steps">
     <article class="step">
-      <h3>Install the plugin</h3>
+      <h3>Install in Cursor</h3>
       <p>Cursor confirms when it is installed.</p>
       <div class="cmdrow">
         <div class="cmdbox">/add-plugin pstack</div>
@@ -337,7 +337,7 @@ footer a{color:var(--mark)}
       </div>
     </article>
     <article class="step">
-      <h3>Pick the models</h3>
+      <h3>Pick Cursor models</h3>
       <p>Writes <code>~/.cursor/rules/pstack-models.mdc</code>. Start a new chat after it finishes.</p>
       <div class="cmdrow">
         <div class="cmdbox">/setup-pstack</div>
@@ -352,6 +352,18 @@ footer a{color:var(--mark)}
         <button class="copy" type="button" data-copy="/poteto-mode add a --json flag to this command. text output stays byte-identical. verify both.">Copy</button>
       </div>
     </article>
+  </div>
+  <div class="sh">
+    <h3>Use pstack in Codex</h3>
+    <p class="lead">Install <a href="https://github.com/HustleCoding/pstack-codex">pstack-codex</a> in a terminal, then start a new Codex task.</p>
+  </div>
+  <div class="cmdrow">
+    <div class="cmdbox">git clone https://github.com/HustleCoding/pstack-codex.git &amp;&amp; cd pstack-codex &amp;&amp; ./scripts/install.sh</div>
+    <button class="copy" type="button" data-copy="git clone https://github.com/HustleCoding/pstack-codex.git &amp;&amp; cd pstack-codex &amp;&amp; ./scripts/install.sh">Copy</button>
+  </div>
+  <div class="cmdrow">
+    <div class="cmdbox">Use setup-pstack to configure Codex. Then use poteto-mode on this task.</div>
+    <button class="copy" type="button" data-copy="Use setup-pstack to configure Codex. Then use poteto-mode on this task.">Copy</button>
   </div>
   <div class="uses">
     <div class="use"><strong>Reach for it</strong><span>A defect, a feature you can verify, a cited question, or work you will leave running.</span></div>
@@ -439,7 +451,7 @@ footer a{color:var(--mark)}
 <section id="principles">
   <div class="sh">
     <h2>Principles</h2>
-    <p class="lead">Twenty-three rules. Say the name to redirect an agent mid-task.</p>
+    <p class="lead">Twenty-four rules. Say the name to redirect an agent mid-task.</p>
   </div>
   <div id="pstack"></div>
 </section>
@@ -447,8 +459,11 @@ footer a{color:var(--mark)}
 <section id="models">
   <div class="sh">
     <h2>Models per role</h2>
-    <p class="lead">A different model can own each role. You only override the roles you care about.</p>
+    <p class="lead">Codex defaults in the port synced to upstream 0.15.46.</p>
   </div>
+  <div class="mgrid" id="codex-models"></div>
+  <p class="models-note">Choose the parent model in Codex. <code>setup-pstack</code> configures child routes in <code>~/.codex/pstack/config.md</code>. Children inherit the parent model when overrides are unavailable. <a href="https://github.com/HustleCoding/pstack-codex/blob/main/config.example.md">Full Codex routes</a></p>
+  <h3>Cursor model roles</h3>
   <div class="mgrid" id="mgrid"></div>
   <p class="models-note">Run <code>/setup-pstack</code> to detect your models and write the rule. A role with no line keeps the skill default. <code>auto</code> and <code>inherit-parent</code> mean the parent chat model.</p>
 </section>
@@ -466,7 +481,7 @@ footer a{color:var(--mark)}
     <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/05-build-and-clean.md" target="_blank" rel="noopener">Build and clean the change</a><span>Choose a build playbook, then keep the diff reviewable.</span></li>
     <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/06-verify-and-ship.md" target="_blank" rel="noopener">Verify the result and open a PR</a><span>Prove behavior on the real app, then drive the PR to merged.</span></li>
     <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/07-overnight.md" target="_blank" rel="noopener">Run work while you sleep</a><span>A checkable finish, an isolated worktree, and a decision log.</span></li>
-    <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/08-principles.md" target="_blank" rel="noopener">Steer with principle names</a><span>Use the 23 names to redirect an agent mid-task.</span></li>
+    <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/08-principles.md" target="_blank" rel="noopener">Steer with principle names</a><span>Use the principle names to redirect an agent mid-task.</span></li>
     <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/09-make-it-yours.md" target="_blank" rel="noopener">Make it yours</a><span>A personal mode, a skill you author, and a test of its changes.</span></li>
     <li><a href="https://github.com/cursor/plugins/blob/main/pstack/docs/guide/10-recipes-and-pitfalls.md" target="_blank" rel="noopener">Recipes and pitfalls</a><span>Prompts worth copying, and the mistakes that recur.</span></li>
   </ol>
@@ -617,6 +632,12 @@ const SKILLS = [
   {cmd:"/setup-pstack", g:"start", when:"You want to pick which models pstack uses per role. Detects your models and writes a config rule.",
    example:"/setup-pstack",
    playbooks:[]},
+  {cmd:"/sharpen", g:"start", when:"Rewrite a task prompt with expert methods and an outside check before sending it.",
+   example:"/sharpen make this migration brief testable", playbooks:[]},
+  {cmd:"/ketchup", g:"understand", when:"Catch up on this chat and see every decision still waiting on you.",
+   example:"/ketchup", playbooks:[]},
+  {cmd:"/ketchup-video", g:"understand", when:"Catch up from the work's screenshots and artifacts in a short subtitled video.",
+   example:"/ketchup-video", playbooks:[]},
   {cmd:"/how", g:"understand", when:"You want a walkthrough of how a subsystem works.",
    example:"/how do we dedupe notifications? is there an n+1 when we look up subscribers?",
    playbooks:["investigation"]},
@@ -656,6 +677,12 @@ const SKILLS = [
   {cmd:"/maintain-verification-skill", g:"prove", when:"Periodic pass that keeps a project's verification skill and feature map honest.",
    example:"/maintain-verification-skill",
    playbooks:[]},
+  {cmd:"/create-formal-verification-skill", g:"prove", when:"Choose a verifier for a race or invariant that ordinary tests rarely reach.",
+   example:"/create-formal-verification-skill prove retries cannot double-charge", playbooks:[]},
+  {cmd:"/maintain-formal-verification-skill", g:"prove", when:"Update a formal check when the code it models changes.",
+   example:"/maintain-formal-verification-skill", playbooks:[]},
+  {cmd:"/statechart", g:"prove", when:"Check a TLA+ model and draw its states or shortest paths to violated rules.",
+   example:"/statechart model the retry flow", playbooks:[]},
   {cmd:"/unslop", g:"write", when:"You are cleaning up writing. Removes AI tells.",
    example:"/unslop that, no emdashes",
    playbooks:["opening-a-pr"]},
@@ -728,6 +755,8 @@ const PRINCIPLES = [
   {g:"arch", n:"Model the Domain", applies:"When writing stateful logic, or when code branches a lot or repeats a shape assumption across files.", rule:"Encode the real domain in a data structure instead of scattering it across conditionals. Reach for state machines, typed models, lookup tables, reducers, or small module boundaries that gather repeated behavior. Don't force an abstraction if the current shape is already clear and local.",
    steer:"model the domain. put the repeated rule in one structure, not more ifs."},
 
+  {g:"verif", n:"Explain the Number", applies:"Reporting a measurement or threshold that someone will use to decide.", rule:"Name what was counted, the units, and the comparison that makes the result meaningful.",
+   steer:"explain the number. what did you count and why does it matter?"},
   {g:"verif", n:"Prove It Works", applies:"After a task, before declaring done.", rule:"Verify against the real artifact. Not a proxy. Not that it compiles.",
    steer:"apply prove it works. run the real flow and show me the written records."},
   {g:"verif", n:"Fix Root Causes", applies:"Debugging.", rule:"Trace each symptom to its root cause. Reproduce first. Ask why until you reach it.",
@@ -746,6 +775,14 @@ const PRINCIPLES = [
    steer:"encode lessons in structure. don't add another paragraph. make it a check."}
 ];
 
+const CODEX_MODELS = [
+  {role:"Parent, complex work, and synthesis", model:"gpt-6.2-sol@high"},
+  {role:"Routine implementation", model:"gpt-6.2-sol@medium"},
+  {role:"Hardest design and review", model:"gpt-6.2-astra@high"},
+  {role:"Focused exploration and swarm workers", model:"gpt-6-luna@high"},
+  {role:"Review panels", model:"GPT-6 Luna High, GPT-6.2 Sol High, GPT-6.2 Astra High"}
+];
+
 const MODELS = [
   {r:"feature, refactoring", k:"single", o:"Code work that builds or restructures."},
   {r:"bug-fix", k:"single", o:"Reproduce, root-cause, and fix with evidence."},
@@ -755,7 +792,6 @@ const MODELS = [
   {r:"hardest tasks", k:"single", o:"The default model for the hardest tasks."},
   {r:"how explorer", k:"single", o:"Maps the subsystem inside the /how skill."},
   {r:"how explainer", k:"single", o:"Writes the /how walkthrough."},
-  {r:"how critics", k:"panel", o:"One subagent per model reviews the explanation."},
   {r:"why investigators", k:"single", o:"Queries one evidence category inside /why."},
   {r:"why synthesizer", k:"single", o:"Combines the evidence into the cited answer."},
   {r:"reflect tooling", k:"single", o:"Captures the tooling recipe in /reflect."},
@@ -1265,6 +1301,14 @@ function renderPrinciples(){
 }
 
 function renderModels(){
+  const codex = $("#codex-models");
+  CODEX_MODELS.forEach(({ role, model }) => {
+    const card = el("div", "mcard");
+    const title = el("div", "mrole"); title.textContent = role;
+    const route = el("code", "mowns"); route.textContent = model;
+    card.append(title, route);
+    codex.appendChild(card);
+  });
   const grid = $("#mgrid");
   MODELS.forEach((m, i) => {
     const card = el("div", "mcard");

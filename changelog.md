@@ -1,11 +1,15 @@
 # pstack upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-11-16T19:09:26+00:00
-Last commit: bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7
+Last synced: 2026-11-22T15:05:32+00:00
+Last commit: 0b46ec399d55f2829e88822998f53b84944837d3
 
 ## Recent changes
 
+- [2026-11-19] [fix(pstack): run /statechart on native Windows and read TLC's \r\n line ends (#1292)](https://github.com/cursor/plugins/commit/0b46ec399d55f2829e88822998f53b84944837d3) (0b46ec3) by poteto
+- [2026-11-19] [chore(pstack): run the Gemini panel seat at gemini-4-neon-xhigh (#1284)](https://github.com/cursor/plugins/commit/dd24b6707267cd89c6621c4efc6fa91a1d0666ec) (dd24b67) by poteto
+- [2026-11-19] [chore(pstack): route the Gemini seat to Gemini 4 Neon (#1283)](https://github.com/cursor/plugins/commit/e58dd043600587dbaf58ba315e7f2b38373eeb43) (e58dd04) by poteto
+- [2026-11-16] [feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh (#1249)](https://github.com/cursor/plugins/commit/2f87c854fe3e2fcda44ca86b46ede35aad3c46b7) (2f87c85) by poteto
 - [2026-11-15] [feat(pstack): new default models, one-file why and how, statechart fixes, sharpen and reflect text (#1236)](https://github.com/cursor/plugins/commit/bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7) (bf0c7cd) by poteto
 - [2026-10-27] [feat(pstack): make Orchestrate agentic and delete the orch scripts (#1043)](https://github.com/cursor/plugins/commit/c742dd61706fbacc1b95f1a20b7b988cf096ce6c) (c742dd6) by poteto
 - [2026-10-27] [feat(pstack): port recent skill updates (#986)](https://github.com/cursor/plugins/commit/ab1f702ce8e8b6557edb56b09f52cde8bfb83f17) (ab1f702) by poteto
@@ -102,7 +106,3 @@ Last commit: bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7
 - [2026-09-01] [docs(pstack): port forge-neutral playbooks and Fable 5.1 defaults](https://github.com/cursor/plugins/commit/23a56e2dac2efd54788056db8eced26e371d7b5e) (23a56e2) by poteto
 - [2026-09-01] [fix(pstack): disable model invocation for five skills (#300)](https://github.com/cursor/plugins/commit/73f8be4873ea4ba2b7378243a036d3360c69e04d) (73f8be4) by poteto
 - [2026-08-27] [fix(pstack): register make-bot-ui at skills root (#275)](https://github.com/cursor/plugins/commit/6fecddba65801f9b9c08b8b328d998ee5b09d290) (6fecddb) by poteto
-- [2026-08-27] [feat(pstack): add make-bot-ui skill (#271)](https://github.com/cursor/plugins/commit/799151d91b6e12ee7dbd09f708eec108d7de9b3b) (799151d) by poteto
-- [2026-08-25] [docs(pstack): make the multi-PR plan a verified checklist (#258)](https://github.com/cursor/plugins/commit/bdf7aa355337897f167153e05069aca505dae17c) (bdf7aa3) by poteto
-- [2026-08-21] [docs(pstack): port workflow and boundary guidance (#238)](https://github.com/cursor/plugins/commit/46125561306434d8a1d7745d540d8932ab0cd2a2) (4612556) by poteto
-- [2026-08-13] [chore(pstack): bump Grok default from 4.5 to 4.6 (#210)](https://github.com/cursor/plugins/commit/63d938c2e4a165a0fec1bd0f61a8e325f0cb751e) (63d938c) by poteto

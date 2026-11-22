@@ -4,6 +4,7 @@ pstack is poteto's set of engineering skills for coding agents. This site is an 
 
 - Live site: https://hustlecoding.github.io/pstack-explained/
 - Source: https://github.com/HustleCoding/pstack-explained
+- Codex port: https://github.com/HustleCoding/pstack-codex
 - Upstream pstack source: https://github.com/cursor/plugins/tree/main/pstack
 
 ## AI-readable endpoints
@@ -24,7 +25,9 @@ Start in a Cursor chat:
 2. `/setup-pstack`
 3. `/poteto-mode` plus one real task, including how you will know it is done
 
-`/poteto-mode` matches the task to a playbook, then runs the appropriate skills as the steps fire. Twenty-three principles apply across every playbook, biasing the work toward small diffs and real verification. The official guide covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.
+For Codex, clone `HustleCoding/pstack-codex`, run `./scripts/install.sh`, then start a new Codex task and ask it to use `setup-pstack` or `poteto-mode`. The current Codex defaults use GPT-6.2 Sol, GPT-6.2 Astra, and GPT-6 Luna.
+
+`/poteto-mode` matches the task to a playbook, then runs the appropriate skills as the steps fire. Twenty-four principles apply across every playbook, biasing the work toward small diffs and real verification. The official guide covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.
 
 The live site also has a situation board (what to type), a which-one chooser for lookalike playbooks, one-line steering phrases, and a page finder. Fetch `llms-full.txt` for the complete reference, including those prompts.
 

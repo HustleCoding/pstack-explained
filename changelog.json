@@ -1,9 +1,41 @@
 {
   "source": "https://github.com/cursor/plugins/tree/main/pstack",
   "sourceUrl": "https://github.com/cursor/plugins/tree/main/pstack",
-  "lastUpdatedAt": "2026-11-16T19:09:26+00:00",
-  "lastCommitSha": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7",
+  "lastUpdatedAt": "2026-11-22T15:05:32+00:00",
+  "lastCommitSha": "0b46ec399d55f2829e88822998f53b84944837d3",
   "entries": [
+    {
+      "sha": "0b46ec399d55f2829e88822998f53b84944837d3",
+      "date": "2026-11-19T22:12:08Z",
+      "title": "fix(pstack): run /statechart on native Windows and read TLC's \\r\\n line ends (#1292)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/0b46ec399d55f2829e88822998f53b84944837d3"
+    },
+    {
+      "sha": "dd24b6707267cd89c6621c4efc6fa91a1d0666ec",
+      "date": "2026-11-19T21:53:07Z",
+      "title": "chore(pstack): run the Gemini panel seat at gemini-4-neon-xhigh (#1284)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/dd24b6707267cd89c6621c4efc6fa91a1d0666ec"
+    },
+    {
+      "sha": "e58dd043600587dbaf58ba315e7f2b38373eeb43",
+      "date": "2026-11-19T06:26:56Z",
+      "title": "chore(pstack): route the Gemini seat to Gemini 4 Neon (#1283)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/e58dd043600587dbaf58ba315e7f2b38373eeb43"
+    },
+    {
+      "sha": "2f87c854fe3e2fcda44ca86b46ede35aad3c46b7",
+      "date": "2026-11-16T21:28:16Z",
+      "title": "feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh (#1249)",
+      "author": "poteto",
+      "authorUrl": "https://github.com/poteto",
+      "url": "https://github.com/cursor/plugins/commit/2f87c854fe3e2fcda44ca86b46ede35aad3c46b7"
+    },
     {
       "sha": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7",
       "date": "2026-11-15T03:36:17Z",
@@ -771,38 +803,6 @@
       "author": "poteto",
       "authorUrl": "https://github.com/poteto",
       "url": "https://github.com/cursor/plugins/commit/6fecddba65801f9b9c08b8b328d998ee5b09d290"
-    },
-    {
-      "sha": "799151d91b6e12ee7dbd09f708eec108d7de9b3b",
-      "date": "2026-08-27T01:42:39Z",
-      "title": "feat(pstack): add make-bot-ui skill (#271)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/799151d91b6e12ee7dbd09f708eec108d7de9b3b"
-    },
-    {
-      "sha": "bdf7aa355337897f167153e05069aca505dae17c",
-      "date": "2026-08-25T04:25:16Z",
-      "title": "docs(pstack): make the multi-PR plan a verified checklist (#258)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/bdf7aa355337897f167153e05069aca505dae17c"
-    },
-    {
-      "sha": "46125561306434d8a1d7745d540d8932ab0cd2a2",
-      "date": "2026-08-21T03:10:04Z",
-      "title": "docs(pstack): port workflow and boundary guidance (#238)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/46125561306434d8a1d7745d540d8932ab0cd2a2"
-    },
-    {
-      "sha": "63d938c2e4a165a0fec1bd0f61a8e325f0cb751e",
-      "date": "2026-08-13T19:40:59Z",
-      "title": "chore(pstack): bump Grok default from 4.5 to 4.6 (#210)",
-      "author": "poteto",
-      "authorUrl": "https://github.com/poteto",
-      "url": "https://github.com/cursor/plugins/commit/63d938c2e4a165a0fec1bd0f61a8e325f0cb751e"
     }
   ]
 }

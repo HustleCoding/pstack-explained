@@ -1,13 +1,14 @@
 # pstack explained
 
-pstack is poteto's set of engineering skills for coding agents, installed with `/add-plugin pstack`.
+pstack is poteto's set of engineering skills for coding agents, available in Cursor and through the Codex port.
 This site is an unofficial reading aid at https://hustlecoding.github.io/pstack-explained/.
 
 ## Overview
 
 Start in a Cursor chat with `/add-plugin pstack`, then `/setup-pstack`, then one real task via `/poteto-mode`.
+For Codex, clone [pstack-codex](https://github.com/HustleCoding/pstack-codex), run `./scripts/install.sh`, and start a new task. Ask Codex to use `setup-pstack` or `poteto-mode`.
 Type `/poteto-mode` and describe a task. pstack matches the task to a playbook, then runs the appropriate skills as the steps fire.
-Twenty-three principles apply across every playbook, biasing the work toward small diffs and real verification. The [official guide](https://github.com/cursor/plugins/blob/main/pstack/docs/guide/README.md) covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.
+Twenty-four principles apply across every playbook, biasing the work toward small diffs and real verification. The [official guide](https://github.com/cursor/plugins/blob/main/pstack/docs/guide/README.md) covers setup, routing, design, building, verification, overnight work, principles, customization, and recipes.
 This site is unofficial and is not affiliated with poteto, pstack, or Cursor.
 
 ## What to type
@@ -330,6 +331,21 @@ Group: start
 When to use: You want to pick which models pstack uses per role. Detects your models and writes a config rule.
 Try: /setup-pstack
 
+### /sharpen
+Group: start
+When to use: Rewrite a task prompt with expert methods and an outside check before sending it.
+Try: /sharpen make this migration brief testable
+
+### /ketchup
+Group: understand
+When to use: Catch up on this chat and see every decision still waiting on you.
+Try: /ketchup
+
+### /ketchup-video
+Group: understand
+When to use: Catch up from the work's screenshots and artifacts in a short subtitled video.
+Try: /ketchup-video
+
 ### /how
 Group: understand
 When to use: You want a walkthrough of how a subsystem works.
@@ -405,6 +421,21 @@ Group: prove
 When to use: Periodic pass that keeps a project's verification skill and feature map honest.
 Try: /maintain-verification-skill
 
+### /create-formal-verification-skill
+Group: prove
+When to use: Choose a verifier for a race or invariant that ordinary tests rarely reach.
+Try: /create-formal-verification-skill prove retries cannot double-charge
+
+### /maintain-formal-verification-skill
+Group: prove
+When to use: Update a formal check when the code it models changes.
+Try: /maintain-formal-verification-skill
+
+### /statechart
+Group: prove
+When to use: Check a TLA+ model and draw its states or shortest paths to violated rules.
+Try: /statechart model the retry flow
+
 ### /unslop
 Group: write
 When to use: You are cleaning up writing. Removes AI tells.
@@ -458,7 +489,7 @@ Try: /make-bot-ui
 
 ## Principles
 
-Twenty-three rules in five families. Each principle has a name, when it applies, the rule to follow, and a phrase you can say to steer.
+Twenty-four rules in five families. Each principle has a name, when it applies, the rule to follow, and a phrase you can say to steer.
 
 ### Core
 How to sequence work and scope it. The bias to delete before you add.
@@ -549,6 +580,11 @@ Boundaries, types, and shared state across concurrent actors.
 ### Verification
 Proving it works against the real artifact, and ordering the work so each step can be checked.
 
+- **Explain the Number**
+  - Applies when: Reporting a measurement or threshold that someone will use to decide.
+  - Rule: Name what was counted, the units, and the comparison that makes the result meaningful.
+  - Say this to steer: explain the number. what did you count and why does it matter?
+
 - **Prove It Works**
   - Applies when: After a task, before declaring done.
   - Rule: Verify against the real artifact. Not a proxy. Not that it compiles.
@@ -590,7 +626,17 @@ Turning repeated corrections into structure that enforces itself.
   - Rule: Encode it as a lint, metadata flag, runtime check, or script instead of more text.
   - Say this to steer: encode lessons in structure. don't add another paragraph. make it a check.
 
-## Models per role
+## Codex model defaults
+
+The Codex port tracks upstream 0.15.46. Choose the parent in Codex. Child overrides come from `~/.codex/pstack/config.md` when the active runtime supports them.
+
+- **Parent, complex work, and synthesis** gpt-6.2-sol@high
+- **Routine implementation** gpt-6.2-sol@medium
+- **Hardest design and review** gpt-6.2-astra@high
+- **Focused exploration and swarm workers** gpt-6-luna@high
+- **Review panels** GPT-6 Luna High, GPT-6.2 Sol High, GPT-6.2 Astra High
+
+## Cursor model roles
 
 pstack can use a different model for each role. Some roles run several models in parallel so the reviews come from different angles.
 Run `/setup-pstack` to detect your models and write the rule. Skills read it and fall back to their own defaults when a line is missing, so you override only what you want.
@@ -603,7 +649,6 @@ Run `/setup-pstack` to detect your models and write the rule. Skills read it and
 - **hardest tasks** (single) — The default model for the hardest tasks.
 - **how explorer** (single) — Maps the subsystem inside the /how skill.
 - **how explainer** (single) — Writes the /how walkthrough.
-- **how critics** (panel) — One subagent per model reviews the explanation.
 - **why investigators** (single) — Queries one evidence category inside /why.
 - **why synthesizer** (single) — Combines the evidence into the cited answer.
 - **reflect tooling** (single) — Captures the tooling recipe in /reflect.
@@ -617,8 +662,12 @@ Run `/setup-pstack` to detect your models and write the rule. Skills read it and
 ## Recent upstream changelog
 
 Source: https://github.com/cursor/plugins/tree/main/pstack
-Last synced: 2026-11-16T19:09:26+00:00
+Last synced: 2026-11-22T15:05:32+00:00
 
+- [2026-11-19] fix(pstack): run /statechart on native Windows and read TLC's \r\n line ends (#1292) (0b46ec3) by poteto
+- [2026-11-19] chore(pstack): run the Gemini panel seat at gemini-4-neon-xhigh (#1284) (dd24b67) by poteto
+- [2026-11-19] chore(pstack): route the Gemini seat to Gemini 4 Neon (#1283) (e58dd04) by poteto
+- [2026-11-16] feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh (#1249) (2f87c85) by poteto
 - [2026-11-15] feat(pstack): new default models, one-file why and how, statechart fixes, sharpen and reflect text (#1236) (bf0c7cd) by poteto
 - [2026-10-27] feat(pstack): make Orchestrate agentic and delete the orch scripts (#1043) (c742dd6) by poteto
 - [2026-10-27] feat(pstack): port recent skill updates (#986) (ab1f702) by poteto
@@ -635,7 +684,3 @@ Last synced: 2026-11-16T19:09:26+00:00
 - [2026-10-23] fix(watch-pr): cap polling sleeps at the deadline (#802) (fe096ef) by poteto
 - [2026-10-23] fix(watch-pr): distinguish fork heads during stack discovery (#801) (96dec8e) by poteto
 - [2026-10-23] fix(pstack): route reflect edits out of the plugin cache (#800) (7054003) by poteto
-- [2026-10-23] chore(pstack): bump to 0.15.32 (#798) (b1a1298) by poteto
-- [2026-10-23] feat(pstack): add the ketchup-video skill (#797) (3c0fdb4) by poteto
-- [2026-10-23] feat(pstack): tell generated verify skills to read each model-check result with /statechart (#794) (00d5dec) by poteto
-- [2026-10-23] chore(pstack): bump to 0.15.31 (#792) (642289e) by poteto
